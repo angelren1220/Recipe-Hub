@@ -16,5 +16,15 @@ class Recipe < ApplicationRecord
   validates :is_glutenfree, inclusion: { in: [true, false] }
   validates :is_nutfree, inclusion: { in: [true, false] }
 
-  validates :directions, presence: true
+  # Still figuring best way to sanitize the instructions but allow words like "sauté" (notice the accent to be allowed)
+  validate :validate_directions
+
+  private
+
+  def validate_directions
+    if directions.any? { |direction| /[^[:word:][:space:][:punct:]]/.match?(direction) }
+      errors.add(:directions, "must only contain letters, numbers, commas, periods, and spaces")
+    end
+  end
+
 end
