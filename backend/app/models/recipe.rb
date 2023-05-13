@@ -3,8 +3,8 @@ class Recipe < ApplicationRecord
   has_many :ingredients
   
   validates :name, presence: true
-  validates :cooktime_minutes, presence: true, numericality: { only_integer: true }
-
+  validates :cooktime_minutes, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  
   # Boolean validations
   validates :is_vegetarian, inclusion: { in: [true, false] }
   validates :is_vegan, inclusion: { in: [true, false] }
