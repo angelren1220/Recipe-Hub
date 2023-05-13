@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   belongs_to :user
-  has_many :ingredients
+  has_many :recipe_books, :ingredients
+  has_many :recipes, through: :recipe_books # many to many relationship
   
   validates :name, presence: true
   validates :cooktime_minutes, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
