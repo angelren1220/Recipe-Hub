@@ -1,6 +1,12 @@
 class RecipesController < ApplicationController
+
+  # GET /recipes
+  def index
+    @recipes = Recipe.all
+    render json: @recipes
+  end
   
-  # Template for other controllers
+  # POST /recipes
   def create
     # Instantiate a new Recipe object with the required parameters
     @recipe = Recipe.new(recipe_params)
