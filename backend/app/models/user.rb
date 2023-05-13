@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  has_many :recipes, :bookmarked_books, :books
+  has_many :recipes
+  has_many :bookmarked_books
+  has_many :books
 
   validates :first_name, presence: true
   validates :last_name, presence: true

@@ -2,7 +2,8 @@
 # This is NOT a collection of recipes, it catalogs each Recipe in a Book.
 
 class RecipeBook < ApplicationRecord
-  belongs_to :recipe, :book
+  belongs_to :recipe
+  belongs_to :book
 
   validates :recipe_id, presence: true
   validates :book_id, presence: true

@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-
+  
+  # Template for other controllers
   def create
     # Instantiate a new Recipe object with the required parameters
     @recipe = Recipe.new(recipe_params)
