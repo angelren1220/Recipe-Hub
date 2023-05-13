@@ -1,4 +1,5 @@
-# this is a join model for Recipe and Book establishing that a Book can have many Recipes and vice versa
+# This is a join model for Recipe and Book establishing that a Book can have many Recipes and vice versa.
+# This is NOT a collection of recipes, it catalogs each Recipe in a Book.
 
 class RecipeBook < ApplicationRecord
   belongs_to :recipe, :book
