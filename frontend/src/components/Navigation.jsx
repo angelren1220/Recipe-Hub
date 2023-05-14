@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Navigation() {
+const Navigation = function() {
   return (
-    <nav>
+    <nav className="nav">
 
-    <span className="logo">Recipe Hub</span>
+      <h1 className="logo">Recipe Hub</h1>
 
-  </nav>
+    </nav>
   );
 }
 
