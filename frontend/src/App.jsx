@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import Navigation from './components/Navigation';
-import Recipe from './components/Recipe';
+import RecipeList from './components/RecipeList';
 import Login from './components/Login';
 import Register from './components/Register';
 
 const App = function() {
+
+  const [viewMode, setViewMode] = useState('recipes')
 
   return (
     <div className="App">
@@ -15,7 +17,9 @@ const App = function() {
 
       <main className="recipes">
 
-        <Login />
+        {viewMode === 'recipes' && <RecipeList />}
+        {viewMode === 'login' && <Login />}
+        {viewMode === 'register' && <Register />}
 
       </main>
     </div>
