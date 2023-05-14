@@ -4,7 +4,7 @@ import {
 } from 'react';
 import dataReducer, {
   SET_USERS
-} from '../reducer/data_reducer';
+} from 'dataReducer';
 import axios from 'axios';
 
 const useApplicationData = () => {
