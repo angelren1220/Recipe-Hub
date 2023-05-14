@@ -4,7 +4,7 @@ const Navigation = function() {
   return (
     <nav className="nav">
 
-      <a href="/" className="logo">Recipe Hub</a>
+      <h1 className="logo"><a href="/">Recipe Hub</a></h1>
 
       <div className="sideview">
         <h3>Title</h3>
