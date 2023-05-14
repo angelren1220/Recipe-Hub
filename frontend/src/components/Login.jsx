@@ -1,41 +1,41 @@
 import React, { useState } from "react";
 
-const Login = function() {
+const Login = function(props) {
 
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
   const handleLogin = () => {
-    event => event.preventDefault();
     console.log("email: ", email, "password: ", pass);
   };
-
 
   return (
     <>
       <form
         autoComplete="off"
-        onSubmit={handleLogin}
+        onSubmit={event => event.preventDefault()}
       >
-        <label for="email" >Email:</label>
+        <label htmlFor="email" >Email:</label>
         <input
           id="email"
           value={email}
+          onChange={(e) => setEmail(e.target.value)}
           name="email"
           type="email"
           placeholder="yourEmail@mailProvider.com"
         />
-        <label for="password" >Password:</label>
+        <label htmlFor="password" >Password:</label>
         <input
           id="password"
           value={pass}
+          onChange={(e) => setPass(e.target.value)}
           name="password"
           type="password"
           placeholder="************"
         />
         <button>Log In</button>
       </form>
-      <button>Don't have an account? Register here!</button>
+      <button >Don't have an account? Register here!</button>
     </>
 
   );
