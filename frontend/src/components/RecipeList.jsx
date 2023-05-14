@@ -3,10 +3,12 @@ import Recipe from "./Recipe";
 
 const RecipeList = function() {
   return (
-    <Recipe />
-    <Recipe />
-    <Recipe />
+    <>
+      <Recipe />
+      <Recipe />
+      <Recipe />
+    </>
   );
 };
 
-export default RecipeList
+export default RecipeList;
