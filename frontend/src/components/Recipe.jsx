@@ -28,21 +28,21 @@ const Recipe = function() {
 
   return (
     <article className="recipe">
-      <h2>{recipe.name}</h2>
 
-      <div className="recipe-intro">
+      <div className="recipe-text">
+        <h2 className="recipe-title">{recipe.name}</h2>
         <ul>
           <li>2lbs Potatoes</li>
           <li>1 egg</li>
           <li>1.5 cups flour</li>
           <li>2 tsp salt</li>
         </ul>
-        <img src={recipe.image} alt={recipe.name} className="recipe-img"/>
+        <ol>
+          {recipe.directions.map(direction => (<li key={recipe.id} > { direction } </li>))}
+        </ol>
       </div>
 
-      <ol>
-        {recipe.directions.map(direction => (<li key={recipe.id} > { direction } </li>))}
-      </ol>
+      <img src={recipe.image} alt={recipe.name} className="recipe-img"/>
 
     </article>
   );
