@@ -9,16 +9,6 @@
 
 }
 
-.nav {
-  height: 100%;
-  width: 20em;
-  background-color: grey;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
 .recipes {
   display: flex;
   flex-direction: column;
