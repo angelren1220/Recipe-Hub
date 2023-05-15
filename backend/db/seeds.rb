@@ -183,17 +183,17 @@ book3 = user3.books.create!({ name: "Emeril's Favorite Recipes", user_id: user3.
 book4 = user4.books.create!({ name: "Florence's Favorite Recipes", user_id: user4.id })
 book5 = user5.books.create!({ name: "Jamie's Favorite Recipes", user_id: user5.id })
 
-book6 = user1.books.create!({ name: "Dinner Party Ideas" })
-book7 = user1.books.create!({ name: "Healthy Meals for One" })
-book8 = user1.books.create!({ name: "Weeknight Favorites" })
-book9 = user1.books.create!({ name: "Summer BBQ Recipes" })
-book10 = user1.books.create!({ name: "International Cuisine" })
+book6 = user1.books.create!({ name: "Dinner Party Ideas", user_id: user1.id, description: "A comprehensive guide with creative and delicious recipes, tips, and inspiration to help you host unforgettable dinner parties. From appetizers to desserts, this book offers a variety of dishes suited for different occasions and tastes. Elevate your hosting skills and impress your guests with this collection of curated recipes and entertaining ideas." })
+book7 = user1.books.create!({ name: "Healthy Meals for One", user_id: user1.id, description: "As someone who loves cooking for myself, I've curated a collection of delicious and healthy recipes tailored for solo dining. Fuel your body with easy-to-make meals that are packed with flavor and goodness." })
+book8 = user1.books.create!({ name: "Weeknight Favorites", user_id: user1.id, description: "Hey there! I've put together a collection of my absolute favorite recipes for those hectic weeknights. Get ready for tasty meals that are quick, easy, and guaranteed to satisfy!" })
+book9 = user1.books.create!({ name: "Summer BBQ Recipes", user_id: user1.id, description: "Fire up the grill and dive into a sizzling collection of mouthwatering recipes for the ultimate summer BBQ experience." })
+book10 = user1.books.create!({ name: "International Cuisine", user_id: user1.id, description: "Indulge in the rich tapestry of global flavors as we embark on a gastronomic adventure, celebrating the vibrant dishes and culinary traditions from around the world." })
 
-book11 = user2.books.create!({ name: "Meat Lover's Delight", user_id: user2.id })
-book12 = user2.books.create!({ name: "Classic British Pub Grub", user_id: user2.id })
-book13 = user2.books.create!({ name: "The Nose-to-Tail Cookbook", user_id: user2.id })
-book14 = user2.books.create!({ name: "French Comfort Food", user_id: user2.id })
-book15 = user2.books.create!({ name: "Seafood Sensations", user_id: user2.id })
+book11 = user2.books.create!({ name: "Meat Lover's Delight", user_id: user2.id, description: "Indulge in the ultimate meat lover's experience with this mouthwatering cookbook. Packed with tantalizing recipes showcasing various cuts of meat, from succulent steaks to savory roasts, this book will satisfy your carnivorous cravings. Discover grilling techniques, marinades, and flavor combinations that will take your meat dishes to the next level. Whether you're a steak connoisseur or a barbecue enthusiast, this book is a must-have for meat enthusiasts seeking bold and flavorful creations." })
+book12 = user2.books.create!({ name: "Classic British Pub Grub", user_id: user2.id, description: "Discover the timeless flavors of traditional British pub cuisine with this delightful cookbook filled with hearty and comforting recipes." })
+book13 = user2.books.create!({ name: "The Nose-to-Tail Cookbook", user_id: user2.id, description: "Celebrate the beauty of offal and lesser-known cuts, crafting exquisite dishes that pay homage to nose-to-tail cooking traditions." })
+book14 = user2.books.create!({ name: "French Comfort Food", user_id: user2.id, description: "Currently working on a collection of delightful and comforting French recipes." })
+book15 = user2.books.create!({ name: "Seafood Sensations", user_id: user2.id, description: "Dive into a world of mouthwatering seafood delights." })
 
 ## RECIPE_BOOK (entrys for a book)
 
