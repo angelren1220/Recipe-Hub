@@ -21,4 +21,4 @@ frontend
 `npm install`
 2. to start the front server:
 `npm run dev `
-The server is run http://localhost:5173/
+The server is run http://localhost:3000/
