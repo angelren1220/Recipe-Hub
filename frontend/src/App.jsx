@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { useContext } from 'react';
+=======
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
+>>>>>>> 9461293fd6d0fbcfd230bc74ba166beb58302e25
 import './App.css';
 
 import Navigation from './components/Navigation';
@@ -18,7 +23,8 @@ const App = function() {
 
   const {
     state,
-    dispatch
+    dispatch,
+    getIngredients
   } = useApplicationData();
 
   return (
@@ -28,7 +34,12 @@ const App = function() {
       <Navigation />
 
       <main className="recipes">
-        {viewMode === 'recipes' && <RecipeList recipes={state.recipes} />}
+
+        {viewMode === 'recipes' &&
+          <RecipeList
+            recipes={state.recipes}
+            getIngredients={() => getIngredients()}
+          />}
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
         {viewMode === 'loading' && <Loading >Loading</Loading>}
