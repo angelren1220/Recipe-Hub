@@ -8,14 +8,14 @@ class Api::IngredientsController < ApplicationController
     render json: @ingredients
   end
 
-  # GET /users/1
+  # GET /ingredients/1
   def show
     render json: @ingredient
   end
 
   # POST /ingredients
   def create
-    @ingredient = Ingredient.new(user_params)
+    @ingredient = Ingredient.new(ingredient_params)
 
     if @ingredient.save
       render json: @ingredient, status: :created, location: @ingredient
