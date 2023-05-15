@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
+import { viewModeContext } from "../hooks/providers/viewModeProvider";
 
-const Register = function(props) {
+const Register = function() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
+
+  const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
 
   const handleRegister = function() {
     console.log("name", name, "email: ", email, "password: ", pass);
@@ -42,9 +45,9 @@ const Register = function(props) {
           type="password"
           placeholder="************"
         />
-        <button>Log In</button>
+        <button onClick={handleRegister}>Register</button>
       </form>
-      <button >Already have an account? Login here!</button>
+      <button onClick={loginView}>Already have an account? Login here!</button>
     </>
   );
 };
