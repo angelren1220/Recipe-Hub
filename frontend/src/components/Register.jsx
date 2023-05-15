@@ -2,14 +2,16 @@ import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 
 const Register = function() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
-  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
 
   const handleRegister = function() {
-    console.log("name", name, "email: ", email, "password: ", pass);
+    console.log("first name", first_name, "last name", last_name, "email: ", email, "password: ", password, "password confirmation: ", passwordConfirmation);
 
   };
 
@@ -19,14 +21,25 @@ const Register = function() {
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
-        <label htmlFor="name" >Full Name:</label>
+        <label htmlFor="first_name" >First Name:</label>
         <input
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          name="name"
+          id="first_name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          name="first_name"
           type="text"
-          placeholder="Full Name"
+          placeholder="First Name"
+          required
+        />
+        <label htmlFor="last_name" >Last Name:</label>
+        <input
+          id="laast_name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          name="last_name"
+          type="text"
+          placeholder="Last Name"
+          required
         />
         <label htmlFor="email" >Email:</label>
         <input
@@ -36,24 +49,29 @@ const Register = function() {
           name="email"
           type="email"
           placeholder="yourEmail@mailProvider.com"
+          required
         />
         <label htmlFor="password" >Password:</label>
         <input
           id="password"
           value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           name="password"
           type="password"
-          placeholder="************"
+          placeholder="******"
+          required
+          minLength={6}
         />
-        <label htmlFor="confirmPassword" > Confirm Password:</label>
+        <label htmlFor="passwordConfirmation" > Confirm Password:</label>
         <input
-          id="confirmPassword"
+          id="passwordConfirmation"
           value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          name="confirmPassword"
-          type="confirmPassword"
-          placeholder="************"
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+          name="passwordConfirmation"
+          type="passwordConfirmation"
+          placeholder="******"
+          required
+          minLength={6}
         />
         <button onClick={handleRegister}>Register</button>
       </form>
