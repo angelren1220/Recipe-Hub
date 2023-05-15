@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
+import bcrypt from "bcryptjs";
 
 const Register = function() {
   const [firstName, setFirstName] = useState('');
@@ -8,10 +9,19 @@ const Register = function() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
+  const { loginView } = useContext(viewModeContext);
+
+  const verifyPassword = function(password1, password2) {
+    if (password1 === password2) {
+      return bcrypt.hashSync(password1, 10);
+    }
+    return null;
+  };
 
   const handleRegister = function() {
-    console.log("first name", first_name, "last name", last_name, "email: ", email, "password: ", password, "password confirmation: ", passwordConfirmation);
+    const hashedPassword = verifyPassword(password, passwordConfirmation);
+    const user = { first_name: firstName, last_name: lastName, email, password: hashedPassword };
+    console.log('🚁', user);
 
   };
 
@@ -21,22 +31,22 @@ const Register = function() {
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
-        <label htmlFor="first_name" >First Name:</label>
+        <label htmlFor="firstName" >First Name:</label>
         <input
-          id="first_name"
+          id="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          name="first_name"
+          name="firstName"
           type="text"
           placeholder="First Name"
           required
         />
-        <label htmlFor="last_name" >Last Name:</label>
+        <label htmlFor="lastName" >Last Name:</label>
         <input
-          id="laast_name"
+          id="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          name="last_name"
+          name="lastName"
           type="text"
           placeholder="Last Name"
           required
@@ -54,7 +64,7 @@ const Register = function() {
         <label htmlFor="password" >Password:</label>
         <input
           id="password"
-          value={pass}
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
           name="password"
           type="password"
@@ -65,10 +75,10 @@ const Register = function() {
         <label htmlFor="passwordConfirmation" > Confirm Password:</label>
         <input
           id="passwordConfirmation"
-          value={pass}
+          value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
           name="passwordConfirmation"
-          type="passwordConfirmation"
+          type="password"
           placeholder="******"
           required
           minLength={6}
