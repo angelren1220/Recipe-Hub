@@ -24,6 +24,8 @@ const CreateRecipe = function() {
           name="title"
           type="text"
           placeholder="My Title"
+          required
+          maxLength={40}
         />
         <label htmlFor="description" >Description:</label>
         <input
@@ -33,6 +35,7 @@ const CreateRecipe = function() {
           name="description"
           type="text"
           placeholder="Lorem ipsum ..."
+          required
         />
         <label htmlFor="image" >Password:</label>
         <input
@@ -42,6 +45,7 @@ const CreateRecipe = function() {
           name="image"
           type="url"
           placeholder="www..."
+          required
         />
         <button onClick={handleCreation}>Register</button>
       </form>
