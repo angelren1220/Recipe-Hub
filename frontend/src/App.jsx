@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 
 import Navigation from './components/Navigation';
@@ -9,16 +9,17 @@ import Loading from './components/Loading';
 
 
 import useApplicationData from './hooks/useApplicationData';
+import { viewModeContext } from './hooks/providers/viewModeProvider.jsx';
 
 
-const App = function(props) {
+const App = function() {
+
+  const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
 
   const {
     state,
     dispatch
   } = useApplicationData();
-
-  const viewMode = 'recipes';
 
   return (
 
@@ -27,17 +28,19 @@ const App = function(props) {
       <Navigation />
 
       <main className="recipes">
-
-        {viewMode === 'recipes' && <RecipeList recipes={state.recipes}/>}
+        {viewMode === 'recipes' && <RecipeList recipes={state.recipes} />}
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
         {viewMode === 'loading' && <Loading >Loading</Loading>}
-
       </main>
+      
       <footer>
-        <button>Log In</button >
-        <button>Register</button >
+        <button onClick={loginView}>Log In</button >
+        <button onClick={registerView}>Register</button >
+        <button onClick={recipesView}>Recipes</button >
+        <button onClick={loadingView}>Loading...</button >
       </footer>
+
     </div>
   );
 

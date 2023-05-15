@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const viewModeContext = createContext();
 
-const viewModeProvider = function(props) {
+export default function ViewModeProvider(props) {
   const [viewMode, setViewMode] = useState('recipes');
 
   //functions to change viewMode
@@ -23,10 +23,10 @@ const viewModeProvider = function(props) {
     setViewMode('loading');
   };
 
-  const viewModeAdjust = { viewMode, loginView, registerView, recipesView, loadingView };
+  const providerData = { viewMode, loginView, registerView, recipesView, loadingView };
 
   return (
-    <viewModeContext.Provider viewModeAdjust={viewModeAdjust}>
+    <viewModeContext.Provider value={providerData}>
       {props.children}
     </viewModeContext.Provider>
   );

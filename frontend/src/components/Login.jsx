@@ -35,7 +35,7 @@ const Login = function(props) {
         />
         <button>Log In</button>
       </form>
-      <button >Don't have an account? Register here!</button>
+      <button >Don&apos;t have an account? Register here!</button>
     </>
 
   );

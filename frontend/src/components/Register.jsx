@@ -5,7 +5,7 @@ const Register = function(props) {
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
 
-  const handleRegister = () => {
+  const handleRegister = function() {
     console.log("name", name, "email: ", email, "password: ", pass);
   };
 
