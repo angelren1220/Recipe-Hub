@@ -5,6 +5,9 @@ class Recipe < ApplicationRecord
 
   has_many :ingredients
 
+  # polymorphic association with messages
+  has_many :messages, as: :subject
+
   validates :name, presence: true
   validates :cooktime_minutes, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   
@@ -17,14 +20,14 @@ class Recipe < ApplicationRecord
   validates :is_nutfree, inclusion: { in: [true, false] }
 
   # Still figuring best way to sanitize the instructions but allow words like "sauté" (notice the accent to be allowed)
-  validate :validate_directions
+  before_save :sanitize_attributes
 
   private
 
-  def validate_directions
-    if directions.any? { |direction| /[^[:word:][:space:][:punct:]]/.match?(direction) }
-      errors.add(:directions, "must only contain letters, numbers, commas, periods, and spaces")
-    end
+  def sanitize_attributes
+    self.name = CGI.escapeHTML(name) if name.present?
+    self.description = CGI.escapeHTML(description) if description.present?
+    self.directions.map! { |direction| CGI.escapeHTML(direction) }
   end
 
 end

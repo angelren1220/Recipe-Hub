@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_15_212911) do
+ActiveRecord::Schema.define(version: 2023_05_16_031413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2023_05_15_212911) do
     t.text "description"
   end
 
+  create_table "grocery_lists", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.jsonb "items", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.integer "recipe_id"
     t.string "name"
@@ -37,6 +45,17 @@ ActiveRecord::Schema.define(version: 2023_05_15_212911) do
     t.string "units"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.string "subject_type"
+    t.bigint "subject_id"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_type", "subject_id"], name: "index_messages_on_subject"
   end
 
   create_table "recipe_books", force: :cascade do |t|
@@ -61,6 +80,13 @@ ActiveRecord::Schema.define(version: 2023_05_15_212911) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "image"
     t.text "description"
+  end
+
+  create_table "user_inboxes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "message_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
