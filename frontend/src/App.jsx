@@ -11,21 +11,12 @@ import Loading from './components/Loading';
 import useApplicationData from './hooks/useApplicationData';
 
 
-const App = function() {
+const App = function(props) {
 
   const {
     state,
     dispatch
   } = useApplicationData();
-
-  const recipeList = state.recipes.map((recipe) => {
-    return (<Recipe
-      key={recipe.id}
-      name={recipe.name}
-      direnctions={recipe.direnctions}
-      cooktime={recipe.cooktime_minutes}
-    />);
-    });
 
   const viewMode = 'recipes';
 
@@ -37,7 +28,7 @@ const App = function() {
 
       <main className="recipes">
 
-        {viewMode === 'recipes' && <RecipeList />}
+        {viewMode === 'recipes' && <RecipeList recipes={state.recipes}/>}
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
         {viewMode === 'loading' && <Loading >Loading</Loading>}
