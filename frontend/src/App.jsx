@@ -8,26 +8,30 @@ import useApplicationData from './hooks/useApplicationData';
 
 
 const App = function() {
-  
+
   const {
     state,
     dispatch
   } = useApplicationData();
-  
-  const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
-  ));
+
+  const recipeList = state.recipes.map((recipe) => {
+    return (<Recipe
+      key={recipe.id}
+      name={recipe.name}
+      direnctions={recipe.direnctions}
+      cooktime={recipe.cooktime_minutes}
+    />);
+    });
 
   return (
-    
+
     <div className="App">
 
       <Navigation />
 
       <main className="recipes">
 
-        <Recipe />
-        <Recipe />
-        <Recipe />
+        {recipeList}
 
       </main>
     </div>
