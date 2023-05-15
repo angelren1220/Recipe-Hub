@@ -1,4 +1,4 @@
-import "../styles/nav.css";
+import "../styles/nav.scss";
 
 const Navigation = function() {
   return (

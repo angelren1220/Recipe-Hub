@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import Navigation from './components/Navigation';
-import Recipe from './components/Recipe';
+import RecipeList from './components/RecipeList';
+import Login from './components/Login';
+import Register from './components/Register';
+import Loading from './components/Loading';
+
 
 import useApplicationData from './hooks/useApplicationData';
 
@@ -23,6 +27,8 @@ const App = function() {
     />);
     });
 
+  const viewMode = 'recipes';
+
   return (
 
     <div className="App">
@@ -31,9 +37,16 @@ const App = function() {
 
       <main className="recipes">
 
-        {recipeList}
+        {viewMode === 'recipes' && <RecipeList />}
+        {viewMode === 'login' && <Login />}
+        {viewMode === 'register' && <Register />}
+        {viewMode === 'loading' && <Loading >Loading</Loading>}
 
       </main>
+      <footer>
+        <button>Log In</button >
+        <button>Register</button >
+      </footer>
     </div>
   );
 

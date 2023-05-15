@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/recipe.css"
+import "../styles/recipe.scss"
 
 const Recipe = function(props) {
   // const recipe = {
