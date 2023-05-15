@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import './App.css';
 
