@@ -1,5 +1,6 @@
 export const SET_USERS = 'SET_USERS';
 export const SET_RECIPES = 'SET_RECIPES';
+export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 
 const dataReducer = (state, action) => {
@@ -16,15 +17,24 @@ const dataReducer = (state, action) => {
         ...state,
         recipes: action.recipes,
         loading: false,
-      }
+      };
+
+    case SET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.ingredients,
+        loading: false
+      };
 
     case SET_APPLICATION_DATA:
       return {
         ...state,
         users: action.users,
-        recipes: action.recipes
-      }
-      
+        recipes: action.recipes,
+        ingredients: action.ingredients,
+        loading: false
+      };
+
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
