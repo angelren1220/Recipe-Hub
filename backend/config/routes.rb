@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  resources :users, :recipes, :ingredients, :books, :recipe_books, :bookmarked_books
+  namespace :api do
+    resources :users
+    resources :recipes
+  end
 end
