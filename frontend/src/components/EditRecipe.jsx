@@ -1,11 +1,18 @@
 import { useState } from "react",
 
-const CreateRecipe = function() {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+const EditRecipe = function() {
 
-  const handleCreation = function() {
+  const currentRecipe = {
+    title: 'How To Cook Dinner',
+    description: 'This recipe will teach you how to cook a delicious meal.',
+    image: 'https://static.wikia.nocookie.net/spongebob/images/2/2f/Krusty_Krab_Training_Video_081.png/revision/latest?cb=20211125123843'
+  }
+
+  const [name, setName] = useState(currentRecipe.name);
+  const [description, setDescription] = useState(currentRecipe.description);
+  const [image, setImage] = useState(currentRecipe.image);
+
+  const handleEdit = function() {
     console.log("title: ", title, "description: ", description, "img url: ", image)
   }
 
@@ -15,14 +22,14 @@ const CreateRecipe = function() {
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
-        <label htmlFor="title" >Recipe Title:</label>
+        <label htmlFor="name" >Recipe Title:</label>
         <input
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           name="name"
           type="text"
-          placeholder="My Title"
+          placeholder={currentRecipe.name}
           required
         />
         <label htmlFor="description" >Description:</label>
@@ -44,7 +51,7 @@ const CreateRecipe = function() {
           type="url"
           placeholder="www..."
         />
-        <button onClick={handleCreation}>Submit</button>
+        <button onClick={handleEdit}>Submit</button>
       </form>
     </>
   )
