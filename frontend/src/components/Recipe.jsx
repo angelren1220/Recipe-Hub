@@ -18,7 +18,7 @@ const Recipe = function(props) {
           {props.is_nutfree && <li>Nut Free</li>}
         </ul>
         <ol>
-          {props.directions.map(direction => (<li> {direction} </li>))}
+          {props.directions.map((direction, i) => (<li key ={i}> {direction} </li>))}
         </ol>
 
       </div>
