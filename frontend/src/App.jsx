@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Navigation from './components/Navigation';
+
+const App = function() {
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="App">
 
-export default App
+      <Navigation />
+
+      <main className="recipes">
+
+        <div className="recipe">
+          <h1>Potato Gnocchi</h1>
+
+          <h3>Ingredients</h3>
+          <ul>
+            <li>2lbs Potatoes</li>
+            <li>1 egg</li>
+            <li>1.5 cups flour</li>
+            <li>2 tsp salt</li>
+          </ul>
+
+          <h3>Directions</h3>
+          <ol>
+            <li>Boil the potatoes with the skins on</li>
+            <li>Peel the potatoes</li>
+            <li>Rice or mash the potatoes</li>
+            <li>Gently combine all ingredients into a dough</li>
+            <li>Shape the dough into bite size pastas</li>
+            <li>Boil the pasta until it floats to the surface</li>
+          </ol>
+        </div>
+
+      </main>
+    </div>
+  );
+};
+
+export default App;
