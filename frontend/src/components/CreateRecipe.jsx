@@ -6,7 +6,7 @@ const CreateRecipe = function() {
   const [image, setImage] = useState('');
 
   const handleCreation = function() {
-    console.log("title: ", title, "description: ", description, "img url: ", image)
+    console.log("name: ", name, "description: ", description, "img url: ", image)
   }
 
   return (

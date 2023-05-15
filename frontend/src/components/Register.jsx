@@ -10,7 +10,7 @@ const Register = function() {
 
   const handleRegister = function() {
     console.log("name", name, "email: ", email, "password: ", pass);
-    
+
   };
 
   return (
@@ -44,6 +44,15 @@ const Register = function() {
           onChange={(e) => setPass(e.target.value)}
           name="password"
           type="password"
+          placeholder="************"
+        />
+        <label htmlFor="confirmPassword" > Confirm Password:</label>
+        <input
+          id="confirmPassword"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+          name="confirmPassword"
+          type="confirmPassword"
           placeholder="************"
         />
         <button onClick={handleRegister}>Register</button>

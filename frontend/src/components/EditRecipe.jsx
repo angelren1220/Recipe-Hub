@@ -13,7 +13,7 @@ const EditRecipe = function() {
   const [image, setImage] = useState(currentRecipe.image);
 
   const handleEdit = function() {
-    console.log("title: ", title, "description: ", description, "img url: ", image)
+    console.log("name: ", name, "description: ", description, "img url: ", image)
   }
 
   return (
@@ -39,7 +39,7 @@ const EditRecipe = function() {
           onChange={(e) => setDescription(e.target.value)}
           name="description"
           type="text"
-          placeholder="Lorem ipsum ..."
+          placeholder={currentRecipe.description}
           required
         />
         <label htmlFor="image" >Image:</label>
@@ -49,7 +49,7 @@ const EditRecipe = function() {
           onChange={(e) => setImage(e.target.value)}
           name="image"
           type="url"
-          placeholder="www..."
+          placeholder={currentRecipe.image}
         />
         <button onClick={handleEdit}>Submit</button>
       </form>
