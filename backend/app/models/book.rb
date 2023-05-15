@@ -8,4 +8,14 @@ class Book < ApplicationRecord
   has_many :users, through: :bookmarked_books
 
   validates :name, presence: true
+
+  before_save :sanitize_attributes
+
+  private
+
+  def sanitize_attributes
+    self.name = CGI.escapeHTML(name)
+    self.description = CGI.escapeHTML(description)
+  end
+
 end
