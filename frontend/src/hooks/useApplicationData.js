@@ -3,27 +3,28 @@ import {
   useReducer
 } from 'react';
 import dataReducer, {
-  SET_USERS
+  SET_APPLICATION_DATA
 } from './dataReducer';
 import axios from 'axios';
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
     users: [],
+    recipes: [],
     loading: true,
   });
   useEffect(() => {
-    axios({
-      method: 'GET',
-      url: '/api/users',
-    })
-      .then(({
-        data
-      }) => {
-        console.log(data);
+    Promise.all([
+      axios.get('/api/users'),
+      axios.get('/api/recipes')
+    ])
+      .then(
+        (all) => {
+        console.log(all);
         dispatch({
-          type: SET_USERS,
-          users: data
+          type: SET_APPLICATION_DATA,
+          users: all[0].data,
+          recipes: all[1].data
         });
       })
       .catch((err) => console.log(err));
