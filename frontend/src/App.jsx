@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React, { useContext } from 'react';
-=======
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
->>>>>>> 9461293fd6d0fbcfd230bc74ba166beb58302e25
+import { useContext } from 'react';
 import './App.css';
 
 import Navigation from './components/Navigation';
