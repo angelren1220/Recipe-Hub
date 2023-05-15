@@ -10,6 +10,7 @@ const Register = function() {
 
   const handleRegister = function() {
     console.log("name", name, "email: ", email, "password: ", pass);
+    
   };
 
   return (
