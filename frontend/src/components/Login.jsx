@@ -1,7 +1,5 @@
 import { useState, useContext } from "react";
-
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
-
 import bcrypt from "bcryptjs";
 
 const Login = function() {
@@ -19,9 +17,11 @@ const Login = function() {
         throw err;
       }
       if (isMatch) {
-        console.log("Password Matches!");
+        console.log("🧠 Password Matches! 🧠");
       }
-      console.log("Password doesn't match!");
+      if (!isMatch) {
+        console.log("Password doesn't match!");
+      }
     });
 
   };
