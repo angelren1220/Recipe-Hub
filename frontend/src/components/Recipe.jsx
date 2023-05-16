@@ -23,6 +23,8 @@ const Recipe = function(props) {
 
       <div className="recipe-text">
         <h2 className="recipe-title">{props.name}</h2>
+        <span>description</span>
+        <p>{props.description}</p>
         <span>ingredients</span>
       <ul>
         {state.ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
