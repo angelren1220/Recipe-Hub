@@ -31,7 +31,7 @@ const dataReducer = (state, action) => {
         ...state,
         users: action.users,
         recipes: action.recipes,
-        ingredients: action.ingredients,
+        // ingredients: action.ingredients,
         loading: false
       };
 
