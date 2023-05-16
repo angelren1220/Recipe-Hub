@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './App.css';
 
@@ -15,7 +16,8 @@ const App = function(props) {
 
   const {
     state,
-    dispatch
+    dispatch,
+    getIngredients
   } = useApplicationData();
 
   const viewMode = 'recipes';
@@ -28,7 +30,11 @@ const App = function(props) {
 
       <main className="recipes">
 
-        {viewMode === 'recipes' && <RecipeList recipes={state.recipes}/>}
+        {viewMode === 'recipes' &&
+          <RecipeList
+            recipes={state.recipes}
+            getIngredients={() => getIngredients()}
+          />}
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
         {viewMode === 'loading' && <Loading >Loading</Loading>}
