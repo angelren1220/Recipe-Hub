@@ -11,7 +11,7 @@ class Api::RecipesController < ApplicationController
 
   # GET /recipes/1
   def show
-    render json: {recipe:@recipe, ingredient:@ingredients}
+    render json: {recipe:@recipe, ingredients:@ingredients}
   end
 
   # POST /recipes

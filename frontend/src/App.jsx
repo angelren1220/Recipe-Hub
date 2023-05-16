@@ -19,7 +19,6 @@ const App = function() {
   const {
     state,
     dispatch,
-    getIngredients
   } = useApplicationData();
 
   return (
@@ -33,7 +32,6 @@ const App = function() {
         {viewMode === 'recipes' &&
           <RecipeList
             recipes={state.recipes}
-            getIngredients={() => getIngredients()}
           />}
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
