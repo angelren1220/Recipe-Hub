@@ -51,7 +51,7 @@ recipe1 = Recipe.create!({
   is_lactosefree: true,
   is_glutenfree: false,
   is_nutfree: false,
-  image: open_asset('burger_placeholder.jpg')
+  image: 'https://pinchofyum.com/wp-content/uploads/Vegetarian-Pad-Thai-Recipe.jpg'
 })
 
 recipe2 = Recipe.create!({
@@ -65,7 +65,7 @@ recipe2 = Recipe.create!({
   is_lactosefree: true,
   is_glutenfree: true,
   is_nutfree: true,
-  image: open_asset('burger_placeholder.jpg')
+  image: 'https://www.wellplated.com/wp-content/uploads/2019/07/Slow-Cooker-Chicken-Curry-Recipe.jpg'
 })
 
 recipe3 = Recipe.create!({
@@ -79,7 +79,7 @@ recipe3 = Recipe.create!({
   is_lactosefree: true,
   is_glutenfree: true,
   is_nutfree: true,
-  image: open_asset('burger_placeholder.jpg')
+  image: 'https://i.pinimg.com/736x/8b/d4/e4/8bd4e438e5a24aca38c1a2a8bddcc821.jpg'
 })
 
 recipe4 = Recipe.create!({
@@ -93,7 +93,7 @@ recipe4 = Recipe.create!({
   is_lactosefree: true,
   is_glutenfree: false,
   is_nutfree: false,
-  image: open_asset('burger_placeholder.jpg')
+  image: 'https://midwestfoodieblog.com/wp-content/uploads/2020/06/FINAL-pesto-pasta-1-5.jpg'
 })
 
 recipe5 = Recipe.create!({
@@ -107,7 +107,7 @@ recipe5 = Recipe.create!({
   is_lactosefree: false,
   is_glutenfree: true,
   is_nutfree: true,
-  image: open_asset('burger_placeholder.jpg')
+  image: 'https://www.finedininglovers.com/sites/g/files/xknfdk626/files/styles/recipes_1200_800_fallback/public/Original_1543_beef-stir-fry-carrots-broccoli-CUT1.jpg?itok=wdtsTvHQ'
 })
 
 ## INGREDIENTS
