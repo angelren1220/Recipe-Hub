@@ -11,7 +11,7 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
     users: [],
     recipes: [],
-    // ingredients: [],
+    ingredients: [],
     loading: true,
   });
   useEffect(() => {
@@ -35,10 +35,11 @@ const useApplicationData = () => {
 
   const getIngredients = (recipeId) => {
     axios.get(`/api/recipes/${recipeId}`)
-      .then((data) => {
+      .then((response) => {
+        // console.log("🙈", response.data);
         dispatch({
           type: SET_INGREDIENTS,
-          ingredients: data.ingredients
+          ingredients: response.data.ingredients
         });
       });
   };

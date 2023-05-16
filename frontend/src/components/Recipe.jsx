@@ -1,29 +1,43 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useApplicationData from '../hooks/useApplicationData';
 
 import "../styles/recipe.scss";
 
 const Recipe = function(props) {
+  // console.log("🐱", props);
+  const {
+    state,
+    getIngredients
+  } = useApplicationData();
 
-  // const ingredients = props.getIngredients(props.key);
+  useEffect(() => {
+    getIngredients(props.id);
+    // console.log("🐹", props.id);
+  }, []);
+
 
   return (
     <article className="recipe">
 
       <div className="recipe-text">
         <h2 className="recipe-title">{props.name}</h2>
-
+        <span>ingredients</span>
+      <ul>
+        {state.ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
+      </ul>
         <ul>
-          <li>Estimate cooktime: {props.cooktime} min</li>
+          <li>Estimate cooktime: {props.cooktime_minutes} min</li>
           {props.is_vegetarian && <li>Vegetarian</li>}
-          {props.is_vegans_lowcarb && <li>Low Carb</li>} 
+          {props.is_vegans_lowcarb && <li>Low Carb</li>}
           {props.is_lactosefree && <li>Lactose Free</li>}
           {props.is_glutenfree && <li>Gluten Free</li>}
           {props.is_nutfree && <li>Nut Free</li>}
         </ul>
+        <span>directions</span>
         <ol>
-          {props.directions.map((direction, i) => (<li key ={i}> {direction} </li>))}
+          {props.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
         </ol>
 
       </div>
