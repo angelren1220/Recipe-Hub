@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from "react";
 import Recipe from "./Recipe";
 
 const RecipeList = function(props) {
-
+ 
   const recipeList = props.recipes.map((recipe) => {
+    
     return (<Recipe
       key={recipe.id}
       name={recipe.name}
@@ -15,6 +18,7 @@ const RecipeList = function(props) {
       is_glutenfree={recipe.is_glutenfree}
       is_nutfree={recipe.is_nutfree}
       image={recipe.image}
+      ingredients={()=> props.getIngredients}
     />);
   });
 

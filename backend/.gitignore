@@ -7,7 +7,6 @@
 # environmental variables
 .env
 
-
 # Ignore bundler config.
 /.bundle
 

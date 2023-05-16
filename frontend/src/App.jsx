@@ -18,7 +18,8 @@ const App = function() {
 
   const {
     state,
-    dispatch
+    dispatch,
+    getIngredients
   } = useApplicationData();
 
   return (
@@ -28,7 +29,12 @@ const App = function() {
       <Navigation />
 
       <main className="recipes">
-        {viewMode === 'recipes' && <RecipeList recipes={state.recipes} />}
+
+        {viewMode === 'recipes' &&
+          <RecipeList
+            recipes={state.recipes}
+            getIngredients={() => getIngredients()}
+          />}
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
         {viewMode === 'loading' && <Loading >Loading</Loading>}
