@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 {/*Page Components*/}
@@ -21,6 +21,7 @@ import Loading from './components/Loading';
 import useApplicationData from './hooks/useApplicationData';
 import { viewModeContext } from './hooks/providers/viewModeProvider.jsx';
 import CreateRecipe from './components/CreateRecipe';
+import EditRecipe from './components/pages/EditRecipe';
 
 const App = function() {
 
@@ -46,6 +47,7 @@ const App = function() {
         <Routes>
           <Route path='/' element={<MyRecipes />}/>
           <Route path='/new/recipe' element={<CreateRecipe />}/>
+          <Route path='/recipe/edit/:id' element={<EditRecipe />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/explore' element={<Explore />}/>
           <Route path='/search' element={<Search />}/>
@@ -56,7 +58,7 @@ const App = function() {
       
       </Router>
 
-      <main className="recipes">
+      {/* <main>
 
         {viewMode === 'recipes' &&
           <RecipeList
@@ -65,7 +67,7 @@ const App = function() {
         {viewMode === 'login' && <Login />}
         {viewMode === 'register' && <Register />}
         {viewMode === 'loading' && <Loading >Loading</Loading>}
-      </main>
+      </main> */}
       
       <footer>
         <button onClick={loginView}>Log In</button >

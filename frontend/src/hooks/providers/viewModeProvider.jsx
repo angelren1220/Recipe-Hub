@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const viewModeContext = createContext();
 
 export default function ViewModeProvider(props) {
-  const [viewMode, setViewMode] = useState('recipes');
+  const [viewMode, setViewMode] = useState('');
 
   //functions to change viewMode
 

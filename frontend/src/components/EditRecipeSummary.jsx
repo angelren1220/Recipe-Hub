@@ -1,9 +1,9 @@
-import { useState } from "react",
+import { useState } from "react";
 
-const EditRecipe = function() {
+const EditRecipeSummary = function() {
 
   const currentRecipe = {
-    title: 'How To Cook Dinner',
+    name: 'How To Cook Dinner',
     description: 'This recipe will teach you how to cook a delicious meal.',
     cooktime_minutes: 2,
     image: 'https://static.wikia.nocookie.net/spongebob/images/2/2f/Krusty_Krab_Training_Video_081.png/revision/latest?cb=20211125123843'
@@ -70,4 +70,4 @@ const EditRecipe = function() {
   );
 };
 
-export default EditRecipe
+export default EditRecipeSummary;
