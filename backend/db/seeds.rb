@@ -195,7 +195,7 @@ book13 = user2.books.create!({ name: "The Nose-to-Tail Cookbook", user_id: user2
 book14 = user2.books.create!({ name: "French Comfort Food", user_id: user2.id, description: "Currently working on a collection of delightful and comforting French recipes." })
 book15 = user2.books.create!({ name: "Seafood Sensations", user_id: user2.id, description: "Dive into a world of mouthwatering seafood delights." })
 
-## RECIPE_BOOK (entrys for a book)
+## RECIPE_BOOK (entries for a book)
 
 puts "Creating Recipe Book Entries ..."
 
@@ -212,14 +212,137 @@ RecipeBook.create!({ recipe_id: recipe3.id, book_id: book7.id })
 RecipeBook.create!({ recipe_id: recipe4.id, book_id: book7.id })
 RecipeBook.create!({ recipe_id: recipe1.id, book_id: book7.id })
 
-## BOOKMARKED_BOOK
+## BOOKMARKED_BOOK (bookmarked entries)
 
 BookmarkedBook.destroy_all
+
+puts "Creating Bookmarked Book Entries ..."
 
 BookmarkedBook.create!({user_id: 1, book_id: 7})
 BookmarkedBook.create!({user_id: 1, book_id: 7})
 BookmarkedBook.create!({user_id: 2, book_id: 2})
 BookmarkedBook.create!({user_id: 3, book_id: 7})
 BookmarkedBook.create!({user_id: 3, book_id: 2})
+
+## GROCERY LISTS
+
+GroceryList.destroy_all
+
+puts "Creating Grocery Lists ..."
+
+grocery_list1 = GroceryList.create!(
+  user_id: 1,
+  name: "Weekly Driver",
+  items: {
+    spinach: { quantity: 1, unit: "bunch" },
+    tofu: { quantity: 2, unit: "pack" },
+    lentils: { quantity: 1, unit: "can" },
+    quinoa: { quantity: 1, unit: "cup" }
+  }
+)
+
+grocery_list2 = GroceryList.create!(
+  user_id: 2,
+  name: "Family Dins",
+  items: {
+    chicken: { quantity: 1, unit: "kg" },
+    potatoes: { quantity: 4, unit: "pieces" },
+    broccoli: { quantity: 2, unit: "heads" },
+    garlic: { quantity: 3, unit: "cloves" },
+    lemon: { quantity: 2, unit: "pieces" }
+  }
+)
+
+grocery_list3 = GroceryList.create!(
+  user_id: 1,
+  name: "Healthy",
+  items: {
+    bananas: { quantity: 3, unit: "pieces" },
+    strawberries: { quantity: 1, unit: "cup" },
+    spinach: { quantity: 1, unit: "handful" },
+    almond_milk: { quantity: 2, unit: "cups" },
+    chia_seeds: { quantity: 1, unit: "tablespoon" }
+  }
+)
+
+grocery_list4 = GroceryList.create!(
+  user_id: 3,
+  name: "Birthday Cake Test",
+  items: {
+    flour: { quantity: 2, unit: "cups" },
+    sugar: { quantity: 1, unit: "cup" },
+    baking_powder: { quantity: 1, unit: "teaspoon" },
+    eggs: { quantity: 3, unit: "pieces" },
+    vanilla_extract: { quantity: 1, unit: "teaspoon" }
+  }
+)
+
+grocery_list5 = GroceryList.create!(
+  user_id: 2,
+  name: "Hiking Snacks",
+  items: {
+    almonds: { quantity: 1, unit: "cup" },
+    dried_mango: { quantity: 0.5, unit: "cup" },
+    popcorn: { quantity: 2, unit: "bags" }
+  }
+)
+
+## GROCERY LISTS
+
+Message.destroy_all
+
+puts "Creating Messages ..."
+
+message1 = Message.create!({
+  sender_id: user1.id,
+  recipient_id: user4.id,
+  subject_type: "Book",
+  subject_id: 13,
+  message: "Where does he come up with this stuff?"
+})
+
+message2 = Message.create!({
+  sender_id: user2.id,
+  recipient_id: user1.id,
+  subject_type: "GroceryList",
+  subject_id: 5,
+  message: "Can you pick these up for me on your way to work?"
+})
+
+message3 = Message.create!({
+  sender_id: user1.id,
+  recipient_id: user3.id,
+  subject_type: "Recipe",
+  subject_id: 4,
+  message: "This was the recipe from last night's dinner!!!"
+})
+
+message4 = Message.create!({
+  sender_id: user2.id,
+  recipient_id: user5.id,
+  subject_type: "Book",
+  subject_id: 6,
+  message: "Ideas for the upcoming party"
+})
+
+message5 = Message.create!({
+  sender_id: user3.id,
+  recipient_id: user1.id,
+  subject_type: "GroceryList",
+  subject_id: 4,
+  message: "Running low on these!!!!"
+})
+
+## USER INBOXES
+
+UserInbox.destroy_all
+
+puts "Creating User Inboxes ..."
+
+UserInbox.create!({user_id: user4.id, message_id: message1.id})
+UserInbox.create!({user_id: user1.id, message_id: message2.id})
+UserInbox.create!({user_id: user3.id, message_id: message3.id})
+UserInbox.create!({user_id: user5.id, message_id: message4.id})
+UserInbox.create!({user_id: user1.id, message_id: message5.id})
 
 puts "DONE!"

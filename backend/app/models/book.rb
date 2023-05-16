@@ -17,8 +17,8 @@ class Book < ApplicationRecord
   private
 
   def sanitize_attributes
-    self.name = CGI.escapeHTML(name)
-    self.description = CGI.escapeHTML(description)
+    self.name = CGI.escapeHTML(name) if name.present?
+    self.description = CGI.escapeHTML(description) if description.present?
   end
 
 end

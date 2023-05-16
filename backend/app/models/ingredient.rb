@@ -10,6 +10,6 @@ class Ingredient < ApplicationRecord
   private
 
   def sanitize_attributes
-    self.name = CGI.escapeHTML(name)
+    self.name = CGI.escapeHTML(name) if name.present?
   end
 end
