@@ -1,14 +1,15 @@
 class Message < ApplicationRecord
-  SUBJECT_TYPES = %w[book recipe grocery_list].freeze
+  # allows id to switch its associations based on 
+  belongs_to :subject, polymorphic: true
+
+  # more explicit because there are two references to Users 
+  belongs_to :sender, class_name: "User"
+  belongs_to :recipient, class_name: "User"
 
   validates :sender_id, presence: true
   validates :recipient_id, presence: true
   validates :subject_type, presence: true
 
-  # ensures subject_type is one of the three categories at the top
-  validates :subject_type, presence: true, inclusion: { in: SUBJECT_TYPES }
-  validates :associated_id, presence: true
-  
   validates :message, presence: true, length: { maximum: 500 }
   
   before_save :sanitize_attributes

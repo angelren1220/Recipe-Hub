@@ -5,6 +5,9 @@ class Recipe < ApplicationRecord
 
   has_many :ingredients
 
+  # polymorphic association with messages
+  has_many :messages, as: :subject
+
   validates :name, presence: true
   validates :cooktime_minutes, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   

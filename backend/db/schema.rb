@@ -43,10 +43,11 @@ ActiveRecord::Schema.define(version: 2023_05_15_220040) do
     t.integer "sender_id"
     t.integer "recipient_id"
     t.string "subject_type"
-    t.integer "associated_id"
+    t.bigint "subject_id"
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_type", "subject_id"], name: "index_messages_on_subject"
   end
 
   create_table "recipe_books", force: :cascade do |t|

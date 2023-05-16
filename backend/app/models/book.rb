@@ -7,6 +7,9 @@ class Book < ApplicationRecord
   has_many :bookmarked_books
   has_many :users, through: :bookmarked_books
 
+  # polymorphic association with messages
+  has_many :messages, as: :subject
+
   validates :name, presence: true
 
   before_save :sanitize_attributes
