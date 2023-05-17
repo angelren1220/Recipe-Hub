@@ -4,6 +4,8 @@ import React from "react";
 import Recipe from "./Recipe";
 
 const RecipeList = function(props) {
+
+  console.log('++++++++++', props);
  
   const recipeList = props.recipes.map((recipe) => {
     

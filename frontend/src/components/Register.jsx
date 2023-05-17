@@ -64,6 +64,15 @@ const Register = function() {
           type="password"
           placeholder="************"
         />
+        <label htmlFor="confirmPassword" > Confirm Password:</label>
+        <input
+          id="confirmPassword"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+          name="confirmPassword"
+          type="confirmPassword"
+          placeholder="************"
+        />
         <button onClick={handleRegister}>Register</button>
       </form>
       <button onClick={loginView}>Already have an account? Login here!</button>
