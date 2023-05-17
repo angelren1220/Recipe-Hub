@@ -47,6 +47,17 @@ const useApplicationData = () => {
       });
   };
 
+  const getRecipesByUserID = (userId) => {
+    axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        // console.log("🙈", response.data);
+        dispatch({
+          type: SET_RECIPES,
+          recipes: response.data.recipes
+        });
+      });
+  };
+
   
   const createUser = (user) => {
     // const user = JSON.stringify(user);
@@ -63,11 +74,12 @@ const useApplicationData = () => {
         console.log(response);
       })
   }
-  
+
   return {
     state,
     dispatch,
     getIngredients,
+    getRecipesByUserID,
     createUser,
     createRecipe
   };

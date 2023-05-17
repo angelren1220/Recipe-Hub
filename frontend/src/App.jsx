@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import './App.css';
 
 import Navigation from './components/Navigation';
@@ -7,15 +7,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Loading from './components/Loading';
 
-// import csrf from 
-
 import useApplicationData from './hooks/useApplicationData';
 import { viewModeContext } from './hooks/providers/viewModeProvider.jsx';
-
-// const csrfProtection = csrf({
-//   cookie: false
-// });
-// app.use(csrfProtection); 
 
 const App = function() {
 
@@ -24,7 +17,13 @@ const App = function() {
   const {
     state,
     dispatch,
+    getRecipesByUserID
   } = useApplicationData();
+
+  useEffect(() => {
+    getRecipesByUserID(1);
+    // console.log("🐹", props.id);
+  }, []);
 
   return (
 

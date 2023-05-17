@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: {user:@user, recipes:@recipes}
   end
 
   # POST /users
@@ -42,6 +42,7 @@ class Api::UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      @recipes = @user.recipes
     end
 
     # Only allow a list of trusted parameters through.
