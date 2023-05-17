@@ -3,7 +3,10 @@ import {
   useReducer
 } from 'react';
 import dataReducer, {
-  SET_APPLICATION_DATA, SET_INGREDIENTS
+  SET_APPLICATION_DATA,
+  SET_INGREDIENTS,
+  SET_RECIPES,
+
 } from './dataReducer';
 import axios from 'axios';
 
@@ -44,10 +47,57 @@ const useApplicationData = () => {
       });
   };
 
+  const getRecipesByUserID = (userId) => {
+    axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        // console.log("🙈", response.data);
+        dispatch({
+          type: SET_RECIPES,
+          recipes: response.data.recipes
+        });
+      });
+  };
+
+
+  const createUser = (user) => {
+    // const user = JSON.stringify(user);
+    // the object post to backend should be the exact same name with it in database
+    axios.post("/api/users", { user })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const createRecipe = (recipe) => {
+    axios.post("/api/recipes", { recipe })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const updateRecipe = (id, recipe) => {
+    axios.put(`/api/recipes/${id}`, { recipe })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const deleteRecipe = (id) => {
+    axios.delete(`/api/recipes/${id}`)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   return {
     state,
     dispatch,
-    getIngredients
+    getIngredients,
+    getRecipesByUserID,
+    createUser,
+    createRecipe,
+    updateRecipe,
+    deleteRecipe
   };
 };
 

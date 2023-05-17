@@ -20,14 +20,14 @@ class Recipe < ApplicationRecord
   validates :is_nutfree, inclusion: { in: [true, false] }
 
   # Still figuring best way to sanitize the instructions but allow words like "sauté" (notice the accent to be allowed)
-  before_save :sanitize_attributes
+  # before_save :sanitize_attributes
 
-  private
+  # private
 
-  def sanitize_attributes
-    self.name = CGI.escapeHTML(name) if name.present?
-    self.description = CGI.escapeHTML(description) if description.present?
-    self.directions.map! { |direction| CGI.escapeHTML(direction) }
-  end
+  # def sanitize_attributes
+  #   self.name = CGI.escapeHTML(name) if name.present?
+  #   self.description = CGI.escapeHTML(description) if description.present?
+  #   self.directions.map! { |direction| CGI.escapeHTML(direction) }
+  # end
 
 end

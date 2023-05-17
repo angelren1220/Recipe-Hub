@@ -19,7 +19,7 @@ class Api::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
+      render json: @recipe, status: :created
     else
       render json: @recipe.errors, status: :unprocessable_entity
     end
@@ -49,8 +49,8 @@ class Api::RecipesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def recipe_params
       params.require(:recipe).permit(
-        :name, :cooktime_minutes, :is_vegetarian, :is_vegan, :is_lowcarb,
-        :is_lactosefree, :is_glutenfree, :is_nutfree, directions: []
+        :name, :user_id, :cooktime_minutes, :is_vegetarian, :is_vegan, :is_lowcarb, :description,
+        :is_lactosefree, :is_glutenfree, :is_nutfree, :image, directions: []
       )
     end
 
