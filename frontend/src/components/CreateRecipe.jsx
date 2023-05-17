@@ -6,6 +6,7 @@ const CreateRecipe = function() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [cooktimeMinutes, setCooktime] = useState('');
+  const [directions, setDections] = useState([]);
 
   const {
     state,
@@ -20,10 +21,11 @@ const CreateRecipe = function() {
       user_id: 1, // need get from cookies
       description,
       cooktime_minutes: cooktimeMinutes,
-      image
+      image,
+      directions: ["something"]
     }
 
-    createRecipe(state.user, recipe);
+    createRecipe(recipe);
   }
 
   return (
