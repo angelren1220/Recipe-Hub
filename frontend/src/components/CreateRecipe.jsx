@@ -1,12 +1,29 @@
-import { useState } from "react",
+import { useState } from "react";
+import useApplicationData from "../hooks/useApplicationData";
 
 const CreateRecipe = function() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
+  const [cooktimeMinutes, setCooktime] = useState('');
+
+  const {
+    state,
+    createRecipe
+  } = useApplicationData();
 
   const handleCreation = function() {
-    console.log("name: ", name, "description: ", description, "img url: ", image)
+    console.log("name: ", name, "description: ", description, "img url: ", image);
+
+    const recipe = {
+      name,
+      user_id: 1, // need get from cookies
+      description,
+      cooktime_minutes: cooktimeMinutes,
+      image
+    }
+
+    createRecipe(state.user, recipe);
   }
 
   return (
@@ -35,7 +52,16 @@ const CreateRecipe = function() {
           placeholder="Lorem ipsum ..."
           required
         />
-        <label htmlFor="image" >Image:</label>
+        <label htmlFor="Cooktime" >Cooktime in minutes:</label>
+        <input
+          id="cooktime"
+          value={cooktimeMinutes}
+          onChange={(e) => setCooktime(e.target.value)}
+          name="cooktime"
+          type="integer"
+          placeholder="15"
+        />
+        <label htmlFor="imgage" >Image URL:</label>
         <input
           id="image"
           value={image}
@@ -49,3 +75,5 @@ const CreateRecipe = function() {
     </>
   )
 }
+
+export default CreateRecipe;

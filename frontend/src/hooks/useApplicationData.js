@@ -58,22 +58,36 @@ const useApplicationData = () => {
       });
   };
 
-  
+
   const createUser = (user) => {
     // const user = JSON.stringify(user);
     // the object post to backend should be the exact same name with it in database
-    axios.post("/api/users", {user})
-    .then((response) => {
-      console.log(response);
-    })
-  }
-  
-  const createRecipe = (recipe) => {
-    axios.put(`/api/receipes`, {recipe})
+    axios.post("/api/users", { user })
       .then((response) => {
         console.log(response);
-      })
-  }
+      });
+  };
+
+  const createRecipe = (recipe) => {
+    axios.post("/api/recipes", { recipe })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const updateRecipe = (id, recipe) => {
+    axios.post(`/api/recipes/${id}`, { recipe })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const deleteRecipe = (id) => {
+    axios.delete(`/api/recipes/${id}`)
+      .then((response) => {
+        console.log(response);
+      });
+  };
 
   return {
     state,
@@ -81,7 +95,9 @@ const useApplicationData = () => {
     getIngredients,
     getRecipesByUserID,
     createUser,
-    createRecipe
+    createRecipe,
+    updateRecipe,
+    deleteRecipe
   };
 };
 
