@@ -3,7 +3,10 @@ import {
   useReducer
 } from 'react';
 import dataReducer, {
-  SET_APPLICATION_DATA, SET_INGREDIENTS
+  SET_APPLICATION_DATA,
+  SET_INGREDIENTS,
+  SET_RECIPES,
+
 } from './dataReducer';
 import axios from 'axios';
 
@@ -44,10 +47,29 @@ const useApplicationData = () => {
       });
   };
 
+  
+  const createUser = (user) => {
+    // const user = JSON.stringify(user);
+    // the object post to backend should be the exact same name with it in database
+    axios.post("/api/users", {user})
+    .then((response) => {
+      console.log(response);
+    })
+  }
+  
+  const createRecipe = (recipe) => {
+    axios.put(`/api/receipes`, {recipe})
+      .then((response) => {
+        console.log(response);
+      })
+  }
+  
   return {
     state,
     dispatch,
-    getIngredients
+    getIngredients,
+    createUser,
+    createRecipe
   };
 };
 

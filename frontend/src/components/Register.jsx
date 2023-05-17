@@ -1,15 +1,25 @@
 import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
-
+import useApplicationData from "../hooks/useApplicationData";
 const Register = function() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const {
+    state,
+    createUser
+  } = useApplicationData();
 
   const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
 
   const handleRegister = function() {
-    console.log("name", name, "email: ", email, "password: ", pass);
+    // console.log("name", firstName, "email: ", email, "password: ", pass);
+
+    // the key in user object should be exactly the same in database
+    const user = {first_name: firstName, last_name: lastName, email, password: pass};
+    createUser(user);
   };
 
   return (
@@ -18,11 +28,20 @@ const Register = function() {
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
-        <label htmlFor="name" >Full Name:</label>
+        <label htmlFor="name" >First Name:</label>
         <input
           id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          name="name"
+          type="text"
+          placeholder="Full Name"
+        />
+        <label htmlFor="name" >Last Name:</label>
+        <input
+          id="name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
           name="name"
           type="text"
           placeholder="Full Name"
