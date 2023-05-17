@@ -76,7 +76,7 @@ const useApplicationData = () => {
   };
 
   const updateRecipe = (id, recipe) => {
-    axios.post(`/api/recipes/${id}`, { recipe })
+    axios.put(`/api/recipes/${id}`, { recipe })
       .then((response) => {
         console.log(response);
       });
