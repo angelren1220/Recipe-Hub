@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import bcrypt from "bcryptjs";
 import useApplicationData from "../hooks/useApplicationData";
+import { Link } from 'react-router-dom';
 
 const RegisterForm = function() {
   const [firstName, setFirstName] = useState('');
@@ -93,7 +94,10 @@ const RegisterForm = function() {
         />
         <button onClick={handleRegister}>Register</button>
       </form>
-      <button onClick={loginView}>Already have an account? Login here!</button>
+
+      <button>
+        <Link to="/login"> Already have an account? Login here!</Link>
+      </button>
     </>
   );
 };
