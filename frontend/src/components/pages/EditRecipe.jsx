@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
+import { viewModeContext } from "../../hooks/providers/viewModeProvider";
 
 import EditRecipeSummary from "../EditRecipeSummary";
+import EditRecipeIngredients from "../EditRecipeIngredients";
 import EditRecipeDirections from "../EditRecipeDirections";
 
 const EditRecipe = function() {
+  const {
+    viewMode,
+    recipeSummaryView,
+    recipeIngredientsView,
+    recipeDirectionsView
+  } = useContext(viewModeContext);
+
   const {
     state,
     dispatch,
@@ -13,16 +22,19 @@ const EditRecipe = function() {
   } = useApplicationData();
 
   const { id } = useParams();
+  console.log('********', id);
 
-  const getRecipe = {
 
-  };
-
-  const [editMode, setEditMode] = useState('SUMMARY');
   return (
     <>
-      {editMode === 'SUMMARY' && <EditRecipeSummary />}
-      {editMode === 'DIRECTIONS' && <EditRecipeDirections />}
+      <div className="viewModes">
+        <button onClick={() => recipeSummaryView()}>Edit Summary</button>
+        <button onClick={() => recipeIngredientsView()}>Edit Ingredients</button>
+        <button onClick={() => recipeDirectionsView()}>Edit Directions</button>
+      </div>
+      {viewMode === 'SUMMARY' && <EditRecipeSummary />}
+      {viewMode === 'INGREDIENTS' && <EditRecipeIngredients />}
+      {viewMode === 'DIRECTIONS' && <EditRecipeDirections />}
     </>
   );
 };

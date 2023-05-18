@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const EditRecipeSummary = function() {
+const EditRecipeSummary = function(props) {
 
   const currentRecipe = {
     name: 'How To Cook Dinner',
@@ -66,6 +66,7 @@ const EditRecipeSummary = function() {
         />
         <button onClick={handleEdit}>Submit</button>
       </form>
+      <button >To Ingredients</button>
     </>
   );
 };

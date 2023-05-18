@@ -23,7 +23,28 @@ export default function ViewModeProvider(props) {
     setViewMode('loading');
   };
 
-  const providerData = { viewMode, loginView, registerView, recipesView, loadingView };
+  const recipeSummaryView = function() {
+    setViewMode('SUMMARY');
+  };
+
+  const recipeIngredientsView = function() {
+    setViewMode('INGREDIENTS');
+  };
+
+  const recipeDirectionsView = function() {
+    setViewMode('DIRECTIONS');
+  };
+
+  const providerData = {
+    viewMode,
+    loginView,
+    registerView,
+    recipesView,
+    loadingView,
+    recipeSummaryView,
+    recipeIngredientsView,
+    recipeDirectionsView
+  };
 
   return (
     <viewModeContext.Provider value={providerData}>
