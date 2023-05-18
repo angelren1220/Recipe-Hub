@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { viewModeContext } from "../../hooks/providers/viewModeProvider";
 
-import EditRecipeSummary from "../EditRecipeSummary";
-import EditRecipeIngredients from "../EditRecipeIngredients";
-import EditRecipeDirections from "../EditRecipeDirections";
+import EditRecipeSummary from "../editRecipe/EditRecipeSummary";
+import EditRecipeIngredients from "../editRecipe/EditRecipeIngredients";
+import EditRecipeDirections from "../editRecipe/EditRecipeDirections";
 
 const EditRecipe = function() {
   const {
@@ -21,8 +21,20 @@ const EditRecipe = function() {
     getRecipesByUserID
   } = useApplicationData();
 
+  //current recipe id being edited
   const { id } = useParams();
   console.log('********', id);
+
+  let editedRecipe = {}
+
+  useEffect(() => {
+    editedRecipe = getRecipesByUserID(1);
+
+    console.log("🐹", editedRecipe);
+  }, []);
+
+  console.log("🐶", editedRecipe);
+
 
 
   return (

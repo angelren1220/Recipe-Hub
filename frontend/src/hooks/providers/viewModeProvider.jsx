@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 export const viewModeContext = createContext();
-
+// this is for view modes in the App component
 export default function ViewModeProvider(props) {
   const [viewMode, setViewMode] = useState('');
 
@@ -23,27 +23,12 @@ export default function ViewModeProvider(props) {
     setViewMode('loading');
   };
 
-  const recipeSummaryView = function() {
-    setViewMode('SUMMARY');
-  };
-
-  const recipeIngredientsView = function() {
-    setViewMode('INGREDIENTS');
-  };
-
-  const recipeDirectionsView = function() {
-    setViewMode('DIRECTIONS');
-  };
-
   const providerData = {
     viewMode,
     loginView,
     registerView,
     recipesView,
     loadingView,
-    recipeSummaryView,
-    recipeIngredientsView,
-    recipeDirectionsView
   };
 
   return (
