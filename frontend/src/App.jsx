@@ -17,6 +17,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Loading from './components/Loading';
 
+import RecipeEditModeProvider from './hooks/providers/recipeEditMode';
 
 import useApplicationData from './hooks/useApplicationData';
 import { viewModeContext } from './hooks/providers/viewModeProvider.jsx';
@@ -47,7 +48,11 @@ const App = function() {
         <Routes>
           <Route path='/' element={<MyRecipes />}/>
           <Route path='/new/recipe' element={<CreateRecipe />}/>
-          <Route path='/recipe/edit/:id' element={<EditRecipe />}/>
+          <Route path='/recipe/edit/:id' element={
+            <RecipeEditModeProvider>
+              <EditRecipe />
+            </RecipeEditModeProvider>
+          }/>
           <Route path='/login' element={<Login />}/>
           <Route path='/explore' element={<Explore />}/>
           <Route path='/search' element={<Search />}/>

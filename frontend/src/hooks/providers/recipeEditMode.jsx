@@ -2,32 +2,33 @@ import { createContext, useState } from "react";
 
 export const recipeEditContext = createContext();
 
-export default function recipeEditMode(props) {
-  const [editRecipeMode, setEditRecipeMode] = useState('');
+export default function RecipeEditModeProvider(props) {
+  const [recipeEditMode, setRecipeEditMode] = useState('SUMMARY');
 
   //functions to change viewMode
 
   const recipeSummaryView = function() {
-    setEditRecipeMode('SUMMARY');
+    setRecipeEditMode('SUMMARY');
   };
 
   const recipeIngredientsView = function() {
-    setEditRecipeMode('INGREDIENTS');
+    setRecipeEditMode('INGREDIENTS');
   };
 
   const recipeDirectionsView = function() {
-    setEditRecipeMode('DIRECTIONS');
+    setRecipeEditMode('DIRECTIONS');
   };
 
   const providerData = {
+    recipeEditMode,
     recipeSummaryView,
     recipeIngredientsView,
     recipeDirectionsView
   };
 
   return (
-    <viewModeContext.Provider value={providerData}>
+    <recipeEditContext.Provider value={providerData}>
       {props.children}
-    </viewModeContext.Provider>
+    </recipeEditContext.Provider>
   );
 };

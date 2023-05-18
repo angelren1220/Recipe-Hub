@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { viewModeContext } from "../../hooks/providers/viewModeProvider";
 
 const EditRecipeSummary = function(props) {
 
@@ -14,10 +15,16 @@ const EditRecipeSummary = function(props) {
   const [image, setImage] = useState(currentRecipe.image);
   const [cooktimeMinutes, setCooktime] = useState(currentRecipe.cooktime_minutes);
 
+  const {
+    viewMode,
+    recipeSummaryView,
+    recipeIngredientsView,
+    recipeDirectionsView
+  } = useContext(viewModeContext);
+
   const handleEdit = function() {
     console.log("name: ", name, "description: ", description, "img url: ", image);
     //call edit recipe helper function and forward to next edit page
-
   };
 
   return (
