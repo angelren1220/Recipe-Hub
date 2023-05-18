@@ -1,0 +1,12 @@
+.template {
+  flex: 1; /* Take up remaining space */
+  display: flex;
+  height: 100vh;
+}
+
+.content-container {
+  flex-grow: 1; /* Take up remaining space */
+  background-color: #666666;
+  padding: 1em;
+  overflow-y: auto;
+}
