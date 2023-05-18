@@ -6,7 +6,6 @@ const CreateRecipe = function() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [cooktimeMinutes, setCooktime] = useState('');
-  const [directions, setDections] = useState([]);
 
   const {
     state,
@@ -22,11 +21,12 @@ const CreateRecipe = function() {
       description,
       cooktime_minutes: cooktimeMinutes,
       image,
-      directions: ["something"]
-    }
+      directions: []
+    };
 
     createRecipe(recipe);
-  }
+    //link to edit the new recipe^^
+  };
 
   return (
     <>
@@ -34,7 +34,7 @@ const CreateRecipe = function() {
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
-        <label htmlFor="title" >Recipe Title:</label>
+        <label htmlFor="name" >Recipe Title:</label>
         <input
           id="name"
           value={name}
@@ -75,7 +75,7 @@ const CreateRecipe = function() {
         <button onClick={handleCreation}>Submit</button>
       </form>
     </>
-  )
-}
+  );
+};
 
 export default CreateRecipe;

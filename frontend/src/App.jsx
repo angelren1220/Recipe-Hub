@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-{/*Page Components*/}
+{/*Page Components*/ }
 
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
@@ -89,6 +89,7 @@ const App = function() {
 
         </Template>
       </Router>
+
     </div>
   );
 
