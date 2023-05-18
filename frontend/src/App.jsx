@@ -56,41 +56,41 @@ const App = function() {
         <Routes>
 
           <Route path='/recipes'>
-            <Route index element={<RecipesList/>}/>
-            <Route path=':id' element={<Recipe/>}/>
-            <Route path='new' element={<NewRecipe/>}/>
-            <Route path='edit/:id' element={
-                <RecipeEditModeProvider>
-                  <EditRecipe />
-                </RecipeEditModeProvider>
-              }/>
+            <Route index element={<RecipesList />} />
+            <Route path=':id' element={<Recipe />} />
+            <Route path='new' element={<NewRecipe />} />
+            <Route path='edit/:recipeId' element={
+              <RecipeEditModeProvider>
+                <EditRecipe />
+              </RecipeEditModeProvider>
+            } />
           </Route>
-          
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
 
-          <Route path='/explore' element={<Explore/>}/>
-          <Route path='/search' element={<Search/>}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+
+          <Route path='/explore' element={<Explore />} />
+          <Route path='/search' element={<Search />} />
 
           <Route path='/books'>
-            <Route index element={<Books/>}/>
-            <Route path=':id' element={<RecipesList/>}/>
-            <Route path='new' element={<NewBook/>}/>
+            <Route index element={<Books />} />
+            <Route path=':id' element={<RecipesList />} />
+            <Route path='new' element={<NewBook />} />
           </Route>
 
           <Route path='/grocerylists'>
-            <Route index element={<GroceryLists/>}/>
-            <Route path=':id' element={<GroceryList/>}/>
-            <Route path='new' element={<GroceryListForm />}/>
+            <Route index element={<GroceryLists />} />
+            <Route path=':id' element={<GroceryList />} />
+            <Route path='new' element={<GroceryListForm />} />
           </Route>
-          
+
           <Route path='/profile'>
-            <Route index element={<Profile/>}/>
-            <Route path=':id' element={<Profile/>}/>
+            <Route index element={<Profile />} />
+            <Route path=':id' element={<Profile />} />
           </Route>
 
           <Route path='/inbox'>
-            <Route index element={<Inbox/>}/>
+            <Route index element={<Inbox />} />
           </Route>
 
         </Routes>
