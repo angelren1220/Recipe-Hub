@@ -1,4 +1,5 @@
 class Api::UsersController < ApplicationController
+  include ::ActionController::Cookies
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -18,6 +19,7 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
