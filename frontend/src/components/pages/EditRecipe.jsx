@@ -23,8 +23,8 @@ const EditRecipe = function() {
   } = useApplicationData();
 
   //current recipe id being edited
-  const { id } = useParams();
-  console.log('********', id);
+  const { recipeId } = useParams();
+  console.log('********', recipeId);
 
   useEffect(() => {
     const editedRecipe = getRecipesByUserID(1);

@@ -48,7 +48,7 @@ const App = function() {
         <Routes>
           <Route path='/' element={<MyRecipes />}/>
           <Route path='/new/recipe' element={<CreateRecipe />}/>
-          <Route path='/recipe/edit/:id' element={
+          <Route path='/recipe/edit/:recipeId' element={
             <RecipeEditModeProvider>
               <EditRecipe />
             </RecipeEditModeProvider>
