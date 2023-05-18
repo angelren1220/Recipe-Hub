@@ -28,14 +28,9 @@ import Inbox from './components/pages/Inbox';
 
 {/*Single Components*/ }
 import Navigation from './components/Navigation';
-import Login from './components/pages/Login';
-import Register from './components/Register';
 
 import RecipeEditModeProvider from './hooks/providers/recipeEditMode';
 
-import useApplicationData from './hooks/useApplicationData';
-import CreateRecipe from './components/CreateRecipe';
-import EditRecipe from './components/pages/EditRecipe';
 import useApplicationData from './hooks/useApplicationData';
 
 
