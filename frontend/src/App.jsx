@@ -4,6 +4,9 @@ import './App.css';
 
 {/*Page Components*/}
 
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
+
 import RecipesList from './components/pages/RecipesList';
 import Recipe from './components/pages/Recipe';
 import NewRecipe from './components/pages/NewRecipe';
@@ -22,24 +25,14 @@ import GroceryListForm from './components/pages/GroceryListForm';
 import Profile from './components/pages/Profile';
 
 import Inbox from './components/pages/Inbox';
-import Message from './components/pages/Message';
-import NewMessage from './components/pages/NewMessage';
 
 {/*Single Components*/}
 import Navigation from './components/Navigation';
-import RecipeList from './components/RecipeList';
-import Login from './components/Login';
-import Register from './components/Register';
-import Loading from './components/Loading';
-
-
 import useApplicationData from './hooks/useApplicationData';
-import { viewModeContext } from './hooks/providers/viewModeProvider.jsx';
-import CreateRecipe from './components/CreateRecipe';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 const App = function() {
-
-  const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
 
   const {
     state,
@@ -66,8 +59,10 @@ const App = function() {
             <Route path='new' element={<NewRecipe/>}/>
             <Route path='edit/:id' element={<EditRecipe/>}/>
           </Route>
-
+          
           <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+
           <Route path='/explore' element={<Explore/>}/>
           <Route path='/search' element={<Search/>}/>
 
@@ -95,7 +90,6 @@ const App = function() {
         </Routes>
       
       </Router>
-
     </div>
   );
 

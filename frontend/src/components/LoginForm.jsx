@@ -1,8 +1,10 @@
 import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import bcrypt from "bcryptjs";
+import { Link } from 'react-router-dom';
 
-const Login = function() {
+
+const LoginForm = function() {
 
   const [email, setEmail] = useState('');
   const [password, setPass] = useState('');
@@ -52,10 +54,14 @@ const Login = function() {
         />
         <button onClick={handleLogin}>Log In</button>
       </form>
-      <button onClick={registerView}>Don&apos;t have an account? Register here!</button>
+
+      <button>
+        <Link to="/register"> Don't have an account? Register here!</Link>
+      </button>
     </>
+
 
   );
 };
 
-export default Login;
+export default LoginForm;

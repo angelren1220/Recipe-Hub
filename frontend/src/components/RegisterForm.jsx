@@ -2,7 +2,8 @@ import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import bcrypt from "bcryptjs";
 import useApplicationData from "../hooks/useApplicationData";
-const Register = function() {
+
+const RegisterForm = function() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -97,4 +98,4 @@ const Register = function() {
   );
 };
 
-export default Register;
+export default RegisterForm;
