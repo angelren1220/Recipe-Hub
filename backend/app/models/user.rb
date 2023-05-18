@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  has_secure_password
+
   has_many :recipes
   has_many :bookmarked_books
   has_many :books

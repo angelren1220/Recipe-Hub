@@ -19,19 +19,24 @@ const RegisterForm = function() {
   const { loginView } = useContext(viewModeContext);
 
   //returns hashed password if passwords match, otherwise returns null
-  const verifyPassword = function(password1, password2) {
-    if (password1 === password2) {
-      return bcrypt.hashSync(password1, 10);
-    }
-    alert('Passwords must match!');
-    return null;
-  };
+  // const verifyPassword = function(password1, password2) {
+  //   if (password1 === password2) {
+  //     return bcrypt.hashSync(password1, 10);
+  //   }
+  //   alert('Passwords must match!');
+  //   return null;
+  // };
 
   const handleRegister = function() {
-    const hashedPassword = verifyPassword(password, passwordConfirmation);
+    // const hashedPassword = verifyPassword(password, passwordConfirmation);
     // the key in user object should be exactly the same in database
-    const user = { first_name: firstName, last_name: lastName, email, password: hashedPassword };
-    (hashedPassword && createUser(user));
+    // const user = { first_name: firstName, last_name: lastName, email, password: hashedPassword };
+    // (hashedPassword && createUser(user));
+    if (password === passwordConfirmation) {
+      const user = { first_name: firstName, last_name: lastName, email, password: password };
+      createUser(user);
+    }
+    alert('Passwords must match!');
   };
 
   return (

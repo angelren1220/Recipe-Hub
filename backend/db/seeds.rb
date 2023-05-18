@@ -27,11 +27,11 @@ puts "Creating Users ..."
 
 User.destroy_all
 
-user1 = User.create!({first_name: "Julia", last_name: "Child", email: "julia.child@example.com", password: "$2a$10$DiCmAm.fuq0bQgpM7iBWoOE7BNu8fkYdSffDHQVeN9kf5W54RT5Pu"})
-user2 = User.create!({first_name: "Fergus", last_name: "Henderson", email: "fergus.henderson@example.com", password: "$2a$10$DiCmAm.fuq0bQgpM7iBWoOE7BNu8fkYdSffDHQVeN9kf5W54RT5Pu"})
-user3 = User.create!({first_name: "Emeril", last_name: "Lagasse", email: "emeril.lagasse@example.com", password: "$2a$10$DiCmAm.fuq0bQgpM7iBWoOE7BNu8fkYdSffDHQVeN9kf5W54RT5Pu"})
-user4 = User.create!({first_name: "Florence", last_name: "Pugh", email: "florence.pugh@example.com", password: "$2a$10$DiCmAm.fuq0bQgpM7iBWoOE7BNu8fkYdSffDHQVeN9kf5W54RT5Pu"})
-user5 = User.create!({first_name: "Jamie", last_name: "Oliver", email: "jamie.oliver@example.com", password: "$2a$10$DiCmAm.fuq0bQgpM7iBWoOE7BNu8fkYdSffDHQVeN9kf5W54RT5Pu"})
+user1 = User.create!({first_name: "Julia", last_name: "Child", email: "julia.child@example.com", password: "password"})
+user2 = User.create!({first_name: "Fergus", last_name: "Henderson", email: "fergus.henderson@example.com", password: "password"})
+user3 = User.create!({first_name: "Emeril", last_name: "Lagasse", email: "emeril.lagasse@example.com", password: "password"})
+user4 = User.create!({first_name: "Florence", last_name: "Pugh", email: "florence.pugh@example.com", password: "password"})
+user5 = User.create!({first_name: "Jamie", last_name: "Oliver", email: "jamie.oliver@example.com", password: "password"})
 
 
 ## RECIPES
