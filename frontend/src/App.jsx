@@ -2,31 +2,44 @@ import { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-{/*Page Components*/}
-import MyRecipes from './components/pages/MyRecipes';
+{/*Page Components*/ }
+
+import Login from './components/pages/Login';
+import Register from './components/pages/Register';
+
+import RecipesList from './components/pages/RecipesList';
+import Recipe from './components/pages/Recipe';
+import NewRecipe from './components/pages/NewRecipe';
+import EditRecipe from './components/pages/EditRecipe';
+
+import Books from './components/pages/Books';
+import NewBook from './components/pages/NewBook';
+
 import Explore from './components/pages/Explore';
 import Search from './components/pages/Search';
+
 import GroceryLists from './components/pages/GroceryLists';
+import GroceryList from './components/pages/GroceryList';
+import GroceryListForm from './components/pages/GroceryListForm';
+
 import Profile from './components/pages/Profile';
+
 import Inbox from './components/pages/Inbox';
 
-
+{/*Single Components*/ }
 import Navigation from './components/Navigation';
-import RecipeList from './components/RecipeList';
-import Login from './components/Login';
+import Login from './components/pages/Login';
 import Register from './components/Register';
-import Loading from './components/Loading';
 
 import RecipeEditModeProvider from './hooks/providers/recipeEditMode';
 
 import useApplicationData from './hooks/useApplicationData';
-import { viewModeContext } from './hooks/providers/viewModeProvider.jsx';
 import CreateRecipe from './components/CreateRecipe';
 import EditRecipe from './components/pages/EditRecipe';
+import useApplicationData from './hooks/useApplicationData';
+
 
 const App = function() {
-
-  const { viewMode, loginView, registerView, recipesView, loadingView } = useContext(viewModeContext);
 
   const {
     state,
@@ -46,40 +59,48 @@ const App = function() {
         <Navigation />
 
         <Routes>
-          <Route path='/' element={<MyRecipes />}/>
-          <Route path='/new/recipe' element={<CreateRecipe />}/>
-          <Route path='/recipe/edit/:recipeId' element={
-            <RecipeEditModeProvider>
-              <EditRecipe />
-            </RecipeEditModeProvider>
-          }/>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/explore' element={<Explore />}/>
-          <Route path='/search' element={<Search />}/>
-          <Route path='/grocerylists' element={<GroceryLists />}/>
-          <Route path='/profile' element={<Profile />}/>
-          <Route path='/inbox' element={<Inbox />}/>
+
+          <Route path='/recipes'>
+            <Route index element={<RecipesList/>}/>
+            <Route path=':id' element={<Recipe/>}/>
+            <Route path='new' element={<NewRecipe/>}/>
+            <Route path='edit/:id' element={
+                <RecipeEditModeProvider>
+                  <EditRecipe />
+                </RecipeEditModeProvider>
+              }/>
+          </Route>
+          
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+
+          <Route path='/explore' element={<Explore/>}/>
+          <Route path='/search' element={<Search/>}/>
+
+          <Route path='/books'>
+            <Route index element={<Books/>}/>
+            <Route path=':id' element={<RecipesList/>}/>
+            <Route path='new' element={<NewBook/>}/>
+          </Route>
+
+          <Route path='/grocerylists'>
+            <Route index element={<GroceryLists/>}/>
+            <Route path=':id' element={<GroceryList/>}/>
+            <Route path='new' element={<GroceryListForm />}/>
+          </Route>
+          
+          <Route path='/profile'>
+            <Route index element={<Profile/>}/>
+            <Route path=':id' element={<Profile/>}/>
+          </Route>
+
+          <Route path='/inbox'>
+            <Route index element={<Inbox/>}/>
+          </Route>
+
         </Routes>
-      
+
       </Router>
-
-      {/* <main>
-
-        {viewMode === 'recipes' &&
-          <RecipeList
-            recipes={state.recipes}
-          />}
-        {viewMode === 'login' && <Login />}
-        {viewMode === 'register' && <Register />}
-        {viewMode === 'loading' && <Loading >Loading</Loading>}
-      </main> */}
-      
-      <footer>
-        <button onClick={loginView}>Log In</button >
-        <button onClick={registerView}>Register</button >
-        <button onClick={recipesView}>Recipes</button >
-        <button onClick={loadingView}>Loading...</button >
-      </footer>
 
     </div>
   );

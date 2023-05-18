@@ -9,7 +9,7 @@ const Navigation = function() {
 
       <div className="sideview">
         <h2><Link to ={'/login'}>Login</Link></h2>
-        <h2><Link to ={'/'}>My Recipes</Link></h2>
+        <h2><Link to ={'/recipes'}>My Recipes</Link></h2>
         <h2><Link to ={'/explore'}>Explore</Link></h2>
         <h2><Link to ={'/search'}>Search</Link></h2>
         <h2><Link to ={'/grocerylists'}>Grocery Lists</Link></h2>

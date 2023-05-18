@@ -2,7 +2,9 @@ import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import bcrypt from "bcryptjs";
 import useApplicationData from "../hooks/useApplicationData";
-const Register = function() {
+import { Link } from 'react-router-dom';
+
+const RegisterForm = function() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -92,9 +94,12 @@ const Register = function() {
         />
         <button onClick={handleRegister}>Register</button>
       </form>
-      <button onClick={loginView}>Already have an account? Login here!</button>
+
+      <button>
+        <Link to="/login"> Already have an account? Login here!</Link>
+      </button>
     </>
   );
 };
 
-export default Register;
+export default RegisterForm;

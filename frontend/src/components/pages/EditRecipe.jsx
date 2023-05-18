@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 
-import RecipeEditMode, { recipeEditContext } from "../../hooks/providers/recipeEditMode";
+import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
 
 import EditRecipeSummary from "../editRecipe/EditRecipeSummary";
 import EditRecipeIngredients from "../editRecipe/EditRecipeIngredients";

@@ -1,19 +1,43 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useEffect } from "react";
+import dataReducer, { SET_RECIPES } from "../dataReducer";
+import axios from "axios";
 
 export const recipeContext = createContext();
 
 export default function recipeProvider(props) {
-  const [recipes, setRecipes] = useState();
+  const [state, dispatch] = useReducer(dataReducer, {
+    recipes: [],
+    ingredients: [],
+    loading: true,
+  });
 
-  //functions to create new
+  useEffect(() => {
 
-  const createRecipe = () => {}
+    axios.get('/api/recipes')
+      .then(
+        (reponse) => {
+          console.log(reponse);
+          dispatch({
+            type: SET_RECIPES,
+            recipes: reponse.data,
 
-  const providerData = {  };
+          });
+        })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const createRecipe = (recipe) => {
+    axios.post("/api/recipes", { recipe })
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
+  const providerData = { createRecipe };
 
   return (
     <recipeContext.Provider value={providerData}>
       {props.children}
     </recipeContext.Provider>
   );
-};
+}
