@@ -12,16 +12,10 @@ const EditRecipeSummary = function(props) {
     setRecipeDescription,
     setRecipeCooktime,
     setRecipeImage,
-    setRecipeFlagOpposite,
+    setRecipeFlag,
   } = useContext(recipeEditContext);
 
-  const handleEdit = function() {
-    console.log('🦁', currentRecipe);
-    recipeIngredientsView();
-  };
-
   return (
-    //for for recipe title, description, cooktime, and image url
     <>
       <h1>Edit Recipe Summary</h1>
       <form
@@ -79,7 +73,7 @@ const EditRecipeSummary = function(props) {
           id="is_vegetarian"
           value={currentRecipe.is_vegetarian}
           onChange={(e) => {
-            setRecipeFlagOpposite('is_vegetarian', e.target.checked);
+            setRecipeFlag('is_vegetarian', e.target.checked);
           }}
           name="is_vegetarian"
           type="checkbox"
@@ -90,7 +84,7 @@ const EditRecipeSummary = function(props) {
           id="is_vegan"
           value={currentRecipe.is_vegan}
           onChange={(e) => {
-            setRecipeFlagOpposite('is_vegan', e.target.checked);
+            setRecipeFlag('is_vegan', e.target.checked);
           }}
           name="is_vegan"
           type="checkbox"
@@ -101,7 +95,7 @@ const EditRecipeSummary = function(props) {
           id="is_lowcarb"
           value={currentRecipe.is_lowcarb}
           onChange={(e) => {
-            setRecipeFlagOpposite('is_lowcarb', e.target.checked);
+            setRecipeFlag('is_lowcarb', e.target.checked);
           }}
           name="is_lowcarb"
           type="checkbox"
@@ -112,7 +106,7 @@ const EditRecipeSummary = function(props) {
           id="is_lactosefree"
           value={currentRecipe.is_lactosefree}
           onChange={(e) => {
-            setRecipeFlagOpposite('is_lactosefree', e.target.checked);
+            setRecipeFlag('is_lactosefree', e.target.checked);
           }}
           name="is_lactosefree"
           type="checkbox"
@@ -123,7 +117,7 @@ const EditRecipeSummary = function(props) {
           id="is_glutenfree"
           value={currentRecipe.is_glutenfree}
           onChange={(e) => {
-            setRecipeFlagOpposite('is_glutenfree', e.target.checked);
+            setRecipeFlag('is_glutenfree', e.target.checked);
           }}
           name="is_glutenfree"
           type="checkbox"
@@ -134,7 +128,7 @@ const EditRecipeSummary = function(props) {
           id="is_nutfree"
           value={currentRecipe.is_nutfree}
           onChange={(e) => {
-            setRecipeFlagOpposite('is_nutfree', e.target.checked);
+            setRecipeFlag('is_nutfree', e.target.checked);
           }}
           name="is_nutfree"
           type="checkbox"

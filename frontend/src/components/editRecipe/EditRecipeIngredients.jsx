@@ -20,13 +20,15 @@ const EditRecipeIngredients = function(props) {
   return (
     <>
       <h1>Edit Recipe Ingredients</h1>
-      {currentIngredients.map(ingredient => {
-        return (
-          <>
-            <IngredientForm id={ingredient.id} />
-          </>
-        );
-      })}
+      <ul>
+        {currentIngredients.map(ingredient => {
+          return (
+            <li key={`ingredient${ingredient.id}`}>
+              <IngredientForm id={ingredient.id} />
+            </li>
+          );
+        })}
+      </ul>
       <button onClick={addIngredient}>+ Add Ingredient +</button>
       <button onClick={recipeSummaryView}>Back</button>
       <button onClick={recipeDirectionsView}>Next</button>

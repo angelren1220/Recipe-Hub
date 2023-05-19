@@ -90,7 +90,7 @@ export default function RecipeEditModeProvider(props) {
     setCurrentRecipe({ ...currentRecipe, image });
   };
   //for a given flag with boolean value it will toggle the value, only if the flag already exists in the object
-  const setRecipeFlagOpposite = function(flag, booleanValue) {
+  const setRecipeFlag = function(flag, booleanValue) {
     setCurrentRecipe({ ...currentRecipe, [flag]: booleanValue})
   }
 
@@ -121,7 +121,7 @@ export default function RecipeEditModeProvider(props) {
     setRecipeDescription,
     setRecipeCooktime,
     setRecipeImage,
-    setRecipeFlagOpposite,
+    setRecipeFlag,
     setRecipeDirections,
     currentIngredients,
     setIngredient,
