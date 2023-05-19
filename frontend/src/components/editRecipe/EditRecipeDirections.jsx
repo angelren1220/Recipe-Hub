@@ -1,11 +1,19 @@
 import { useState, useContext } from "react";
+import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
 
 const EditRecipeDirections = function(props) {
+
+  const [directionCount, setDirectionCount] = useState(0);
+
+  const {
+    currentRecipe,
+    setRecipeDirections
+  } = useContext(recipeEditContext);
+
   return (
     <>
       <h1>Edit Recipe Directions</h1>
-      <p>Directions</p>
-      <button >Edit Summary</button>
+      {currentRecipe.directions.map(direction => <p>{direction}</p>)}
     </>
   );
 };

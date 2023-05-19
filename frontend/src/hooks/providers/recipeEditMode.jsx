@@ -94,8 +94,20 @@ export default function RecipeEditModeProvider(props) {
     setCurrentRecipe({ ...currentRecipe, [flag]: booleanValue})
   }
 
-//functions to change ingredients
+  const setRecipeDirections = function(index, direction) {
+    let updatedDirections = currentRecipe.directions
+    updatedDirections[index] = direction
+    setCurrentRecipe({...currentRecipe, directions: updatedDirections})
+  }
 
+//functions to change ingredients
+  //updates ingredient in the currentIngredients state by matching id
+  const setIngredient = function(ingredient) {
+    const ingredientIndex = currentIngredients.findIndex(i => i.id === ingredient.id)
+    let updatedIngredients = currentIngredients
+    updatedIngredients[ingredientIndex] = ingredient
+    setCurrentIngredients(updatedIngredients)
+  }
 
 //export functions and states
   const providerData = {
@@ -110,7 +122,9 @@ export default function RecipeEditModeProvider(props) {
     setRecipeCooktime,
     setRecipeImage,
     setRecipeFlagOpposite,
-    currentIngredients
+    setRecipeDirections,
+    currentIngredients,
+    setIngredient,
   };
 
   return (

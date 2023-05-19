@@ -21,7 +21,9 @@ const EditRecipeSummary = function(props) {
   };
 
   return (
+    //for for recipe title, description, cooktime, and image url
     <>
+      <h1>Edit Recipe Summary</h1>
       <form
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
@@ -65,6 +67,8 @@ const EditRecipeSummary = function(props) {
           placeholder={currentRecipe.image}
         />
       </form>
+
+      //form for boolean tags only
       <form
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
