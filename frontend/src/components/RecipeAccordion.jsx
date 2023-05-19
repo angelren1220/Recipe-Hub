@@ -36,8 +36,8 @@ const RecipeAccordion = function(props) {
           </div>
 
           <div className={selected.some(index => index === i) ? 'content show' : 'content'}>
-            <h2>By: {item.author}</h2>
-            <h2>Description: {item.details}</h2>
+            <h2>By: {item.first_name}</h2>
+            <h2>Description: {item.description}</h2>
           </div>
 
         </div>
