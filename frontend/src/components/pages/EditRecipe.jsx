@@ -10,6 +10,8 @@ import EditRecipeDirections from "../editRecipe/EditRecipeDirections";
 
 const EditRecipe = function() {
   const {
+    currentRecipe,
+    currentIngredients,
     recipeEditMode,
     recipeSummaryView,
     recipeIngredientsView,
@@ -19,7 +21,8 @@ const EditRecipe = function() {
   const {
     state,
     dispatch,
-    getRecipesByUserID
+    getRecipesByUserID,
+    updateRecipe
   } = useApplicationData();
 
   //current recipe id being edited
@@ -32,16 +35,25 @@ const EditRecipe = function() {
     console.log("🐹", editedRecipe);
   }, []);
 
+  const handleSubmit = function() {
+    console.log('🐯', currentRecipe);
+    console.log('🐮', currentIngredients);
+    //update ingredients here too!
+  };
+
   return (
     <>
-      <div className="viewModes">
+      <div>
         <button onClick={() => recipeSummaryView()}>Edit Summary</button>
         <button onClick={() => recipeIngredientsView()}>Edit Ingredients</button>
         <button onClick={() => recipeDirectionsView()}>Edit Directions</button>
       </div>
-      {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
-      {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
-      {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
+      <div>
+        {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
+        {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
+        {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
+      </div>
+      <button onClick={handleSubmit}>Publish</button>
 
     </>
   );

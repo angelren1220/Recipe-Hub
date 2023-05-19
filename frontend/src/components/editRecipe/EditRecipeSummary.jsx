@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { viewModeContext } from "../../hooks/providers/viewModeProvider";
 
 import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
@@ -12,6 +12,7 @@ const EditRecipeSummary = function(props) {
     setRecipeDescription,
     setRecipeCooktime,
     setRecipeImage,
+    setRecipeFlagOpposite,
   } = useContext(recipeEditContext);
 
   const handleEdit = function() {
@@ -62,6 +63,17 @@ const EditRecipeSummary = function(props) {
           name="image"
           type="url"
           placeholder={currentRecipe.image}
+        />
+        <label htmlFor="is_vegetarian">Vegetarian:</label>
+        <input 
+          id="is_vegetarian"
+          value={currentRecipe.is_vegetarian}
+          onChange={(e) => {
+            console.log('AAAAAAA', e.target.checked)
+            setRecipeFlagOpposite('is_vegetarian', e.target.checked);
+          }}
+          name="is_vegetarian"
+          type="checkbox"
         />
         <button onClick={handleEdit}>Edit Ingredients</button>
       </form>

@@ -21,7 +21,7 @@ const someRecipe = {
   is_glutenfree: false,
   is_nutfree: false,
   image: "https://pinchofyum.com/wp-content/uploads/Vegetarian-Pad-Thai-Recipe.jpg",
-  description: "A lovely take on a classic Pad Thai recipe"
+  description: "A vegan take on a classic Pad Thai recipe"
 };
 
 const someIngredients = [
@@ -54,7 +54,7 @@ export default function RecipeEditModeProvider(props) {
   const [currentIngredients, setCurrentIngredients] = useState(someIngredients);
 
 
-  //functions to change viewMode
+//functions to change viewMode
 
   const recipeSummaryView = function() {
     setRecipeEditMode('SUMMARY');
@@ -68,7 +68,11 @@ export default function RecipeEditModeProvider(props) {
     setRecipeEditMode('DIRECTIONS');
   };
 
-  //functions to change recipe
+//functions to change recipe
+
+  const setRecipe = function(recipe) {
+    setCurrentRecipe(recipe);
+  }
 
   const setRecipeName = function(name) {
     setCurrentRecipe({ ...currentRecipe, name });
@@ -85,19 +89,27 @@ export default function RecipeEditModeProvider(props) {
   const setRecipeImage = function(image) {
     setCurrentRecipe({ ...currentRecipe, image });
   };
+  //for a given flag with boolean value it will toggle the value, only if the flag already exists in the object
+  const setRecipeFlagOpposite = function(flag, booleanValue) {
+    setCurrentRecipe({ ...currentRecipe, [flag]: booleanValue})
+  }
 
-  //functions to change ingredients
+//functions to change ingredients
 
+
+//export functions and states
   const providerData = {
     recipeEditMode,
     recipeSummaryView,
     recipeIngredientsView,
     recipeDirectionsView,
     currentRecipe,
+    setRecipe,
     setRecipeName,
     setRecipeDescription,
     setRecipeCooktime,
     setRecipeImage,
+    setRecipeFlagOpposite,
     currentIngredients
   };
 
