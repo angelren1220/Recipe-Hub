@@ -11,7 +11,7 @@ class Api::RecipesController < ApplicationController
 
   # GET /recipes/1
   def show
-    render json: {recipe:@recipe, ingredients:@ingredients}
+    render json: {recipe:@recipe, ingredients:@ingredients, user:@user}
   end
 
   # POST /recipes
@@ -43,8 +43,10 @@ class Api::RecipesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])
+      @user = @recipe.user
       @ingredients = @recipe.ingredients
     end
+
 
     # Only allow a list of trusted parameters through.
     def recipe_params

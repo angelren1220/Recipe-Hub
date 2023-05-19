@@ -27,10 +27,10 @@ import Profile from './components/pages/Profile';
 import Inbox from './components/pages/Inbox';
 
 {/*Single Components*/}
+import MyRecipes from './components/pages/MyRecipes';
 import Template from './components/Template';
 
 const App = function() {
-
 
 
   return (

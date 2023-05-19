@@ -43,6 +43,7 @@ Recipe.destroy_all
 recipe1 = Recipe.create!({
   user_id: user1.id,
   name: "Vegan Pad Thai",
+  description: 'A delicious plant-based dish made with soaked noodles, cooked vegetables, and a homemade sauce. Quick recipe to make!',
   directions: ["Soak the noodles", "Cook the noodles", "Prepare the sauce", "Cook the vegetables", "Combine everything"],
   cooktime_minutes: 30,
   is_vegetarian: true,
@@ -57,6 +58,7 @@ recipe1 = Recipe.create!({
 recipe2 = Recipe.create!({
   user_id: user1.id,
   name: "Slow Cooker Chicken Curry",
+  description: 'A flavorful and aromatic curry dish made with tender chicken, spices, and vegetables. Simply combine ingredients in a slow cooker and let it simmer for hours. Perfect for a convenient and comforting meal.',
   directions: ["Brown the chicken", "Cook the vegetables", "Add the curry powder and tomatoes", "Slow cook everything together"],
   cooktime_minutes: 240,
   is_vegetarian: false,
@@ -71,6 +73,7 @@ recipe2 = Recipe.create!({
 recipe3 = Recipe.create!({
   user_id: user2.id,
   name: "Quinoa Salad with Roasted Vegetables",
+  description: "I love my Quinoa Salad with Roasted Vegetables! It's a delightful blend of nutty quinoa, vibrant roasted veggies, and a zesty dressing. The combination of flavors and textures creates a satisfying and wholesome dish. It's my go-to recipe for a healthy and delicious meal that leaves me feeling nourished and satisfied.",
   directions: ["Cook the quinoa", "Roast the vegetables", "Mix everything together"],
   cooktime_minutes: 40,
   is_vegetarian: true,
@@ -85,6 +88,7 @@ recipe3 = Recipe.create!({
 recipe4 = Recipe.create!({
   user_id: user2.id,
   name: "Pesto Pasta with Cherry Tomatoes",
+  description: 'A burst of freshness and flavor in every bite. The vibrant cherry tomatoes add a pop of sweetness, while the homemade pesto brings a delightful herby taste. This dish is a true crowd-pleaser and always leaves me craving more.',
   directions: ["Cook the pasta", "Make the pesto", "Add the cherry tomatoes", "Mix everything together"],
   cooktime_minutes: 20,
   is_vegetarian: true,
@@ -99,6 +103,7 @@ recipe4 = Recipe.create!({
 recipe5 = Recipe.create!({
   user_id: user3.id,
   name: "Beef Stir Fry with Broccoli and Carrots",
+  description: "A weekly staple. Tender beef, crisp broccoli, and carrots come together in a flavorful stir-fry that's quick, nutritious, and packed with deliciousness.",
   directions: ["Marinate the beef", "Cut the vegetables", "Stir fry everything together"],
   cooktime_minutes: 30,
   is_vegetarian: false,

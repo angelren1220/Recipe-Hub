@@ -102,6 +102,8 @@ const useApplicationData = () => {
         });
         // setCookie('Current User', response.data.user.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
+        const userId = localStorage.getItem('userId');
+        console.log(userId)
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
@@ -151,7 +153,12 @@ const useApplicationData = () => {
   const deleteRecipe = (id) => {
     axios.delete(`/api/recipes/${id}`)
       .then((response) => {
-        console.log(response);
+        const updatedRecipes = state.recipes.filter(recipe => recipe.id !== id);
+        console.log(updatedRecipes, id);
+        dispatch({
+          type: SET_RECIPES,
+          recipes: updatedRecipes
+        });
       })
       .catch((error) => {
         // const message = Object.entries(error.response.data)
