@@ -17,7 +17,7 @@ const Navigation = function() {
     <nav className="nav">
 
       <h1 className="logo"><a href="/">Sous</a></h1>
-
+      
       <div className="sideview">
         {!userId && <h2><Link to={'/login'}>Login</Link></h2>}
         {userId && <h2><Link to={'/login'}>
