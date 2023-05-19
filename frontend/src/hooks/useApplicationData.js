@@ -56,39 +56,38 @@ const useApplicationData = () => {
       });
   };
 
-  const createUser = (user) => {
-    axios.post("/api/users", { user })
-      .then((response) => {
-        console.log(response);
-        dispatch({
-          type: SET_USER,
-          user: response.data.user
-        });
-        localStorage.setItem('userId', response.data.session.user_id);
-  
-        // Create a new book object using the first_name of the created user
-        const book = {
-          title: `${user.first_name}'s favorites`,
-          user_id: response.data.session.user_id
-        };
-  
-        // Make a secondary POST request to create the book object
-        axios.post("/api/books", { book })
-          .then((bookResponse) => {
-            console.log(bookResponse);
-          })
-          .catch((error) => {
-            const message = Object.entries(error.response.data)
-              .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-            alert(message);
-          });
-      })
-      .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+const createUser = (user) => {
+  axios.post("/api/users", { user })
+    .then((response) => {
+      console.log(response);
+      dispatch({
+        type: SET_USER,
+        user: response.data.user
       });
-  };
+      // setCookie('Current User', response.data.id, { path: '/' });
+      localStorage.setItem('userId', response.data.session.user_id);
+
+      // Create a book after creating a user
+      const firstName = user.first_name;
+      const bookName = `${firstName}'s Favorites`;
+
+      axios.post("/api/books", { name: bookName, user_id:response.data.session.user_id  })
+        .then((response) => {
+          console.log(response);
+          // Handle book creation success
+        })
+        .catch((error) => {
+          console.error(error);
+          // Handle book creation failure
+        });
+    })
+    .catch((error) => {
+      const message = Object.entries(error.response.data)
+        .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+      alert(message);
+    });
+};
+
 
   const loginUser = (user) => {
     axios.post("/api/sessions", user)
