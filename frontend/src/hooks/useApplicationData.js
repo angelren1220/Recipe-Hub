@@ -96,8 +96,9 @@ const useApplicationData = () => {
   };
 
   const logoutUser = () => {
-    axios.delete("/api/sessions")
+    axios.delete("/api/sessions/1")
       .then((response) => {
+        console.log(response);
         localStorage.removeItem('userId');
 
       });

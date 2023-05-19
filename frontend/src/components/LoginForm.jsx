@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
-import bcrypt from "bcryptjs";
+
 import { Link } from 'react-router-dom';
 
 import useApplicationData from "../hooks/useApplicationData";
@@ -18,19 +18,6 @@ const LoginForm = function() {
   } = useApplicationData();
 
   const handleLogin = () => {
-    // const getHashedPassword = "$2a$10$8Be1QsGuEtN.RZCTEf.AMeG2TrGTGaxhfnUAS7LKuTV929enLsRke";
-
-    // bcrypt.compare(password, getHashedPassword, function(err, isMatch) {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   if (isMatch) {
-    //     console.log("🧠 Password Matches! 🧠");
-    //   }
-    //   if (!isMatch) {
-    //     console.log("Password doesn't match!");
-    //   }
-    // });
 
     const user = { email, password };
     return loginUser(user);
@@ -62,7 +49,7 @@ const LoginForm = function() {
           placeholder="************"
         />
         <button onClick={handleLogin}>Log In</button>
-        
+
       </form>
 
       <button>
