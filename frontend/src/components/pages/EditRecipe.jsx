@@ -43,11 +43,11 @@ const EditRecipe = function() {
 
   return (
     <>
-      <div>
+      <main>
         {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
         {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
         {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
-      </div>
+      </main>
       <button onClick={handleSubmit}>Publish</button>
 
     </>
