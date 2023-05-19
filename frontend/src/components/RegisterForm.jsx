@@ -71,8 +71,6 @@ const RegisterForm = function() {
           name="password"
           type="password"
           placeholder="******"
-          required
-          minLength={6}
         />
         <label htmlFor="passwordConfirmation" > Confirm Password:</label>
         <input
@@ -82,8 +80,6 @@ const RegisterForm = function() {
           name="passwordConfirmation"
           type="password"
           placeholder="******"
-          required
-          minLength={6}
         />
         <button onClick={handleRegister}>Register</button>
       </form>

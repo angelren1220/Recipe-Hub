@@ -3,7 +3,7 @@ class Api::SessionsController < ApplicationController
     if user = User.authenticate_with_credentials(params[:email], params[:password])
       # success, log user in
       session[:user_id] = user.id
-      render json: {message: 'Successfully logged in!', session: session}
+      render json: {message: 'Successfully logged in!', user: user, session: session}
     else
       # failure send error message.
       render json: {message: 'Invalid login!'}, status: 403
