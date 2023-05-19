@@ -64,18 +64,78 @@ const EditRecipeSummary = function(props) {
           type="url"
           placeholder={currentRecipe.image}
         />
+      </form>
+      <form
+        autoComplete="off"
+        onSubmit={event => event.preventDefault()}
+        className="toggle"
+      >
         <label htmlFor="is_vegetarian">Vegetarian:</label>
         <input 
           id="is_vegetarian"
           value={currentRecipe.is_vegetarian}
           onChange={(e) => {
-            console.log('AAAAAAA', e.target.checked)
             setRecipeFlagOpposite('is_vegetarian', e.target.checked);
           }}
           name="is_vegetarian"
           type="checkbox"
+          checked={(currentRecipe.is_vegetarian ? "checked" : false)}
         />
-        <button onClick={handleEdit}>Edit Ingredients</button>
+        <label htmlFor="is_vegan">Vegan:</label>
+        <input 
+          id="is_vegan"
+          value={currentRecipe.is_vegan}
+          onChange={(e) => {
+            setRecipeFlagOpposite('is_vegan', e.target.checked);
+          }}
+          name="is_vegan"
+          type="checkbox"
+          checked={(currentRecipe.is_vegan ? "checked" : false)}
+        />
+        <label htmlFor="is_lowcarb">Low Carb:</label>
+        <input 
+          id="is_lowcarb"
+          value={currentRecipe.is_lowcarb}
+          onChange={(e) => {
+            setRecipeFlagOpposite('is_lowcarb', e.target.checked);
+          }}
+          name="is_lowcarb"
+          type="checkbox"
+          checked={(currentRecipe.is_lowcarb ? "checked" : false)}
+        />
+        <label htmlFor="is_lactosefree">Low Carb:</label>
+        <input 
+          id="is_lactosefree"
+          value={currentRecipe.is_lactosefree}
+          onChange={(e) => {
+            setRecipeFlagOpposite('is_lactosefree', e.target.checked);
+          }}
+          name="is_lactosefree"
+          type="checkbox"
+          checked={(currentRecipe.is_lactosefree ? "checked" : false)}
+        />
+        <label htmlFor="is_glutenfree">Low Carb:</label>
+        <input 
+          id="is_glutenfree"
+          value={currentRecipe.is_glutenfree}
+          onChange={(e) => {
+            setRecipeFlagOpposite('is_glutenfree', e.target.checked);
+          }}
+          name="is_glutenfree"
+          type="checkbox"
+          checked={(currentRecipe.is_glutenfree ? "checked" : false)}
+        />
+        <label htmlFor="is_nutfree">Low Carb:</label>
+        <input 
+          id="is_nutfree"
+          value={currentRecipe.is_nutfree}
+          onChange={(e) => {
+            setRecipeFlagOpposite('is_nutfree', e.target.checked);
+          }}
+          name="is_nutfree"
+          type="checkbox"
+          checked={(currentRecipe.is_nutfree ? "checked" : false)}
+        />
       </form>
       <button >To Ingredients</button>
     </>
