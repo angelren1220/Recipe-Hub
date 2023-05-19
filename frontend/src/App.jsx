@@ -27,22 +27,12 @@ import Profile from './components/pages/Profile';
 import Inbox from './components/pages/Inbox';
 
 {/*Single Components*/}
+import MyRecipes from './components/pages/MyRecipes';
 import Template from './components/Template';
 import useApplicationData from './hooks/useApplicationData';
 
 const App = function() {
 
-  const {
-    state,
-    dispatch,
-    getRecipesByUserID
-  } = useApplicationData();
-
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getRecipesByUserID(userId);
-    // console.log("🐹", props.id);
-  }, []);
 
   return (
 

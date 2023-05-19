@@ -85,6 +85,8 @@ const useApplicationData = () => {
         });
         // setCookie('Current User', response.data.user.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
+        const userId = localStorage.getItem('userId');
+        console.log(userId)
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)

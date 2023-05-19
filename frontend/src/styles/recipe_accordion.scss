@@ -29,6 +29,7 @@
       .banner-image {
         max-height: 150px;
         width: 150px;
+        border-radius: .5rem;
         object-fit: cover;
       }
     }
@@ -52,3 +53,14 @@
   }
 }
 
+.recipe-accordions-wrapper {
+  .recipe-accordion {
+    &:nth-child(even) {
+      background-color: #bdac75; // Set the background color for even-indexed accordions
+    }
+
+    &:nth-child(odd) {
+      background-color: #e0aaaa; // Set the background color for odd-indexed accordions
+    }
+  }
+}

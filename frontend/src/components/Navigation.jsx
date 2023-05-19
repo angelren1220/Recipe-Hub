@@ -24,9 +24,10 @@ const Navigation = function() {
           <button onClick={handleLogout}>Logout</button>
         </Link></h2>}
         <h2><Link to={'/recipes'}>My Recipes</Link></h2>
+        <h2><Link to={'/books'}>My Books</Link></h2>
+        <h2><Link to={'/grocerylists'}>Grocery Lists</Link></h2>
         <h2><Link to={'/explore'}>Explore</Link></h2>
         <h2><Link to={'/search'}>Search</Link></h2>
-        <h2><Link to={'/grocerylists'}>Grocery Lists</Link></h2>
         <h2><Link to={'/profile'}>Profile</Link></h2>
         <h2><Link to={'/inbox'}>Inbox</Link></h2>
       </div>
