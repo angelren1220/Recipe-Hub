@@ -34,7 +34,7 @@ const RegisterForm = function() {
     // (hashedPassword && createUser(user));
     if (password === passwordConfirmation) {
       const user = { first_name: firstName, last_name: lastName, email, password: password };
-      createUser(user);
+      return createUser(user);
     }
     alert('Passwords must match!');
   };

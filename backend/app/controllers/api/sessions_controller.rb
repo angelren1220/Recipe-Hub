@@ -1,12 +1,11 @@
-class SessionsController < ApplicationController
-  include ::ActionController::Cookies
+class Api::SessionsController < ApplicationController
   def create
     if user = User.authenticate_with_credentials(params[:email], params[:password])
-      # success logic, log them in
+      # success, log user in
       session[:user_id] = user.id
-      render json: {message: 'Successfully logged in!', user}
+      render json: {message: 'Successfully logged in!', session: session}
     else
-      # failure, render login form, send error message.
+      # failure send error message.
       render json: {message: 'Invalid login!'}, status: 403
     end
   end

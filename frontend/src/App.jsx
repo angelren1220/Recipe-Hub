@@ -41,7 +41,8 @@ const App = function() {
   } = useApplicationData();
 
   useEffect(() => {
-    getRecipesByUserID(1);
+    let userId = localStorage.getItem('userId');
+    getRecipesByUserID(userId);
     // console.log("🐹", props.id);
   }, []);
 

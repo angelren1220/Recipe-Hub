@@ -11,7 +11,7 @@ import dataReducer, {
 } from './dataReducer';
 import axios from 'axios';
 
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
@@ -21,7 +21,7 @@ const useApplicationData = () => {
     loading: true,
   });
 
-  const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
+  // const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   // useEffect(() => {
   //   Promise.all([
   //     axios.get('/api/users'),
@@ -53,6 +53,9 @@ const useApplicationData = () => {
   };
 
   const getRecipesByUserID = (userId) => {
+    if (!userId) {
+      userId = 1;
+    }
     axios.get(`/api/users/${userId}`)
       .then((response) => {
         // console.log("🙈", response.data);
@@ -72,15 +75,33 @@ const useApplicationData = () => {
         console.log(response);
         // dispatch({
         //   type: SET_USER,
+        //   user: response.data.session.user_id
+        // });
+        // setCookie('Current User', response.data.id, { path: '/' });
+        localStorage.setItem('userId', response.data.session.user_id);
+      });
+  };
+
+  const loginUser = (user) => {
+    axios.post("/api/sessions", user)
+      .then((response) => {
+        console.log(response);
+        // dispatch({
+        //   type: SET_USER,
         //   user: response.data.id
         // });
-        setCookie('Current User', response.data.id);
+        // setCookie('Current User', response.data.user.id, { path: '/' });
+        localStorage.setItem('userId', response.data.session.user_id);
       });
   };
 
   const logoutUser = () => {
-    removeCookie('Current User');
-  }
+    axios.delete("/api/sessions")
+      .then((response) => {
+        localStorage.removeItem('userId');
+
+      });
+  };
 
   const createRecipe = (recipe) => {
     axios.post("/api/recipes", { recipe })
@@ -109,6 +130,7 @@ const useApplicationData = () => {
     getIngredients,
     getRecipesByUserID,
     createUser,
+    loginUser,
     logoutUser,
     createRecipe,
     updateRecipe,
