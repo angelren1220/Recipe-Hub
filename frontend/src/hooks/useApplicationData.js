@@ -74,8 +74,8 @@ const useApplicationData = () => {
   };
 
   const createUser = (user) => {
-
     // the object post to backend should be the exact same name with it in database
+
     axios.post("/api/users", { user })
       .then((response) => {
         console.log(response);
@@ -83,9 +83,25 @@ const useApplicationData = () => {
           type: SET_USER,
           user: response.data.user
         });
-        // setCookie('Current User', response.data.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
-        window.location = "/recipes"
+  
+        // Create a new book object using the first_name of the created user
+        const book = {
+          title: `${user.first_name}'s favorites`,
+          user_id: response.data.session.user_id
+        };
+  
+        // Make a secondary POST request to create the book object
+        axios.post("/api/books", { book })
+          .then((bookResponse) => {
+            console.log(bookResponse);
+            window.location = "/recipes"
+          })
+          .catch((error) => {
+            const message = Object.entries(error.response.data)
+              .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+            alert(message);
+          });
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
