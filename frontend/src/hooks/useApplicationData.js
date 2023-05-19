@@ -21,6 +21,22 @@ const useApplicationData = () => {
     loading: true,
   });
 
+  const getAllRecipes = () => {
+    axios.get('/api/recipes')
+      .then((response) => {
+        // console.log("🙈", response.data);
+        dispatch({
+          type: SET_RECIPES,
+          recipes: response.data
+        });
+      })
+      .catch((error) => {
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
+      });
+  };
+
   const getIngredients = (recipeId) => {
     axios.get(`/api/recipes/${recipeId}`)
       .then((response) => {
@@ -31,16 +47,16 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
       });
   };
 
   const getRecipesByUserID = (userId) => {
-    if (!userId) {
-      userId = 1;
-    }
+    // if (!userId) {
+    //   userId = 1;
+    // }
     axios.get(`/api/users/${userId}`)
       .then((response) => {
         // console.log("🙈", response.data);
@@ -50,9 +66,9 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
       });
   };
 
@@ -67,6 +83,7 @@ const useApplicationData = () => {
         });
         // setCookie('Current User', response.data.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
+        
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
@@ -101,9 +118,9 @@ const useApplicationData = () => {
 
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
       });
   };
 
@@ -113,9 +130,9 @@ const useApplicationData = () => {
         console.log(response);
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
       });
   };
 
@@ -125,9 +142,9 @@ const useApplicationData = () => {
         console.log(response);
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
       });
   };
 
@@ -137,15 +154,16 @@ const useApplicationData = () => {
         console.log(response);
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
       });
   };
 
   return {
     state,
     dispatch,
+    getAllRecipes,
     getIngredients,
     getRecipesByUserID,
     createUser,

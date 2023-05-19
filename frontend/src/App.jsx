@@ -28,21 +28,10 @@ import Inbox from './components/pages/Inbox';
 
 {/*Single Components*/}
 import Template from './components/Template';
-import useApplicationData from './hooks/useApplicationData';
 
 const App = function() {
 
-  const {
-    state,
-    dispatch,
-    getRecipesByUserID
-  } = useApplicationData();
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getRecipesByUserID(userId);
-    // console.log("🐹", props.id);
-  }, []);
 
   return (
 
@@ -53,7 +42,7 @@ const App = function() {
           <Routes>
 
             <Route path='/recipes'>
-              <Route index element={<RecipesList/>}/>
+              <Route index element={<RecipesList />}/>
               <Route path=':id' element={<Recipe/>}/>
               <Route path='new' element={<NewRecipe/>}/>
               <Route path='edit/:id' element={<EditRecipe/>}/>
