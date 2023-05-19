@@ -6,7 +6,14 @@ import IngredientForm from "./IngredientForm";
 const EditRecipeIngredients = function(props) {
   const {
     currentIngredients,
+    recipeSummaryView,
+    recipeIngredientsView,
+    recipeDirectionsView,
   } = useContext(recipeEditContext);
+
+  const addIngredient = function() {
+    console.log('🍍ADD INGREDIENT🍍');
+  };
 
   console.log(currentIngredients);
 
@@ -20,6 +27,9 @@ const EditRecipeIngredients = function(props) {
           </>
         );
       })}
+      <button onClick={addIngredient}>+ Add Ingredient +</button>
+      <button onClick={recipeSummaryView}>Back</button>
+      <button onClick={recipeDirectionsView}>Next</button>
     </>
   );
 };

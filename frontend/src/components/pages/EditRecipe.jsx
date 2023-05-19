@@ -44,11 +44,6 @@ const EditRecipe = function() {
   return (
     <>
       <div>
-        <button onClick={() => recipeSummaryView()}>Edit Summary</button>
-        <button onClick={() => recipeIngredientsView()}>Edit Ingredients</button>
-        <button onClick={() => recipeDirectionsView()}>Edit Directions</button>
-      </div>
-      <div>
         {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
         {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
         {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}

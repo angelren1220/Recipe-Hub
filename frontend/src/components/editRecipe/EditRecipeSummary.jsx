@@ -68,7 +68,7 @@ const EditRecipeSummary = function(props) {
         />
       </form>
 
-      //form for boolean tags only
+      {/* form for boolean tags only */}
       <form
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
@@ -141,7 +141,7 @@ const EditRecipeSummary = function(props) {
           checked={(currentRecipe.is_nutfree ? "checked" : false)}
         />
       </form>
-      <button >To Ingredients</button>
+      <button onClick={recipeIngredientsView}>Next</button>
     </>
   );
 };
