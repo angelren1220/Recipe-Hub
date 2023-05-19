@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { viewModeContext } from "../../hooks/providers/viewModeProvider";
 
 const EditRecipeDirections = function(props) {
   const getRecipeIngredients = {};
