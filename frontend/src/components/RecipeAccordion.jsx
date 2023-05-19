@@ -34,8 +34,6 @@ const RecipeAccordion = function(props) {
     deleteRecipe(id);
   };
 
-  console.log(props.recipes)
-
   return (
     <article className="recipe-accordions-wrapper">
 
@@ -44,19 +42,35 @@ const RecipeAccordion = function(props) {
         <div className={selected.some(index => index === i) ? 'recipe-accordion selected' : 'recipe-accordion'} key={i} onClick={(event) => toggle(i, event)}>
           
           <div className="banner">
+
+            <div className="banner-left">
             <Link to={`/recipes/${item.id}`}>
               <h1>{item.name}</h1>
             </Link>
+            <h2>By: {item.first_name}</h2>
+            </div>
+
             <div className="banner-right">
-              <h2>By: {item.first_name}</h2>
               <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
               <img className="banner-image" src={item.image} />
             </div>
+
           </div>
 
           <div className={selected.includes(item.id) ? 'content show' : 'content'}>
+
             <h2>Cooktime: {item.cooktime_minutes} min</h2>
-            <h2>Description: {item.description}</h2>
+            <h2>Description: <p>{item.description}</p></h2>
+            
+            <div className="categories">
+              <h2>Categories:</h2>
+              {item.is_vegan && <span className="category">Vegan</span>}
+              {item.is_vegetarian && <span className="category">Vegetarian</span>}
+              {item.is_nutfree && <span className="category">Nut-free</span>}
+              {item.is_lowcarb && <span className="category">Nut-free</span>}
+              {item.is_glutenfree && <span className="category">Nut-free</span>}
+              {item.is_nutfree && <span className="category">Nut-free</span>}
+            </div>
 
             <div className="control-buttons">
               <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
@@ -64,6 +78,7 @@ const RecipeAccordion = function(props) {
                 <button>Edit Recipe</button>
               </Link>
             </div>
+
           </div>
 
         </div>
