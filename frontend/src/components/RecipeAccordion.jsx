@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
@@ -9,14 +9,20 @@ const RecipeAccordion = function(props) {
     state,
     dispatch,
     getRecipesByUserID,
+    getAllRecipes,
     deleteRecipe
   } = useApplicationData();
 
   const [selected, setSelected] = useState([]);
 
+  const userId = localStorage.getItem('userId');
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getRecipesByUserID(userId);
+    if (userId){
+      getRecipesByUserID(userId);
+    } else {
+      getAllRecipes();
+    }
+
   }, []);
 
   const toggle = (i, event) => {
@@ -58,12 +64,12 @@ const RecipeAccordion = function(props) {
             <h2>Cooktime: {item.cooktime_minutes} min</h2>
             <h2>Description: {item.description}</h2>
 
-            <div className="control-buttons">
+            {userId &&<div className="control-buttons">
               <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
               <Link to={`/edit/${item.id}`}>
                 <button>Edit Recipe</button>
               </Link>
-            </div>
+            </div>}
           </div>
 
         </div>
