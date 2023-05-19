@@ -1,0 +1,66 @@
+.recipe-accordion {
+  color: blue;
+  width: 90%;
+  background: rgb(206, 206, 189);
+  padding: 1.5rem;
+  margin: .5rem 0;
+  border-radius: .5rem;
+
+  h1 {
+    font-size: 2rem;
+    text-decoration: underline;
+    color: blue;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  .banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .banner-right {
+      display: flex;
+      gap: 2em;
+      align-items: center;
+
+      .banner-image {
+        max-height: 150px;
+        width: 150px;
+        border-radius: .5rem;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all .2s cubic-bezier(0,1,0,1);
+  }
+
+  .content.show {
+    height: auto;
+    max-height: 9999px;
+    transition: all .5s cubic-bezier(0,1,0,1);
+  }
+
+  &:hover {
+    background: rgb(163, 163, 163);
+    cursor: pointer;
+  }
+}
+
+.recipe-accordions-wrapper {
+  .recipe-accordion {
+    &:nth-child(even) {
+      background-color: #bdac75; // Set the background color for even-indexed accordions
+    }
+
+    &:nth-child(odd) {
+      background-color: #e0aaaa; // Set the background color for odd-indexed accordions
+    }
+  }
+}

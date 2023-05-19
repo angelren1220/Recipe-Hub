@@ -26,8 +26,8 @@ class RecipesController < ApplicationController
   # Define a helper method to whitelist the required parameters for recipe creation
   def recipe_params
     params.require(:recipe).permit(
-      :name, :cooktime_minutes, :is_vegetarian, :is_vegan, :is_lowcarb,
-      :is_lactosefree, :is_glutenfree, :is_nutfree, directions: []
+      :name, :user_id, :cooktime_minutes, :is_vegetarian, :is_vegan, :is_lowcarb, :description,
+      :is_lactosefree, :is_glutenfree, :is_nutfree, :image, directions: []
     )
   end
 
