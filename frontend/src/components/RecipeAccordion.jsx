@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
 
+
 const RecipeAccordion = function(props) {
 
   const {
@@ -51,7 +52,9 @@ const RecipeAccordion = function(props) {
           
           <div className="banner">
             <Link to={`/recipes/${item.id}`}>
+    
               <h1>{item.name}</h1>
+  
             </Link>
             <div className="banner-right">
               <h2>By: {item.first_name}</h2>
