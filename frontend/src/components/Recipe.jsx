@@ -6,7 +6,7 @@ import useApplicationData from '../hooks/useApplicationData';
 import "../styles/recipe.scss";
 
 const Recipe = function(props) {
-  // console.log("🐱", props);
+  console.log("🐱", props);
   const {
     state,
     getIngredients
