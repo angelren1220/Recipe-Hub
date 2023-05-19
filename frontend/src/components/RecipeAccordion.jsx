@@ -34,7 +34,7 @@ const RecipeAccordion = function(props) {
     deleteRecipe(id);
   };
 
-  console.log(props.recipes)
+  // console.log(props.recipes)
 
   return (
     <article className="recipe-accordions-wrapper">

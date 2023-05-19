@@ -9,6 +9,7 @@ import dataReducer, {
   SET_USER,
 
 } from './dataReducer';
+
 import axios from 'axios';
 
 // import { useCookies } from 'react-cookie';
@@ -73,6 +74,7 @@ const useApplicationData = () => {
   };
 
   const createUser = (user) => {
+
     // the object post to backend should be the exact same name with it in database
     axios.post("/api/users", { user })
       .then((response) => {
@@ -83,7 +85,7 @@ const useApplicationData = () => {
         });
         // setCookie('Current User', response.data.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
-        
+        window.location = "/recipes"
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
@@ -93,6 +95,7 @@ const useApplicationData = () => {
   };
 
   const loginUser = (user) => {
+    
     axios.post("/api/sessions", user)
       .then((response) => {
         console.log(response);
@@ -102,8 +105,9 @@ const useApplicationData = () => {
         });
         // setCookie('Current User', response.data.user.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
-        const userId = localStorage.getItem('userId');
-        console.log(userId)
+        // const userId = localStorage.getItem('userId');
+        // console.log(userId);
+        window.location = "/recipes"
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
@@ -113,11 +117,12 @@ const useApplicationData = () => {
   };
 
   const logoutUser = () => {
+ 
     axios.delete("/api/sessions/1")
       .then((response) => {
         console.log(response);
         localStorage.removeItem('userId');
-
+        window.location = "/login"
       })
       .catch((error) => {
         // const message = Object.entries(error.response.data)

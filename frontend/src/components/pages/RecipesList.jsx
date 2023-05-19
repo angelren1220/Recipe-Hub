@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import RecipeAccordion from "../RecipeAccordion";
-import useApplicationData from "../../hooks/useApplicationData";
 
 const RecipesList = function(props) {
 
