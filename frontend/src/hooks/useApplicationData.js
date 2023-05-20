@@ -7,8 +7,8 @@ import dataReducer, {
   SET_INGREDIENTS,
   SET_RECIPES,
   SET_USER,
-  SET_RECIPE
-
+  SET_RECIPE,
+  SET_BOOKS
 } from './dataReducer';
 
 import axios from 'axios';
@@ -21,6 +21,7 @@ const useApplicationData = () => {
     recipe: [],
     recipes: [],
     ingredients: [],
+    books: [],
     loading: true,
   });
 
@@ -85,9 +86,27 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
+      
+      });
+  };
+
+  const getBooksByUserID = (userId) => {
+    if (!userId) {
+      return;
+    }
+    axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        // console.log("🙈", response.data);
+        dispatch({
+          type: SET_BOOKS,
+          books: response.data.books
+        });
+      })
+      .catch((error) => {
 
       });
   };
+
 
   const createUser = (user) => {
     // the object post to backend should be the exact same name with it in database
@@ -99,6 +118,7 @@ const useApplicationData = () => {
           type: SET_USER,
           user: response.data.user
         });
+        // setCookie('Current User', response.data.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
 
         // Create a new book object using the first_name of the created user
@@ -114,13 +134,19 @@ const useApplicationData = () => {
             window.location = "/recipes";
           })
           .catch((error) => {
+
             sendErrorMessage(error);
+
+            console.error(error);
+            // Handle book creation failure
+
           });
       })
       .catch((error) => {
         sendErrorMessage(error);
       });
   };
+
 
   const loginUser = (user) => {
 
@@ -180,7 +206,6 @@ const useApplicationData = () => {
     axios.delete(`/api/recipes/${id}`)
       .then((response) => {
         const updatedRecipes = state.recipes.filter(recipe => recipe.id !== id);
-        console.log(updatedRecipes, id);
         dispatch({
           type: SET_RECIPES,
           recipes: updatedRecipes
@@ -191,6 +216,36 @@ const useApplicationData = () => {
       });
   };
 
+  const deleteBook = (id) => {
+    axios.delete(`/api/books/${id}`)
+      .then((response) => {
+        const updatedBooks = state.books.filter(book => book.id !== id);
+        dispatch({
+          type: SET_BOOKS,
+          books: updatedBooks
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
+  const deleteBook = (id) => {
+    axios.delete(`/api/books/${id}`)
+      .then((response) => {
+        const updatedBooks = state.books.filter(book => book.id !== id);
+        dispatch({
+          type: SET_BOOKS,
+          books: updatedBooks
+        });
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
   return {
     state,
     dispatch,
@@ -198,12 +253,14 @@ const useApplicationData = () => {
     getIngredients,
     getRecipeById,
     getRecipesByUserId,
+    getBooksByUserID,
     createUser,
     loginUser,
     logoutUser,
     createRecipe,
     updateRecipe,
-    deleteRecipe
+    deleteRecipe,
+    deleteBook
   };
 };
 

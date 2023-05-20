@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: {user:@user, recipes:@recipes}
+    render json: {user:@user, recipes:@recipes, books:@books}
   end
 
   # POST /users
@@ -45,6 +45,7 @@ class Api::UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
       @recipes = @user.recipes
+      @books = @user.books
     end
 
     # Only allow a list of trusted parameters through.
