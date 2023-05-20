@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
+import sass from 'sass';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
 
@@ -12,9 +13,24 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
-        secure: false
-      }
-    }
-  }
+        secure: false,
+      },
+    },
+  },
 
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'), // Set an alias for the src directory
+    },
+    extensions: ['.js', '.jsx', '.json', '.scss'], // Include .scss extension for SCSS files
+  },
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        implementation: sass,
+        additionalData: `@import "@/styles/variables.scss";`, // Import a global variables file
+      },
+    },
+  },
 });

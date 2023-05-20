@@ -37,6 +37,14 @@ const dataReducer = (state, action) => {
       return {
         ...state,
         books: action.books,
+        bookmarks: action.bookmarks,
+        loading: false
+      };
+
+    case SET_BOOKMARKS:
+      return {
+        ...state,
+        bookmarks: action.bookmarks,
         loading: false
       };
 

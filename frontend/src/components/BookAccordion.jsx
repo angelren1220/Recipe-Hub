@@ -1,74 +1,130 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import DescriptionEditor from "./DescriptionEditor";
 import "../styles/book_accordion.scss";
-import useApplicationData from "../hooks/useApplicationData";
 
-const BookAccordion = function(props) {
-
-  const {
-    state,
-    dispatch,
-    getBooksByUserID,
-    deleteBook
-  } = useApplicationData();
-
+const BookAccordion = ({
+  books,
+  deleteBook,
+  bookmarks,
+  deleteBookmark,
+  updateBookDescription,
+}) => {
   const [selected, setSelected] = useState([]);
+  const [booksState, setBooks] = useState(books); // Declare books state
+  const [editingBookId, setEditingBookId] = useState(null);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getBooksByUserID(userId);
-  }, []);
+    setBooks(books);
+  }, [books]);
 
-  const toggle = (i, event) => {
+  const toggle = (id, event) => {
     event.stopPropagation();
-    const selectedBookId = state.books[i].id;
-    if (selected.includes(selectedBookId)) {
-      setSelected(selected.filter((id) => id !== selectedBookId));
+    if (selected.includes(id)) {
+      setSelected(selected.filter((selectedId) => selectedId !== id));
     } else {
-      setSelected([...selected, selectedBookId]);
+      setSelected([...selected, id]);
     }
   };
 
   const handleDelete = (id, event) => {
     event.stopPropagation();
-    deleteBook(id);
+    if (bookmarks && selected.includes(id)) {
+      const bookmark = bookmarks.find((bookmark) => bookmark.book.id === id); // Use id instead of item.id
+      if (bookmark) {
+        deleteBookmark(bookmark.id);
+        console.log('🐷 deleted bookmark!');
+
+        // Update the books state by filtering out the deleted book
+        const updatedBooks = booksState.filter((book) => book.id !== id);
+        setBooks(updatedBooks);
+      }
+    } else {
+      deleteBook(id);
+      console.log('🦊 deleted book!');
+    }
+  };
+
+  const handleEditDescription = (id, event) => {
+    event.stopPropagation();
+    setEditingBookId(id);
+  };
+
+  const handleSaveDescription = (id, editedDescription) => {
+    updateBookDescription(id, editedDescription)
+      .then((response) => {
+        console.log('📝 Updated description:', editedDescription);
+
+        // Update the books state with the edited description
+        setBooks((prevBooks) =>
+          prevBooks.map((book) => {
+            if (book.id === id) {
+              return { ...book, description: editedDescription };
+            }
+            return book;
+          })
+        );
+
+        // Reset the editing state
+        setEditingBookId(null);
+      })
+      .catch((error) => {
+        console.error('Error updating description:', error);
+      });
+  };
+
+  const handleCancelDescription = () => {
+    // Reset the editing state without saving
+    setEditingBookId(null);
   };
 
   return (
     <article className="book-accordions-wrapper">
-
-      {/* Looping through recipes sent from RecipesList, passed down from App component */}
-      {state.books.map((item, i) => (
-        <div className={selected.some(index => index === i) ? 'book-accordion selected' : 'book-accordion'} key={i} onClick={(event) => toggle(i, event)}>
-          
+      {booksState.map((item) => (
+        <div
+          className={selected.includes(item.id) ? 'book-accordion selected' : 'book-accordion'}
+          key={item.id}
+          onClick={(event) => toggle(item.id, event)}
+        >
           <div className="banner">
-
             <div className="banner-left">
-            <Link to={`/books/${item.id}`}>
-              <h1>{item.name}</h1>
-            </Link>
-            <h2>By: {item.first_name}</h2>
-            </div>
-
-            <div className="banner-right">
-              <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
-            </div>
-
-          </div>
-
-          <div className={selected.includes(item.id) ? 'content show' : 'content'}>
-
-            <h2>Description: <p>{item.description}</p></h2>
-
-            <div className="control-buttons">
-              <button onClick={(event) => handleDelete(item.id, event)}>Delete Book</button>
-              <Link to={`/edit/${item.id}`}>
-                <button>Edit Description</button>
+              <Link to={`/books/${item.id}`}>
+                <h1>{item.name}</h1>
               </Link>
+              <h2>By: {item.first_name}</h2>
             </div>
-
+            <div className="banner-right">
+              <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
+            </div>
           </div>
-
+          {selected.includes(item.id) && (
+            <div className="book-content show">
+              {editingBookId === item.id ? (
+                <DescriptionEditor
+                  initialDescription={item.description}
+                  onSave={(editedDescription) => handleSaveDescription(item.id, editedDescription)}
+                  onCancel={handleCancelDescription}
+                />
+              ) : (
+                <>
+                  <h2>{item.description}</h2>
+                  <div className="control-buttons">
+                    {bookmarks && (
+                      <button onClick={(event) => handleDelete(item.id, event)}>Remove Bookmark</button>
+                    )}
+                    {!bookmarks && (
+                      <>
+                        <button onClick={(event) => handleDelete(item.id, event)}>Delete Book</button>
+                        <button onClick={(event) => handleEditDescription(item.id, event)}>
+                          {item.description ? "Edit Description" : "Add Description"}
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
       ))}
     </article>

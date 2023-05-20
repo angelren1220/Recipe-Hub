@@ -1,0 +1,48 @@
+.infinite-scroll-loop-inner {
+  position: relative;
+  max-width: 100vw; /* Set the maximum width for the content */
+  max-height: 100vh; /* Set the maximum height for the content (80vh for viewport height) */
+  overflow: scroll; /* Enable scrolling within the content */
+  scrollbar-width: none;
+}
+
+// .loop-content {
+//   display: flex;
+//   height: 10rem;
+//   width: 50rem;
+//   margin: 1em;
+//   text-align: center;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 1rem;
+//   font-size: 2rem;
+// }
+
+// .loop-content:nth-child(6n + 1) {
+//   background-color: #FF0000;
+// }
+
+// .loop-content:nth-child(6n + 2) {
+//   background-color: #FF3333;
+// }
+
+// .loop-content:nth-child(6n + 3) {
+//   background-color: #FF6666;
+// }
+
+// .loop-content:nth-child(6n + 4) {
+//   background-color: #FF9999;
+// }
+
+// .loop-content:nth-child(6n + 5) {
+//   background-color: #FFCCCC;
+// }
+
+// .loop-content:nth-child(6n + 6) {
+//   background-color: #FFE5E5;
+// }
+
+
+::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}

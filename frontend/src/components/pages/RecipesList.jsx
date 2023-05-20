@@ -1,7 +1,8 @@
 import React from "react";
 import RecipeAccordion from "../RecipeAccordion";
+import Loop from "../LoopScroll";
 
-const RecipesList = function(props) {  
+const RecipesList = function(props) {
 
   return (
     <article className="recipes-list">

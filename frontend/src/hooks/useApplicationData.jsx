@@ -22,6 +22,7 @@ const useApplicationData = () => {
     recipes: [],
     ingredients: [],
     books: [],
+    bookmarks: [],
     loading: true,
   });
 
@@ -114,7 +115,7 @@ const useApplicationData = () => {
         return response.data;
       })
       .catch((error) => {
-
+      
       });
   };
 
@@ -124,14 +125,14 @@ const useApplicationData = () => {
     }
     axios.get(`/api/users/${userId}`)
       .then((response) => {
-        // console.log("🙈", response.data);
+        console.log("🙈", response.data);
         dispatch({
           type: SET_BOOKS,
-          books: response.data.books
+          books: response.data.books,
+          bookmarks: response.data.bookmarked_books
         });
       })
       .catch((error) => {
-
       });
   };
 
@@ -233,6 +234,16 @@ const useApplicationData = () => {
       });
   };
 
+  const updateBookDescription = (id, description) => {
+    return axios.put(`/api/books/${id}`, { description })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+
+      });
+  };
+
   const deleteRecipe = (id) => {
     axios.delete(`/api/recipes/${id}`)
       .then((response) => {
@@ -261,6 +272,20 @@ const useApplicationData = () => {
       });
   };
 
+  const deleteBookmark = (id) => {
+    axios.delete(`/api/bookmarked_books/${id}`)
+      .then((response) => {
+        const updatedBookmarks = state.bookmarks.filter(bookmark => bookmark.id !== id);
+        dispatch({
+          type: SET_BOOKMARKS,
+          bookmarks: updatedBookmarks
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
 
   return {
     state,
@@ -278,7 +303,9 @@ const useApplicationData = () => {
     createRecipe,
     updateRecipe,
     deleteRecipe,
-    deleteBook
+    deleteBook,
+    updateBookDescription,
+    deleteBookmark
   };
 };
 

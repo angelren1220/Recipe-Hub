@@ -1,0 +1,21 @@
+.description-editor {
+  width: 100%;
+
+  textarea {
+    width: 100%;
+    min-height: auto; /* Set the minimum height */
+    resize: none; 
+    font-size: 1.5rem; /* Adjust the value as needed */
+    font-weight: bold; /* Set the font weight to match an h2 element */
+    font-family: inherit;
+    color: inherit;
+    background-color: rgba(255, 255, 255, 0.15); 
+    outline: none;
+    border: none; 
+    overflow: hidden; 
+  }
+
+  .control-buttons {
+    margin-top: 0.5rem; /* Add spacing between textarea and buttons */
+  }
+}
