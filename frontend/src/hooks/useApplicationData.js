@@ -7,6 +7,7 @@ import dataReducer, {
   SET_INGREDIENTS,
   SET_RECIPES,
   SET_USER,
+  SET_BOOKS
 
 } from './dataReducer';
 
@@ -19,6 +20,7 @@ const useApplicationData = () => {
     user: [],
     recipes: [],
     ingredients: [],
+    books: [],
     loading: true,
   });
 
@@ -67,11 +69,31 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
+  const getBooksByUserID = (userId) => {
+    if (!userId) {
+      return;
+    }
+    axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        // console.log("🙈", response.data);
+        dispatch({
+          type: SET_BOOKS,
+          books: response.data.books
+        });
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
         // alert(message);
       });
   };
+
 
   const createUser = (user) => {
     // the object post to backend should be the exact same name with it in database
@@ -83,6 +105,7 @@ const useApplicationData = () => {
           type: SET_USER,
           user: response.data.user
         });
+        // setCookie('Current User', response.data.id, { path: '/' });
         localStorage.setItem('userId', response.data.session.user_id);
   
         // Create a new book object using the first_name of the created user
@@ -98,9 +121,8 @@ const useApplicationData = () => {
             window.location = "/recipes"
           })
           .catch((error) => {
-            const message = Object.entries(error.response.data)
-              .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-            alert(message);
+            console.error(error);
+            // Handle book creation failure
           });
       })
       .catch((error) => {
@@ -109,6 +131,7 @@ const useApplicationData = () => {
         alert(message);
       });
   };
+
 
   const loginUser = (user) => {
     
@@ -175,10 +198,25 @@ const useApplicationData = () => {
     axios.delete(`/api/recipes/${id}`)
       .then((response) => {
         const updatedRecipes = state.recipes.filter(recipe => recipe.id !== id);
-        console.log(updatedRecipes, id);
         dispatch({
           type: SET_RECIPES,
           recipes: updatedRecipes
+        });
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
+  const deleteBook = (id) => {
+    axios.delete(`/api/books/${id}`)
+      .then((response) => {
+        const updatedBooks = state.books.filter(book => book.id !== id);
+        dispatch({
+          type: SET_BOOKS,
+          books: updatedBooks
         });
       })
       .catch((error) => {
@@ -188,18 +226,36 @@ const useApplicationData = () => {
       });
   };
 
+  const deleteBook = (id) => {
+    axios.delete(`/api/books/${id}`)
+      .then((response) => {
+        const updatedBooks = state.books.filter(book => book.id !== id);
+        dispatch({
+          type: SET_BOOKS,
+          books: updatedBooks
+        });
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
   return {
     state,
     dispatch,
     getAllRecipes,
     getIngredients,
     getRecipesByUserID,
+    getBooksByUserID,
     createUser,
     loginUser,
     logoutUser,
     createRecipe,
     updateRecipe,
-    deleteRecipe
+    deleteRecipe,
+    deleteBook
   };
 };
 
