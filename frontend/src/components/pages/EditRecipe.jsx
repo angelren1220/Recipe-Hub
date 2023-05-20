@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 
 import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
@@ -10,12 +10,21 @@ import EditRecipeDirections from "../editRecipe/EditRecipeDirections";
 
 const EditRecipe = function() {
   const {
-    currentRecipe,
-    currentIngredients,
     recipeEditMode,
     recipeSummaryView,
     recipeIngredientsView,
-    recipeDirectionsView
+    recipeDirectionsView,
+    currentRecipe,
+    setRecipe,
+    setRecipeName,
+    setRecipeDescription,
+    setRecipeCooktime,
+    setRecipeImage,
+    setRecipeFlag,
+    setRecipeDirection,
+    currentIngredients,
+    setIngredient,
+    setIngredients,
   } = useContext(recipeEditContext);
 
   const {
@@ -32,12 +41,7 @@ const EditRecipe = function() {
   //current user id from cookie
   const userId = localStorage.getItem('userId');
 
-  useEffect(() => {
-    const editedRecipe = getRecipesByUserID(1);
-
-    console.log("🐹", editedRecipe);
-  }, []);
-
+  //submit recipe and ingredients to the db
   const handleSubmit = function() {
     console.log('🐯', currentRecipe);
     console.log('🐮', currentIngredients);
@@ -53,7 +57,8 @@ const EditRecipe = function() {
         {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
         {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
       </main>
-      <button onClick={handleSubmit}>Publish</button>
+      <Link to={`/recipes/${currentRecipe.id}`}>Reset Changes</Link>
+      <Link to={`/recipes/${currentRecipe.id}`} onClick={handleSubmit}>Publish</Link>
 
     </>
   );

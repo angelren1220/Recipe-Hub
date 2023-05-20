@@ -14,7 +14,7 @@ const DirectionForm = function(props) {
       onSubmit={event => event.preventDefault()}
     >
       <>
-        <label htmlFor={`direction${props.index}`} >{props.index}:</label>
+        <label htmlFor={`direction${props.index}`} >{"Step " + (props.index + 1)}:</label>
         <input
           id={`direction${props.index}`}
           value={currentRecipe.directions[props.index]}
