@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :bookmarked_books
   has_many :books
 
-  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :email, :password_confirmation, presence: true
   validates_uniqueness_of :email, case_sensitive: false
   validates :password, presence: true, length: { minimum: 6 }
 

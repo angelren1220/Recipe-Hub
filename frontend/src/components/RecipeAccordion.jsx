@@ -9,7 +9,7 @@ const RecipeAccordion = function(props) {
   const {
     state,
     dispatch,
-    getRecipesByUserID,
+    getRecipesByUserId,
     getAllRecipes,
     deleteRecipe
   } = useApplicationData();
@@ -19,11 +19,10 @@ const RecipeAccordion = function(props) {
   const userId = localStorage.getItem('userId');
   useEffect(() => {
     if (userId){
-      getRecipesByUserID(userId);
+      getRecipesByUserId(userId);
     } else {
       getAllRecipes();
     }
-
   }, []);
 
   const toggle = (i, event) => {
@@ -49,15 +48,13 @@ const RecipeAccordion = function(props) {
         <div className={selected.some(index => index === i) ? 'recipe-accordion selected' : 'recipe-accordion'} key={i} onClick={(event) => toggle(i, event)}>
           
           <div className="banner">
-
-            <div className="banner-left">
             <Link to={`/recipes/${item.id}`}>
     
               <h1>{item.name}</h1>
   
             </Link>
             <h2>By: {item.first_name}</h2>
-            </div>
+          
 
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
@@ -76,9 +73,9 @@ const RecipeAccordion = function(props) {
               {item.is_vegan && <span className="category">Vegan</span>}
               {item.is_vegetarian && <span className="category">Vegetarian</span>}
               {item.is_nutfree && <span className="category">Nut-free</span>}
-              {item.is_lowcarb && <span className="category">Nut-free</span>}
-              {item.is_glutenfree && <span className="category">Nut-free</span>}
-              {item.is_nutfree && <span className="category">Nut-free</span>}
+              {item.is_lowcarb && <span className="category">Low-Carb</span>}
+              {item.is_glutenfree && <span className="category">Gluten-free</span>}
+              {item.is_is_lactosefree && <span className="category">Lactose-free</span>}
             </div>
 
             {userId &&<div className="control-buttons">

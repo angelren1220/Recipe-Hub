@@ -20,11 +20,9 @@ const RegisterForm = function() {
 
   const handleRegister = function() {
 
-    if (password === passwordConfirmation) {
-      const user = { first_name: firstName, last_name: lastName, email, password: password };
+      const user = { first_name: firstName, last_name: lastName, email, password: password, password_confirmation: passwordConfirmation };
       return createUser(user);
-    }
-    alert('Passwords must match!');
+
   };
 
   return (
@@ -41,7 +39,6 @@ const RegisterForm = function() {
           name="firstName"
           type="text"
           placeholder="First Name"
-          required
         />
         <label htmlFor="lastName" >Last Name:</label>
         <input
@@ -51,7 +48,6 @@ const RegisterForm = function() {
           name="lastName"
           type="text"
           placeholder="Last Name"
-          required
         />
         <label htmlFor="email" >Email:</label>
         <input
@@ -61,7 +57,6 @@ const RegisterForm = function() {
           name="email"
           type="email"
           placeholder="yourEmail@mailProvider.com"
-          required
         />
         <label htmlFor="password" >Password:</label>
         <input
