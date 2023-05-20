@@ -36,10 +36,20 @@ const EditRecipe = function() {
   } = useApplicationData();
 
   //current recipe id being edited
+
   const { recipeId } = useParams();
-  console.log('********', recipeId);
-  //current user id from cookie
-  const userId = localStorage.getItem('userId');
+  useEffect(() => {
+    const getRecipe = async () => {
+      await recipeId;
+      console.log('********', recipeId);
+      const userId = await localStorage.getItem('userId');
+      console.log('12345: ', userId);
+      const userRecipes = await getRecipesByUserId(userId);
+      console.log('🐺', userRecipes);
+
+    };
+    getRecipe();
+  }, []);
 
   //submit recipe and ingredients to the db
   const handleSubmit = function() {
@@ -49,6 +59,8 @@ const EditRecipe = function() {
     currentIngredients.map(ingredient => updateIngredient(ingredient.id, ingredient));
 
   };
+
+
 
   return (
     <>

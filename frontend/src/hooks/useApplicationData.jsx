@@ -212,7 +212,7 @@ const useApplicationData = () => {
   const createRecipe = (recipe) => {
     axios.post("/api/recipes", { recipe })
       .then((response) => {
-        console.log(response);
+        window.location = `/recipes/edit/${response.data.id}`;
       })
       .catch((error) => {
 

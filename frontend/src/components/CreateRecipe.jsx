@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import useApplicationData from "../hooks/useApplicationData";
 
-const CreateRecipe = function() {
+const CreateRecipe = function(props) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [cooktimeMinutes, setCooktime] = useState('');
+  const loggedIn = (props.userId ? true : false);
 
   const {
     state,
@@ -13,15 +15,13 @@ const CreateRecipe = function() {
   } = useApplicationData();
 
   const handleCreation = function() {
-    console.log("name: ", name, "description: ", description, "img url: ", image);
-
     const recipe = {
       name,
-      user_id: 1, // need get from cookies
+      user_id: props.userId,
       description,
       cooktime_minutes: cooktimeMinutes,
       image,
-      directions: []
+      directions: ["Gather ingredients"]
     };
 
     createRecipe(recipe);
@@ -30,6 +30,8 @@ const CreateRecipe = function() {
 
   return (
     <>
+      {!loggedIn && <Link to='/login'><h1>Log in to create recipes!</h1></Link>}
+      {loggedIn &&
       <form
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
@@ -73,7 +75,7 @@ const CreateRecipe = function() {
           placeholder="www..."
         />
         <button onClick={handleCreation}>Submit</button>
-      </form>
+      </form>}
     </>
   );
 };
