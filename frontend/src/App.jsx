@@ -29,7 +29,6 @@ import Inbox from './components/pages/Inbox';
 {/*Single Components*/}
 import MyRecipes from './components/pages/MyRecipes';
 import Template from './components/Template';
-import useApplicationData from './hooks/useApplicationData';
 
 const App = function() {
 
@@ -43,7 +42,7 @@ const App = function() {
           <Routes>
 
             <Route path='/recipes'>
-              <Route index element={<RecipesList/>}/>
+              <Route index element={<RecipesList />}/>
               <Route path=':id' element={<Recipe/>}/>
               <Route path='new' element={<NewRecipe/>}/>
               <Route path='edit/:id' element={<EditRecipe/>}/>

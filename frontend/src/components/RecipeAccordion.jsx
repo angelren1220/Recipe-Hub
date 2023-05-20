@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
+
 
 const RecipeAccordion = function(props) {
 
@@ -9,14 +10,20 @@ const RecipeAccordion = function(props) {
     state,
     dispatch,
     getRecipesByUserID,
+    getAllRecipes,
     deleteRecipe
   } = useApplicationData();
 
   const [selected, setSelected] = useState([]);
 
+  const userId = localStorage.getItem('userId');
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getRecipesByUserID(userId);
+    if (userId){
+      getRecipesByUserID(userId);
+    } else {
+      getAllRecipes();
+    }
+
   }, []);
 
   const toggle = (i, event) => {
@@ -45,7 +52,9 @@ const RecipeAccordion = function(props) {
 
             <div className="banner-left">
             <Link to={`/recipes/${item.id}`}>
+    
               <h1>{item.name}</h1>
+  
             </Link>
             <h2>By: {item.first_name}</h2>
             </div>
@@ -72,12 +81,12 @@ const RecipeAccordion = function(props) {
               {item.is_nutfree && <span className="category">Nut-free</span>}
             </div>
 
-            <div className="control-buttons">
+            {userId &&<div className="control-buttons">
               <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
               <Link to={`/edit/${item.id}`}>
                 <button>Edit Recipe</button>
               </Link>
-            </div>
+            </div>}
 
           </div>
 
