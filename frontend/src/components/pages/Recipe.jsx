@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
 const Recipe = function(props) {
   const { id } = useParams();
-
+  const userId = localStorage.getItem('userId');
   // console.log(id);
 
   const {
     state,
     getRecipeById,
-    getIngredients
+    getIngredients,
+    deleteRecipe
   } = useApplicationData();
 
   useEffect(() => {
@@ -18,6 +20,11 @@ const Recipe = function(props) {
   }, []);
 
   const { recipe, ingredients } = state;
+
+  const handleDelete = (id) => {
+    deleteRecipe(id);
+    window.location = "/recipes";
+  };
 
   if (!recipe || !recipe.directions) {
     return <div>Loading...</div>;
@@ -48,10 +55,15 @@ const Recipe = function(props) {
           {recipe.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
         </ol>
 
+        {userId && <div className="control-buttons">
+          <button onClick={(event) => handleDelete(recipe.id)}>Delete Recipe</button>
+          <Link to={`/edit/${recipe.id}`}>
+            <button>Edit Recipe</button>
+          </Link>
+        </div>}
       </div>
 
       <img src={recipe.image} alt={recipe.name} className="recipe-img" />
-
     </article>
   );
 
