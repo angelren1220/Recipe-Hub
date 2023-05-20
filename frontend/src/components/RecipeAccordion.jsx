@@ -9,7 +9,7 @@ const RecipeAccordion = function(props) {
   const {
     state,
     dispatch,
-    getRecipesByUserID,
+    getRecipesByUserId,
     getAllRecipes,
     deleteRecipe
   } = useApplicationData();
@@ -19,7 +19,7 @@ const RecipeAccordion = function(props) {
   const userId = localStorage.getItem('userId');
   useEffect(() => {
     if (userId){
-      getRecipesByUserID(userId);
+      getRecipesByUserId(userId);
     } else {
       getAllRecipes();
     }
@@ -73,9 +73,9 @@ const RecipeAccordion = function(props) {
               {item.is_vegan && <span className="category">Vegan</span>}
               {item.is_vegetarian && <span className="category">Vegetarian</span>}
               {item.is_nutfree && <span className="category">Nut-free</span>}
-              {item.is_lowcarb && <span className="category">Nut-free</span>}
-              {item.is_glutenfree && <span className="category">Nut-free</span>}
-              {item.is_nutfree && <span className="category">Nut-free</span>}
+              {item.is_lowcarb && <span className="category">Low-Carb</span>}
+              {item.is_glutenfree && <span className="category">Gluten-free</span>}
+              {item.is_is_lactosefree && <span className="category">Lactose-free</span>}
             </div>
 
             {userId &&<div className="control-buttons">
