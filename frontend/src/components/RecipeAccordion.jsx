@@ -42,8 +42,6 @@ const RecipeAccordion = function(props) {
 
   return (
     <article className="recipe-accordions-wrapper">
-
-      {/* Looping through recipes sent from RecipesList, passed down from App component */}
       {state.recipes.map((item, i) => (
         <div className={selected.some(index => index === i) ? 'recipe-accordion selected' : 'recipe-accordion'} key={i} onClick={(event) => toggle(i, event)}>
           

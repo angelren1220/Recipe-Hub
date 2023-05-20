@@ -230,22 +230,6 @@ const useApplicationData = () => {
       });
   };
 
-  const deleteBook = (id) => {
-    axios.delete(`/api/books/${id}`)
-      .then((response) => {
-        const updatedBooks = state.books.filter(book => book.id !== id);
-        dispatch({
-          type: SET_BOOKS,
-          books: updatedBooks
-        });
-      })
-      .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
-      });
-  };
-
   return {
     state,
     dispatch,
