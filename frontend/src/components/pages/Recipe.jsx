@@ -1,53 +1,56 @@
 import React, { useEffect, useState } from "react";
 import useApplicationData from "../../hooks/useApplicationData";
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 const Recipe = function(props) {
+  const { id } = useParams();
 
-  // console.log(props);
+  // console.log(id);
 
-  // const {
-  //   state,
-  //   getIngredients
-  // } = useApplicationData();
+  const {
+    state,
+    getRecipeById,
+    getIngredients
+  } = useApplicationData();
 
-  // useEffect(() => {
-  //   getIngredients(props.id);
-  //   // console.log("🐹", props.id);
-  // }, []);
+  useEffect(() => {
+    getRecipeById(id);
+    getIngredients(id);
+  }, []);
 
-  // return (
-  //   <article className="recipe">
+  const { recipe, ingredients } = state;
 
-  //     <div className="recipe-text">
-  //       <h2 className="recipe-title">{props.name}</h2>
-  //       <span>description</span>
-  //       <p>{props.description}</p>
-  //       <span>ingredients</span>
-  //       <ul>
-  //         {state.ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
-  //       </ul>
-  //       <ul>
-  //         <li>Estimate cooktime: {props.cooktime_minutes} min</li>
-  //         {props.is_vegetarian && <li>Vegetarian</li>}
-  //         {props.is_vegans_lowcarb && <li>Low Carb</li>}
-  //         {props.is_lactosefree && <li>Lactose Free</li>}
-  //         {props.is_glutenfree && <li>Gluten Free</li>}
-  //         {props.is_nutfree && <li>Nut Free</li>}
-  //       </ul>
-  //       <span>directions</span>
-  //       <ol>
-  //         {props.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
-  //       </ol>
+  if (!recipe || !recipe.directions) {
+    return <div>Loading...</div>;
+  }
 
-  //     </div>
-
-  //     <img src={props.image} alt={props.name} className="recipe-img" />
-
-  //   </article>
-  // );
   return (
     <article className="recipe">
-      <h1>Single recipe information goes here</h1>
+
+      <div className="recipe-text">
+        <h2 className="recipe-title">{recipe.name}</h2>
+        <span>description</span>
+        <p>{recipe.description}</p>
+        <span>ingredients</span>
+        <ul>
+          {ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
+        </ul>
+        <ul>
+          <li>Estimate cooktime: {recipe.cooktime_minutes} min</li>
+          {recipe.is_vegetarian && <li>Vegetarian</li>}
+          {recipe.is_vegans_lowcarb && <li>Low Carb</li>}
+          {recipe.is_lactosefree && <li>Lactose Free</li>}
+          {recipe.is_glutenfree && <li>Gluten Free</li>}
+          {recipe.is_nutfree && <li>Nut Free</li>}
+        </ul>
+        <span>directions</span>
+        <ol>
+          {recipe.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
+        </ol>
+
+      </div>
+
+      <img src={recipe.image} alt={recipe.name} className="recipe-img" />
+
     </article>
   );
 

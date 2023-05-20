@@ -23,7 +23,6 @@ const RecipeAccordion = function(props) {
     } else {
       getAllRecipes();
     }
-
   }, []);
 
   const toggle = (i, event) => {
@@ -49,15 +48,13 @@ const RecipeAccordion = function(props) {
         <div className={selected.some(index => index === i) ? 'recipe-accordion selected' : 'recipe-accordion'} key={i} onClick={(event) => toggle(i, event)}>
           
           <div className="banner">
-
-            <div className="banner-left">
             <Link to={`/recipes/${item.id}`}>
     
               <h1>{item.name}</h1>
   
             </Link>
             <h2>By: {item.first_name}</h2>
-            </div>
+          
 
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>

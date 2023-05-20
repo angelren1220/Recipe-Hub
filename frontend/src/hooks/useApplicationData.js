@@ -7,6 +7,7 @@ import dataReducer, {
   SET_INGREDIENTS,
   SET_RECIPES,
   SET_USER,
+  SET_RECIPE
 
 } from './dataReducer';
 
@@ -17,6 +18,7 @@ import axios from 'axios';
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(dataReducer, {
     user: [],
+    recipe: [],
     recipes: [],
     ingredients: [],
     loading: true,
@@ -54,7 +56,24 @@ const useApplicationData = () => {
       });
   };
 
-  const getRecipesByUserID = (userId) => {
+  const getRecipeById = (recipeId) => {
+
+    axios.get(`/api/recipes/${recipeId}`)
+      .then((response) => {
+        dispatch({
+          type: SET_RECIPE,
+          recipe: response.data.recipe
+        });
+        console.log("🙈", response.data.recipe);
+      })
+      .catch((error) => {
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
+      });
+  };
+
+  const getRecipesByUserId = (userId) => {
     // if (!userId) {
     //   userId = 1;
     // }
@@ -95,7 +114,7 @@ const useApplicationData = () => {
         axios.post("/api/books", { book })
           .then((bookResponse) => {
             console.log(bookResponse);
-            window.location = "/recipes"
+            window.location = "/recipes";
           })
           .catch((error) => {
             const message = Object.entries(error.response.data)
@@ -111,7 +130,7 @@ const useApplicationData = () => {
   };
 
   const loginUser = (user) => {
-    
+
     axios.post("/api/sessions", user)
       .then((response) => {
         console.log(response);
@@ -123,7 +142,7 @@ const useApplicationData = () => {
         localStorage.setItem('userId', response.data.session.user_id);
         // const userId = localStorage.getItem('userId');
         // console.log(userId);
-        window.location = "/recipes"
+        window.location = "/recipes";
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
@@ -133,12 +152,12 @@ const useApplicationData = () => {
   };
 
   const logoutUser = () => {
- 
+
     axios.delete("/api/sessions/1")
       .then((response) => {
         console.log(response);
         localStorage.removeItem('userId');
-        window.location = "/login"
+        window.location = "/login";
       })
       .catch((error) => {
         // const message = Object.entries(error.response.data)
@@ -193,7 +212,8 @@ const useApplicationData = () => {
     dispatch,
     getAllRecipes,
     getIngredients,
-    getRecipesByUserID,
+    getRecipeById,
+    getRecipesByUserId,
     createUser,
     loginUser,
     logoutUser,
