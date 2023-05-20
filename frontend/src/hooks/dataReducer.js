@@ -1,6 +1,7 @@
 export const SET_USER = 'SET_USERS';
 export const SET_RECIPES = 'SET_RECIPES';
 export const SET_INGREDIENTS = 'SET_INGREDIENTS';
+export const SET_BOOKS = 'SET_BOOKS';
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 
 const dataReducer = (state, action) => {
@@ -23,6 +24,13 @@ const dataReducer = (state, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
+        loading: false
+      };
+
+    case SET_BOOKS:
+      return {
+        ...state,
+        books: action.books,
         loading: false
       };
 

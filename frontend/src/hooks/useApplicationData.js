@@ -7,6 +7,7 @@ import dataReducer, {
   SET_INGREDIENTS,
   SET_RECIPES,
   SET_USER,
+  SET_BOOKS
 
 } from './dataReducer';
 import axios from 'axios';
@@ -18,6 +19,7 @@ const useApplicationData = () => {
     user: [],
     recipes: [],
     ingredients: [],
+    books: [],
     loading: true,
   });
 
@@ -56,37 +58,57 @@ const useApplicationData = () => {
       });
   };
 
-const createUser = (user) => {
-  axios.post("/api/users", { user })
-    .then((response) => {
-      console.log(response);
-      dispatch({
-        type: SET_USER,
-        user: response.data.user
-      });
-      // setCookie('Current User', response.data.id, { path: '/' });
-      localStorage.setItem('userId', response.data.session.user_id);
-
-      // Create a book after creating a user
-      const firstName = user.first_name;
-      const bookName = `${firstName}'s Favorites`;
-
-      axios.post("/api/books", { name: bookName, user_id:response.data.session.user_id  })
-        .then((response) => {
-          console.log(response);
-          // Handle book creation success
-        })
-        .catch((error) => {
-          console.error(error);
-          // Handle book creation failure
+  const getBooksByUserID = (userId) => {
+    if (!userId) {
+      return;
+    }
+    axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        // console.log("🙈", response.data);
+        dispatch({
+          type: SET_BOOKS,
+          books: response.data.books
         });
-    })
-    .catch((error) => {
-      const message = Object.entries(error.response.data)
-        .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-      alert(message);
-    });
-};
+      })
+      .catch((error) => {
+        // const message = Object.entries(error.response.data)
+        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // // alert(message);
+      });
+  };
+
+
+  const createUser = (user) => {
+    axios.post("/api/users", { user })
+      .then((response) => {
+        console.log(response);
+        dispatch({
+          type: SET_USER,
+          user: response.data.user
+        });
+        // setCookie('Current User', response.data.id, { path: '/' });
+        localStorage.setItem('userId', response.data.session.user_id);
+
+        // Create a book after creating a user
+        const firstName = user.first_name;
+        const bookName = `${firstName}'s Favorites`;
+
+        axios.post("/api/books", { name: bookName, user_id:response.data.session.user_id  })
+          .then((response) => {
+            console.log(response);
+            // Handle book creation success
+          })
+          .catch((error) => {
+            console.error(error);
+            // Handle book creation failure
+          });
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
 
 
   const loginUser = (user) => {
@@ -151,10 +173,25 @@ const createUser = (user) => {
     axios.delete(`/api/recipes/${id}`)
       .then((response) => {
         const updatedRecipes = state.recipes.filter(recipe => recipe.id !== id);
-        console.log(updatedRecipes, id);
         dispatch({
           type: SET_RECIPES,
           recipes: updatedRecipes
+        });
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
+  const deleteBook = (id) => {
+    axios.delete(`/api/books/${id}`)
+      .then((response) => {
+        const updatedBooks = state.books.filter(book => book.id !== id);
+        dispatch({
+          type: SET_BOOKS,
+          books: updatedBooks
         });
       })
       .catch((error) => {
@@ -169,12 +206,14 @@ const createUser = (user) => {
     dispatch,
     getIngredients,
     getRecipesByUserID,
+    getBooksByUserID,
     createUser,
     loginUser,
     logoutUser,
     createRecipe,
     updateRecipe,
-    deleteRecipe
+    deleteRecipe,
+    deleteBook
   };
 };
 
