@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
+
 
 const RecipeAccordion = function(props) {
 
   const {
     state,
     dispatch,
-    getRecipesByUserID,
+    getRecipesByUserId,
+    getAllRecipes,
     deleteRecipe
   } = useApplicationData();
 
   const [selected, setSelected] = useState([]);
 
+  const userId = localStorage.getItem('userId');
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getRecipesByUserID(userId);
+    if (userId){
+      getRecipesByUserId(userId);
+    } else {
+      getAllRecipes();
+    }
   }, []);
 
   const toggle = (i, event) => {
@@ -34,8 +40,6 @@ const RecipeAccordion = function(props) {
     deleteRecipe(id);
   };
 
-  console.log(props.recipes)
-
   return (
     <article className="recipe-accordions-wrapper">
 
@@ -45,25 +49,42 @@ const RecipeAccordion = function(props) {
           
           <div className="banner">
             <Link to={`/recipes/${item.id}`}>
+    
               <h1>{item.name}</h1>
+  
             </Link>
+            <h2>By: {item.first_name}</h2>
+          
+
             <div className="banner-right">
-              <h2>By: {item.first_name}</h2>
               <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
               <img className="banner-image" src={item.image} />
             </div>
+
           </div>
 
           <div className={selected.includes(item.id) ? 'content show' : 'content'}>
-            <h2>Cooktime: {item.cooktime_minutes} min</h2>
-            <h2>Description: {item.description}</h2>
 
-            <div className="control-buttons">
+            <h2>Cooktime: {item.cooktime_minutes} min</h2>
+            <h2>Description: <p>{item.description}</p></h2>
+            
+            <div className="categories">
+              <h2>Categories:</h2>
+              {item.is_vegan && <span className="category">Vegan</span>}
+              {item.is_vegetarian && <span className="category">Vegetarian</span>}
+              {item.is_nutfree && <span className="category">Nut-free</span>}
+              {item.is_lowcarb && <span className="category">Low-Carb</span>}
+              {item.is_glutenfree && <span className="category">Gluten-free</span>}
+              {item.is_is_lactosefree && <span className="category">Lactose-free</span>}
+            </div>
+
+            {userId &&<div className="control-buttons">
               <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
               <Link to={`/edit/${item.id}`}>
                 <button>Edit Recipe</button>
               </Link>
-            </div>
+            </div>}
+
           </div>
 
         </div>

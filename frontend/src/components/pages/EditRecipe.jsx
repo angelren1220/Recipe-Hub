@@ -30,7 +30,7 @@ const EditRecipe = function() {
   const {
     state,
     dispatch,
-    getRecipesByUserID,
+    getRecipesByUserId,
     updateRecipe,
     updateIngredient
   } = useApplicationData();

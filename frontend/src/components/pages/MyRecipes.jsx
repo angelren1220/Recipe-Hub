@@ -8,12 +8,12 @@ const MyRecipes = function(props) {
   const {
     state,
     dispatch,
-    getRecipesByUserID
+    getRecipesByUserId
   } = useApplicationData();
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
-    getRecipesByUserID(userId);
+    getRecipesByUserId(userId);
   }, []);
 
   return (

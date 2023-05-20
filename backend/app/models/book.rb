@@ -11,14 +11,6 @@ class Book < ApplicationRecord
   has_many :messages, as: :subject
 
   validates :name, presence: true
-
-  before_save :sanitize_attributes
-
-  private
-
-  def sanitize_attributes
-    self.name = CGI.escapeHTML(name) if name.present?
-    self.description = CGI.escapeHTML(description) if description.present?
-  end
-
+  validates :user_id, presence: true
+  
 end
