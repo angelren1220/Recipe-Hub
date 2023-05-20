@@ -24,6 +24,13 @@ const useApplicationData = () => {
     loading: true,
   });
 
+  // handle error messages
+  const sendErrorMessage = (error) => {
+    const message = (Object.entries(error.response.data)
+      .reduce((str, [key, val]) => `${str} ${key} ${val}`, '')) || ("Something wrong with connection...");
+    alert(message);
+  };
+
   const getAllRecipes = () => {
     axios.get('/api/recipes')
       .then((response) => {
@@ -34,9 +41,7 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
@@ -50,9 +55,7 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
@@ -67,16 +70,12 @@ const useApplicationData = () => {
         console.log("🙈", response.data.recipe);
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
   const getRecipesByUserId = (userId) => {
-    // if (!userId) {
-    //   userId = 1;
-    // }
+
     axios.get(`/api/users/${userId}`)
       .then((response) => {
         // console.log("🙈", response.data);
@@ -86,9 +85,7 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
@@ -103,13 +100,13 @@ const useApplicationData = () => {
           user: response.data.user
         });
         localStorage.setItem('userId', response.data.session.user_id);
-  
+
         // Create a new book object using the first_name of the created user
         const book = {
           title: `${user.first_name}'s favorites`,
           user_id: response.data.session.user_id
         };
-  
+
         // Make a secondary POST request to create the book object
         axios.post("/api/books", { book })
           .then((bookResponse) => {
@@ -117,15 +114,11 @@ const useApplicationData = () => {
             window.location = "/recipes";
           })
           .catch((error) => {
-            const message = Object.entries(error.response.data)
-              .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-            alert(message);
+            sendErrorMessage(error);
           });
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        sendErrorMessage(error);
       });
   };
 
@@ -145,9 +138,8 @@ const useApplicationData = () => {
         window.location = "/recipes";
       })
       .catch((error) => {
-        const message = Object.entries(error.response.data)
-          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        console.log(error);
+        sendErrorMessage(error);
       });
   };
 
@@ -160,9 +152,7 @@ const useApplicationData = () => {
         window.location = "/login";
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
@@ -172,9 +162,7 @@ const useApplicationData = () => {
         console.log(response);
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
@@ -184,9 +172,7 @@ const useApplicationData = () => {
         console.log(response);
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
@@ -201,9 +187,7 @@ const useApplicationData = () => {
         });
       })
       .catch((error) => {
-        // const message = Object.entries(error.response.data)
-        //   .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        // alert(message);
+
       });
   };
 
