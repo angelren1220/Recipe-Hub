@@ -101,7 +101,7 @@ const EditRecipeSummary = function(props) {
           type="checkbox"
           checked={(currentRecipe.is_lowcarb ? "checked" : false)}
         />
-        <label htmlFor="is_lactosefree">Low Carb:</label>
+        <label htmlFor="is_lactosefree">Lactose Free:</label>
         <input 
           id="is_lactosefree"
           value={currentRecipe.is_lactosefree}
@@ -112,7 +112,7 @@ const EditRecipeSummary = function(props) {
           type="checkbox"
           checked={(currentRecipe.is_lactosefree ? "checked" : false)}
         />
-        <label htmlFor="is_glutenfree">Low Carb:</label>
+        <label htmlFor="is_glutenfree">Gluten Free:</label>
         <input 
           id="is_glutenfree"
           value={currentRecipe.is_glutenfree}
@@ -123,7 +123,7 @@ const EditRecipeSummary = function(props) {
           type="checkbox"
           checked={(currentRecipe.is_glutenfree ? "checked" : false)}
         />
-        <label htmlFor="is_nutfree">Low Carb:</label>
+        <label htmlFor="is_nutfree">Nut Free:</label>
         <input 
           id="is_nutfree"
           value={currentRecipe.is_nutfree}
