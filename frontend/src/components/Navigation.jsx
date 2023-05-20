@@ -20,9 +20,8 @@ const Navigation = function() {
       
       <div className="sideview">
         {!userId && <h2><Link to={'/login'}>Login</Link></h2>}
-        {userId && <h2><Link to={'/login'}>
-          <button onClick={handleLogout}>Logout</button>
-        </Link></h2>}
+        {userId && <h2>
+          <button onClick={handleLogout}>Logout</button></h2>}
         <h2><Link to={'/recipes'}>My Recipes</Link></h2>
         <h2><Link to={'/books'}>My Books</Link></h2>
         <h2><Link to={'/grocerylists'}>Grocery Lists</Link></h2>
