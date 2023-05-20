@@ -1,10 +1,14 @@
 import { useState, useContext } from "react";
 import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
 
+import useApplicationData from "../../hooks/useApplicationData";
+
 import IngredientForm from "./IngredientForm";
 
 const EditRecipeIngredients = function(props) {
+  const { createIngredient } = useApplicationData();
   const {
+    currentRecipe,
     currentIngredients,
     recipeSummaryView,
     recipeIngredientsView,
@@ -13,6 +17,14 @@ const EditRecipeIngredients = function(props) {
 
   const addIngredient = function() {
     console.log('🍍ADD INGREDIENT🍍');
+    const newIngredient = {
+      recipe_id: currentRecipe.id,
+      name: "Sugar",
+      quantity: 1.5,
+      units: "cups"
+    };
+    console.log('🦑', newIngredient);
+    createIngredient(newIngredient);
   };
 
   console.log(currentIngredients);

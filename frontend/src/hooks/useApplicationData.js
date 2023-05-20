@@ -37,6 +37,30 @@ const useApplicationData = () => {
       });
   };
 
+  const updateIngredient = (id, ingredient) => {
+    axios.put(`/api/ingredients/${id}`, { ingredient })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
+      });
+  };
+
+  const createIngredient = (ingredient) => {
+    axios.post("/api/ingredients", { ingredient })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
   const getRecipesByUserID = (userId) => {
     if (!userId) {
       userId = 1;
@@ -129,7 +153,7 @@ const useApplicationData = () => {
       .catch((error) => {
         const message = Object.entries(error.response.data)
           .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
-        alert(message);
+        // alert(message);
       });
   };
 
@@ -154,6 +178,8 @@ const useApplicationData = () => {
     state,
     dispatch,
     getIngredients,
+    updateIngredient,
+    createIngredient,
     getRecipesByUserID,
     createUser,
     loginUser,

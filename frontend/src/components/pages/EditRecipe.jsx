@@ -22,12 +22,15 @@ const EditRecipe = function() {
     state,
     dispatch,
     getRecipesByUserID,
-    updateRecipe
+    updateRecipe,
+    updateIngredient
   } = useApplicationData();
 
   //current recipe id being edited
   const { recipeId } = useParams();
   console.log('********', recipeId);
+  //current user id from cookie
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const editedRecipe = getRecipesByUserID(1);
@@ -38,7 +41,9 @@ const EditRecipe = function() {
   const handleSubmit = function() {
     console.log('🐯', currentRecipe);
     console.log('🐮', currentIngredients);
-    //update ingredients here too!
+    updateRecipe(currentRecipe.id, currentRecipe);
+    currentIngredients.map(ingredient => updateIngredient(ingredient.id, ingredient));
+
   };
 
   return (
