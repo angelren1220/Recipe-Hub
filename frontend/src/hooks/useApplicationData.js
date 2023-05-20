@@ -118,6 +118,7 @@ const useApplicationData = () => {
         axios.post("/api/books", { book })
           .then((bookResponse) => {
             console.log(bookResponse);
+            window.location = "/recipes"
           })
           .catch((error) => {
             console.error(error);
