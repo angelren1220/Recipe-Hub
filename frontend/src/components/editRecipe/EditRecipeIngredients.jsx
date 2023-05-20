@@ -10,6 +10,7 @@ const EditRecipeIngredients = function(props) {
   const {
     currentRecipe,
     currentIngredients,
+    setIngredients,
     recipeSummaryView,
     recipeIngredientsView,
     recipeDirectionsView,
@@ -19,12 +20,13 @@ const EditRecipeIngredients = function(props) {
     console.log('🍍ADD INGREDIENT🍍');
     const newIngredient = {
       recipe_id: currentRecipe.id,
-      name: "Sugar",
+      name: "Name",
       quantity: 1.5,
-      units: "cups"
+      units: "units"
     };
     console.log('🦑', newIngredient);
     createIngredient(newIngredient);
+    setIngredients([...currentIngredients, newIngredient]);
   };
 
   console.log(currentIngredients);
@@ -33,7 +35,7 @@ const EditRecipeIngredients = function(props) {
     <>
       <h1>Edit Recipe Ingredients</h1>
       <ul>
-        {currentIngredients.map(ingredient => {
+        {currentIngredients && currentIngredients.map(ingredient => {
           return (
             <li key={`ingredient${ingredient.id}`}>
               <IngredientForm id={ingredient.id} />

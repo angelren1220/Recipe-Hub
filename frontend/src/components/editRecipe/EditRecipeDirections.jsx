@@ -3,7 +3,7 @@ import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
 
 import DirectionForm from "./DirectionForm";
 
-const EditRecipeDirections = function()  {
+const EditRecipeDirections = function() {
   const {
     currentRecipe,
     setRecipeDirection,
@@ -11,23 +11,23 @@ const EditRecipeDirections = function()  {
     recipeIngredientsView,
     recipeDirectionsView
   } = useContext(recipeEditContext);
-  
-  let directionCount = -1
 
   const addDirection = function() {
-    console.log('🥇', "ADD DIRECTION")
-  }
+    console.log('🥇', "ADD DIRECTION");
+    setRecipeDirection((currentRecipe.directions.length + 1), '');
+  };
 
+  console.log(currentRecipe.directions);
+  let directionCount = -1;
   return (
     <>
       <h1>Edit Recipe Directions</h1>
       <ul>
-        {currentRecipe.directions.map(() => {
-          directionCount++
-          console.log('🏵', `direction${directionCount}`)
+        {currentRecipe && currentRecipe.directions.map(() => {
+          directionCount++;
           return (
-            <li><DirectionForm key={`direction${directionCount}`} index={directionCount}/></li>
-          )
+            <li key={`direction${directionCount}`}><DirectionForm index={directionCount} /></li>
+          );
         })}
       </ul>
       <button onClick={addDirection}>+ Add Direction +</button>

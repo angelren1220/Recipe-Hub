@@ -34,12 +34,13 @@ const EditRecipe = function() {
     dispatch,
     getRecipesByUserId,
     updateRecipe,
-    updateIngredient
+    getIngredients,
+    updateIngredient,
   } = useApplicationData();
 
   //current recipe id from the url
   const { id } = useParams();
-  
+
   //used to check if a user's recipe list contains the recipe they are trying to edit
   const findRecipeById = function(recipeId, recipes) {
     const editRecipe = recipes.find(recipe => recipe.id === parseInt(recipeId));
@@ -49,7 +50,7 @@ const EditRecipe = function() {
     }
     return null;
   };
-  
+
   //set the currentRecipe to the recipe with the id matching the url only if the user owns the recipe
   useEffect(() => {
     const getRecipe = async () => {
@@ -57,9 +58,13 @@ const EditRecipe = function() {
       const userInfo = await getRecipesByUserId(userId);
       const userRecipes = userInfo.recipes;
       const ownedRecipe = findRecipeById(id, userRecipes);
-      (ownedRecipe && recipeSummaryView());
+      if (ownedRecipe) {
+        recipeSummaryView();
+        const ingredients = await getIngredients(ownedRecipe.id);
+        setIngredients(ingredients);
+      }
       console.log('AAAA', userRecipes);
-      console.log('🦁',ownedRecipe);
+      console.log('🦁', ownedRecipe);
       setRecipe(ownedRecipe);
     };
     getRecipe();
