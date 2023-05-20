@@ -49,12 +49,16 @@ const someIngredients = [
 ];
 
 export default function RecipeEditModeProvider(props) {
-  const [recipeEditMode, setRecipeEditMode] = useState('SUMMARY');
+  const [recipeEditMode, setRecipeEditMode] = useState('LOCKED');
   const [currentRecipe, setCurrentRecipe] = useState(someRecipe);
   const [currentIngredients, setCurrentIngredients] = useState(someIngredients);
 
 
 //functions to change viewMode
+
+  const recipeLockedView = function() {
+    setRecipeEditMode('LOCKED');
+  };
 
   const recipeSummaryView = function() {
     setRecipeEditMode('SUMMARY');
@@ -117,6 +121,7 @@ export default function RecipeEditModeProvider(props) {
 //export functions and states
   const providerData = {
     recipeEditMode,
+    recipeLockedView,
     recipeSummaryView,
     recipeIngredientsView,
     recipeDirectionsView,

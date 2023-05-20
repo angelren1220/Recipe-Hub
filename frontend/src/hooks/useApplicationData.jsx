@@ -104,13 +104,14 @@ const useApplicationData = () => {
     if (!userId) {
       userId = 1;
     }
-    axios.get(`/api/users/${userId}`)
+    return axios.get(`/api/users/${userId}`)
       .then((response) => {
         // console.log("🙈", response.data);
         dispatch({
           type: SET_RECIPES,
           recipes: response.data.recipes
         });
+        return response.data;
       })
       .catch((error) => {
 
@@ -222,7 +223,7 @@ const useApplicationData = () => {
   const updateRecipe = (id, recipe) => {
     axios.put(`/api/recipes/${id}`, { recipe })
       .then((response) => {
-        console.log(response);
+        window.location = `/recipes/${response.data.id}`;
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
