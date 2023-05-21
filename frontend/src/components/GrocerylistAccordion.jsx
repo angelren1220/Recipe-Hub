@@ -46,22 +46,30 @@ const GrocerylistAccordion = function(props) {
 
   return (
     <article className="grocerylist-accordions-wrapper">
-      {state.grocerylists.map((item, i) => (
+      {state.grocerylists.map((grocerylist, i) => (
         <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} key={i} onClick={(event) => toggle(i, event)}>
 
           <div className="banner">
-            <h1>{item.name}</h1>
+            <h1>{grocerylist.name}</h1>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
             </div>
 
           </div>
 
-          <div className={selected.includes(item.id) ? 'content show' : 'content'}>
-
+          <div className={selected.includes(grocerylist.id) ? 'content show' : 'content'}>
+            <div className="items-list">
+              <ul>
+                {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
+                  <li key={itemName}>
+                    <strong>{itemName}:</strong> {itemData.quantity} {itemData.unit}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="control-buttons">
-              <button onClick={(event) => handleDelete(item.id, event)}>Delete Grocerylist</button>
-              <Link to={`/edit/${item.id}`}>
+              <button onClick={(event) => handleDelete(grocerylist.id, event)}>Delete Grocerylist</button>
+              <Link to={`/edit/${grocerylist.id}`}>
                 <button>Edit Grocerylist</button>
               </Link>
             </div>
