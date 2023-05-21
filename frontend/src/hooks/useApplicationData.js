@@ -72,7 +72,7 @@ const useApplicationData = () => {
           type: SET_RECIPE,
           recipe: response.data.recipe
         });
-        console.log("🙈", response.data.recipe);
+        // console.log("🙈", response.data.recipe);
       })
       .catch((error) => {
 

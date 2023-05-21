@@ -11,7 +11,8 @@ const Recipe = function(props) {
     state,
     getRecipeById,
     getIngredients,
-    deleteRecipe
+    deleteRecipe,
+    createGrocerylist
   } = useApplicationData();
 
   useEffect(() => {
@@ -24,6 +25,16 @@ const Recipe = function(props) {
   const handleDelete = (id) => {
     deleteRecipe(id);
     window.location = "/recipes";
+  };
+
+  const handleAddGrocerylist = () => {
+    const items = {};
+    ingredients.map((ingredient) => {
+      items[ingredient.name] = {quantity: ingredient.quantity, units: ingredient.units};
+    });
+
+    const grocerylist = { name: recipe.name, user_id: userId, items: items };
+    createGrocerylist(grocerylist);
   };
 
   if (!recipe || !recipe.directions) {
@@ -42,6 +53,11 @@ const Recipe = function(props) {
           {ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
         </ul>
         <ul>
+
+          {userId && <div className="control-buttons">
+            <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
+          </div>}
+
           <li>Estimate cooktime: {recipe.cooktime_minutes} min</li>
           {recipe.is_vegetarian && <li>Vegetarian</li>}
           {recipe.is_vegan && <li>Vegan</li>}

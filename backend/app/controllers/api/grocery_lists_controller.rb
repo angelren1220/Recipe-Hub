@@ -15,7 +15,7 @@ class Api::GroceryListsController < ApplicationController
 
   # POST /grocerylists
   def create
-    @grocerylist = Recipe.new(grocerylist_params)
+    @grocerylist = GroceryList.new(grocerylist_params)
 
     if @grocerylist.save
       render json: @grocerylist, status: :created
