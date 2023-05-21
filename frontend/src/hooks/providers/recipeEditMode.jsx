@@ -9,7 +9,7 @@ export default function RecipeEditModeProvider(props) {
   const [currentIngredients, setCurrentIngredients] = useState([]);
 
 
-//functions to change viewMode
+  //functions to change viewMode
 
   const recipeLockedView = function() {
     setRecipeEditMode('LOCKED');
@@ -27,11 +27,11 @@ export default function RecipeEditModeProvider(props) {
     setRecipeEditMode('DIRECTIONS');
   };
 
-//functions to change recipe
+  //functions to change recipe
 
   const setRecipe = function(recipe) {
     setCurrentRecipe(recipe);
-  }
+  };
 
   const setRecipeName = function(name) {
     setCurrentRecipe({ ...currentRecipe, name });
@@ -42,7 +42,7 @@ export default function RecipeEditModeProvider(props) {
   };
 
   const setRecipeCooktime = function(cooktime) {
-    setCurrentRecipe({ ...currentRecipe,  cooktime_minutes: cooktime });
+    setCurrentRecipe({ ...currentRecipe, cooktime_minutes: cooktime });
   };
 
   const setRecipeImage = function(image) {
@@ -50,30 +50,36 @@ export default function RecipeEditModeProvider(props) {
   };
   //for a given flag with boolean value it will toggle the value, only if the flag already exists in the object
   const setRecipeFlag = function(flag, booleanValue) {
-    setCurrentRecipe({ ...currentRecipe, [flag]: booleanValue})
-  }
+    setCurrentRecipe({ ...currentRecipe, [flag]: booleanValue });
+  };
 
   const setRecipeDirection = function(index, direction) {
-    let updatedDirections = currentRecipe.directions
-    updatedDirections[index] = direction
-    setCurrentRecipe({...currentRecipe, directions: updatedDirections})
-  }
+    let updatedDirections = currentRecipe.directions;
+    updatedDirections[index] = direction;
+    setCurrentRecipe({ ...currentRecipe, directions: updatedDirections });
+  };
 
-//functions to change ingredients
+  const newRecipeDirection = function() {
+    let updatedDirections = currentRecipe.directions;
+    updatedDirections.push('');
+    setCurrentRecipe({ ...currentRecipe, directions: updatedDirections });
+  };
+
+  //functions to change ingredients
   //updates ingredient in the currentIngredients state by matching id
 
   const setIngredients = function(ingredients) {
     setCurrentIngredients(ingredients);
-  }
+  };
 
   const setIngredient = function(ingredient) {
-    const ingredientIndex = currentIngredients.findIndex(i => i.id === ingredient.id)
-    let updatedIngredients = currentIngredients
-    updatedIngredients[ingredientIndex] = ingredient
-    setCurrentIngredients(updatedIngredients)
-  }
+    const ingredientIndex = currentIngredients.findIndex(i => i.id === ingredient.id);
+    let updatedIngredients = currentIngredients;
+    updatedIngredients[ingredientIndex] = ingredient;
+    setCurrentIngredients(updatedIngredients);
+  };
 
-//export functions and states
+  //export functions and states
   const providerData = {
     recipeEditMode,
     recipeLockedView,
@@ -84,6 +90,7 @@ export default function RecipeEditModeProvider(props) {
     setRecipe,
     setRecipeName,
     setRecipeDescription,
+    newRecipeDirection,
     setRecipeCooktime,
     setRecipeImage,
     setRecipeFlag,
