@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import DescriptionEditor from "./DescriptionEditor";
 import "../styles/book_accordion.scss";
 
-const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, updateBookDescription }) => {
+const BookAccordion = ({
+  books,
+  deleteBook,
+  bookmarks,
+  deleteBookmark,
+  updateBookDescription,
+}) => {
   const [selected, setSelected] = useState([]);
   const [booksState, setBooks] = useState(books); // Declare books state
   const [editingBookId, setEditingBookId] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false); // Loading state
 
-
   useEffect(() => {
-    setBooks(books); // Update books state when the prop changes
+    setBooks(books);
   }, [books]);
 
   const toggle = (id, event) => {
@@ -30,7 +35,7 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, updateBoo
       if (bookmark) {
         deleteBookmark(bookmark.id);
         console.log('🐷 deleted bookmark!');
-  
+
         // Update the books state by filtering out the deleted book
         const updatedBooks = booksState.filter((book) => book.id !== id);
         setBooks(updatedBooks);
@@ -55,17 +60,18 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, updateBoo
         .then((response) => {
           console.log('📝 Updated description:', editedDescription);
   
+          // Update the books state with the edited description
+          setBooks((prevBooks) =>
+            prevBooks.map((book) => {
+              if (book.id === id) {
+                return { ...book, description: editedDescription };
+              }
+              return book;
+            })
+          );
+  
           // Reset the editing state
           setEditingBookId(null);
-  
-          // Update the books state with the edited description
-          const updatedBooks = booksState.map((book) => {
-            if (book.id === id) {
-              return { ...book, description: editedDescription };
-            }
-            return book;
-          });
-          setBooks(updatedBooks);
         })
         .catch((error) => {
           console.error('Error updating description:', error);
@@ -83,10 +89,10 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, updateBoo
 
   return (
     <article className="book-accordions-wrapper">
-      {booksState.map((item, i) => (
+      {booksState.map((item) => (
         <div
           className={selected.includes(item.id) ? 'book-accordion selected' : 'book-accordion'}
-          key={i}
+          key={item.id}
           onClick={(event) => toggle(item.id, event)}
         >
           <div className="banner">

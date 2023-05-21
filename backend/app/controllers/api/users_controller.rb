@@ -17,7 +17,7 @@ class Api::UsersController < ApplicationController
       bookmarked_book.attributes.merge(book: book)
     end
   
-    render json: { user: user, recipes: @recipes, books: @books, bookmarked_books: bookmarked_books_with_books }
+    render json: { user: user, recipes: @recipes, books: @books.order(:id), bookmarked_books: bookmarked_books_with_books }
   end
 
   # POST /users
