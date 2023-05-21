@@ -13,7 +13,6 @@ const BookAccordion = ({
   const [selected, setSelected] = useState([]);
   const [booksState, setBooks] = useState(books); // Declare books state
   const [editingBookId, setEditingBookId] = useState(null);
-  const [isUpdating, setIsUpdating] = useState(false); // Loading state
 
   useEffect(() => {
     setBooks(books);
@@ -52,36 +51,27 @@ const BookAccordion = ({
   };
 
   const handleSaveDescription = (id, editedDescription) => {
-    setIsUpdating(true); // Set loading state
-  
-    // Call the updateBookDescription function from the parent component after a delay
-    setTimeout(() => {
-      updateBookDescription(id, editedDescription)
-        .then((response) => {
-          console.log('📝 Updated description:', editedDescription);
-  
-          // Update the books state with the edited description
-          setBooks((prevBooks) =>
-            prevBooks.map((book) => {
-              if (book.id === id) {
-                return { ...book, description: editedDescription };
-              }
-              return book;
-            })
-          );
-  
-          // Reset the editing state
-          setEditingBookId(null);
-        })
-        .catch((error) => {
-          console.error('Error updating description:', error);
-        })
-        .finally(() => {
-          setIsUpdating(false); // Reset loading state
-        });
-    }, 500); // Delay of 500 milliseconds
-  };
+    updateBookDescription(id, editedDescription)
+      .then((response) => {
+        console.log('📝 Updated description:', editedDescription);
 
+        // Update the books state with the edited description
+        setBooks((prevBooks) =>
+          prevBooks.map((book) => {
+            if (book.id === id) {
+              return { ...book, description: editedDescription };
+            }
+            return book;
+          })
+        );
+
+        // Reset the editing state
+        setEditingBookId(null);
+      })
+      .catch((error) => {
+        console.error('Error updating description:', error);
+      });
+  };
 
   const handleCancelDescription = () => {
     // Reset the editing state without saving
@@ -137,7 +127,6 @@ const BookAccordion = ({
           )}
         </div>
       ))}
-      {isUpdating && <div className="updating-state">Updating...</div>}
     </article>
   );
 };

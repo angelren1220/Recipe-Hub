@@ -10,6 +10,7 @@ const DescriptionEditor = ({ initialDescription, onSave, onCancel }) => {
     const textarea = textareaRef.current;
     textarea.focus();
     textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+    adjustTextareaHeight();
   }, []);
 
   const handleSave = async (event) => {
