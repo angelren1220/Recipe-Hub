@@ -162,6 +162,20 @@ const useApplicationData = () => {
       });
   };
 
+  const getBookByBookID = (bookId) => {
+    if (!bookId) {
+      return Promise.resolve(); // Return a resolved promise if userId is not available
+    }
+    return axios.get(`/api/books/${bookId}`)
+      .then((response) => {
+        console.log('🎄',response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        // Handle error if needed
+      });
+  };
+
 
   const getMessagesByUserID = (userId) => {
     if (!userId) {
@@ -495,6 +509,7 @@ return {
   getRecipeById,
   getRecipesByUserId,
   getBooksByUserID,
+  getBookByBookID,
   getMessagesByUserID,
   createUser,
   loginUser,

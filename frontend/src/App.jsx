@@ -16,6 +16,7 @@ import EditRecipe from './components/pages/EditRecipe';
 
 import Books from './components/pages/Books';
 import NewBook from './components/pages/NewBook';
+import BookRecipes from './components/pages/BookRecipes';
 
 import Explore from './components/pages/Explore';
 import Search from './components/pages/Search';
@@ -61,7 +62,7 @@ const App = function() {
 
             <Route path='/books'>
               <Route index element={<Books/>}/>
-              <Route path=':id' element={<RecipesList/>}/>
+              <Route path=':id' element={<BookRecipes />}/>
               <Route path='new' element={<NewBook/>}/>
             </Route>
 
