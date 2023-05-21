@@ -6,14 +6,23 @@ const DirectionForm = function(props) {
   const {
     currentRecipe,
     setRecipeDirection,
+    setRecipeDirections,
   } = useContext(recipeEditContext);
 
+  const handleDelete = function() {
+    const updatedDirections = [...currentRecipe.directions];
+    console.log('🐿',updatedDirections);
+    updatedDirections.splice(props.index, 1);
+    console.log('🦔',updatedDirections);
+    setRecipeDirections(updatedDirections);
+  };
+
   return (
-    <form
-      autoComplete="off"
-      onSubmit={event => event.preventDefault()}
-    >
-      <>
+    <>
+      <form
+        autoComplete="off"
+        onSubmit={event => event.preventDefault()}
+      >
         <label htmlFor={`direction${props.index}`} >{"Step " + (props.index + 1)}:</label>
         <input
           id={`direction${props.index}`}
@@ -24,8 +33,9 @@ const DirectionForm = function(props) {
           placeholder={currentRecipe.directions[props.index]}
           required
         />
-      </>
-    </form>
+      </form>
+      <button onClick={handleDelete}>{`Delete Step ${props.index + 1}`}</button>
+    </>
 
   );
 };

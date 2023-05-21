@@ -53,6 +53,11 @@ export default function RecipeEditModeProvider(props) {
     setCurrentRecipe({ ...currentRecipe, [flag]: booleanValue });
   };
 
+  const setRecipeDirections = function(directions) {
+    setCurrentRecipe({ ...currentRecipe, directions: directions });
+  };
+
+
   const setRecipeDirection = function(index, direction) {
     let updatedDirections = currentRecipe.directions;
     updatedDirections[index] = direction;
@@ -102,6 +107,7 @@ export default function RecipeEditModeProvider(props) {
     setRecipeImage,
     setRecipeFlag,
     setRecipeDirection,
+    setRecipeDirections,
     currentIngredients,
     setIngredient,
     setIngredients,
