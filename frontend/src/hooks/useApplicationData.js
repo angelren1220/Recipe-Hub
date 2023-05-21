@@ -203,7 +203,7 @@ const useApplicationData = () => {
   };
 
   const updateBookDescription = (id, description) => {
-    axios.put(`/api/books/${id}`, { description })
+    return axios.put(`/api/books/${id}`, { description })
       .then((response) => {
         console.log(response);
       })

@@ -3,33 +3,34 @@ import { Link } from "react-router-dom";
 import DescriptionEditor from "./DescriptionEditor";
 import "../styles/book_accordion.scss";
 
-const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark }) => {
+const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, updateBookDescription }) => {
   const [selected, setSelected] = useState([]);
   const [booksState, setBooks] = useState(books); // Declare books state
   const [editingBookId, setEditingBookId] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false); // Loading state
+
 
   useEffect(() => {
     setBooks(books); // Update books state when the prop changes
   }, [books]);
 
-  const toggle = (i, event) => {
+  const toggle = (id, event) => {
     event.stopPropagation();
-    const selectedBookId = booksState[i].id;
-    if (selected.includes(selectedBookId)) {
-      setSelected(selected.filter((id) => id !== selectedBookId));
+    if (selected.includes(id)) {
+      setSelected(selected.filter((selectedId) => selectedId !== id));
     } else {
-      setSelected([...selected, selectedBookId]);
+      setSelected([...selected, id]);
     }
   };
 
   const handleDelete = (id, event) => {
     event.stopPropagation();
     if (bookmarks && selected.includes(id)) {
-      const bookmark = bookmarks.find((bookmark) => bookmark.book.id === id);
+      const bookmark = bookmarks.find((bookmark) => bookmark.book.id === id); // Use id instead of item.id
       if (bookmark) {
         deleteBookmark(bookmark.id);
         console.log('🐷 deleted bookmark!');
-
+  
         // Update the books state by filtering out the deleted book
         const updatedBooks = booksState.filter((book) => book.id !== id);
         setBooks(updatedBooks);
@@ -46,20 +47,33 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark }) => {
   };
 
   const handleSaveDescription = (id, editedDescription) => {
-    // Handle saving the edited description
-    console.log('📝 Saving edited description:', editedDescription);
-
-    // Reset the editing state
-    setEditingBookId(null);
-
-    // Update the books state with the edited description
-    const updatedBooks = booksState.map((book) => {
-      if (book.id === id) {
-        return { ...book, description: editedDescription };
-      }
-      return book;
-    });
-    setBooks(updatedBooks);
+    setIsUpdating(true); // Set loading state
+  
+    // Call the updateBookDescription function from the parent component after a delay
+    setTimeout(() => {
+      updateBookDescription(id, editedDescription)
+        .then((response) => {
+          console.log('📝 Updated description:', editedDescription);
+  
+          // Reset the editing state
+          setEditingBookId(null);
+  
+          // Update the books state with the edited description
+          const updatedBooks = booksState.map((book) => {
+            if (book.id === id) {
+              return { ...book, description: editedDescription };
+            }
+            return book;
+          });
+          setBooks(updatedBooks);
+        })
+        .catch((error) => {
+          console.error('Error updating description:', error);
+        })
+        .finally(() => {
+          setIsUpdating(false); // Reset loading state
+        });
+    }, 500); // Delay of 500 milliseconds
   };
 
   const handleCancelDescription = () => {
@@ -71,9 +85,9 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark }) => {
     <article className="book-accordions-wrapper">
       {booksState.map((item, i) => (
         <div
-          className={selected.some((index) => index === i) ? 'book-accordion selected' : 'book-accordion'}
+          className={selected.includes(item.id) ? 'book-accordion selected' : 'book-accordion'}
           key={i}
-          onClick={(event) => toggle(i, event)}
+          onClick={(event) => toggle(item.id, event)}
         >
           <div className="banner">
             <div className="banner-left">
@@ -83,11 +97,11 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark }) => {
               <h2>By: {item.first_name}</h2>
             </div>
             <div className="banner-right">
-              <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
+              <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
             </div>
           </div>
           {selected.includes(item.id) && (
-            <div className="content show">
+            <div className="book-content show">
               {editingBookId === item.id ? (
                 <DescriptionEditor
                   initialDescription={item.description}
@@ -116,6 +130,7 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark }) => {
           )}
         </div>
       ))}
+      {isUpdating && <div className="updating-state">Updating...</div>}
     </article>
   );
 };
