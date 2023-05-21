@@ -9,7 +9,8 @@ import dataReducer, {
   SET_USER,
   SET_RECIPE,
   SET_BOOKS,
-  SET_GROCERYLISTS
+  SET_GROCERYLISTS,
+  SET_BOOKMARKS
 } from './dataReducer';
 
 import axios from 'axios';
@@ -259,11 +260,12 @@ const useApplicationData = () => {
   const getGrocerylistsByUserId = (userId) => {
     axios.get(`/api/users/${userId}`)
     .then((response) => {
-      // console.log("🙈", response.data);
       dispatch({
         type: SET_GROCERYLISTS,
-        recipes: response.data.grocerylists
+        grocerylists: response.data.grocerylists
       });
+      console.log("🙈", response.data.grocerylists);
+
     })
     .catch((error) => {
     
