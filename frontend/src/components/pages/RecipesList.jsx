@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import RecipeAccordion from "../RecipeAccordion";
 import Loop from "../LoopScroll";
 import useApplicationData from "../../hooks/useApplicationData";
+import { Link } from "react-router-dom";
 
 const RecipesList = function(props) {
 
@@ -13,7 +14,7 @@ const RecipesList = function(props) {
 
   const userId = localStorage.getItem('userId');
   useEffect(() => {
-    if (userId){
+    if (userId) {
       getRecipesByUserId(userId);
     } else {
       getAllRecipes();
@@ -22,7 +23,8 @@ const RecipesList = function(props) {
 
   return (
     <article className="recipes-list">
-      <h1>A template to show recipes here</h1>
+      {userId ? <h1>User Recipes</h1> : <h1>All Recipes</h1>}
+      {userId && <Link to={'/recipes/new'}><button>Create a Recipe</button></Link>}
       <RecipeAccordion recipes={state.recipes} userId={userId}/>
     </article>
   );
