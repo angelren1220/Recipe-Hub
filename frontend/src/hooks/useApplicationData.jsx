@@ -48,13 +48,14 @@ const useApplicationData = () => {
   };
 
   const getIngredients = (recipeId) => {
-    axios.get(`/api/recipes/${recipeId}`)
+    return axios.get(`/api/recipes/${recipeId}`)
       .then((response) => {
         // console.log("🙈", response.data);
         dispatch({
           type: SET_INGREDIENTS,
           ingredients: response.data.ingredients
         });
+        return response.data.ingredients;
       })
       .catch((error) => {
 
@@ -73,10 +74,10 @@ const useApplicationData = () => {
       });
   };
 
-  const createIngredient = (ingredient) => {
-    axios.post("/api/ingredients", { ingredient })
+  const createIngredient = async(ingredient) => {
+    return axios.post("/api/ingredients", { ingredient })
       .then((response) => {
-        console.log(response);
+        console.log('🦜',response);
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)

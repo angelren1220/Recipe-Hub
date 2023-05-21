@@ -53,23 +53,27 @@ const EditRecipe = function() {
 
   //set the currentRecipe to the recipe with the id matching the url only if the user owns the recipe
   useEffect(() => {
-    const getRecipe = async () => {
+    const getRecipe = async() => {
       const userId = await localStorage.getItem('userId');
       const userInfo = await getRecipesByUserId(userId);
       const userRecipes = userInfo.recipes;
       const ownedRecipe = findRecipeById(id, userRecipes);
+      
       if (ownedRecipe) {
-        recipeSummaryView();
         const ingredients = await getIngredients(ownedRecipe.id);
+        recipeSummaryView();
         setIngredients(ingredients);
       }
       console.log('AAAA', userRecipes);
       console.log('🦁', ownedRecipe);
       setRecipe(ownedRecipe);
     };
-    getRecipe();
+    const fetchData = async () => {
+      await getRecipe();
+    };
+    fetchData();
   }, [id]);
-
+  
   //submit recipe and ingredients to the db
   const handleSubmit = function() {
     updateRecipe(currentRecipe.id, currentRecipe);
