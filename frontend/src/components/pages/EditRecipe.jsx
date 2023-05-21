@@ -35,7 +35,6 @@ const EditRecipe = function() {
   //used to check if a user's recipe list contains the recipe they are trying to edit
   const findRecipeById = function(recipeId, recipes) {
     const editRecipe = recipes.find(recipe => recipe.id === parseInt(recipeId));
-    console.log('🐬', recipes, recipeId);
     if (editRecipe) {
       return editRecipe;
     }
@@ -55,8 +54,6 @@ const EditRecipe = function() {
         recipeSummaryView();
         setIngredients(ingredients);
       }
-      console.log('AAAA', userRecipes);
-      console.log('🦁', ownedRecipe);
       setRecipe(ownedRecipe);
     };
     const fetchData = async () => {

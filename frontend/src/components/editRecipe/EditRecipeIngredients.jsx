@@ -17,19 +17,15 @@ const EditRecipeIngredients = function(props) {
   } = useContext(recipeEditContext);
 
   const addIngredient = function() {
-    console.log('🍍ADD INGREDIENT🍍');
     const newIngredient = {
       recipe_id: currentRecipe.id,
       name: "Ingredient",
       quantity: 1,
       units: "Units"
     };
-    console.log('🦑', newIngredient);
     createIngredient(newIngredient);
     setIngredients([...currentIngredients, newIngredient]);
   };
-
-  console.log(currentIngredients);
 
   return (
     <>

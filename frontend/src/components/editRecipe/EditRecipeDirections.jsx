@@ -20,7 +20,6 @@ const EditRecipeDirections = function() {
       <h1>Edit Recipe Directions</h1>
       <ul>
         {currentRecipe && currentRecipe.directions.map((direction, index) => {
-          console.log('🐲', direction, index);
           return (
             <li key={`direction${index}`}>
               <DirectionForm index={index} />

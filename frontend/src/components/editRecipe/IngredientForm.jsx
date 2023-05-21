@@ -11,7 +11,6 @@ const IngredientForm = function(props) {
   
   //local state used in form used to keep track of a single ingredient
   const [currentIngredient, setCurrentIngredient] = useState(props.ingredient);
-  console.log('🦧', currentIngredient);
 
   const handleIngredientChange = function(key, value) {
     const updatedIngredient = { ...currentIngredient, [key]: value };
