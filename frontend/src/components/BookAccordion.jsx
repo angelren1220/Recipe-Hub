@@ -82,6 +82,7 @@ const BookAccordion = ({
     }, 500); // Delay of 500 milliseconds
   };
 
+
   const handleCancelDescription = () => {
     // Reset the editing state without saving
     setEditingBookId(null);
