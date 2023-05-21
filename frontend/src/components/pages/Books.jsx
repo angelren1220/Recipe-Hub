@@ -7,7 +7,8 @@ const Books = function(props) {
     state,
     dispatch,
     getBooksByUserID,
-    deleteBook
+    deleteBook,
+    deleteBookmark
   } = useApplicationData();
 
   useEffect(() => {
@@ -21,23 +22,22 @@ const Books = function(props) {
     setShowBookmarks((prevShowBookmarks) => !prevShowBookmarks);
   };
 
-  // Extract bookmarked books from state.bookmarks
-  const bookmarkedBooks = state.bookmarks.map((bookmark) => bookmark.book);
+  // Extract bookmarked books from state.bookmarks if it is defined
+  const bookmarkedBooks = state.bookmarks?.map((bookmark) => bookmark.book) || [];
 
   return (
     <article className="books">
-      <h1>All of current user's books go here</h1>
+      <h1>All of the current user's books go here</h1>
       <button onClick={handleBookmarksToggle}>Bookmarks</button>
       {showBookmarks ? (
         <BookAccordion
           books={bookmarkedBooks}
           bookmarks={state.bookmarks}
-          deleteBook={deleteBook}
+          deleteBookmark={deleteBookmark}
         />
       ) : (
         <BookAccordion
           books={state.books}
-          bookmarks={state.bookmarks}
           deleteBook={deleteBook}
         />
       )}

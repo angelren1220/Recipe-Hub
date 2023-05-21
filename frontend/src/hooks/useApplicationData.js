@@ -231,6 +231,20 @@ const useApplicationData = () => {
       });
   };
 
+  const deleteBookmark = (id) => {
+    axios.delete(`/api/bookmarked_books/${id}`)
+      .then((response) => {
+        const updatedBookmarks = state.bookmarks.filter(bookmark => bookmark.id !== id);
+        dispatch({
+          type: SET_BOOKMARKS,
+          bookmarks: updatedBookmarks
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
   return {
     state,
     dispatch,
@@ -245,7 +259,8 @@ const useApplicationData = () => {
     createRecipe,
     updateRecipe,
     deleteRecipe,
-    deleteBook
+    deleteBook,
+    deleteBookmark
   };
 };
 
