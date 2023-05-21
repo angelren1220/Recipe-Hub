@@ -8,7 +8,8 @@ import dataReducer, {
   SET_RECIPES,
   SET_USER,
   SET_RECIPE,
-  SET_BOOKS
+  SET_BOOKS,
+  SET_GROCERYLISTS
 } from './dataReducer';
 
 import axios from 'axios';
@@ -23,6 +24,7 @@ const useApplicationData = () => {
     ingredients: [],
     books: [],
     bookmarks: [],
+    grocerylists: [],
     loading: true,
   });
 
@@ -254,6 +256,54 @@ const useApplicationData = () => {
       });
   };
 
+  const getGrocerylistsByUserId = (userId) => {
+    axios.get(`/api/users/${userId}`)
+    .then((response) => {
+      // console.log("🙈", response.data);
+      dispatch({
+        type: SET_GROCERYLISTS,
+        recipes: response.data.grocerylists
+      });
+    })
+    .catch((error) => {
+    
+    });
+  }
+
+  const createGrocerylist = (grocerylist) => {
+    axios.post("/api/grocerylists", { grocerylist })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+
+      });
+  };
+
+  const updateGrocerylist = (id, grocerylist) => {
+    axios.put(`/api/grocerylists/${id}`, { grocerylist })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+
+      });
+  };
+
+  const deleteGrocerylist = (id) => {
+    axios.delete(`/api/grocerylists/${id}`)
+      .then((response) => {
+        const updatedGrocerylists = state.grocerylists.filter(grocerylist => grocerylist.id !== id);
+        dispatch({
+          type: SET_GROCERYLISTS,
+          grocerylists: updatedGrocerylists
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
   return {
     state,
     dispatch,
@@ -270,7 +320,11 @@ const useApplicationData = () => {
     updateBookDescription,
     deleteRecipe,
     deleteBook,
-    deleteBookmark
+    deleteBookmark,
+    getGrocerylistsByUserId,
+    createGrocerylist,
+    updateGrocerylist,
+    deleteGrocerylist
   };
 };
 

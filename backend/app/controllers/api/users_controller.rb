@@ -17,7 +17,7 @@ class Api::UsersController < ApplicationController
       bookmarked_book.attributes.merge(book: book)
     end
   
-    render json: { user: user, recipes: @recipes, books: @books.order(:id), bookmarked_books: bookmarked_books_with_books }
+    render json: { user: user, recipes: @recipes, books: @books.order(:id), bookmarked_books: bookmarked_books_with_books, grocerylists: @grocerylists }
   end
 
   # POST /users
@@ -54,6 +54,7 @@ class Api::UsersController < ApplicationController
       @recipes = @user.recipes
       @books = @user.books
       @bookmarked_books = @user.bookmarked_books
+      @grocerylists = @user.grocery_lists
     end
 
     # Only allow a list of trusted parameters through.
