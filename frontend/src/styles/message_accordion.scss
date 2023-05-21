@@ -1,0 +1,70 @@
+.message-accordion {
+  color: blue;
+  width: 90%;
+  background: rgb(206, 206, 189);
+  padding: 1.5rem;
+  margin: .5rem 0;
+  border-radius: .5rem;
+
+  h1 {
+    font-size: 2rem;
+    text-decoration: underline;
+    color: blue;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  .banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .banner-right {
+      display: flex;
+      gap: 2em;
+      align-items: center;
+
+      .banner-image {
+        max-height: 150px;
+        width: 150px;
+        border-radius: .5rem;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .message-content {
+    height: 0;
+    overflow: hidden;
+    transition: height .5s ease-out;
+
+    &.selected {
+      height: auto;
+      transition: height 0.5s ease-in;
+    }
+  }
+
+  .message-content.show {
+    height: auto;
+    transition: height .5s ease-in;
+  }
+
+  &:hover {
+    background: rgb(163, 163, 163);
+    cursor: pointer;
+  }
+}
+
+.message-accordions-wrapper {
+  .message-accordion {
+    &:nth-child(even) {
+      background-color: #bdac75; // Set the background color for even-indexed accordions
+    }
+
+    &:nth-child(odd) {
+      background-color: #e0aaaa; // Set the background color for odd-indexed accordions
+    }
+  }
+}

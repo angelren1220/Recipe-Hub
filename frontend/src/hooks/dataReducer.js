@@ -3,6 +3,8 @@ export const SET_RECIPE = 'SET_RECIPE';
 export const SET_RECIPES = 'SET_RECIPES';
 export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 export const SET_BOOKS = 'SET_BOOKS';
+export const SET_BOOKMARKS = "SET_BOOKMARKS";
+export const SET_MESSAGES = "SET_MESSAGES";
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 
 const dataReducer = (state, action) => {
@@ -48,6 +50,13 @@ const dataReducer = (state, action) => {
         loading: false
       };
 
+    case SET_MESSAGES:
+      return {
+        ...state,
+        messages: action.messages,
+        loading: false
+      };
+    
     case SET_APPLICATION_DATA:
       return {
         ...state,

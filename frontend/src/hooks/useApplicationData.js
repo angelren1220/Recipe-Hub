@@ -2,13 +2,16 @@ import {
   // useEffect,
   useReducer
 } from 'react';
+
 import dataReducer, {
   // SET_APPLICATION_DATA,
   SET_INGREDIENTS,
   SET_RECIPES,
   SET_USER,
   SET_RECIPE,
-  SET_BOOKS
+  SET_BOOKS,
+  SET_BOOKMARKS,
+  SET_MESSAGES
 } from './dataReducer';
 
 import axios from 'axios';
@@ -23,6 +26,7 @@ const useApplicationData = () => {
     ingredients: [],
     books: [],
     bookmarks: [],
+    messages: [],
     loading: true,
   });
 
@@ -136,18 +140,45 @@ const useApplicationData = () => {
 
   const getBooksByUserID = (userId) => {
     if (!userId) {
-      return;
+      return Promise.resolve(); // Return a resolved promise if userId is not available
     }
-    axios.get(`/api/users/${userId}`)
+    return axios.get(`/api/users/${userId}`)
       .then((response) => {
-        console.log("🙈", response.data);
         dispatch({
           type: SET_BOOKS,
           books: response.data.books,
-          bookmarks: response.data.bookmarked_books
+          bookmarks: response.data.bookmarked_books.map((item) => {
+            return {
+              bookmarked_book: item.bookmarked_book,
+              book: item.book,
+            };
+          })
         });
       })
       .catch((error) => {
+        // Handle error if needed
+      });
+  };
+
+  
+  const getMessagesByUserID = (userId) => {
+    if (!userId) {
+      return Promise.resolve(); // Return a resolved promise if userId is not available
+    }
+    return axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        const filteredMessages = response.data.messages.filter((message) => {
+          return ((userId === message.recipient_id && message.recipient_deleted === false) || (userId === message.sender_id && message.sender_deleted === false));
+        });;
+  
+        dispatch({
+          type: SET_MESSAGES,
+          messages: filteredMessages
+        });
+        console.log("😎 Messages:", filteredMessages); // Add this console.log statement
+      })
+      .catch((error) => {
+        // Handle error if needed
       });
   };
 
@@ -301,6 +332,32 @@ const useApplicationData = () => {
       });
   };
 
+  const deleteMessage = (id, userId, senderId, recipientId) => {
+    const endpoint = `/api/messages/${id}`;
+    const data = {};
+  
+    // Determine which user is invoking the function
+    if (userId === senderId) {
+      data.sender_deleted = true;
+    } else if (userId === recipientId) {
+      data.recipient_deleted = true;
+    }
+  
+    axios
+      .put(endpoint, { data })
+      .then((response) => {
+        // Update state
+        const updatedMessages = state.messages.filter((message) => message.id !== id);
+        dispatch({
+          type: SET_MESSAGES,
+          messages: updatedMessages,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        return;
+      });
+  };
 
   return {
     state,
@@ -313,6 +370,7 @@ const useApplicationData = () => {
     getRecipeById,
     getRecipesByUserId,
     getBooksByUserID,
+    getMessagesByUserID,
     createUser,
     loginUser,
     logoutUser,
@@ -321,7 +379,8 @@ const useApplicationData = () => {
     deleteRecipe,
     deleteBook,
     updateBookDescription,
-    deleteBookmark
+    deleteBookmark,
+    deleteMessage
   };
 };
 

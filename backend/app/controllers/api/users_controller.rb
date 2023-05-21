@@ -10,14 +10,21 @@ class Api::UsersController < ApplicationController
 
   # GET /users/1
   def show
-    # appends book information with bookmark
+
+    #append book to bookmark_books
     user = User.find(params[:id])
     bookmarked_books_with_books = user.bookmarked_books.map do |bookmarked_book|
       book = Book.find_by(id: bookmarked_book.book_id)
       bookmarked_book.attributes.merge(book: book)
     end
   
-    render json: { user: user, recipes: @recipes, books: @books.order(:id), bookmarked_books: bookmarked_books_with_books }
+    render json: {
+      user: user,
+      recipes: @recipes,
+      books: @books.order(:id),
+      bookmarked_books: bookmarked_books_with_books,
+      messages: @messages
+    }
   end
 
   # POST /users
@@ -54,6 +61,7 @@ class Api::UsersController < ApplicationController
       @recipes = @user.recipes
       @books = @user.books
       @bookmarked_books = @user.bookmarked_books
+      @messages = Message.where("recipient_id = :user_id OR sender_id = :user_id", user_id: @user.id)
     end
 
     # Only allow a list of trusted parameters through.
