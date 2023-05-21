@@ -79,6 +79,13 @@ export default function RecipeEditModeProvider(props) {
     setCurrentIngredients(updatedIngredients);
   };
 
+  const removeIngredient = function(ingredient) {
+    const ingredientIndex = currentIngredients.findIndex(i => i.id === ingredient.id);
+    let updatedIngredients = currentIngredients;
+    updatedIngredients.splice(ingredientIndex, 1);
+    setCurrentIngredients(updatedIngredients);
+  };
+
   //export functions and states
   const providerData = {
     recipeEditMode,
@@ -98,6 +105,7 @@ export default function RecipeEditModeProvider(props) {
     currentIngredients,
     setIngredient,
     setIngredients,
+    removeIngredient,
   };
 
   return (

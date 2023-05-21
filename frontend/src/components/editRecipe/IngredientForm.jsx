@@ -6,6 +6,7 @@ const IngredientForm = function(props) {
   const {
     currentIngredients,
     setIngredient,
+    removeIngredient,
   } = useContext(recipeEditContext);
 
   const [currentIngredient, setCurrentIngredient] = useState(props.ingredient);
@@ -13,12 +14,20 @@ const IngredientForm = function(props) {
 
   const handleIngredientChange = function(key, value) {
     setCurrentIngredient({ ...currentIngredient, [key]: value });
-    setIngredient({ ...currentIngredients, currentIngredient});
+    setIngredient({ ...currentIngredients, currentIngredient });
+  };
+
+  const handleIngredientDelete = function() {
+    setCurrentIngredient({...currentIngredient, delete: true});
+  };
+
+  const handleIngredientUndoDelete = function() {
+    setCurrentIngredient({...currentIngredient, delete: false})
   };
 
   return (
     <>
-      {currentIngredient && <>
+      {!currentIngredient.delete && <>
         <h4>{currentIngredient.name + " " + currentIngredient.quantity + " " + currentIngredient.units}</h4>
 
         <form
@@ -57,7 +66,9 @@ const IngredientForm = function(props) {
             required
           />
         </form>
+        <button onClick={handleIngredientDelete}>{`Remove ${currentIngredient.name}`}</button>
       </>}
+      {currentIngredient.delete && <button onClick={handleIngredientUndoDelete}>{`Undo Remove ${currentIngredient.name}`}</button>}
     </>
   );
 };

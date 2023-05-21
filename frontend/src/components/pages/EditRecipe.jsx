@@ -12,20 +12,10 @@ import EditRecipeDirections from "../editRecipe/EditRecipeDirections";
 const EditRecipe = function() {
   const {
     recipeEditMode,
-    recipeLockedView,
     recipeSummaryView,
-    recipeIngredientsView,
-    recipeDirectionsView,
     currentRecipe,
     setRecipe,
-    setRecipeName,
-    setRecipeDescription,
-    setRecipeCooktime,
-    setRecipeImage,
-    setRecipeFlag,
-    setRecipeDirection,
     currentIngredients,
-    setIngredient,
     setIngredients,
   } = useContext(recipeEditContext);
 
