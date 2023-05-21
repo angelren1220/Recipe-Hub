@@ -16,9 +16,9 @@ class Api::IngredientsController < ApplicationController
   # POST /ingredients
   def create
     @ingredient = Ingredient.new(ingredient_params)
-
+  
     if @ingredient.save
-      render json: @ingredient, status: :created, location: @ingredient
+      render json: @ingredient, status: :created, location: api_ingredient_url(@ingredient)
     else
       render json: @ingredient.errors, status: :unprocessable_entity
     end
