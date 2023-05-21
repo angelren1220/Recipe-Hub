@@ -72,7 +72,6 @@ const App = function() {
             </Route>
             
             <Route path='/profile'>
-              <Route index element={<Profile/>}/>
               <Route path=':id' element={<Profile/>}/>
             </Route>
 

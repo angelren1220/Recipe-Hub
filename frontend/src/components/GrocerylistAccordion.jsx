@@ -1,15 +1,17 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
+
 import SendLinkForm from "./SendLinkForm";
+import Popup from "./Popup";
+import CreateGrocerylist from "./CreateGroceryList";
 
 const GrocerylistAccordion = function(props) {
 
   const {
     state,
     getGrocerylistsByUserId,
-    createGrocerylist,
     updateGrocerylist,
     deleteGrocerylist,
     createMessage
@@ -18,12 +20,12 @@ const GrocerylistAccordion = function(props) {
   const [selected, setSelected] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
-  const [grocerylistName, setGrocerylistName] = useState('');
+
   const [quantity, setQuantity] = useState('');
   const [units, setUnits] = useState('');
   const [isItemSaved, setIsItemSaved] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [showGroceryListPopup, setShowGroceryListPopup] = useState(false);
+
   const [selectedGroceryListForPopup, setSelectedGroceryListForPopup] = useState(null);
 
   const userId = localStorage.getItem('userId');
@@ -88,6 +90,7 @@ const GrocerylistAccordion = function(props) {
     setQuantity('');
     setUnits('');
     setIsItemSaved(true);
+    setShowForm(false);
   };
 
   const handleCancelItem = (event) => {
@@ -96,7 +99,7 @@ const GrocerylistAccordion = function(props) {
     setQuantity('');
     setUnits('');
     setShowForm(false);
-    setShowPopup(false);
+
   };
 
   const handleDeleteItem = (itemName, grocerylist, event) => {
@@ -123,25 +126,6 @@ const GrocerylistAccordion = function(props) {
     event.stopPropagation();
   };
 
-  const handleAddNewGrocerylist = (event) => {
-    event.stopPropagation();
-    setShowGroceryListPopup(true);
-  };
-
-  const handleSaveList = (userId, event) => {
-    event.stopPropagation();
-
-    const newGrocerylist = { user_id: userId, name: grocerylistName, items: {} };
-    createGrocerylist(newGrocerylist);
-
-    setShowForm(false);
-  };
-
-  const handleCancelList = (event) => {
-    event.stopPropagation();
-    setGrocerylistName('');
-    setShowGroceryListPopup(false);
-  };
 
   return (
     <article className="grocerylist-accordions-wrapper">
@@ -167,7 +151,9 @@ const GrocerylistAccordion = function(props) {
               <h1>{grocerylist.name}</h1>
             </Link>
             <div className="banner-right">
+
               <h2 className="toggle" onClick={(event) => toggle(i, event)}>+</h2>
+              
             </div>
 
           </div>
@@ -178,14 +164,14 @@ const GrocerylistAccordion = function(props) {
                 {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
                   <li key={itemName}>
                     <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>Delete</button>
+                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>➖</button>
                   </li>
                 ))}
               </ul>
             </div>
             {selected.includes(grocerylist.id) && (
               <div>
-                <button className="btn-add" onClick={(event) => handleButtonClick(i, event)}></button>
+                <button className="btn-add" onClick={(event) => handleButtonClick(i, event)}>➕Add item</button>
                 {showForm && (
                   <form>
                     <div>
@@ -221,7 +207,7 @@ const GrocerylistAccordion = function(props) {
                         onClick={handleClick}
                       />
                     </div>
-                    <button onClick={(event) => handleSaveItem(grocerylist, event)}>Save Item</button>
+                    <button onClick={(event) => handleSaveItem(grocerylist, event)} disabled={!name}>Save Item</button>
                     <button onClick={(event) => handleCancelItem(event)}>Cancel</button>
                   </form>
 
@@ -241,23 +227,11 @@ const GrocerylistAccordion = function(props) {
 
       <div className="add-new-grocerylist">
 
-        <button onClick={(event) => handleAddNewGrocerylist(event)}>Add new grocery list</button>
-        {showGroceryListPopup && (
-          <form className="add-new-grocerylist">
-            <div>
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                id="grocerylist-name"
-                name="name"
-                value={grocerylistName}
-                onChange={(event) => setGrocerylistName(event.target.value)}
-              />
-            </div>
-            <button onClick={(event) => handleSaveList(userId, event)}>Submit</button>
-            <button onClick={(event) => handleCancelList(event)}>Cancel</button>
-          </form>
-        )}
+        <Popup popupMessage="Create a Grocery List">
+
+          <CreateGrocerylist userId={userId} />
+
+        </Popup>
       </div>
     </article>
   );

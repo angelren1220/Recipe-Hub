@@ -36,6 +36,7 @@ const BooksRecipes = function(props) {
       {bookState &&
         <article className="recipes-list">
           <h1>{`${bookState.book.name}`}</h1>
+          {bookState.recipes.length === 0 && <h3>This Book is currently empty!</h3>}
           <RecipeAccordion
             recipes={bookState.recipes}
             userId={userId}
