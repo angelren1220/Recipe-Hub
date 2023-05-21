@@ -8,7 +8,9 @@ import dataReducer, {
   SET_RECIPES,
   SET_USER,
   SET_RECIPE,
-  SET_BOOKS
+  SET_BOOKS,
+  SET_BOOKMARKS,
+  SET_MESSAGES
 } from './dataReducer';
 
 import axios from 'axios';
@@ -23,6 +25,7 @@ const useApplicationData = () => {
     ingredients: [],
     books: [],
     bookmarks: [],
+    messages: [],
     loading: true,
   });
 
@@ -100,7 +103,7 @@ const useApplicationData = () => {
         console.log("🙈", response.data);
         dispatch({
           type: SET_BOOKS,
-          books: response.data.books,
+          books: response.data.books.map((item) => ({ ...item.book, key: item.book.id })),
           bookmarks: response.data.bookmarked_books
         });
       })
