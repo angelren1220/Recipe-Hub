@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :books
     resources :bookmarked_books
     resources :sessions
+    resources :grocery_lists
   end
 end
