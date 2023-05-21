@@ -61,7 +61,7 @@ const Recipe = function(props) {
         </ul>
         <ul>
 
-          {parseInt(userId) === recipe.user_id && <div className="control-buttons">
+          {userId && <div className="control-buttons">
             <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
           </div>}
 
