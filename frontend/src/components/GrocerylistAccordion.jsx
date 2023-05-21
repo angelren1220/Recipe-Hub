@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/recipe_accordion.scss";
+import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
 
 
-const RecipeAccordion = function(props) {
+const GrocerylistAccordion = function(props) {
 
   const {
     state,
@@ -45,9 +45,9 @@ const RecipeAccordion = function(props) {
   };
 
   return (
-    <article className="recipe-accordions-wrapper">
+    <article className="grocerylist-accordions-wrapper">
       {state.grocerylists.map((item, i) => (
-        <div className={selected.some(index => index === i) ? 'recipe-accordion selected' : 'recipe-accordion'} key={i} onClick={(event) => toggle(i, event)}>
+        <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} key={i} onClick={(event) => toggle(i, event)}>
 
           <div className="banner">
             <h1>{item.name}</h1>
@@ -74,4 +74,4 @@ const RecipeAccordion = function(props) {
   );
 };
 
-export default RecipeAccordion;
+export default GrocerylistAccordion;

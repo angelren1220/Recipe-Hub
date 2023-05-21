@@ -264,7 +264,7 @@ const useApplicationData = () => {
         type: SET_GROCERYLISTS,
         grocerylists: response.data.grocerylists
       });
-      console.log("🙈", response.data.grocerylists);
+      // console.log("🙈", response.data.grocerylists);
 
     })
     .catch((error) => {
@@ -273,7 +273,7 @@ const useApplicationData = () => {
   }
 
   const createGrocerylist = (grocerylist) => {
-    axios.post("/api/grocerylists", { grocerylist })
+    axios.post("/api/grocery_lists", { grocerylist })
       .then((response) => {
         console.log(response);
       })
@@ -283,7 +283,7 @@ const useApplicationData = () => {
   };
 
   const updateGrocerylist = (id, grocerylist) => {
-    axios.put(`/api/grocerylists/${id}`, { grocerylist })
+    axios.put(`/api/grocery_lists/${id}`, { grocerylist })
       .then((response) => {
         console.log(response);
       })
@@ -293,7 +293,7 @@ const useApplicationData = () => {
   };
 
   const deleteGrocerylist = (id) => {
-    axios.delete(`/api/grocerylists/${id}`)
+    axios.delete(`/api/grocery_lists/${id}`)
       .then((response) => {
         const updatedGrocerylists = state.grocerylists.filter(grocerylist => grocerylist.id !== id);
         dispatch({
