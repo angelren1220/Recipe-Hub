@@ -5,10 +5,10 @@ import useApplicationData from "../../hooks/useApplicationData";
 const Books = function(props) {
   const {
     state,
-    dispatch,
     getBooksByUserID,
     deleteBook,
-    deleteBookmark
+    deleteBookmark,
+    updateBookDescription
   } = useApplicationData();
 
   useEffect(() => {
@@ -34,11 +34,13 @@ const Books = function(props) {
           books={bookmarkedBooks}
           bookmarks={state.bookmarks}
           deleteBookmark={deleteBookmark}
+          updateBookDescription={updateBookDescription}
         />
       ) : (
         <BookAccordion
           books={state.books}
           deleteBook={deleteBook}
+          updateBookDescription={updateBookDescription}
         />
       )}
     </article>

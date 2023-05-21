@@ -108,7 +108,6 @@ const useApplicationData = () => {
       });
   };
 
-
   const createUser = (user) => {
     // the object post to backend should be the exact same name with it in database
 
@@ -203,6 +202,16 @@ const useApplicationData = () => {
       });
   };
 
+  const updateBookDescription = (id, description) => {
+    axios.put(`/api/books/${id}`, { description })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+
+      });
+  };
+
   const deleteRecipe = (id) => {
     axios.delete(`/api/recipes/${id}`)
       .then((response) => {
@@ -258,6 +267,7 @@ const useApplicationData = () => {
     logoutUser,
     createRecipe,
     updateRecipe,
+    updateBookDescription,
     deleteRecipe,
     deleteBook,
     deleteBookmark
