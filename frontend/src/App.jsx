@@ -22,7 +22,6 @@ import Search from './components/pages/Search';
 
 import GroceryLists from './components/pages/GroceryLists';
 import GroceryList from './components/pages/GroceryList';
-import GroceryListForm from './components/pages/GroceryListForm';
 
 import Profile from './components/pages/Profile';
 
@@ -69,7 +68,6 @@ const App = function() {
             <Route path='/grocerylists'>
               <Route index element={<GroceryLists/>}/>
               <Route path=':id' element={<GroceryList/>}/>
-              <Route path='new' element={<GroceryListForm />}/>
             </Route>
             
             <Route path='/profile'>

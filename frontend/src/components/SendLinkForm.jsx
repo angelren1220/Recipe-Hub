@@ -46,7 +46,7 @@ const SendLinkForm = ({ subjectType, subjectId, onClose, createMessage }) => {
 
   return (
     <div className="popup-form" ref={formRef}>
-      <h3>Send Link</h3>
+      <h3>Share this {subjectType === 'GroceryList' ? 'Grocery List' : subjectType}</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="recipient">Recipient ID:</label>
         <input

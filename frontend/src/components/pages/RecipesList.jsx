@@ -15,6 +15,8 @@ const RecipesList = function(props) {
     getRecipesByUserId,
     getUserById,
     getAllRecipes,
+    deleteRecipe,
+    createMessage
   } = useApplicationData();
 
   const userId = localStorage.getItem('userId');
@@ -39,10 +41,15 @@ const RecipesList = function(props) {
       {!userState && <h1>All Recipes</h1>}
       {userState && (
         <Popup popupMessage="Create a Recipe">
-          <NewRecipe/>
+          <NewRecipe />
         </Popup>
       )}
-      <RecipeAccordion recipes={state.recipes} userId={userId} />
+      <RecipeAccordion
+        recipes={state.recipes}
+        userId={userId}
+        deleteRecipe={deleteRecipe}
+        createMessage={createMessage}
+      />
     </article>
   );
 };
