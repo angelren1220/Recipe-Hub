@@ -22,6 +22,7 @@ const useApplicationData = () => {
     recipes: [],
     ingredients: [],
     books: [],
+    bookmarks: [],
     loading: true,
   });
 
@@ -96,14 +97,14 @@ const useApplicationData = () => {
     }
     axios.get(`/api/users/${userId}`)
       .then((response) => {
-        // console.log("🙈", response.data);
+        console.log("🙈", response.data);
         dispatch({
           type: SET_BOOKS,
-          books: response.data.books
+          books: response.data.books,
+          bookmarks: response.data.bookmarked_books
         });
       })
       .catch((error) => {
-
       });
   };
 

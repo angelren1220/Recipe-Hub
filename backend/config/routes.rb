@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :recipes
     resources :ingredients
     resources :books
+    resources :bookmarked_books
     resources :sessions
   end
 end

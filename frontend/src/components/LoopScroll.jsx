@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import '../styles/loop_scroll.scss';
 
+/* The useCallback hook, which memoizes (caching arguments so the function does having to run multiple times) the function so that it retains the same reference across re-renders unless its dependencies change. 
+This is used to prevent unnecessary re-renders when the function is passed as a prop or used in an effect. */
+
 const Loop = ({ outerStyle, innerStyle, children, dataReady, parentHeight }) => {
   // Create a ref for the content container
   const contentRef = useRef(null);

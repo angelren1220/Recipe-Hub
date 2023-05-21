@@ -37,6 +37,7 @@ const dataReducer = (state, action) => {
       return {
         ...state,
         books: action.books,
+        bookmarks: action.bookmarks,
         loading: false
       };
 

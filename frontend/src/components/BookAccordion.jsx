@@ -1,29 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/book_accordion.scss";
-import useApplicationData from "../hooks/useApplicationData";
 import Loop from "./LoopScroll";
 
-const BookAccordion = function(props) {
-  const {
-    state,
-    dispatch,
-    getBooksByUserID,
-    deleteBook
-  } = useApplicationData();
-
-  console.log(state.books);
-
+const BookAccordion = function({ books, deleteBook }) {
   const [selected, setSelected] = useState([]);
-
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    getBooksByUserID(userId);
-  }, []);
 
   const toggle = (i, event) => {
     event.stopPropagation();
-    const selectedBookId = state.books[i].id;
+    const selectedBookId = books[i].id;
     if (selected.includes(selectedBookId)) {
       setSelected(selected.filter((id) => id !== selectedBookId));
     } else {
@@ -36,7 +21,7 @@ const BookAccordion = function(props) {
     deleteBook(id);
   };
 
-  const dataReady = state.books.length > 0; // Check if the books data is available
+  const dataReady = books.length > 0; // Check if the books data is available
 
   // Get the height of the parent container
   const parentHeight = document.querySelector('.book-accordions-wrapper')?.offsetHeight;
@@ -44,8 +29,8 @@ const BookAccordion = function(props) {
   return (
     <article className="book-accordions-wrapper ">
       <Loop dataReady={dataReady} parentHeight={parentHeight}>
-        {state.books.map((item, i) => (
-          <div className={ selected.some((index) => index === i) ? 'book-accordion selected' : 'book-accordion'} key={i} onClick={(event) => toggle(i, event)}>
+        {books.map((item, i) => (
+          <div className={selected.some((index) => index === i) ? 'book-accordion selected' : 'book-accordion'} key={i} onClick={(event) => toggle(i, event)}>
             <div className="banner">
               <div className="banner-left">
                 <Link to={`/books/${item.id}`}>

@@ -7,6 +7,10 @@ class Book < ApplicationRecord
   has_many :bookmarked_books
   has_many :users, through: :bookmarked_books
 
+  # cascades delete to bookmarks
+  has_many :bookmarked_books, dependent: :destroy
+  has_many :users, through: :bookmarked_books
+
   # polymorphic association with messages
   has_many :messages, as: :subject
 

@@ -224,10 +224,10 @@ BookmarkedBook.destroy_all
 puts "Creating Bookmarked Book Entries ..."
 
 BookmarkedBook.create!({user_id: 1, book_id: 7})
-BookmarkedBook.create!({user_id: 1, book_id: 7})
-BookmarkedBook.create!({user_id: 2, book_id: 2})
+BookmarkedBook.create!({user_id: 1, book_id: 8})
+BookmarkedBook.create!({user_id: 2, book_id: 7})
 BookmarkedBook.create!({user_id: 3, book_id: 7})
-BookmarkedBook.create!({user_id: 3, book_id: 2})
+BookmarkedBook.create!({user_id: 3, book_id: 7})
 
 ## GROCERY LISTS
 
