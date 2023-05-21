@@ -82,7 +82,7 @@ const useApplicationData = () => {
       });
   };
 
-  const createIngredient = async(ingredient) => {
+  const createIngredient = async (ingredient) => {
     return axios.post("/api/ingredients", { ingredient })
       .then((response) => {
         return response.data;
@@ -136,7 +136,7 @@ const useApplicationData = () => {
         return response.data;
       })
       .catch((error) => {
-      
+
       });
   };
 
@@ -162,7 +162,7 @@ const useApplicationData = () => {
       });
   };
 
-  
+
   const getMessagesByUserID = (userId) => {
     if (!userId) {
       return Promise.resolve(); // Return a resolved promise if userId is not available
@@ -172,7 +172,7 @@ const useApplicationData = () => {
         const filteredMessages = response.data.messages.filter((message) => {
           return ((userId === message.recipient_id && message.recipient_deleted === false) || (userId === message.sender_id && message.sender_deleted === false));
         });
-  
+
         dispatch({
           type: SET_MESSAGES,
           messages: filteredMessages
@@ -230,7 +230,7 @@ const useApplicationData = () => {
       .then((response) => {
         console.log("💫", response.data.message);
         const newMessage = response.data.message;
-  
+
         dispatch({
           type: SET_MESSAGES,
           messages: [...state.messages, newMessage], // Add the new message to the existing messages array
@@ -355,14 +355,14 @@ const useApplicationData = () => {
   const deleteMessage = (id, userId, senderId, recipientId) => {
     const endpoint = `/api/messages/${id}`;
     const data = {};
-  
+
     // Determine which user is invoking the function
     if (userId === senderId) {
       data.sender_deleted = true;
     } else if (userId === recipientId) {
       data.recipient_deleted = true;
     }
-  
+
     axios
       .put(endpoint, { data })
       .then((response) => {
@@ -381,24 +381,24 @@ const useApplicationData = () => {
 
   const getGrocerylistsByUserId = (userId) => {
     axios.get(`/api/users/${userId}`)
-    .then((response) => {
-      dispatch({
-        type: SET_GROCERYLISTS,
-        grocerylists: response.data.grocerylists
-      });
-      // console.log("🙈", response.data.grocerylists);
+      .then((response) => {
+        dispatch({
+          type: SET_GROCERYLISTS,
+          grocerylists: response.data.grocerylists
+        });
+        // console.log("🙈", response.data.grocerylists);
 
-    })
-    .catch((error) => {
-    
-    });
-  }
+      })
+      .catch((error) => {
+
+      });
+  };
 
   const createGrocerylist = (grocerylist) => {
     axios.post("/api/grocery_lists", { grocerylist })
       .then((response) => {
         // console.log(response);
-        
+
       })
       .catch((error) => {
 
@@ -415,7 +415,7 @@ const useApplicationData = () => {
         //   }
         //   return item;
         // });
-        
+
         // dispatch({
         //   type: SET_GROCERYLISTS,
         //   grocerylists: updatedGrocerylists
@@ -442,77 +442,77 @@ const useApplicationData = () => {
 
   const getGrocerylistById = (id) => {
     axios.get(`/api/grocery_lists/${id}`)
-    .then((response) => {
-      dispatch({
-        type: SET_GROCERYLIST,
-        grocerylist: response.data.grocerylist
+      .then((response) => {
+        dispatch({
+          type: SET_GROCERYLIST,
+          grocerylist: response.data.grocerylist
+        });
+        // console.log("🙈", response.data.grocerylist);
+      })
+      .catch((error) => {
+
       });
-      // console.log("🙈", response.data.grocerylist);
-    })
-    .catch((error) => {
-
-    });
-  }
-  const getUserById = (id) => {
-    axios.get(`/api/users/${id}`)
-    .then((response) => {
-      dispatch({
-        type: SET_USER,
-        user: response.data.user
-      });
-
-      dispatch({
-        type: SET_BOOKS,
-        books: response.data.books,
-      });
-
-      dispatch({
-        type: SET_RECIPES,
-        recipes: response.data.recipes,
-      });
-
-      dispatch({
-        type: SET_GROCERYLISTS,
-        grocerylists: response.data.grocerylists,
-      });
-
-      console.log("🙈", response.data);
-    })
-    .catch((error) => {
-
-    });
-  }
-
-  return {
-    state,
-    dispatch,
-    getAllRecipes,
-    getIngredients,
-    updateIngredient,
-    createIngredient,
-    createMessage,
-    deleteIngredient,
-    getRecipeById,
-    getRecipesByUserId,
-    getBooksByUserID,
-    getMessagesByUserID,
-    createUser,
-    loginUser,
-    logoutUser,
-    createRecipe,
-    updateRecipe,
-    deleteRecipe,
-    deleteBook,
-    updateBookDescription,
-    deleteBookmark,
-    getGrocerylistsByUserId,
-    createGrocerylist,
-    updateGrocerylist,
-    deleteGrocerylist,
-    deleteMessage,
-    getGrocerylistById,
-    getUserById
   };
+  const getUserById = (id) => {
+    return axios.get(`/api/users/${id}`)
+      .then((response) => {
+        dispatch({
+          type: SET_USER,
+          user: response.data.user
+        });
+
+        dispatch({
+          type: SET_BOOKS,
+          books: response.data.books,
+        });
+
+        dispatch({
+          type: SET_RECIPES,
+          recipes: response.data.recipes,
+        });
+
+        dispatch({
+          type: SET_GROCERYLISTS,
+          grocerylists: response.data.grocerylists,
+        });
+
+        return (response.data.user);
+      })
+      .catch ((error) => {
+
+})
+  };
+
+return {
+  state,
+  dispatch,
+  getAllRecipes,
+  getIngredients,
+  updateIngredient,
+  createIngredient,
+  createMessage,
+  deleteIngredient,
+  getRecipeById,
+  getRecipesByUserId,
+  getBooksByUserID,
+  getMessagesByUserID,
+  createUser,
+  loginUser,
+  logoutUser,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
+  deleteBook,
+  updateBookDescription,
+  deleteBookmark,
+  getGrocerylistsByUserId,
+  createGrocerylist,
+  updateGrocerylist,
+  deleteGrocerylist,
+  deleteMessage,
+  getGrocerylistById,
+  getUserById
+};
 };
 
 export default useApplicationData;
