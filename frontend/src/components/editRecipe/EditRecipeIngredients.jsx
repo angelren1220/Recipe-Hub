@@ -16,14 +16,14 @@ const EditRecipeIngredients = function(props) {
     recipeDirectionsView,
   } = useContext(recipeEditContext);
 
-  const addIngredient = function() {
-    const newIngredient = {
+  const addIngredient = async function() {
+    let newIngredient = {
       recipe_id: currentRecipe.id,
-      name: "Ingredient",
-      quantity: 1,
-      units: "Units"
+      name: "",
+      quantity: 0,
+      units: ""
     };
-    createIngredient(newIngredient);
+    newIngredient = await createIngredient(newIngredient);
     setIngredients([...currentIngredients, newIngredient]);
   };
 
@@ -31,7 +31,7 @@ const EditRecipeIngredients = function(props) {
     <>
       <h1>Edit Recipe Ingredients</h1>
       <ul>
-        {currentIngredients && currentIngredients.map(ingredient => {
+        {currentIngredients && currentIngredients.map((ingredient) => {
           return (
             <li key={`ingredient-list-${ingredient.id}`}>
               <IngredientForm key={`ingredient-form-${ingredient.id}`} ingredient={ingredient} />

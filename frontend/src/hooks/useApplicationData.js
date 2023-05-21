@@ -81,7 +81,7 @@ const useApplicationData = () => {
   const createIngredient = async(ingredient) => {
     return axios.post("/api/ingredients", { ingredient })
       .then((response) => {
-        console.log('🦜',response);
+        return response.data;
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
