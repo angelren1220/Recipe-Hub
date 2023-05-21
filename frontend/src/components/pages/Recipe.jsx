@@ -61,7 +61,7 @@ const Recipe = function(props) {
         </ul>
         <ul>
 
-          {userId && <div className="control-buttons">
+          {parseInt(userId) === recipe.user_id && <div className="control-buttons">
             <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
           </div>}
 
@@ -78,7 +78,7 @@ const Recipe = function(props) {
           {recipe.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
         </ol>
 
-        {userId && <div className="control-buttons">
+        {parseInt(userId) === recipe.user_id && <div className="control-buttons">
           <button onClick={(event) => handleDelete(recipe.id)}>Delete Recipe</button>
           <Link to={`/recipes/edit/${recipe.id}`}>
             <button>Edit Recipe</button>
