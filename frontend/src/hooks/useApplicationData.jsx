@@ -86,6 +86,20 @@ const useApplicationData = () => {
       });
   };
 
+  const deleteIngredient = (id) => {
+    axios.delete(`/api/ingredients/${id}`)
+      .then((response) => {
+        const updatedRecipes = state.recipes.filter(recipe => recipe.id !== id);
+        dispatch({
+          type: SET_RECIPES,
+          recipes: updatedRecipes
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
 
   const getRecipeById = (recipeId) => {
 
@@ -295,6 +309,7 @@ const useApplicationData = () => {
     getIngredients,
     updateIngredient,
     createIngredient,
+    deleteIngredient,
     getRecipeById,
     getRecipesByUserId,
     getBooksByUserID,

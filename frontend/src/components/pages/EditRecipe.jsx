@@ -26,6 +26,7 @@ const EditRecipe = function() {
     updateRecipe,
     getIngredients,
     updateIngredient,
+    deleteIngredient,
   } = useApplicationData();
 
   //current recipe id from the url
@@ -67,7 +68,10 @@ const EditRecipe = function() {
   //submit recipe and ingredients to the db
   const handleSubmit = function() {
     updateRecipe(currentRecipe.id, currentRecipe);
-    currentIngredients.map(ingredient => updateIngredient(ingredient.id, ingredient));
+    currentIngredients.map(ingredient => {
+      (ingredient.delete && deleteIngredient(ingredient.id));
+      (!ingredient.delete && updateIngredient(ingredient.id, ingredient));
+    });
 
   };
 

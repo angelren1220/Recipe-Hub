@@ -8,21 +8,28 @@ const IngredientForm = function(props) {
     setIngredient,
     removeIngredient,
   } = useContext(recipeEditContext);
-
+  
+  //local state used in form used to keep track of a single ingredient
   const [currentIngredient, setCurrentIngredient] = useState(props.ingredient);
   console.log('🦧', currentIngredient);
 
   const handleIngredientChange = function(key, value) {
-    setCurrentIngredient({ ...currentIngredient, [key]: value });
-    setIngredient({ ...currentIngredients, currentIngredient });
+    const updatedIngredient = { ...currentIngredient, [key]: value };
+    setCurrentIngredient(updatedIngredient);
+    setIngredient(updatedIngredient);
   };
+    
 
   const handleIngredientDelete = function() {
-    setCurrentIngredient({...currentIngredient, delete: true});
+    const updatedIngredient = { ...currentIngredient, delete: true}
+    setCurrentIngredient(updatedIngredient);
+    setIngredient(updatedIngredient);
   };
 
   const handleIngredientUndoDelete = function() {
-    setCurrentIngredient({...currentIngredient, delete: false})
+    const updatedIngredient = { ...currentIngredient, delete: false}
+    setCurrentIngredient(updatedIngredient);
+    setIngredient(updatedIngredient);
   };
 
   return (
@@ -41,7 +48,7 @@ const IngredientForm = function(props) {
             onChange={(e) => handleIngredientChange('name', e.target.value)}
             name={`name${currentIngredient.id}`}
             type="text"
-            placeholder={currentIngredient.name ? `name${currentIngredient.id}` : 'Sugar'}
+            placeholder={currentIngredient.name ? `name${currentIngredient.id}` : ''}
             required
           />
           <label htmlFor={`quantity${currentIngredient.id}`} >Quantity:</label>
@@ -52,7 +59,7 @@ const IngredientForm = function(props) {
             name={`quantity${currentIngredient.id}`}
             type="number"
             step=".01"
-            placeholder={currentIngredient.name ? `quantity${currentIngredient.id}` : 1.5}
+            placeholder={currentIngredient.name ? `quantity${currentIngredient.id}` : 0}
             required
           />
           <label htmlFor={`units${currentIngredient.id}`} >Units:</label>
@@ -62,7 +69,7 @@ const IngredientForm = function(props) {
             onChange={(e) => handleIngredientChange('units', e.target.value)}
             name={`units${currentIngredient.id}`}
             type="text"
-            placeholder={currentIngredient.name ? `units${currentIngredient.id}` : "cups"}
+            placeholder={currentIngredient.name ? `units${currentIngredient.id}` : ""}
             required
           />
         </form>
