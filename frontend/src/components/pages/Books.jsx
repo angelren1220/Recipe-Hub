@@ -34,7 +34,6 @@ const Books = function(props) {
           books={bookmarkedBooks}
           bookmarks={state.bookmarks}
           deleteBookmark={deleteBookmark}
-          updateBookDescription={updateBookDescription}
         />
       ) : (
         <BookAccordion

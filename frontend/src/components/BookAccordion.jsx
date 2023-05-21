@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DescriptionEditor from "./DescriptionEditor";
 import "../styles/book_accordion.scss";
 
-const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, showBookmarks }) => {
+const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark }) => {
   const [selected, setSelected] = useState([]);
+  const [booksState, setBooks] = useState(books); // Declare books state
   const [editingBookId, setEditingBookId] = useState(null);
+
+  useEffect(() => {
+    setBooks(books); // Update books state when the prop changes
+  }, [books]);
 
   const toggle = (i, event) => {
     event.stopPropagation();
-    const selectedBookId = books[i].id;
+    const selectedBookId = booksState[i].id;
     if (selected.includes(selectedBookId)) {
       setSelected(selected.filter((id) => id !== selectedBookId));
     } else {
@@ -24,14 +29,18 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, showBookm
       if (bookmark) {
         deleteBookmark(bookmark.id);
         console.log('🐷 deleted bookmark!');
+
+        // Update the books state by filtering out the deleted book
+        const updatedBooks = booksState.filter((book) => book.id !== id);
+        setBooks(updatedBooks);
       }
     } else {
       deleteBook(id);
-      console.log('🦊 deleted book!')
+      console.log('🦊 deleted book!');
     }
   };
 
-  const handleEdit = (id, event) => {
+  const handleEditDescription = (id, event) => {
     event.stopPropagation();
     setEditingBookId(id);
   };
@@ -42,6 +51,15 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, showBookm
 
     // Reset the editing state
     setEditingBookId(null);
+
+    // Update the books state with the edited description
+    const updatedBooks = booksState.map((book) => {
+      if (book.id === id) {
+        return { ...book, description: editedDescription };
+      }
+      return book;
+    });
+    setBooks(updatedBooks);
   };
 
   const handleCancelDescription = () => {
@@ -51,7 +69,7 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, showBookm
 
   return (
     <article className="book-accordions-wrapper">
-      {books.map((item, i) => (
+      {booksState.map((item, i) => (
         <div
           className={selected.some((index) => index === i) ? 'book-accordion selected' : 'book-accordion'}
           key={i}
@@ -80,13 +98,13 @@ const BookAccordion = ({ books, deleteBook, bookmarks, deleteBookmark, showBookm
                 <>
                   <h2>{item.description}</h2>
                   <div className="control-buttons">
-                    {showBookmarks && (
+                    {bookmarks && (
                       <button onClick={(event) => handleDelete(item.id, event)}>Remove Bookmark</button>
                     )}
-                    {!showBookmarks && (
+                    {!bookmarks && (
                       <>
                         <button onClick={(event) => handleDelete(item.id, event)}>Delete Book</button>
-                        <button onClick={(event) => handleEdit(item.id, event)}>
+                        <button onClick={(event) => handleEditDescription(item.id, event)}>
                           {item.description ? "Edit Description" : "Add Description"}
                         </button>
                       </>
