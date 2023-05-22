@@ -1,17 +1,17 @@
 .grocerylist-accordion {
-  color: blue;
+  color: $secondary-color1;
   width: 90%;
-  background: rgb(206, 206, 189);
+  background: $primary-color1;
   padding: 1.5rem;
   margin: .5rem 0;
   border-radius: .5rem;
 
   h1 {
     font-size: 2rem;
-    color: blue;
+    color: $secondary-color1;
 
     &:hover {
-      color: red;
+      color: $secondary-color3;
     }
   }
 
@@ -35,11 +35,11 @@
   }
 
   .btn-delete{
-    color: red;
+    color: $secondary-color1;
   }
 
   .btn-add{
-    color: green;
+    color: $secondary-color1;
   }
 
   .content {
@@ -55,7 +55,7 @@
   }
 
   &:hover {
-    background: rgb(163, 163, 163);
+    background: $primary-color1;
     cursor: pointer;
   }
 }
@@ -68,11 +68,11 @@
 .grocerylist-accordions-wrapper {
   .grocerylist-accordion {
     &:nth-child(even) {
-      background-color: #c4e09d; // Set the background color for even-indexed accordions
+      background-color: $primary-color1; // Set the background color for even-indexed accordions
     }
 
     &:nth-child(odd) {
-      background-color: #e6d49a; // Set the background color for odd-indexed accordions
+      background-color: $primary-color2; // Set the background color for odd-indexed accordions
     }
   }
 }
