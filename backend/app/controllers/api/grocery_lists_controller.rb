@@ -50,7 +50,7 @@ class Api::GroceryListsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def grocerylist_params
       params.require(:grocerylist).permit(
-        :name, :user_id, :items
+        :name, :user_id, items: {}
       )
     end
 end
