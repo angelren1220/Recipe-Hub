@@ -11,21 +11,29 @@ const GroceryList = function(props) {
   const {
     state,
     getGrocerylistById,
-    deleteGrocerylist
+    createGrocerylist
   } = useApplicationData();
 
   useEffect(() => {
     getGrocerylistById(id);
   }, []);
 
-  const handleDelete = (id) => {
-    deleteGrocerylist(id);
-    window.location = "/recipes";
+  const { grocerylist } = state;
+
+  const handleAddGrocerylist = () => {
+
+    const newGrocerylist = { ...grocerylist, user_id: userId };
+
+    // console.log(items);
+    // console.log(grocerylist);
+    // console.log(ingredients.length, Object.keys(items).length);
+    createGrocerylist(newGrocerylist);
+    alert("Added to Grocery lists!");
+
+
   };
 
-
-  const {grocerylist} = state;
-  if (!grocerylist) {
+  if (!grocerylist || !grocerylist.items) {
     return <div>Loading...</div>;
   }
 
@@ -34,7 +42,19 @@ const GroceryList = function(props) {
       <h1>Single grocery list details go here</h1>
       <div className="grocerylist-text">
         <h2 className="grocerylist-title">{grocerylist.name}</h2>
+        <div className="items-list">
+          <ul>
+            {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
+              <li key={itemName}>
+                <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+      {userId && <div className="control-buttons">
+        <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
+      </div>}
     </article>
   );
 };

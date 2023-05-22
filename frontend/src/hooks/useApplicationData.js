@@ -430,7 +430,7 @@ const useApplicationData = () => {
         type: SET_GROCERYLIST,
         grocerylist: response.data.grocerylist
       });
-      console.log("🙈", response.data.grocerylist);
+      // console.log("🙈", response.data.grocerylist);
     })
     .catch((error) => {
 
