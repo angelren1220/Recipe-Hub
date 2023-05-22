@@ -10,12 +10,12 @@ const GroceryList = function(props) {
 
   const {
     state,
-    getGrocerylistsByUserId,
+    getGrocerylistById,
     deleteGrocerylist
   } = useApplicationData();
 
   useEffect(() => {
-    getGrocerylistsByUserId(id);
+    getGrocerylistById(id);
   }, []);
 
   const handleDelete = (id) => {
@@ -23,13 +23,18 @@ const GroceryList = function(props) {
     window.location = "/recipes";
   };
 
-  if (!state.grocerylist) {
+
+  const {grocerylist} = state;
+  if (!grocerylist) {
     return <div>Loading...</div>;
   }
 
   return (
-    <article className="grocery-list">
+    <article className="grocerylist-list">
       <h1>Single grocery list details go here</h1>
+      <div className="grocerylist-text">
+        <h2 className="grocerylist-title">{grocerylist.name}</h2>
+      </div>
     </article>
   );
 };

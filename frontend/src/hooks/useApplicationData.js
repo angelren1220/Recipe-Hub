@@ -428,9 +428,9 @@ const useApplicationData = () => {
     .then((response) => {
       dispatch({
         type: SET_GROCERYLIST,
-        recipe: response.data.grocerylist
+        grocerylist: response.data.grocerylist
       });
-      // console.log("🙈", response.data.recipe);
+      console.log("🙈", response.data.grocerylist);
     })
     .catch((error) => {
 
