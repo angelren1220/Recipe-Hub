@@ -239,22 +239,22 @@ grocery_list1 = GroceryList.create!(
   user_id: 1,
   name: "Weekly Driver",
   items: {
-    spinach: { quantity: 1, units: "bunch" },
-    tofu: { quantity: 2, units: "pack" },
-    lentils: { quantity: 1, units: "can" },
-    quinoa: { quantity: 1, units: "cup" }
+    'spinach': { quantity: 1, units: "bunch" },
+    'tofu': { quantity: 2, units: "pack" },
+    'lentils': { quantity: 1, units: "can" },
+    'quinoa': { quantity: 1, units: "cup" }
   }
 )
 
 grocery_list2 = GroceryList.create!(
-  user_id: 2,
-  name: "Family Dins",
+  'user_id': 2,
+  'name': "Family Dins",
   items: {
-    chicken: { quantity: 1, units: "kg" },
-    potatoes: { quantity: 4, units: "pieces" },
-    broccoli: { quantity: 2, units: "heads" },
-    garlic: { quantity: 3, units: "cloves" },
-    lemon: { quantity: 2, units: "pieces" }
+    'chicken': { quantity: 1, units: "kg" },
+    'potatoes': { quantity: 4, units: "pieces" },
+    'broccoli': { quantity: 2, units: "heads" },
+    'garlic': { quantity: 3, units: "cloves" },
+    'lemon': { quantity: 2, units: "pieces" }
   }
 )
 
@@ -262,11 +262,11 @@ grocery_list3 = GroceryList.create!(
   user_id: 1,
   name: "Healthy",
   items: {
-    bananas: { quantity: 3, units: "pieces" },
-    strawberries: { quantity: 1, units: "cup" },
-    spinach: { quantity: 1, units: "handful" },
-    almond_milk: { quantity: 2, units: "cups" },
-    chia_seeds: { quantity: 1, units: "tablespoon" }
+    'bananas': { quantity: 3, units: "pieces" },
+    'strawberries': { quantity: 1, units: "cup" },
+    'spinach': { quantity: 1, units: "handful" },
+    'almond milk': { quantity: 2, units: "cups" },
+    'chia seeds': { quantity: 1, units: "tablespoon" }
   }
 )
 
@@ -274,11 +274,11 @@ grocery_list4 = GroceryList.create!(
   user_id: 3,
   name: "Birthday Cake Test",
   items: {
-    flour: { quantity: 2, units: "cups" },
-    sugar: { quantity: 1, units: "cup" },
-    baking_powder: { quantity: 1, units: "teaspoon" },
-    eggs: { quantity: 3, units: "pieces" },
-    vanilla_extract: { quantity: 1, units: "teaspoon" }
+    'flour': { quantity: 2, units: "cups" },
+    'sugar': { quantity: 1, units: "cup" },
+    'baking powder': { quantity: 1, units: "teaspoon" },
+    'eggs': { quantity: 3, units: "pieces" },
+    'vanilla extract': { quantity: 1, units: "teaspoon" }
   }
 )
 
@@ -286,9 +286,9 @@ grocery_list5 = GroceryList.create!(
   user_id: 2,
   name: "Hiking Snacks",
   items: {
-    almonds: { quantity: 1, units: "cup" },
-    dried_mango: { quantity: 0.5, units: "cup" },
-    popcorn: { quantity: 2, units: "bags" }
+    'almonds': { quantity: 1, units: "cup" },
+    'dried mango': { quantity: 0.5, units: "cup" },
+    'popcorn': { quantity: 2, units: "bags" }
   }
 )
 
