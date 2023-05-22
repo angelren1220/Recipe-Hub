@@ -287,17 +287,17 @@ const useApplicationData = () => {
     axios.put(`/api/grocery_lists/${id}`, { grocerylist })
       .then((response) => {
         console.log(response);
-        const updatedGrocerylists = state.grocerylists.map((item, i) => {
-          if (i === id) {
-            return grocerylist;
-          }
-          return item;
-        });
+        // const updatedGrocerylists = state.grocerylists.map((item, i) => {
+        //   if (i === id) {
+        //     return grocerylist;
+        //   }
+        //   return item;
+        // });
         
-        dispatch({
-          type: SET_GROCERYLISTS,
-          grocerylists: updatedGrocerylists
-        });
+        // dispatch({
+        //   type: SET_GROCERYLISTS,
+        //   grocerylists: updatedGrocerylists
+        // });
       })
       .catch((error) => {
 

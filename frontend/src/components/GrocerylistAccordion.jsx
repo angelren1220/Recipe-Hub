@@ -21,14 +21,16 @@ const GrocerylistAccordion = function(props) {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
   const [units, setUnits] = useState('');
+  const [isItemSaved, setIsItemSaved] = useState(false);
 
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     if (userId) {
       getGrocerylistsByUserId(userId);
+      setIsItemSaved(false);
     }
-  }, []);
+  }, [isItemSaved]);
 
   if (!userId) {
     return (<div>Empty</div>);
@@ -44,7 +46,12 @@ const GrocerylistAccordion = function(props) {
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (i, event) => {
+    event.stopPropagation();
+    const selectedGrocerylistId = state.grocerylists[i].id;
+
+    setSelected([selectedGrocerylistId]);
+  
     setShowForm(true);
   };
 
@@ -63,11 +70,11 @@ const GrocerylistAccordion = function(props) {
 
     updateGrocerylist(grocerylist.id, updatedGrocerylist);
 
-
     setName('');
     setQuantity('');
     setUnits('');
     setShowForm(false);
+    setIsItemSaved(true);
   };
 
   const handleCancel = (event) => {
@@ -78,22 +85,19 @@ const GrocerylistAccordion = function(props) {
     setShowForm(false);
   }
 
-  const handleDeleteItem = (item, grocerylist, event) => {
+  const handleDeleteItem = (itemName, grocerylist, event) => {
     event.stopPropagation();
 
     const currentItems = grocerylist.items;
   
     const updatedItems = { ...currentItems};
-    delete updatedItems[item];
+    delete updatedItems[itemName];
     const updatedGrocerylist = { ...grocerylist, items: updatedItems };
 
     updateGrocerylist(grocerylist.id, updatedGrocerylist);
 
-
-    setName('');
-    setQuantity('');
-    setUnits('');
     setShowForm(false);
+    setIsItemSaved(true);
   }
 
   const handleDelete = (id, event) => {
@@ -125,7 +129,7 @@ const GrocerylistAccordion = function(props) {
                 ))}
               </ul>
               <div>
-                <FaPlus className="btn-add" onClick={handleButtonClick} />
+                <FaPlus className="btn-add" onClick={(event) => handleButtonClick(i, event)} />
                 {showForm && (
                   <form>
                     <div>
