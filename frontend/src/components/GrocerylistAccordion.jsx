@@ -214,7 +214,7 @@ const GrocerylistAccordion = function(props) {
 
         <button onClick={(event) => handleAddNewGrocerylist(event)}>Add new grocery list</button>
         {showPopup && (
-          <form>
+          <form className="add-new-grocerylist">
             <div>
               <label htmlFor="name">Name:</label>
               <input

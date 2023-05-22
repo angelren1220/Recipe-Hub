@@ -60,6 +60,11 @@
   }
 }
 
+.add-new-grocerylist{
+  display: flex;
+  align-items: center;
+}
+
 .grocerylist-accordions-wrapper {
   .grocerylist-accordion {
     &:nth-child(even) {
