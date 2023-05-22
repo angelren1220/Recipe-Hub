@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :ingredients
     resources :books
     resources :bookmarked_books
-    resources :messages
+    resources :messages, only: [:index, :show, :create, :update]
     resources :sessions
   end
 end

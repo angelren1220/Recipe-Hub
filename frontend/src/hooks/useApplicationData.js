@@ -104,7 +104,7 @@ const useApplicationData = () => {
         console.log("🙈", response.data);
         dispatch({
           type: SET_BOOKS,
-          books: response.data.books.map((item) => ({ ...item.book, key: item.book.id })),
+          books: response.data.books,
           bookmarks: response.data.bookmarked_books
         });
       })

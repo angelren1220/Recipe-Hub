@@ -4,10 +4,11 @@ import useApplicationData from "../../hooks/useApplicationData";
 
 const Inbox = function(props) {
   
-  // const {
-  //   state,
-  //   deleteMessage
-  // } = useApplicationData();
+  const {
+    state,
+    deleteMessage,
+    getMessagesByUserID,
+  } = useApplicationData();
 
   // useEffect(() => {
   //   const userId = localStorage.getItem('userId');

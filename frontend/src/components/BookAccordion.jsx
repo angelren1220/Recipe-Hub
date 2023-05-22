@@ -16,6 +16,7 @@ const BookAccordion = ({
 
   useEffect(() => {
     setBooks(books);
+    console.log(books)
   }, [books]);
 
   const toggle = (id, event) => {
