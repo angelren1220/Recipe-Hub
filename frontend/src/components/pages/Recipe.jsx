@@ -61,10 +61,10 @@ const Recipe = function(props) {
 
       <div className="recipe-text">
         <h2 className="recipe-title">{recipe.name}</h2>
-         <h2>by <UserInfo userId={user.id} /></h2>
-        <span>description</span>
+        <h4 className="author"><UserInfo userId={user.id} /></h4>
+        <h3 className="subtitle">Description</h3>
         <p>{recipe.description}</p>
-        <span>ingredients</span>
+        <h3 className="subtitle">Ingredients</h3>
         <ul>
           {ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
         </ul>
@@ -87,7 +87,7 @@ const Recipe = function(props) {
           {recipe.is_glutenfree && <li>Gluten Free</li>}
           {recipe.is_nutfree && <li>Nut Free</li>}
         </ul>
-        <span>directions</span>
+        <h3 className="subtitle">Directions</h3>
         <ol>
           {recipe.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
         </ol>
