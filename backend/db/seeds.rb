@@ -115,6 +115,21 @@ recipe5 = Recipe.create!({
   image: 'https://www.finedininglovers.com/sites/g/files/xknfdk626/files/styles/recipes_1200_800_fallback/public/Original_1543_beef-stir-fry-carrots-broccoli-CUT1.jpg?itok=wdtsTvHQ'
 })
 
+recipe6 = Recipe.create!({
+  user_id: user2.id,
+  name: "Caprese Salad",
+  description: 'A simple and refreshing salad that celebrates the flavors of ripe tomatoes, fresh mozzarella cheese, and fragrant basil leaves. Drizzled with balsamic glaze and olive oil, this salad is a perfect appetizer or side dish for any meal.',
+  directions: ["Slice the tomatoes and mozzarella", "Arrange the tomato and mozzarella slices on a platter", "Tuck basil leaves in between the slices", "Drizzle with balsamic glaze and olive oil", "Season with salt and pepper"],
+  cooktime_minutes: 10,
+  is_vegetarian: true,
+  is_vegan: false,
+  is_lowcarb: true,
+  is_lactosefree: false,
+  is_glutenfree: true,
+  is_nutfree: true,
+  image: 'https://www.foodnetwork.com/content/dam/images/food/fullset/2003/9/22/0/tm1a35_caprese_salad.jpg'
+})
+
 ## INGREDIENTS
 
 puts "Creating Ingredients ..."
