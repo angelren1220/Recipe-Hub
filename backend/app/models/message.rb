@@ -14,7 +14,7 @@ class Message < ApplicationRecord
   validates :recipient_id, presence: true
   validates :subject_type, presence: true
 
-  validates :message, presence: true, length: { maximum: 500 }
+  validates :message, length: { maximum: 500 }
   
   before_save :sanitize_attributes
 

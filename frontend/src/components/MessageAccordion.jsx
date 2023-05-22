@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => {
   const [selected, setSelected] = useState([]);
-  
-  console.log("🥰", messages);
+  const userId = parseInt(localStorage.getItem('userId'), 10);
 
   // Function to format the date in a desired format
   const formatDate = (dateString) => {
@@ -30,11 +29,16 @@ const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => 
     }
   };
 
+  const handleDelete = (id, event, senderId, recipientId) => {
+    event.stopPropagation();
+    deleteMessage(id, userId, senderId, recipientId);
+  };
+
   return (
     <article className="message-accordions-wrapper">
       {messages.map((item) => (
         <div
-          className={selected.includes(item.id) ? 'message-accordion selected' : 'message-accordion'}
+          className={selected.includes(item.id) ? "message-accordion selected" : "message-accordion"}
           key={item.id}
           onClick={(event) => toggle(item.id, event)}
         >
@@ -60,12 +64,12 @@ const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => 
                 <h2>From: USER ID {item.sender_id}</h2>
               ) : (
                 <h2>Sent to: USER ID {item.recipient_id}</h2>
-              )
-              }
+              )}
               <h3>{formatDate(item.created_at)}</h3>
             </div>
             <div className="banner-right">
-              <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
+              <h2 className="toggle">{selected.includes(item.id) ? "-" : "+"}</h2>
+              <button onClick={(event) => handleDelete(item.id, event, item.sender_id, item.recipient_id)}>Delete Message</button>
             </div>
           </div>
           {selected.includes(item.id) && (

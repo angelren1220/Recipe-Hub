@@ -12,7 +12,7 @@ const Inbox = function(props) {
   const [showReceivedMessages, setShowReceivedMessages] = useState(true); // Define the showReceivedMessages state variable
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = parseInt(localStorage.getItem('userId'), 10);
     getMessagesByUserID(userId);
   }, []);
 

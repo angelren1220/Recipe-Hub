@@ -124,16 +124,20 @@ const useApplicationData = () => {
     }
     return axios.get(`/api/users/${userId}`)
       .then((response) => {
+        const filteredMessages = response.data.messages.filter((message) => {
+          return ((userId === message.recipient_id && message.recipient_deleted === false) || (userId === message.sender_id && message.sender_deleted === false));
+        });;
+  
         dispatch({
           type: SET_MESSAGES,
-          messages: response.data.messages
+          messages: filteredMessages
         });
-        console.log("😎 Messages:", response.data.messages); // Add this console.log statement
+        console.log("😎 Messages:", filteredMessages); // Add this console.log statement
       })
       .catch((error) => {
         // Handle error if needed
       });
-  };
+  };  
 
   const createUser = (user) => {
     // the object post to backend should be the exact same name with it in database
@@ -281,31 +285,32 @@ const useApplicationData = () => {
       });
   };
 
-  // Note: This is actually a POST question for a soft deletion
-  const deleteMessage = (id, userId) => {
+  const deleteMessage = (id, userId, senderId, recipientId) => {
     const endpoint = `/api/messages/${id}`;
     const data = {};
   
     // Determine which user is invoking the function
-    if (userId === sender_id || userId === recipient_id) {
+    if (userId === senderId) {
       data.sender_deleted = true;
+    } else if (userId === recipientId) {
       data.recipient_deleted = true;
     }
   
-    axios.put(endpoint, { data })
+    axios
+      .put(endpoint, { data })
       .then((response) => {
         // Update state
-        const updatedMessages = state.messages.filter(message => message.id !== id);
+        const updatedMessages = state.messages.filter((message) => message.id !== id);
         dispatch({
           type: SET_MESSAGES,
-          messages: updatedMessages
+          messages: updatedMessages,
         });
       })
       .catch((error) => {
-        // Handle error
+        console.log(error);
+        return;
       });
   };
-  
 
   return {
     state,
