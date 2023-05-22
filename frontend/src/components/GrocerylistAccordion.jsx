@@ -49,10 +49,9 @@ const GrocerylistAccordion = function(props) {
   const handleButtonClick = (i, event) => {
     event.stopPropagation();
     const selectedGrocerylistId = state.grocerylists[i].id;
-
     setSelected([selectedGrocerylistId]);
-  
     setShowForm(true);
+
   };
 
   const handleSaveItem = (grocerylist, event) => {
@@ -83,14 +82,14 @@ const GrocerylistAccordion = function(props) {
     setQuantity('');
     setUnits('');
     setShowForm(false);
-  }
+  };
 
   const handleDeleteItem = (itemName, grocerylist, event) => {
     event.stopPropagation();
 
     const currentItems = grocerylist.items;
-  
-    const updatedItems = { ...currentItems};
+
+    const updatedItems = { ...currentItems };
     delete updatedItems[itemName];
     const updatedGrocerylist = { ...grocerylist, items: updatedItems };
 
@@ -98,7 +97,7 @@ const GrocerylistAccordion = function(props) {
 
     setShowForm(false);
     setIsItemSaved(true);
-  }
+  };
 
   const handleDelete = (id, event) => {
     event.stopPropagation();
@@ -124,10 +123,12 @@ const GrocerylistAccordion = function(props) {
                 {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
                   <li key={itemName}>
                     <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-                    <FaMinusCircle className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}/>
+                    <FaMinusCircle className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)} />
                   </li>
                 ))}
               </ul>
+            </div>
+            {selected.includes(grocerylist.id) && (
               <div>
                 <FaPlus className="btn-add" onClick={(event) => handleButtonClick(i, event)} />
                 {showForm && (
@@ -168,7 +169,8 @@ const GrocerylistAccordion = function(props) {
 
                 )}
               </div>
-            </div>
+            )}
+
             <div className="control-buttons">
               <button onClick={(event) => handleDelete(grocerylist.id, event)}>Delete Grocerylist</button>
             </div>
@@ -177,6 +179,7 @@ const GrocerylistAccordion = function(props) {
 
         </div>
       ))}
+
     </article>
   );
 };

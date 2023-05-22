@@ -35,10 +35,11 @@ const Recipe = function(props) {
 
     const grocerylist = { name: recipe.name, user_id: userId, items: items };
 
-    console.log(items);
-    console.log(grocerylist);
-    console.log(ingredients.length, Object.keys(items).length);
+    // console.log(items);
+    // console.log(grocerylist);
+    // console.log(ingredients.length, Object.keys(items).length);
     createGrocerylist(grocerylist);
+    alert("Added to Grocery lists!");
 
 
   };
