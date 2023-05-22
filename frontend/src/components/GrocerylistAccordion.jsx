@@ -4,12 +4,10 @@ import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
 import { FaAngleDoubleDown, FaPlus, FaMinusCircle } from 'react-icons/fa';
 
-
 const GrocerylistAccordion = function(props) {
 
   const {
     state,
-    dispatch,
     getGrocerylistsByUserId,
     createGrocerylist,
     updateGrocerylist,
@@ -19,9 +17,11 @@ const GrocerylistAccordion = function(props) {
   const [selected, setSelected] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
+  const [grocerylistName, setGrocerylistName] = useState('');
   const [quantity, setQuantity] = useState('');
   const [units, setUnits] = useState('');
   const [isItemSaved, setIsItemSaved] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const userId = localStorage.getItem('userId');
 
@@ -72,16 +72,16 @@ const GrocerylistAccordion = function(props) {
     setName('');
     setQuantity('');
     setUnits('');
-    setShowForm(false);
     setIsItemSaved(true);
   };
 
-  const handleCancel = (event) => {
+  const handleCancelItem = (event) => {
     event.stopPropagation();
     setName('');
     setQuantity('');
     setUnits('');
     setShowForm(false);
+    setShowPopup(false);
   };
 
   const handleDeleteItem = (itemName, grocerylist, event) => {
@@ -108,8 +108,29 @@ const GrocerylistAccordion = function(props) {
     event.stopPropagation();
   };
 
+  const handleAddNewGrocerylist = (event) => {
+    event.stopPropagation();
+    setShowPopup(true);
+  };
+
+  const handleSaveList = (userId, event) => {
+    event.stopPropagation();
+
+    const newGrocerylist = { user_id: userId, name: grocerylistName, items: {} };
+    createGrocerylist(newGrocerylist);
+
+    setShowForm(false);
+  };
+
+  const handleCancelList = (event) => {
+    event.stopPropagation();
+    setGrocerylistName('');
+    setShowPopup(false);
+  };
+
   return (
     <article className="grocerylist-accordions-wrapper">
+
       {state.grocerylists.map((grocerylist, i) => (
         <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} onClick={(event) => toggle(i, event)} key={i}>
 
@@ -173,7 +194,7 @@ const GrocerylistAccordion = function(props) {
                       />
                     </div>
                     <button onClick={(event) => handleSaveItem(grocerylist, event)}>Save Item</button>
-                    <button onClick={(event) => handleCancel(event)}>Cancel</button>
+                    <button onClick={(event) => handleCancelItem(event)}>Cancel</button>
                   </form>
 
                 )}
@@ -189,6 +210,26 @@ const GrocerylistAccordion = function(props) {
         </div>
       ))}
 
+      <div className="add-new-grocerylist">
+
+        <button onClick={(event) => handleAddNewGrocerylist(event)}>Add new grocery list</button>
+        {showPopup && (
+          <form>
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="grocerylist-name"
+                name="name"
+                value={grocerylistName}
+                onChange={(event) => setGrocerylistName(event.target.value)}
+              />
+            </div>
+            <button onClick={(event) => handleSaveList(userId, event)}>Save List</button>
+            <button onClick={(event) => handleCancelList(event)}>Cancel</button>
+          </form>
+        )}
+      </div>
     </article>
   );
 };
