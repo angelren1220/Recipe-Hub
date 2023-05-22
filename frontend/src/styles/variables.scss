@@ -9,41 +9,7 @@ $secondary-color3: hsl(42, 88%, 60%);
 $secondary-color4: hsl(42, 88%, 52%);
 
 
+$font1: 'EB Garamond', serif;
+$font2: 'Inter', sans-serif;
 
-//TIMESDOT
-@font-face {
-  font-family: 'TimesDot';
-  src: local('./styles/fonts/TimesDot/TimesDotRom.otf');
-  font-style: normal;
-}
 
-@font-face {
-  font-family: 'TimesDot';
-  src: local('./styles/fonts/TimesDot/TimesDotBol.otf');
-  font-style: bold;
-}
-
-@font-face {
-  font-family: 'TimesDot';
-  src: local('./styles/fonts/TimesDot/Times Dot-Italic.otf');
-  font-style: italic
-}
-
-//FreeSans
-@font-face {
-  font-family: 'FreeSans';
-  src: local('FreeSans'), url('.styles/fonts/FreeSans.otf') format('opentype');
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'FreeSans';
-  src: local('FreeSans Bold'), url('./fonts/FreeSansBold.otf') format('opentype');
-  font-style: bold;
-}
-
-@font-face {
-  font-family: 'FreeSans';
-  src: local('FreeSans Bold Oblique'), url('./styles/fonts/FreeSansBoldOblique.otf') format('opentype');
-  font-style: oblique;
-}
