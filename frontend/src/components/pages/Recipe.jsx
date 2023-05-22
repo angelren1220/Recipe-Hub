@@ -81,7 +81,7 @@ const Recipe = function(props) {
           <li>Estimate cooktime: {recipe.cooktime_minutes} min</li>
           {recipe.is_vegetarian && <li>Vegetarian</li>}
           {recipe.is_vegan && <li>Vegan</li>}
-          {recipe.is_vegans_lowcarb && <li>Low Carb</li>}
+          {recipe.is_lowcarb && <li>Low Carb</li>}
           {recipe.is_lactosefree && <li>Lactose Free</li>}
           {recipe.is_glutenfree && <li>Gluten Free</li>}
           {recipe.is_nutfree && <li>Nut Free</li>}
