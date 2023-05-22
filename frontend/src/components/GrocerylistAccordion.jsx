@@ -114,7 +114,9 @@ const GrocerylistAccordion = function(props) {
         <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} onClick={(event) => toggle(i, event)} key={i}>
 
           <div className="banner">
-            <h1>{grocerylist.name}</h1>
+            <Link to={`/grocerylists/${grocerylist.id}`}>
+              <h1>{grocerylist.name}</h1>
+            </Link>
             <div className="banner-right">
               <h2 className="toggle" onClick={(event) => toggle(i, event)}><FaAngleDoubleDown /></h2>
             </div>

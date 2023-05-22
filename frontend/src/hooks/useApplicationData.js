@@ -13,6 +13,7 @@ import dataReducer, {
   SET_BOOKMARKS,
   SET_MESSAGES,
   SET_GROCERYLISTS,
+  SET_GROCERYLIST,
 } from './dataReducer';
 
 import axios from 'axios';
@@ -29,6 +30,7 @@ const useApplicationData = () => {
     bookmarks: [],
     messages: [],
     grocerylists: [],
+    grocerylist: [],
     loading: true,
   });
 
@@ -421,6 +423,20 @@ const useApplicationData = () => {
       });
   };
 
+  const getGrocerylistById = (id) => {
+    axios.get(`/api/grocery_lists/${id}`)
+    .then((response) => {
+      dispatch({
+        type: SET_GROCERYLIST,
+        recipe: response.data.grocerylist
+      });
+      // console.log("🙈", response.data.recipe);
+    })
+    .catch((error) => {
+
+    });
+  }
+
   return {
     state,
     dispatch,
@@ -446,7 +462,8 @@ const useApplicationData = () => {
     createGrocerylist,
     updateGrocerylist,
     deleteGrocerylist,
-    deleteMessage
+    deleteMessage,
+    getGrocerylistById
   };
 };
 
