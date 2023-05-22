@@ -30,11 +30,17 @@ const Recipe = function(props) {
   const handleAddGrocerylist = () => {
     const items = {};
     ingredients.map((ingredient) => {
-      items[ingredient.name] = {quantity: ingredient.quantity, units: ingredient.units};
+      items[ingredient.name] = { quantity: ingredient.quantity, units: ingredient.units };
     });
 
     const grocerylist = { name: recipe.name, user_id: userId, items: items };
+
+    console.log(items);
+    console.log(grocerylist);
+    console.log(ingredients.length, Object.keys(items).length);
     createGrocerylist(grocerylist);
+
+
   };
 
   if (!recipe || !recipe.directions) {

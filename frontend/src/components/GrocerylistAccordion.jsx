@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
+import { FaAngleDoubleDown } from 'react-icons/fa'
 
 
 const GrocerylistAccordion = function(props) {
@@ -16,6 +17,10 @@ const GrocerylistAccordion = function(props) {
   } = useApplicationData();
 
   const [selected, setSelected] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [name, setName] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [units, setUnits] = useState('');
 
   const userId = localStorage.getItem('userId');
 
@@ -39,6 +44,31 @@ const GrocerylistAccordion = function(props) {
     }
   };
 
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
+
+  const handleSaveItem = (grocerylist, event) => {
+    event.stopPropagation();
+
+    const currentItems = grocerylist.items;
+    const newItem = {
+      [name]: {
+        units: units,
+        quantity: quantity
+      }
+    };
+    const updatedItems = { ...currentItems, ...newItem };
+    const updatedGrocerylist = { ...grocerylist, items: updatedItems };
+
+    updateGrocerylist(grocerylist.id, updatedGrocerylist);
+
+    setName('');
+    setQuantity('');
+    setUnits('');
+    setShowForm(false);
+  };
+
   const handleDelete = (id, event) => {
     event.stopPropagation();
     deleteGrocerylist(id);
@@ -47,12 +77,12 @@ const GrocerylistAccordion = function(props) {
   return (
     <article className="grocerylist-accordions-wrapper">
       {state.grocerylists.map((grocerylist, i) => (
-        <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} key={i} onClick={(event) => toggle(i, event)}>
+        <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} key={i}>
 
           <div className="banner">
             <h1>{grocerylist.name}</h1>
             <div className="banner-right">
-              <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
+              <h2 className="toggle" onClick={(event) => toggle(i, event)}><FaAngleDoubleDown /></h2>
             </div>
 
           </div>
@@ -62,16 +92,52 @@ const GrocerylistAccordion = function(props) {
               <ul>
                 {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
                   <li key={itemName}>
-                    <strong>{itemName}:</strong> {itemData.quantity} {itemData.unit}
+                    <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
                   </li>
                 ))}
               </ul>
+              <div>
+                <button onClick={handleButtonClick}>+</button>
+                {showForm && (
+                  <form>
+                    <div>
+                      <label htmlFor="name">Name:</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="quantity">Quantity:</label>
+                      <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        value={quantity}
+                        onChange={(event) => setQuantity(event.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="units">Units:</label>
+                      <input
+                        type="text"
+                        id="units"
+                        name="units"
+                        value={units}
+                        onChange={(event) => setUnits(event.target.value)}
+                      />
+                    </div>
+                    <button onClick={(event) => handleSaveItem(grocerylist, event)}>Save Item</button>
+                  </form>
+
+                )}
+              </div>
             </div>
             <div className="control-buttons">
               <button onClick={(event) => handleDelete(grocerylist.id, event)}>Delete Grocerylist</button>
-              <Link to={`/edit/${grocerylist.id}`}>
-                <button>Edit Grocerylist</button>
-              </Link>
             </div>
 
           </div>
