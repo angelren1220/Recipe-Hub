@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RecipeAccordion from "../RecipeAccordion";
-import Loop from "../LoopScroll";
 import useApplicationData from "../../hooks/useApplicationData";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import UserInfo from "../UserInfo";
 
 const BooksRecipes = function(props) {

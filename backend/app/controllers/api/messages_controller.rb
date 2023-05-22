@@ -1,10 +1,10 @@
 class Api::MessagesController < ApplicationController
 
-  before_action :set_message, only: [:show, :update]
+  before_action :set_message, only: [:show, :update, :mark_as_read]
 
     # GET /messages
     def index
-      @messages = Message.all
+      @messages = Message.all.order(updated_at: :desc)
       render json: @messages
     end
   
@@ -21,6 +21,19 @@ class Api::MessagesController < ApplicationController
         render json: @message, status: :created
       else
         render json: @message.errors, status: :unprocessable_entity
+      end
+    end
+
+    # PUT /messages/:id/mark_as_read
+    def mark_as_read
+      if params[:read].present? || params[:read] == false
+        if @message.update(read: params[:read])
+          render json: @message
+        else
+          render json: @message.errors, status: :unprocessable_entity
+        end
+      else
+        render json: { error: "error updating message" }, status: :unprocessable_entity
       end
     end
 

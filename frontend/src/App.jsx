@@ -2,7 +2,9 @@ import { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import RecipeEditModeProvider from './hooks/providers/recipeEditMode';
+{/*Providers*/}
+import { UnreadMessagesProvider } from './hooks/providers/UnreadMessagesProvider';
+import RecipeEditModeProvider  from './hooks/providers/recipeEditMode';
 
 {/*Page Components*/ }
 
@@ -39,49 +41,51 @@ const App = function() {
 
     <div className="App">
       <Router>
-        <Template>
+        <UnreadMessagesProvider>
+          <Template>
 
-          <Routes>
+            <Routes>
 
-            <Route path='/recipes'>
-              <Route index element={<RecipesList />}/>
-              <Route path=':id' element={<Recipe/>}/>
-              <Route path='new' element={<NewRecipe/>}/>
-              <Route path='edit/:id' element={
-                <RecipeEditModeProvider>
-                  <EditRecipe/>
-                </RecipeEditModeProvider>
-              }/>
-            </Route>
-            
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>}/>
+              <Route path='/recipes'>
+                <Route index element={<RecipesList />}/>
+                <Route path=':id' element={<Recipe/>}/>
+                <Route path='new' element={<NewRecipe/>}/>
+                <Route path='edit/:id' element={
+                  <RecipeEditModeProvider>
+                    <EditRecipe/>
+                  </RecipeEditModeProvider>
+                }/>
+              </Route>
+              
+              <Route path='/login' element={<Login/>}/>
+              <Route path='/register' element={<Register/>}/>
 
-            <Route path='/explore' element={<Explore/>}/>
-            <Route path='/search' element={<Search/>}/>
+              <Route path='/explore' element={<Explore/>}/>
+              <Route path='/search' element={<Search/>}/>
 
-            <Route path='/books'>
-              <Route index element={<Books/>}/>
-              <Route path=':id' element={<BookRecipes />}/>
-              <Route path='new' element={<NewBook/>}/>
-            </Route>
+              <Route path='/books'>
+                <Route index element={<Books/>}/>
+                <Route path=':id' element={<BookRecipes />}/>
+                <Route path='new' element={<NewBook/>}/>
+              </Route>
 
-            <Route path='/grocerylists'>
-              <Route index element={<GroceryLists/>}/>
-              <Route path=':id' element={<GroceryList/>}/>
-            </Route>
-            
-            <Route path='/profile'>
-              <Route path=':id' element={<Profile/>}/>
-            </Route>
+              <Route path='/grocerylists'>
+                <Route index element={<GroceryLists/>}/>
+                <Route path=':id' element={<GroceryList/>}/>
+              </Route>
+              
+              <Route path='/profile'>
+                <Route path=':id' element={<Profile/>}/>
+              </Route>
 
-            <Route path='/inbox'>
-              <Route index element={<Inbox/>}/>
-            </Route>
+              <Route path='/inbox'>
+                <Route index element={<Inbox/>}/>
+              </Route>
 
-          </Routes>
+            </Routes>
 
-        </Template>
+          </Template>
+        </UnreadMessagesProvider>
       </Router>
 
     </div>

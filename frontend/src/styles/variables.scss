@@ -7,3 +7,43 @@ $secondary-color1: hsl(42, 88%, 80%);
 $secondary-color2: hsl(42, 88%, 73%);
 $secondary-color3: hsl(42, 88%, 60%);
 $secondary-color4: hsl(42, 88%, 52%);
+
+
+
+//TIMESDOT
+@font-face {
+  font-family: 'TimesDot';
+  src: local('./styles/fonts/TimesDot/TimesDotRom.otf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TimesDot';
+  src: local('./styles/fonts/TimesDot/TimesDotBol.otf');
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'TimesDot';
+  src: local('./styles/fonts/TimesDot/Times Dot-Italic.otf');
+  font-style: italic
+}
+
+//FreeSans
+@font-face {
+  font-family: 'FreeSans';
+  src: local('FreeSans'), url('.styles/fonts/FreeSans.otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FreeSans';
+  src: local('FreeSans Bold'), url('./fonts/FreeSansBold.otf') format('opentype');
+  font-style: bold;
+}
+
+@font-face {
+  font-family: 'FreeSans';
+  src: local('FreeSans Bold Oblique'), url('./styles/fonts/FreeSansBoldOblique.otf') format('opentype');
+  font-style: oblique;
+}

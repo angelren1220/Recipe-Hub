@@ -7,6 +7,7 @@ const Inbox = function(props) {
     state,
     deleteMessage,
     getMessagesByUserID,
+    updateReadMessage
   } = useApplicationData();
 
   const [showReceivedMessages, setShowReceivedMessages] = useState(true); // Define the showReceivedMessages state variable
@@ -50,6 +51,7 @@ const Inbox = function(props) {
         messages={filteredMessages}
         deleteMessage={deleteMessage}
         showReceivedMessages={showReceivedMessages}
+        updateReadMessage={updateReadMessage}
       />
     </article>
   );

@@ -67,10 +67,12 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
           onClick={(event) => toggle(i, event)}
         >
           <div className="banner">
-            <Link to={`/recipes/${item.id}`}>
-              <h1>{item.name}</h1>
-            </Link>
-            <h2>by: <UserInfo userId={item.user_id}/></h2>
+            <div className="banner-left">
+              <Link to={`/recipes/${item.id}`}>
+                <h1>{item.name}</h1>
+              </Link>
+              <h2>by: <UserInfo userId={item.user_id}/></h2>
+            </div>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
               <img className="banner-image" src={item.image} alt="Recipe" />
@@ -79,29 +81,35 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
           <div className={selected.includes(item.id) ? 'content show' : 'content'}>
             <h2>Cooktime: {item.cooktime_minutes} min</h2>
             <h2>Description: <p>{item.description}</p></h2>
-            <div className="categories">
-              <h2>Categories:</h2>
-              {item.is_vegan && <span className="category">Vegan</span>}
-              {item.is_vegetarian && <span className="category">Vegetarian</span>}
-              {item.is_nutfree && <span className="category">Nut-free</span>}
-              {item.is_lowcarb && <span className="category">Low-Carb</span>}
-              {item.is_glutenfree && <span className="category">Gluten-free</span>}
-              {item.is_lactosefree && <span className="category">Lactose-free</span>}
-            </div>
-            {userId && (
-              <div className="control-buttons">
-                <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
-                <Link to={`/recipes/edit/${item.id}`}>
-                  <button>Edit Recipe</button>
-                </Link>
-                <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Send Recipe </button>
 
-                <Popup popupMessage={'Add to Book'} userBooks={userBooks} item={item} addRecipe={addRecipe}>
-                  <AddRecipeForm />
-                </Popup>
+            <div className="bottom-content">
+              <div className="categories">
+                <h2>Categories:</h2>
+                  <div className="tags">
+                    {item.is_vegan && <span className="category">Vegan</span>}
+                    {item.is_vegetarian && <span className="category">Vegetarian</span>}
+                    {item.is_nutfree && <span className="category">Nut-free</span>}
+                    {item.is_lowcarb && <span className="category">Low-Carb</span>}
+                    {item.is_glutenfree && <span className="category">Gluten-free</span>}
+                    {item.is_lactosefree && <span className="category">Lactose-free</span>}
+                  </div>
               </div>
-            )}
+              {userId && (
+                <div className="control-buttons">
+                  <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
+                  <Link to={`/recipes/edit/${item.id}`}>
+                    <button>Edit Recipe</button>
+                  </Link>
+                  <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Send Recipe </button>
+
+                  <Popup popupMessage={'Add to Book'} userBooks={userBooks} item={item} addRecipe={addRecipe}>
+                    <AddRecipeForm />
+                  </Popup>
+                </div>
+              )}
+            </div>
           </div>
+            
         </div>
       ))}
     </article>

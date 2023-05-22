@@ -4,6 +4,7 @@ export const SET_RECIPES = 'SET_RECIPES';
 export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 export const SET_BOOKS = 'SET_BOOKS';
 export const SET_MESSAGES = "SET_MESSAGES";
+export const SET_UNREAD_MESSAGES_COUNT ="SET_UNREAD_MESSAGES_COUNT";
 export const SET_BOOKMARKS = 'SET_BOOKMARKS';
 export const SET_GROCERYLISTS = 'SET_GROCERYLISTS';
 export const SET_GROCERYLIST = 'SET_GROCERYLIST';
@@ -57,6 +58,13 @@ const dataReducer = (state, action) => {
       return {
         ...state,
         messages: action.messages,
+        loading: false
+      };
+
+    case SET_UNREAD_MESSAGES_COUNT:
+      return {
+        ...state,
+        unread: action.unread_messages,
         loading: false
       };
 

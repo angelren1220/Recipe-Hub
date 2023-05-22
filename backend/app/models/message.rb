@@ -15,13 +15,11 @@ class Message < ApplicationRecord
   validates :subject_type, presence: true
 
   validates :message, length: { maximum: 500 }
-  
-  before_save :sanitize_attributes
 
-  private
+  # private
 
-  def sanitize_attributes
-  self.message = CGI.escapeHTML(message) if message.present?
-  end
+  # def sanitize_attributes
+  # self.message = CGI.escapeHTML(message) if message.present?
+  # end
 
 end

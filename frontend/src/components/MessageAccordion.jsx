@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/message_accordion.scss";
 import { Link } from "react-router-dom";
 import UserInfo from "./UserInfo";
+import UnreadMessagesContext from "../hooks/providers/UnreadMessagesProvider";
 
 const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => {
   const [selected, setSelected] = useState([]);
   const userId = parseInt(localStorage.getItem('userId'), 10);
+  const { updateReadMessage } = useContext(UnreadMessagesContext);
 
   // Function to format the date in a desired format
   const formatDate = (dateString) => {
@@ -21,12 +23,21 @@ const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => 
     return `${date.toDateString()} ${date.toLocaleTimeString()}`;
   };
 
+  // toggles accordion and read status
   const toggle = (id, event) => {
     event.stopPropagation();
     if (selected.includes(id)) {
       setSelected(selected.filter((selectedId) => selectedId !== id));
     } else {
       setSelected([...selected, id]);
+    }
+
+    const clickedMessage = messages.find((message) => message.id === id);
+    if (clickedMessage && !clickedMessage.read && clickedMessage.sender_id !== userId) {
+      console.log("Message ID:", clickedMessage.id);
+      const isRead = { read: true }
+
+      updateReadMessage(clickedMessage.id, isRead)
     }
   };
 
