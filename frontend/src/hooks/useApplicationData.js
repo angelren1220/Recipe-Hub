@@ -52,18 +52,58 @@ const useApplicationData = () => {
   };
 
   const getIngredients = (recipeId) => {
-    axios.get(`/api/recipes/${recipeId}`)
+    return axios.get(`/api/recipes/${recipeId}`)
       .then((response) => {
         // console.log("🙈", response.data);
         dispatch({
           type: SET_INGREDIENTS,
           ingredients: response.data.ingredients
         });
+        return response.data.ingredients;
       })
       .catch((error) => {
 
       });
   };
+
+  const updateIngredient = (id, ingredient) => {
+    axios.put(`/api/ingredients/${id}`, { ingredient })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
+      });
+  };
+
+  const createIngredient = async(ingredient) => {
+    return axios.post("/api/ingredients", { ingredient })
+      .then((response) => {
+        console.log('🦜',response);
+      })
+      .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        alert(message);
+      });
+  };
+
+  const deleteIngredient = (id) => {
+    axios.delete(`/api/ingredients/${id}`)
+      .then((response) => {
+        const updatedRecipes = state.recipes.filter(recipe => recipe.id !== id);
+        dispatch({
+          type: SET_RECIPES,
+          recipes: updatedRecipes
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
 
   const getRecipeById = (recipeId) => {
 
@@ -81,14 +121,17 @@ const useApplicationData = () => {
   };
 
   const getRecipesByUserId = (userId) => {
-
-    axios.get(`/api/users/${userId}`)
+    if (!userId) {
+      userId = 1;
+    }
+    return axios.get(`/api/users/${userId}`)
       .then((response) => {
         // console.log("🙈", response.data);
         dispatch({
           type: SET_RECIPES,
           recipes: response.data.recipes
         });
+        return response.data;
       })
       .catch((error) => {
       
@@ -137,7 +180,8 @@ const useApplicationData = () => {
       .catch((error) => {
         // Handle error if needed
       });
-  };  
+  };
+
 
   const createUser = (user) => {
     // the object post to backend should be the exact same name with it in database
@@ -216,7 +260,7 @@ const useApplicationData = () => {
   const createRecipe = (recipe) => {
     axios.post("/api/recipes", { recipe })
       .then((response) => {
-        console.log(response);
+        window.location = `/recipes/edit/${response.data.id}`;
       })
       .catch((error) => {
 
@@ -226,9 +270,12 @@ const useApplicationData = () => {
   const updateRecipe = (id, recipe) => {
     axios.put(`/api/recipes/${id}`, { recipe })
       .then((response) => {
-        console.log(response);
+        window.location = `/recipes/${response.data.id}`;
       })
       .catch((error) => {
+        const message = Object.entries(error.response.data)
+          .reduce((str, [key, val]) => `${str} ${key} ${val}`, '');
+        // alert(message);
 
       });
   };
@@ -317,6 +364,9 @@ const useApplicationData = () => {
     dispatch,
     getAllRecipes,
     getIngredients,
+    updateIngredient,
+    createIngredient,
+    deleteIngredient,
     getRecipeById,
     getRecipesByUserId,
     getBooksByUserID,
@@ -326,9 +376,9 @@ const useApplicationData = () => {
     logoutUser,
     createRecipe,
     updateRecipe,
-    updateBookDescription,
     deleteRecipe,
     deleteBook,
+    updateBookDescription,
     deleteBookmark,
     deleteMessage
   };

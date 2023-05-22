@@ -57,7 +57,7 @@ const Recipe = function(props) {
 
         {userId && <div className="control-buttons">
           <button onClick={(event) => handleDelete(recipe.id)}>Delete Recipe</button>
-          <Link to={`/edit/${recipe.id}`}>
+          <Link to={`/recipes/edit/${recipe.id}`}>
             <button>Edit Recipe</button>
           </Link>
         </div>}

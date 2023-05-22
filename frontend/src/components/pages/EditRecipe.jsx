@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 
 import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
@@ -8,40 +8,86 @@ import EditRecipeSummary from "../editRecipe/EditRecipeSummary";
 import EditRecipeIngredients from "../editRecipe/EditRecipeIngredients";
 import EditRecipeDirections from "../editRecipe/EditRecipeDirections";
 
+
 const EditRecipe = function() {
   const {
     recipeEditMode,
     recipeSummaryView,
-    recipeIngredientsView,
-    recipeDirectionsView
+    currentRecipe,
+    setRecipe,
+    currentIngredients,
+    setIngredients,
   } = useContext(recipeEditContext);
 
   const {
     state,
     dispatch,
-    getRecipesByUserID
+    getRecipesByUserId,
+    updateRecipe,
+    getIngredients,
+    updateIngredient,
+    deleteIngredient,
   } = useApplicationData();
 
-  //current recipe id being edited
-  const { recipeId } = useParams();
-  console.log('********', recipeId);
+  //current recipe id from the url
+  const { id } = useParams();
 
+  //used to check if a user's recipe list contains the recipe they are trying to edit
+  const findRecipeById = function(recipeId, recipes) {
+    const editRecipe = recipes.find(recipe => recipe.id === parseInt(recipeId));
+    if (editRecipe) {
+      return editRecipe;
+    }
+    return null;
+  };
+
+  //set the currentRecipe to the recipe with the id matching the url only if the user owns the recipe
   useEffect(() => {
-    const editedRecipe = getRecipesByUserID(1);
+    const getRecipe = async() => {
+      const userId = await localStorage.getItem('userId');
+      const userInfo = await getRecipesByUserId(userId);
+      const userRecipes = userInfo.recipes;
+      const ownedRecipe = findRecipeById(id, userRecipes);
+      
+      if (ownedRecipe) {
+        const ingredients = await getIngredients(ownedRecipe.id);
+        recipeSummaryView();
+        setIngredients(ingredients);
+      }
+      setRecipe(ownedRecipe);
+    };
+    const fetchData = async () => {
+      await getRecipe();
+    };
+    fetchData();
+  }, [id]);
+  
+  //submit recipe and ingredients to the db
+  const handleSubmit = function() {
+    updateRecipe(currentRecipe.id, currentRecipe);
+    currentIngredients.map(ingredient => {
+      (ingredient.delete && deleteIngredient(ingredient.id));
+      (!ingredient.delete && updateIngredient(ingredient.id, ingredient));
+    });
 
-    console.log("🐹", editedRecipe);
-  }, []);
+  };
+
+
 
   return (
     <>
-      <div className="viewModes">
-        <button onClick={() => recipeSummaryView()}>Edit Summary</button>
-        <button onClick={() => recipeIngredientsView()}>Edit Ingredients</button>
-        <button onClick={() => recipeDirectionsView()}>Edit Directions</button>
-      </div>
-      {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
-      {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
-      {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
+      <main>
+        {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
+        {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
+        {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
+      </main>
+      {recipeEditMode === 'LOCKED' && <Link to={'/recipes'}><button>Back</button></Link>}
+      {currentRecipe &&
+        <>
+          <Link to={`/recipes/${currentRecipe.id}`}><button>Reset Changes</button></Link>
+          <Link to={`/recipes/${currentRecipe.id}`} onClick={handleSubmit}><button>Publish</button></Link>
+        </>
+      }
 
     </>
   );
