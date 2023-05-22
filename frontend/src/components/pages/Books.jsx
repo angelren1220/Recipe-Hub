@@ -9,7 +9,8 @@ const Books = function(props) {
     deleteBook,
     deleteBookmark,
     updateBookDescription,
-    createMessage
+    createMessage,
+    createBookmark
   } = useApplicationData();
 
   useEffect(() => {
@@ -25,6 +26,8 @@ const Books = function(props) {
 
   // Extract bookmarked books from state.bookmarks if it is defined
   const bookmarkedBooks = state.bookmarks?.map((bookmark) => bookmark.book) || [];
+
+  // console.log("BOOKMARKED BOOKS", bookmarkedBooks)
 
   return (
     <article className="books">
@@ -43,6 +46,7 @@ const Books = function(props) {
           deleteBook={deleteBook}
           updateBookDescription={updateBookDescription}
           createMessage={createMessage}
+          createBookmark={createBookmark}
         />
       )}
     </article>

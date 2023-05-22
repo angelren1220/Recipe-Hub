@@ -3,13 +3,14 @@ import RecipeAccordion from "../RecipeAccordion";
 import Loop from "../LoopScroll";
 import useApplicationData from "../../hooks/useApplicationData";
 import { Link, useParams } from "react-router-dom";
+import UserInfo from "../UserInfo";
 
 const BooksRecipes = function(props) {
 
   const {
     state,
-    getRecipesByUserId,
-    getUserById,
+    addRecipe,
+    getBooksByUserID,
     getBookByBookID,
     deleteRecipe,
     createMessage
@@ -31,17 +32,28 @@ const BooksRecipes = function(props) {
 
   }, []);
 
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    getBooksByUserID(userId);
+  }, []);
+
   return (
     <>
       {bookState &&
         <article className="recipes-list">
           <h1>{`${bookState.book.name}`}</h1>
-          {bookState.recipes.length === 0 && <h3>This Book is currently empty!</h3>}
+
+          <UserInfo userId={bookState.user.id}/>
+
+          {bookState.recipes.length === 0 && <h3>This Book has no recipes!</h3>}
+
           <RecipeAccordion
             recipes={bookState.recipes}
             userId={userId}
             deleteRecipe={deleteRecipe}
             createMessage={createMessage}
+            userBooks={state.books}
+            addRecipe={addRecipe}
           />
         </article>
       }

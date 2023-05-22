@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DescriptionEditor from "./DescriptionEditor";
 import SendLinkForm from "./SendLinkForm";
 import "../styles/book_accordion.scss";
+import UserInfo from "./UserInfo";
 
 const BookAccordion = ({
   books,
@@ -10,7 +11,8 @@ const BookAccordion = ({
   bookmarks,
   deleteBookmark,
   updateBookDescription,
-  createMessage
+  createMessage,
+  createBookmark
 }) => {
   const [selected, setSelected] = useState([]);
   const [booksState, setBooks] = useState(books); // Declare books state
@@ -46,6 +48,7 @@ const BookAccordion = ({
     event.stopPropagation();
     if (bookmarks && selected.includes(id)) {
       const bookmark = bookmarks.find((bookmark) => bookmark.book.id === id); // Use id instead of item.id
+      console.log("BOOKMARK:",bookmark)
       if (bookmark) {
         deleteBookmark(bookmark.id);
         console.log('🐷 deleted bookmark!');
@@ -93,7 +96,14 @@ const BookAccordion = ({
       });
   };
 
+  const handleBookmark = (bookId, event) => {
+    const userId = parseInt(localStorage.getItem('userId'), 10);
+    event.stopPropagation();
+    createBookmark( userId, bookId);
+  }
+
   return (
+    
     <article className="book-accordions-wrapper">
 
       {showPopup && (
@@ -120,7 +130,7 @@ const BookAccordion = ({
               <Link to={`/books/${item.id}`}>
                 <h1>{item.name}</h1>
               </Link>
-              <h2>By: {item.first_name}</h2>
+              <h2>by: <UserInfo userId={item.user_id}/></h2>
             </div>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
@@ -148,6 +158,7 @@ const BookAccordion = ({
                           {item.description ? "Edit Description" : "Add Description"}
                         </button>
                         <button onClick={(event) => handleSendBookLink(item.id, "Book", event)}> Send Book </button>
+                        <button onClick={(event) => handleBookmark(item.id, event)}> Bookmark </button>
                       </>
                     )}
                   </div>

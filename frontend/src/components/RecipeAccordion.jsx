@@ -5,12 +5,14 @@ import "../styles/recipe_accordion.scss";
 import SendLinkForm from "./SendLinkForm";
 import Popup from "./Popup";
 import AddRecipeForm from "./AddRecipeForm";
+import UserInfo from "./UserInfo";
 
-const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks }) => {
+const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks, addRecipe }) => {
   const [selected, setSelected] = useState([]);
   const [recipesState, setRecipesState] = useState(recipes);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showSendPopup, setShowSendPopup] = useState(false);
   const [selectedRecipeForPopup, setSelectedRecipeForPopup] = useState(null);
+  const [selectedBookId, setSelectedBookId] = useState(null);
 
   useEffect(() => {
     setRecipesState(recipes);
@@ -18,12 +20,12 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
 
   const handleSendRecipeLink = (id, subjectType, event) => {
     event.stopPropagation();
-    setShowPopup(true);
+    setShowSendPopup(true);
     setSelectedRecipeForPopup({ id, subjectType });
   };
 
   const closePopup = () => {
-    setShowPopup(false);
+    setShowSendPopup(false);
     setSelectedRecipeForPopup(null);
   };
 
@@ -43,21 +45,13 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
     setRecipesState(recipesState.filter((recipe) => recipe.id !== id));
   };
 
-  const handleAddRecipe = (event, recipeId) => {
-    event.stopPropagation();
-    const selectedBook = selectedBookId || userBooks[0].id; // Use the first book ID as a fallback if selectedBookId is null
-    console.log("Selected Recipe ID:", recipeId);
-    console.log("Selected Book ID:", selectedBook);
-    setSelectedBookId(null);
-    setSelectedRecipeId(null);
-    // Additional logic using the selected book ID
-    closePopup(); // Close the popup after handling the submit action
-  };
+  console.log("💨", recipesState)
+  console.log("💦", userBooks)
 
   return (
     <article className="recipe-accordions-wrapper">
 
-      {showPopup && (
+      {showSendPopup && (
         <div className="popup-overlay">
           <div className="popup-form">
             <SendLinkForm
@@ -81,7 +75,7 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
             <Link to={`/recipes/${item.id}`}>
               <h1>{item.name}</h1>
             </Link>
-            {/* <h2>By: {item.first_name}</h2> */}
+            <h2>by: <UserInfo userId={item.user_id}/></h2>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
               <img className="banner-image" src={item.image} alt="Recipe" />
@@ -107,7 +101,7 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
                 </Link>
                 <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Send Recipe </button>
 
-                <Popup popupMessage={'Add to Book'} userBooks={userBooks} item={item}>
+                <Popup popupMessage={'Add to Book'} userBooks={userBooks} item={item} addRecipe={addRecipe}>
                   <AddRecipeForm />
                 </Popup>
               </div>
