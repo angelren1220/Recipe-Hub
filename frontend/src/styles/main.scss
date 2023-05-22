@@ -30,12 +30,28 @@
 
 a {
   font-weight: 500;
-  color: $secondary-color3;
+  color: $secondary-color1;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: $secondary-color4;
+  color: $secondary-color3;
+}
+
+h1 {
+  color: $secondary-color1;
+}
+
+label {
+  color: $secondary-color1;
+}
+
+input {
+  color: $secondary-color1;
+}
+
+textarea {
+  color: $primary-color4;
 }
 
 body {
@@ -59,7 +75,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   color: $secondary-color1;
-  background-color: $primary-color4;
+  background-color: $primary-color2;
   cursor: pointer;
   transition: border-color 0.25s;
 }
