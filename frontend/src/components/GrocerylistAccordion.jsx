@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
-import { FaAngleDoubleDown } from 'react-icons/fa'
+import { FaAngleDoubleDown, FaPlus, FaMinusCircle } from 'react-icons/fa';
 
 
 const GrocerylistAccordion = function(props) {
@@ -63,11 +63,38 @@ const GrocerylistAccordion = function(props) {
 
     updateGrocerylist(grocerylist.id, updatedGrocerylist);
 
+
     setName('');
     setQuantity('');
     setUnits('');
     setShowForm(false);
   };
+
+  const handleCancel = (event) => {
+    event.stopPropagation();
+    setName('');
+    setQuantity('');
+    setUnits('');
+    setShowForm(false);
+  }
+
+  const handleDeleteItem = (item, grocerylist, event) => {
+    event.stopPropagation();
+
+    const currentItems = grocerylist.items;
+  
+    const updatedItems = { ...currentItems};
+    delete updatedItems[item];
+    const updatedGrocerylist = { ...grocerylist, items: updatedItems };
+
+    updateGrocerylist(grocerylist.id, updatedGrocerylist);
+
+
+    setName('');
+    setQuantity('');
+    setUnits('');
+    setShowForm(false);
+  }
 
   const handleDelete = (id, event) => {
     event.stopPropagation();
@@ -93,11 +120,12 @@ const GrocerylistAccordion = function(props) {
                 {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
                   <li key={itemName}>
                     <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
+                    <FaMinusCircle className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}/>
                   </li>
                 ))}
               </ul>
               <div>
-                <button onClick={handleButtonClick}>+</button>
+                <FaPlus className="btn-add" onClick={handleButtonClick} />
                 {showForm && (
                   <form>
                     <div>
@@ -131,6 +159,7 @@ const GrocerylistAccordion = function(props) {
                       />
                     </div>
                     <button onClick={(event) => handleSaveItem(grocerylist, event)}>Save Item</button>
+                    <button onClick={(event) => handleCancel(event)}>Cancel</button>
                   </form>
 
                 )}
