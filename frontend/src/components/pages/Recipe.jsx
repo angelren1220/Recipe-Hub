@@ -65,9 +65,7 @@ const Recipe = function(props) {
           <span>By:</span>
           <span className="author"> <UserInfo userId={user.id} /> </span>
         </div>
-        <h3 className="subtitle">Description</h3>
-          <p>Estimate cooktime: {recipe.cooktime_minutes} min</p>
-        <p className="description">{recipe.description}</p>
+        <p>Estimate cooktime: {recipe.cooktime_minutes} min</p>
         <div className="categories">
           <div className="tags">
             {recipe.is_vegan && <span className="category">Vegan</span>}
@@ -78,8 +76,13 @@ const Recipe = function(props) {
             {recipe.is_lactosefree && <span className="category">Lactose-free</span>}
           </div>
         </div>
+        <h3 className="subtitle description-title">Description</h3>
+        <p className="description">{recipe.description}</p>
         <h3 className="subtitle">Ingredients</h3>
 
+        <ul>
+          {ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
+        </ul>
         {userId && <div className="control-buttons make-grocery-list">
           <SystemMessage
             show={isItemSaved}
@@ -88,9 +91,6 @@ const Recipe = function(props) {
             onShowMessage={handleShowMessage} />
           <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
         </div>}
-        <ul>
-          {ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
-        </ul>
 
         <h3 className="subtitle">Directions</h3>
         <ol>

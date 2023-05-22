@@ -22,18 +22,19 @@
 
   .recipe-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-top: 2em;
     width: 100%;
   }
 
   .subtitle {
-    align-self: left;
+    padding-top: 1em;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid;
+    border-color: $secondary-color1;
   }
-
-  .description {
-    margin-bottom: 3em;
-  }
-
+  
   a {
     color: $secondary-color1;
     display: flex;
@@ -47,10 +48,12 @@
 
   .categories {
     display: column;
-    margin-bottom: 2em;
-
+    width: 75%;
+    
     .tags {
+      flex-wrap:wrap;
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 2em;
     }
@@ -69,6 +72,8 @@
     justify-content: flex-end;
     align-items: center;
     width: 100%;
+    border-bottom: 1px solid;
+    border-color: $secondary-color1;
   }
 }
 
