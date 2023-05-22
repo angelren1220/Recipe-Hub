@@ -104,10 +104,14 @@ const GrocerylistAccordion = function(props) {
     deleteGrocerylist(id);
   };
 
+  const handleClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
     <article className="grocerylist-accordions-wrapper">
       {state.grocerylists.map((grocerylist, i) => (
-        <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} key={i}>
+        <div className={selected.some(index => index === i) ? 'grocerylist-accordion selected' : 'grocerylist-accordion'} onClick={(event) => toggle(i, event)} key={i}>
 
           <div className="banner">
             <h1>{grocerylist.name}</h1>
@@ -141,6 +145,7 @@ const GrocerylistAccordion = function(props) {
                         name="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
+                        onClick={handleClick}
                       />
                     </div>
                     <div>
@@ -151,6 +156,7 @@ const GrocerylistAccordion = function(props) {
                         name="quantity"
                         value={quantity}
                         onChange={(event) => setQuantity(event.target.value)}
+                        onClick={handleClick}
                       />
                     </div>
                     <div>
@@ -161,6 +167,7 @@ const GrocerylistAccordion = function(props) {
                         name="units"
                         value={units}
                         onChange={(event) => setUnits(event.target.value)}
+                        onClick={handleClick}
                       />
                     </div>
                     <button onClick={(event) => handleSaveItem(grocerylist, event)}>Save Item</button>
