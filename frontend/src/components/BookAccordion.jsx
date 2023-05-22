@@ -16,8 +16,9 @@ const BookAccordion = ({
 
   useEffect(() => {
     setBooks(books);
-    console.log(books)
   }, [books]);
+
+  console.log(bookmarks)
 
   const toggle = (id, event) => {
     event.stopPropagation();

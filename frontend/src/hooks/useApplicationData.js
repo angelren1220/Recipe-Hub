@@ -97,35 +97,41 @@ const useApplicationData = () => {
 
   const getBooksByUserID = (userId) => {
     if (!userId) {
-      return;
+      return Promise.resolve(); // Return a resolved promise if userId is not available
     }
-    axios.get(`/api/users/${userId}`)
+    return axios.get(`/api/users/${userId}`)
       .then((response) => {
-        console.log("🙈", response.data);
         dispatch({
           type: SET_BOOKS,
           books: response.data.books,
-          bookmarks: response.data.bookmarked_books
+          bookmarks: response.data.bookmarked_books.map((item) => {
+            return {
+              bookmarked_book: item.bookmarked_book,
+              book: item.book,
+            };
+          })
         });
       })
       .catch((error) => {
+        // Handle error if needed
       });
   };
 
   
   const getMessagesByUserID = (userId) => {
     if (!userId) {
-      return;
+      return Promise.resolve(); // Return a resolved promise if userId is not available
     }
-    axios.get(`/api/users/${userId}`)
+    return axios.get(`/api/users/${userId}`)
       .then((response) => {
-        console.log("🙈", response.data);
         dispatch({
           type: SET_MESSAGES,
-          books: response.data.messages
+          messages: response.data.messages
         });
+        console.log("😎 Messages:", response.data.messages); // Add this console.log statement
       })
       .catch((error) => {
+        // Handle error if needed
       });
   };
 

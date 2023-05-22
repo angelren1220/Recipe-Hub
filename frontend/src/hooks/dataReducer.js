@@ -53,7 +53,7 @@ const dataReducer = (state, action) => {
     case SET_MESSAGES:
       return {
         ...state,
-        bookmarks: action.messages,
+        messages: action.messages,
         loading: false
       };
     
