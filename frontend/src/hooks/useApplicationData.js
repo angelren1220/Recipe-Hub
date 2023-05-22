@@ -2,6 +2,7 @@ import {
   // useEffect,
   useReducer
 } from 'react';
+
 import dataReducer, {
   // SET_APPLICATION_DATA,
   SET_INGREDIENTS,
@@ -105,6 +106,23 @@ const useApplicationData = () => {
           type: SET_BOOKS,
           books: response.data.books.map((item) => ({ ...item.book, key: item.book.id })),
           bookmarks: response.data.bookmarked_books
+        });
+      })
+      .catch((error) => {
+      });
+  };
+
+  
+  const getMessagesByUserID = (userId) => {
+    if (!userId) {
+      return;
+    }
+    axios.get(`/api/users/${userId}`)
+      .then((response) => {
+        console.log("🙈", response.data);
+        dispatch({
+          type: SET_MESSAGES,
+          books: response.data.messages
         });
       })
       .catch((error) => {
@@ -257,6 +275,32 @@ const useApplicationData = () => {
       });
   };
 
+  // Note: This is actually a POST question for a soft deletion
+  const deleteMessage = (id, userId) => {
+    const endpoint = `/api/messages/${id}`;
+    const data = {};
+  
+    // Determine which user is invoking the function
+    if (userId === sender_id || userId === recipient_id) {
+      data.sender_deleted = true;
+      data.recipient_deleted = true;
+    }
+  
+    axios.put(endpoint, { data })
+      .then((response) => {
+        // Update state
+        const updatedMessages = state.messages.filter(message => message.id !== id);
+        dispatch({
+          type: SET_MESSAGES,
+          messages: updatedMessages
+        });
+      })
+      .catch((error) => {
+        // Handle error
+      });
+  };
+  
+
   return {
     state,
     dispatch,
@@ -265,6 +309,7 @@ const useApplicationData = () => {
     getRecipeById,
     getRecipesByUserId,
     getBooksByUserID,
+    getMessagesByUserID,
     createUser,
     loginUser,
     logoutUser,
@@ -273,7 +318,8 @@ const useApplicationData = () => {
     updateBookDescription,
     deleteRecipe,
     deleteBook,
-    deleteBookmark
+    deleteBookmark,
+    deleteMessage
   };
 };
 
