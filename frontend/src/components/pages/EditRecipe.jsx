@@ -1,3 +1,5 @@
+import '../../styles/edit_recipe.scss';
+
 import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
@@ -76,16 +78,17 @@ const EditRecipe = function() {
 
   return (
     <>
-      <main>
+      <main className='edit-recipe'>
         {recipeEditMode === 'SUMMARY' && <EditRecipeSummary />}
         {recipeEditMode === 'INGREDIENTS' && <EditRecipeIngredients />}
         {recipeEditMode === 'DIRECTIONS' && <EditRecipeDirections />}
       </main>
       {recipeEditMode === 'LOCKED' && <Link to={'/recipes'}><button>Back</button></Link>}
+      
       {currentRecipe &&
-        <>
+        <div className='publish-button'>
           <button onClick={handleSubmit}>Publish</button>
-        </>
+        </div>
       }
 
     </>

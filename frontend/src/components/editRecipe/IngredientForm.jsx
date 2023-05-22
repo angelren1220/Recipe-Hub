@@ -72,9 +72,14 @@ const IngredientForm = function(props) {
             required
           />
         </form>
-        <button onClick={handleIngredientDelete}>{`Remove ${currentIngredient.name}`}</button>
+        <button className='remove-item' onClick={handleIngredientDelete}>{`Remove ${currentIngredient.name}`}</button>
       </>}
-      {currentIngredient.delete && <button onClick={handleIngredientUndoDelete}>{`Undo Remove ${currentIngredient.name}`}</button>}
+      {currentIngredient.delete &&
+      <>
+        <h4></h4>
+        <button onClick={handleIngredientUndoDelete}>{`Undo Remove ${currentIngredient.name}`}</button>
+      </>
+      }
     </>
   );
 };

@@ -16,7 +16,7 @@ const EditRecipeSummary = function(props) {
   } = useContext(recipeEditContext);
 
   return (
-    <>
+    <div className="edit-summary">
       <h1>Edit Recipe Summary</h1>
       <form
         autoComplete="off"
@@ -81,7 +81,7 @@ const EditRecipeSummary = function(props) {
             className="switch-checkbox"
           />
           <label htmlFor="is_vegetarian" className="switch-label">
-            Vegetarian:
+            Vegetarian
             <span className="switch-slider" />
           </label>
         </div>
@@ -98,7 +98,7 @@ const EditRecipeSummary = function(props) {
             className="switch-checkbox"
           />
           <label htmlFor="is_vegan" className="switch-label">
-            Vegan:
+            Vegan
             <span className="switch-slider" />
           </label>
         </div>
@@ -115,7 +115,7 @@ const EditRecipeSummary = function(props) {
             className="switch-checkbox"
           />
           <label htmlFor="is_lowcarb" className="switch-label">
-            Low Carb:
+            Low Carb
             <span className="switch-slider" />
           </label>
         </div>
@@ -132,7 +132,7 @@ const EditRecipeSummary = function(props) {
             className="switch-checkbox"
           />
           <label htmlFor="is_lactosefree" className="switch-label">
-            Lactose Free:
+            Lactose Free
             <span className="switch-slider" />
           </label>
         </div>
@@ -149,7 +149,7 @@ const EditRecipeSummary = function(props) {
             className="switch-checkbox"
           />
           <label htmlFor="is_glutenfree" className="switch-label">
-            Gluten Free:
+            Gluten Free
             <span className="switch-slider" />
           </label>
         </div>
@@ -166,13 +166,13 @@ const EditRecipeSummary = function(props) {
             className="switch-checkbox"
           />
           <label htmlFor="is_nutfree" className="switch-label">
-            Nut Free:
+            Nut Free
             <span className="switch-slider" />
           </label>
         </div>
       </form>
       <button onClick={recipeIngredientsView}>Next</button>
-    </>
+    </div>
   );
 };
 

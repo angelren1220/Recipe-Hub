@@ -30,18 +30,22 @@ const EditRecipeIngredients = function(props) {
   return (
     <>
       <h1>Edit Recipe Ingredients</h1>
-      <ul>
+      <div className="all-ingredients-form">
         {currentIngredients && currentIngredients.map((ingredient) => {
           return (
-            <li key={`ingredient-list-${ingredient.id}`}>
+            <div key={`ingredient-list-${ingredient.id}`}>
               <IngredientForm key={`ingredient-form-${ingredient.id}`} ingredient={ingredient} />
-            </li>
+            </div>
           );
         })}
-      </ul>
-      <button onClick={addIngredient}>+ Add Ingredient +</button>
-      <button onClick={recipeSummaryView}>Back</button>
-      <button onClick={recipeDirectionsView}>Next</button>
+      </div>
+      <div className="add-ingredient">
+        <button onClick={addIngredient}>+ Add Ingredient +</button>
+      </div>
+      <div className="back-next">
+        <button onClick={recipeSummaryView}>Back</button>
+        <button onClick={recipeDirectionsView}>Next</button>
+      </div>
     </>
   );
 };
