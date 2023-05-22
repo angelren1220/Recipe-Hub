@@ -23,8 +23,8 @@ class Api::UsersController < ApplicationController
       recipes: @recipes,
       books: @books.order(:id),
       bookmarked_books: bookmarked_books_with_books,
-      messages: @messages
-    }
+      messages: @messages,
+      grocerylists: @grocerylists.order(:id) }
   end
 
   # POST /users
@@ -62,6 +62,7 @@ class Api::UsersController < ApplicationController
       @books = @user.books
       @bookmarked_books = @user.bookmarked_books
       @messages = Message.where("recipient_id = :user_id OR sender_id = :user_id", user_id: @user.id)
+      @grocerylists = @user.grocery_lists
     end
 
     # Only allow a list of trusted parameters through.

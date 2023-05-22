@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :recipes
   has_many :bookmarked_books
   has_many :books
+  has_many :grocery_lists
 
   validates :first_name, :last_name, :email, :password_confirmation, presence: true
   validates_uniqueness_of :email, case_sensitive: false
