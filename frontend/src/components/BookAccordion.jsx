@@ -18,8 +18,6 @@ const BookAccordion = ({
     setBooks(books);
   }, [books]);
 
-  console.log(bookmarks)
-
   const toggle = (id, event) => {
     event.stopPropagation();
     if (selected.includes(id)) {

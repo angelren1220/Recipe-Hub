@@ -3,34 +3,56 @@ import MessageAccordion from "../MessageAccordion.jsx";
 import useApplicationData from "../../hooks/useApplicationData";
 
 const Inbox = function(props) {
-  
   const {
     state,
     deleteMessage,
     getMessagesByUserID,
   } = useApplicationData();
 
+  const [showReceivedMessages, setShowReceivedMessages] = useState(true); // Define the showReceivedMessages state variable
+
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     getMessagesByUserID(userId);
   }, []);
 
-  const handlesMessagesToggle = () => {
-    setShowBookmarks((prevShowBookmarks) => !prevShowBookmarks);
+  const handlesReceivedMessages = () => {
+    setShowReceivedMessages(true);
   };
+
+  const handlesSentMessages = () => {
+    setShowReceivedMessages(false);
+  };
+
+  // Filter the messages based on the toggle state and current user id
+  const filteredMessages = state.messages.filter((message) => {
+    const userId = parseInt(localStorage.getItem('userId'), 10); // localStorage always returns a string!
+    if (showReceivedMessages) {
+      // Show received messages where recipient_id is equal to the current user id
+      return message.recipient_id === userId;
+    } else {
+      // Show sent messages where sender_id is equal to the current user id
+      return message.sender_id === userId;
+    }
+  });
 
   return (
     <article className="inbox">
       <h1>All of the current user's messages go here</h1>
-      <button onClick={handlesMessagesToggle}>Received</button>
-      <button onClick={handlesMessagesToggle}>Sent</button>
-        <MessageAccordion
-        state ={state}
-        messages={state.messages}
+      <div>
+        <button onClick={handlesReceivedMessages} disabled={showReceivedMessages}>
+          Received
+        </button>
+        <button onClick={handlesSentMessages} disabled={!showReceivedMessages}>
+          Sent
+        </button>
+      </div>
+      <MessageAccordion
+        messages={filteredMessages}
         deleteMessage={deleteMessage}
-        />
+        showReceivedMessages={showReceivedMessages}
+      />
     </article>
-
   );
 };
 
