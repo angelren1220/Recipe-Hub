@@ -61,38 +61,43 @@ const Recipe = function(props) {
 
       <div className="recipe-text">
         <h2 className="recipe-title">{recipe.name}</h2>
-        <p className="author"><UserInfo userId={user.id} /></p>
+        <div className="byline">
+          <span>By:</span>
+          <span className="author"> <UserInfo userId={user.id} /> </span>
+        </div>
         <h3 className="subtitle">Description</h3>
-        <p>{recipe.description}</p>
+          <p>Estimate cooktime: {recipe.cooktime_minutes} min</p>
+        <p className="description">{recipe.description}</p>
+        <div className="categories">
+          <div className="tags">
+            {recipe.is_vegan && <span className="category">Vegan</span>}
+            {recipe.is_vegetarian && <span className="category">Vegetarian</span>}
+            {recipe.is_nutfree && <span className="category">Nut-free</span>}
+            {recipe.is_lowcarb && <span className="category">Low-Carb</span>}
+            {recipe.is_glutenfree && <span className="category">Gluten-free</span>}
+            {recipe.is_lactosefree && <span className="category">Lactose-free</span>}
+          </div>
+        </div>
         <h3 className="subtitle">Ingredients</h3>
+
+        {userId && <div className="control-buttons make-grocery-list">
+          <SystemMessage
+            show={isItemSaved}
+            message={"Added to grocery list successfully"}
+            type="success"
+            onShowMessage={handleShowMessage} />
+          <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
+        </div>}
         <ul>
           {ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
         </ul>
-        <ul>
 
-          {userId && <div className="control-buttons">
-            <SystemMessage
-              show={isItemSaved}
-              message={"Added to grocery list successfully"}
-              type="success"
-              onShowMessage={handleShowMessage} />
-            <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
-          </div>}
-
-          <li>Estimate cooktime: {recipe.cooktime_minutes} min</li>
-          {recipe.is_vegetarian && <li>Vegetarian</li>}
-          {recipe.is_vegan && <li>Vegan</li>}
-          {recipe.is_lowcarb && <li>Low Carb</li>}
-          {recipe.is_lactosefree && <li>Lactose Free</li>}
-          {recipe.is_glutenfree && <li>Gluten Free</li>}
-          {recipe.is_nutfree && <li>Nut Free</li>}
-        </ul>
         <h3 className="subtitle">Directions</h3>
         <ol>
           {recipe.directions.map((direction, i) => (<li key={i}> {direction} </li>))}
         </ol>
 
-        {parseInt(userId) === recipe.user_id && <div className="control-buttons">
+        {parseInt(userId) === recipe.user_id && <div className="control-buttons, recipe-footer">
           <Popup popupMessage={"Delete Recipe"}>
             <button onClick={(event) => handleDelete(recipe.id)}>Confirm Delete</button>
           </Popup>

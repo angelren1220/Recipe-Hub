@@ -1,6 +1,6 @@
 .recipe {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .recipe-title {
@@ -16,23 +16,64 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 40%;
   margin: 10px;
+
+  .recipe-footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .subtitle {
+    align-self: left;
+  }
+
+  .description {
+    margin-bottom: 3em;
+  }
+
+  a {
+    color: $secondary-color1;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: space-between;
+    width: 50%;
+    margin: 10px;
+    width: 100%;
+  }
+
+  .categories {
+    display: column;
+    margin-bottom: 2em;
+
+    .tags {
+      display: flex;
+      align-items: center;
+      gap: 2em;
+    }
+
+    .category {
+      font-size: 0.75em;
+      padding: .8em 1em;
+      text-align: center;
+      border: 1px solid;
+      border-radius: 50%;
+    }
+  }
+
+  .byline {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
 }
 
-.recipe-text a {
-  color: $secondary-color1;
-  display: flex;
-  flex-direction: column;
-  align-items: right;
-  justify-content: space-between;
-  width: 50%;
-  margin: 10px;
-}
 
 .recipe-img {
   width: 50%;
-  padding-left: 1em;
   object-fit: cover;
 }
 
@@ -40,10 +81,6 @@
   background-color: $primary-color3;
 }
 
-.recipe-text .author {
-  display: flex;
-  justify-content: right;
+.make-grocery-list {
   align-self: right;
-  width: 100%;
-  text-align: right;
 }
