@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import CreateRecipe from "../CreateRecipe";
 
 const NewRecipe = function(props) {
 
+  const userId = localStorage.getItem('userId');
+
   return (
     <article className="new-recipe">
-      <h1>New recipe form goes here</h1>
+      <CreateRecipe userId={userId}/>
     </article>
   );
 };

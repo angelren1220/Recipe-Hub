@@ -1,13 +1,34 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
 
-const EditRecipeDirections = function(props) {
-  const getRecipeIngredients = {};
-  const [ingredients, setIngredients] = useState(getRecipeIngredients);
+import DirectionForm from "./DirectionForm";
+
+const EditRecipeDirections = function() {
+  const {
+    currentRecipe,
+    setRecipeDirection,
+    newRecipeDirection,
+    recipeSummaryView,
+    recipeIngredientsView,
+    recipeDirectionsView
+  } = useContext(recipeEditContext);
+
+
+  console.log(currentRecipe.directions);
   return (
     <>
-      <h1>Edit Recipe Ingredients</h1>
-      <p>Ingredients</p>
-      <button >To Summary</button>
+      <h1>Edit Recipe Directions</h1>
+      <ul>
+        {currentRecipe && currentRecipe.directions.map((direction, index) => {
+          return (
+            <li key={`direction${index}`}>
+              <DirectionForm index={index} />
+            </li>
+          );
+        })}
+      </ul>
+      <button onClick={newRecipeDirection}>+ Add Direction +</button>
+      <button onClick={recipeIngredientsView}>Back</button>
     </>
   );
 };

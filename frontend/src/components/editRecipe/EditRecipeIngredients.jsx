@@ -1,13 +1,47 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { recipeEditContext } from "../../hooks/providers/recipeEditMode";
+
+import useApplicationData from "../../hooks/useApplicationData";
+
+import IngredientForm from "./IngredientForm";
 
 const EditRecipeIngredients = function(props) {
-  const getRecipeDirections = ["Do step one.", "Do step two.", "Do step three."];
-  const [directions, setDirections] = useState(getRecipeDirections);
+  const { createIngredient } = useApplicationData();
+  const {
+    currentRecipe,
+    currentIngredients,
+    setIngredients,
+    recipeSummaryView,
+    recipeIngredientsView,
+    recipeDirectionsView,
+  } = useContext(recipeEditContext);
+
+  const addIngredient = async function() {
+    let newIngredient = {
+      recipe_id: currentRecipe.id,
+      name: "",
+      quantity: 0,
+      units: ""
+    };
+    newIngredient = await createIngredient(newIngredient);
+    setIngredients([...currentIngredients, newIngredient]);
+  };
+
   return (
     <>
-      <h1>Edit Recipe Directions</h1>
-      <p>{directions}</p>
-      <button >To Directions</button>
+      <h1>Edit Recipe Ingredients</h1>
+      <ul>
+        {currentIngredients && currentIngredients.map((ingredient) => {
+          return (
+            <li key={`ingredient-list-${ingredient.id}`}>
+              <IngredientForm key={`ingredient-form-${ingredient.id}`} ingredient={ingredient} />
+            </li>
+          );
+        })}
+      </ul>
+      <button onClick={addIngredient}>+ Add Ingredient +</button>
+      <button onClick={recipeSummaryView}>Back</button>
+      <button onClick={recipeDirectionsView}>Next</button>
     </>
   );
 };
