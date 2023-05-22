@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
 import SystemMessage from "../SystemMessage";
+import Popup from "../Popup";
+import RecipeEditModeProvider from "../../hooks/providers/recipeEditMode";
+import EditRecipe from "./EditRecipe";
 
 const Recipe = function(props) {
   const { id } = useParams();
@@ -89,10 +92,14 @@ const Recipe = function(props) {
         </ol>
 
         {parseInt(userId) === recipe.user_id && <div className="control-buttons">
-          <button onClick={(event) => handleDelete(recipe.id)}>Delete Recipe</button>
-          <Link to={`/recipes/edit/${recipe.id}`}>
-            <button>Edit Recipe</button>
-          </Link>
+          <Popup popupMessage="Delete Recipe">
+            <button onClick={(event) => handleDelete(recipe.id)}>Confirm Delete</button>
+          </Popup>
+          <RecipeEditModeProvider>
+            <Popup popupMessage="Edit Recipe">
+              <EditRecipe />
+            </Popup>
+          </RecipeEditModeProvider>
         </div>}
       </div>
 

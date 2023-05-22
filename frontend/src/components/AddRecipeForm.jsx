@@ -4,7 +4,6 @@ const AddRecipeForm = function(props) {
   const [selectedBookId, setSelectedBookId] = useState(null);
 
   const handleAddRecipe = function() {
-    console.log('!!!!!!',selectedBookId);
     props.closePopup();
   };
 
