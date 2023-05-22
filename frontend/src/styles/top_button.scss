@@ -5,8 +5,10 @@
   right: 20px;
   width: 8rem;
   border-radius: .5rem;
-  background-color: #333;
-  color: #fff;
+  background-color: $primary-color4;
+  color: $secondary-color1;
+  bottom: 1px solid;
+  border-color: $secondary-color1;
   font-size: 1.5rem;
   text-align: center;
   cursor: pointer;
@@ -18,5 +20,5 @@
 }
 
 .top-button:hover {
-  background-color: #555;
+  background-color: $primary-color3;
 }
