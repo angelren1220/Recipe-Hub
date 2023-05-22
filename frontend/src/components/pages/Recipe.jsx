@@ -92,7 +92,7 @@ const Recipe = function(props) {
         </ol>
 
         {parseInt(userId) === recipe.user_id && <div className="control-buttons">
-          <Popup popupMessage="Delete Recipe">
+          <Popup popupMessage={"Delete Recipe"}>
             <button onClick={(event) => handleDelete(recipe.id)}>Confirm Delete</button>
           </Popup>
           <RecipeEditModeProvider>
