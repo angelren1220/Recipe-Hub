@@ -198,7 +198,7 @@ const useApplicationData = () => {
 
         // Create a new book object using the first_name of the created user
         const book = {
-          title: `${user.first_name}'s favorites`,
+          name: `${user.first_name}'s favorites`,
           user_id: response.data.session.user_id
         };
 
