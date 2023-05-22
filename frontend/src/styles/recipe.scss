@@ -41,5 +41,9 @@
 }
 
 .recipe-text .author {
+  display: flex;
+  justify-content: right;
   align-self: right;
+  width: 100%;
+  text-align: right;
 }

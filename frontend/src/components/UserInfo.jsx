@@ -16,7 +16,7 @@ const UserInfo = function (props) {
 
   return(
     <Link to={`/profile/${state.user.id}`}>
-      By: {state.user.first_name} {state.user.last_name}
+      {state.user.first_name} {state.user.last_name}
     </Link>
   )
 }

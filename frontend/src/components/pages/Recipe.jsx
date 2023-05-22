@@ -61,7 +61,7 @@ const Recipe = function(props) {
 
       <div className="recipe-text">
         <h2 className="recipe-title">{recipe.name}</h2>
-        <h4 className="author"><UserInfo userId={user.id} /></h4>
+        <p className="author"><UserInfo userId={user.id} /></p>
         <h3 className="subtitle">Description</h3>
         <p>{recipe.description}</p>
         <h3 className="subtitle">Ingredients</h3>
