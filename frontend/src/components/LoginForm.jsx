@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import useApplicationData from "../hooks/useApplicationData";
 
+import "../styles/form.scss";
+
 const LoginForm = function() {
 
   const [email, setEmail] = useState('');
@@ -29,8 +31,9 @@ const LoginForm = function() {
       <form
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
+        className="form-container"
       >
-        <label htmlFor="email" >Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           id="email"
           value={email}
@@ -39,7 +42,7 @@ const LoginForm = function() {
           type="email"
           placeholder="yourEmail@mailProvider.com"
         />
-        <label htmlFor="password" >Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           id="password"
           value={password}
@@ -49,12 +52,12 @@ const LoginForm = function() {
           placeholder="************"
         />
         <button onClick={handleLogin}>Log In</button>
-
       </form>
 
-      <button>
-        <Link to="/register"> Don't have an account? Register here!</Link>
-      </button>
+      {/* <button>
+        <Link to="/register">Don't have an account? Register here!</Link>
+      </button> */}
+
     </>
 
 

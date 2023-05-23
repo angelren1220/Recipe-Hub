@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from 'react-router-dom';
+import "../styles/form.scss";
 
 const RegisterForm = function() {
   const [firstName, setFirstName] = useState('');
@@ -29,6 +30,7 @@ const RegisterForm = function() {
       <form
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
+        className="form-container"
       >
         <label htmlFor="firstName" >First Name:</label>
         <input
@@ -78,9 +80,9 @@ const RegisterForm = function() {
         <button onClick={handleRegister}>Register</button>
       </form>
 
-      <button>
+      {/* <button>
         <Link to="/login"> Already have an account? Login here!</Link>
-      </button>
+      </button> */}
     </>
   );
 };
