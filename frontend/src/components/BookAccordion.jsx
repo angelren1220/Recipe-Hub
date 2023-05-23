@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DescriptionEditor from "./DescriptionEditor";
+import SendLinkForm from "./SendLinkForm";
 import "../styles/book_accordion.scss";
 
 const BookAccordion = ({
@@ -9,14 +10,28 @@ const BookAccordion = ({
   bookmarks,
   deleteBookmark,
   updateBookDescription,
+  createMessage
 }) => {
   const [selected, setSelected] = useState([]);
   const [booksState, setBooks] = useState(books); // Declare books state
   const [editingBookId, setEditingBookId] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedBookForPopup, setSelectedBookForPopup] = useState(null);
 
   useEffect(() => {
     setBooks(books);
   }, [books]);
+
+  const handleSendBookLink = (id, subjectType, event) => {
+    event.stopPropagation();
+    setShowPopup(true);
+    setSelectedBookForPopup({ id, subjectType });
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedBookForPopup(null);
+  };
 
   const toggle = (id, event) => {
     event.stopPropagation();
@@ -50,6 +65,11 @@ const BookAccordion = ({
     setEditingBookId(id);
   };
 
+  const handleCancelDescription = () => {
+    // Reset the editing state without saving
+    setEditingBookId(null);
+  };
+
   const handleSaveDescription = (id, editedDescription) => {
     updateBookDescription(id, editedDescription)
       .then((response) => {
@@ -73,13 +93,22 @@ const BookAccordion = ({
       });
   };
 
-  const handleCancelDescription = () => {
-    // Reset the editing state without saving
-    setEditingBookId(null);
-  };
-
   return (
     <article className="book-accordions-wrapper">
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-form">
+            <SendLinkForm
+              subjectType={selectedBookForPopup.subjectType}
+              subjectId={selectedBookForPopup.id}
+              onClose={closePopup}
+              createMessage={createMessage}
+            />
+          </div>
+        </div>
+      )}
+
       {booksState.map((item) => (
         <div
           className={selected.includes(item.id) ? 'book-accordion selected' : 'book-accordion'}
@@ -118,6 +147,7 @@ const BookAccordion = ({
                         <button onClick={(event) => handleEditDescription(item.id, event)}>
                           {item.description ? "Edit Description" : "Add Description"}
                         </button>
+                        <button onClick={(event) => handleSendBookLink(item.id, "Book", event)}> Send Book </button>
                       </>
                     )}
                   </div>

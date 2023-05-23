@@ -8,7 +8,8 @@ const Books = function(props) {
     getBooksByUserID,
     deleteBook,
     deleteBookmark,
-    updateBookDescription
+    updateBookDescription,
+    createMessage
   } = useApplicationData();
 
   useEffect(() => {
@@ -34,12 +35,14 @@ const Books = function(props) {
           books={bookmarkedBooks}
           bookmarks={state.bookmarks}
           deleteBookmark={deleteBookmark}
+          createMessage={createMessage}
         />
       ) : (
         <BookAccordion
           books={state.books}
           deleteBook={deleteBook}
           updateBookDescription={updateBookDescription}
+          createMessage={createMessage}
         />
       )}
     </article>
