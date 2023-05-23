@@ -11,7 +11,9 @@ import dataReducer, {
   SET_RECIPE,
   SET_BOOKS,
   SET_BOOKMARKS,
-  SET_MESSAGES
+  SET_MESSAGES,
+  SET_GROCERYLISTS,
+  SET_GROCERYLIST,
 } from './dataReducer';
 
 import axios from 'axios';
@@ -27,6 +29,8 @@ const useApplicationData = () => {
     books: [],
     bookmarks: [],
     messages: [],
+    grocerylists: [],
+    grocerylist: [],
     loading: true,
   });
 
@@ -81,7 +85,7 @@ const useApplicationData = () => {
   const createIngredient = async(ingredient) => {
     return axios.post("/api/ingredients", { ingredient })
       .then((response) => {
-        console.log('🦜',response);
+        return response.data;
       })
       .catch((error) => {
         const message = Object.entries(error.response.data)
@@ -113,7 +117,7 @@ const useApplicationData = () => {
           type: SET_RECIPE,
           recipe: response.data.recipe
         });
-        console.log("🙈", response.data.recipe);
+        // console.log("🙈", response.data.recipe);
       })
       .catch((error) => {
 
@@ -121,9 +125,7 @@ const useApplicationData = () => {
   };
 
   const getRecipesByUserId = (userId) => {
-    if (!userId) {
-      userId = 1;
-    }
+
     return axios.get(`/api/users/${userId}`)
       .then((response) => {
         // console.log("🙈", response.data);
@@ -349,6 +351,7 @@ const useApplicationData = () => {
       });
   };
 
+
   const deleteMessage = (id, userId, senderId, recipientId) => {
     const endpoint = `/api/messages/${id}`;
     const data = {};
@@ -376,6 +379,110 @@ const useApplicationData = () => {
       });
   };
 
+  const getGrocerylistsByUserId = (userId) => {
+    axios.get(`/api/users/${userId}`)
+    .then((response) => {
+      dispatch({
+        type: SET_GROCERYLISTS,
+        grocerylists: response.data.grocerylists
+      });
+      // console.log("🙈", response.data.grocerylists);
+
+    })
+    .catch((error) => {
+    
+    });
+  }
+
+  const createGrocerylist = (grocerylist) => {
+    axios.post("/api/grocery_lists", { grocerylist })
+      .then((response) => {
+        // console.log(response);
+        
+      })
+      .catch((error) => {
+
+      });
+  };
+
+  const updateGrocerylist = (id, grocerylist) => {
+    axios.put(`/api/grocery_lists/${id}`, { grocerylist })
+      .then((response) => {
+        console.log(response);
+        // const updatedGrocerylists = state.grocerylists.map((item, i) => {
+        //   if (i === id) {
+        //     return grocerylist;
+        //   }
+        //   return item;
+        // });
+        
+        // dispatch({
+        //   type: SET_GROCERYLISTS,
+        //   grocerylists: updatedGrocerylists
+        // });
+      })
+      .catch((error) => {
+
+      });
+  };
+
+  const deleteGrocerylist = (id) => {
+    axios.delete(`/api/grocery_lists/${id}`)
+      .then((response) => {
+        const updatedGrocerylists = state.grocerylists.filter(grocerylist => grocerylist.id !== id);
+        dispatch({
+          type: SET_GROCERYLISTS,
+          grocerylists: updatedGrocerylists
+        });
+      })
+      .catch((error) => {
+
+      });
+  };
+
+  const getGrocerylistById = (id) => {
+    axios.get(`/api/grocery_lists/${id}`)
+    .then((response) => {
+      dispatch({
+        type: SET_GROCERYLIST,
+        grocerylist: response.data.grocerylist
+      });
+      // console.log("🙈", response.data.grocerylist);
+    })
+    .catch((error) => {
+
+    });
+  }
+  const getUserById = (id) => {
+    axios.get(`/api/users/${id}`)
+    .then((response) => {
+      dispatch({
+        type: SET_USER,
+        user: response.data.user
+      });
+
+      dispatch({
+        type: SET_BOOKS,
+        books: response.data.books,
+      });
+
+      dispatch({
+        type: SET_RECIPES,
+        recipes: response.data.recipes,
+      });
+
+      dispatch({
+        type: SET_GROCERYLISTS,
+        grocerylists: response.data.grocerylists,
+      });
+
+      console.log("🙈", response.data);
+    })
+    .catch((error) => {
+
+    });
+  }
+
   return {
     state,
     dispatch,
@@ -398,7 +505,13 @@ const useApplicationData = () => {
     deleteBook,
     updateBookDescription,
     deleteBookmark,
-    deleteMessage
+    getGrocerylistsByUserId,
+    createGrocerylist,
+    updateGrocerylist,
+    deleteGrocerylist,
+    deleteMessage,
+    getGrocerylistById,
+    getUserById
   };
 };
 
