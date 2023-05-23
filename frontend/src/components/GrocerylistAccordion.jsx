@@ -2,7 +2,6 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
-import { FaAngleDoubleDown, FaPlus, FaMinusCircle } from 'react-icons/fa';
 
 const GrocerylistAccordion = function(props) {
 
@@ -139,7 +138,7 @@ const GrocerylistAccordion = function(props) {
               <h1>{grocerylist.name}</h1>
             </Link>
             <div className="banner-right">
-              <h2 className="toggle" onClick={(event) => toggle(i, event)}><FaAngleDoubleDown /></h2>
+              <h2 className="toggle" onClick={(event) => toggle(i, event)}></h2>
             </div>
 
           </div>
@@ -150,14 +149,14 @@ const GrocerylistAccordion = function(props) {
                 {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
                   <li key={itemName}>
                     <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-                    <FaMinusCircle className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)} />
+                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>-</button>
                   </li>
                 ))}
               </ul>
             </div>
             {selected.includes(grocerylist.id) && (
               <div>
-                <FaPlus className="btn-add" onClick={(event) => handleButtonClick(i, event)} />
+                <button className="btn-add" onClick={(event) => handleButtonClick(i, event)} >+</button>
                 {showForm && (
                   <form>
                     <div>
