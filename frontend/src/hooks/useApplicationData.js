@@ -437,6 +437,36 @@ const useApplicationData = () => {
     });
   }
 
+  const getUserById = (id) => {
+    axios.get(`/api/users/${id}`)
+    .then((response) => {
+      dispatch({
+        type: SET_USER,
+        user: response.data.user
+      });
+
+      dispatch({
+        type: SET_BOOKS,
+        books: response.data.books,
+      });
+
+      dispatch({
+        type: SET_RECIPES,
+        recipes: response.data.recipes,
+      });
+
+      dispatch({
+        type: SET_GROCERYLISTS,
+        grocerylists: response.data.grocerylists,
+      });
+
+      console.log("🙈", response.data);
+    })
+    .catch((error) => {
+
+    });
+  }
+
   return {
     state,
     dispatch,
@@ -463,7 +493,8 @@ const useApplicationData = () => {
     updateGrocerylist,
     deleteGrocerylist,
     deleteMessage,
-    getGrocerylistById
+    getGrocerylistById,
+    getUserById
   };
 };
 
