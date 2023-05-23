@@ -4,6 +4,10 @@ import Loop from "../LoopScroll";
 import useApplicationData from "../../hooks/useApplicationData";
 import { Link } from "react-router-dom";
 
+import Popup from "../Popup";
+import NewRecipe from "./NewRecipe";
+import CreateRecipe from "../CreateRecipe";
+
 const RecipesList = function(props) {
 
   const {
@@ -34,14 +38,18 @@ const RecipesList = function(props) {
   }, []);
   return (
     <article className="recipes-list">
-      {userState ? <h1>{`${userState.first_name}'s Recipes`}</h1> : <h1>All Recipes</h1>}
-      {userState && <Link to={'/recipes/new'}><button>Create a Recipe</button></Link>}
-      <RecipeAccordion 
+      {!userState && <h1>All Recipes</h1>}
+      {userState && (
+        <Popup popupMessage="Create a Recipe">
+          <NewRecipe />
+        </Popup>
+      )}
+      <RecipeAccordion
         recipes={state.recipes}
         userId={userId}
         deleteRecipe={deleteRecipe}
         createMessage={createMessage}
-       />
+      />
     </article>
   );
 };
