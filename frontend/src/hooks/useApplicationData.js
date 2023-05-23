@@ -32,7 +32,7 @@ const useApplicationData = () => {
     messages: [],
     grocerylists: [],
     grocerylist: [],
-    errorMessage: [],
+    errorMessage: "",
     loading: true,
   });
 

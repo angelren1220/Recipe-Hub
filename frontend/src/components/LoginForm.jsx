@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import useApplicationData from "../hooks/useApplicationData";
 
+
 const LoginForm = function() {
 
   const [email, setEmail] = useState('');
@@ -24,7 +25,7 @@ const LoginForm = function() {
 
   };
 
-  const {errorMessage} = state;
+  const { errorMessage } = state;
 
   return (
     <>
@@ -50,7 +51,7 @@ const LoginForm = function() {
           type="password"
           placeholder="************"
         />
-        <button onClick={handleLogin}>Log In</button>
+        <button className="btn btn-primary" onClick={handleLogin}>Log In</button>
 
       </form>
 
@@ -58,8 +59,8 @@ const LoginForm = function() {
         <Link to="/register"> Don't have an account? Register here!</Link>
       </button>
       {
-      errorMessage && <p>{errorMessage}</p>
-    }
+        errorMessage && <div className="error-message">{errorMessage}</div>
+      }
     </>
 
 

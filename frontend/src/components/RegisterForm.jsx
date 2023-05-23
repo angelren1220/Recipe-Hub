@@ -19,11 +19,11 @@ const RegisterForm = function() {
 
   const handleRegister = function() {
 
-      const user = { first_name: firstName, last_name: lastName, email, password: password, password_confirmation: passwordConfirmation };
-      return createUser(user);
+    const user = { first_name: firstName, last_name: lastName, email, password: password, password_confirmation: passwordConfirmation };
+    return createUser(user);
 
   };
-  const {errorMessage} = state;
+  const { errorMessage } = state;
 
   return (
     <>
@@ -83,8 +83,8 @@ const RegisterForm = function() {
         <Link to="/login"> Already have an account? Login here!</Link>
       </button>
       {
-      errorMessage && <p>{errorMessage}</p>
-    }
+        errorMessage && <div className="error-message">{errorMessage}</div>
+      }
     </>
   );
 };
