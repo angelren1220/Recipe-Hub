@@ -16,7 +16,8 @@ const RecipesList = function(props) {
     getUserById,
     getAllRecipes,
     deleteRecipe,
-    createMessage
+    createMessage,
+    addRecipe,
   } = useApplicationData();
 
   const userId = localStorage.getItem('userId');
@@ -36,6 +37,7 @@ const RecipesList = function(props) {
       getAllRecipes();
     }
   }, []);
+
   return (
     <article className="recipes-list">
       {!userState && <h1>All Recipes</h1>}
@@ -47,8 +49,10 @@ const RecipesList = function(props) {
       <RecipeAccordion
         recipes={state.recipes}
         userId={userId}
+        userBooks={state.books}
         deleteRecipe={deleteRecipe}
         createMessage={createMessage}
+        addRecipe={addRecipe}
       />
     </article>
   );

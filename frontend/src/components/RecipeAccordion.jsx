@@ -3,12 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import SendLinkForm from "./SendLinkForm";
+import Popup from "./Popup";
+import { preprocessCSS } from "vite";
+import AddRecipeForm from "./AddRecipeForm";
 
-const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage }) => {
+const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks, addRecipe }) => {
   const [selected, setSelected] = useState([]);
   const [recipesState, setRecipesState] = useState(recipes);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showSendPopup, setShowSendPopup] = useState(false);
   const [selectedRecipeForPopup, setSelectedRecipeForPopup] = useState(null);
+  const [selectedBookId, setSelectedBookId] = useState(null);
+
 
   useEffect(() => {
     setRecipesState(recipes);
@@ -16,12 +21,12 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage }) => {
 
   const handleSendRecipeLink = (id, subjectType, event) => {
     event.stopPropagation();
-    setShowPopup(true);
+    setShowSendPopup(true);
     setSelectedRecipeForPopup({ id, subjectType });
   };
 
   const closePopup = () => {
-    setShowPopup(false);
+    setShowSendPopup(false);
     setSelectedRecipeForPopup(null);
   };
 
@@ -35,6 +40,15 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage }) => {
     }
   };
 
+  const handleAddRecipe = (event, recipeId) => {
+    event.stopPropagation();
+    const selectedBook = selectedBookId || userBooks[0].id; // Use the first book ID as a fallback if selectedBookId is null
+    console.log("Selected Recipe ID:", recipeId);
+    console.log("Selected Book ID:", selectedBook);
+    setSelectedBookId(null);
+    props.closePopup();
+  };
+
   const handleDelete = async (id, event) => {
     event.stopPropagation();
     await deleteRecipe(id);
@@ -44,7 +58,7 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage }) => {
   return (
     <article className="recipe-accordions-wrapper">
 
-      {showPopup && (
+      {showSendPopup && (
         <div className="popup-overlay">
           <div className="popup-form">
             <SendLinkForm
@@ -92,7 +106,15 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage }) => {
                 <Link to={`/edit/${item.id}`}>
                   <button>Edit Recipe</button>
                 </Link>
-                <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Send Recipe </button>
+                <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Share Recipe </button>
+                
+                <Popup 
+                  popupMessage={'Add to Book'}
+                >
+                  
+                  <AddRecipeForm userBooks={userBooks} />
+
+                </Popup>
               </div>
             )}
           </div>

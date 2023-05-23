@@ -93,7 +93,12 @@ const BookAccordion = ({
       });
   };
 
+
+  console.log("💥", props.closePopup)
+
   return (
+
+
     <article className="book-accordions-wrapper">
 
       {showPopup && (
