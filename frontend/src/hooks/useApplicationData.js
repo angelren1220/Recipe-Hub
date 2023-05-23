@@ -241,6 +241,23 @@ const useApplicationData = () => {
       });
   };
 
+  const createBookmark = (bookmark) => {
+    axios
+      .post("/api/bookmarked_books", { bookmark })
+      .then((response) => {
+        console.log("💫", response.bookmarked_book);
+        const newBookmark = response.data.bookmarked_book;
+
+        dispatch({
+          type: SET_BOOKMARKS,
+          messages: [...state.bookmarks, newBookmark], // Add the new message to the existing messages array
+        });
+      })
+      .catch((error) => {
+        console.error('Error creating bookmark:', error);
+      });
+  };
+
 
   const loginUser = (user) => {
 
@@ -282,7 +299,7 @@ const useApplicationData = () => {
         window.location = `/recipes/edit/${response.data.id}`;
       })
       .catch((error) => {
-
+        console.error('Error creating bookmark:', error);
       });
   };
 
@@ -306,6 +323,20 @@ const useApplicationData = () => {
       })
       .catch((error) => {
 
+      });
+  };
+
+  const addRecipe = (id) => {
+    axios.put(`/api/books/${id}`, { recipe })
+      .then((response) => {
+        const updatedBook = response.data.book;
+        dispatch({
+          type: SET_BOOKS,
+          recipes: updatedBook
+        });
+      })
+      .catch((error) => {
+        console.error('Error creating bookmark:', error);
       });
   };
 
@@ -491,6 +522,8 @@ return {
   updateIngredient,
   createIngredient,
   createMessage,
+  createBookmark,
+  addRecipe,
   deleteIngredient,
   getRecipeById,
   getRecipesByUserId,
