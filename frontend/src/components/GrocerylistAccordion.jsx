@@ -89,6 +89,7 @@ const GrocerylistAccordion = function(props) {
     setQuantity('');
     setUnits('');
     setIsItemSaved(true);
+    setShowForm(false);
   };
 
   const handleCancelItem = (event) => {
