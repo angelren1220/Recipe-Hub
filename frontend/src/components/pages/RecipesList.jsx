@@ -9,6 +9,8 @@ const RecipesList = function(props) {
     state,
     getRecipesByUserId,
     getAllRecipes,
+    deleteRecipe,
+    createMessage
   } = useApplicationData();
 
   const userId = localStorage.getItem('userId');
@@ -23,7 +25,12 @@ const RecipesList = function(props) {
   return (
     <article className="recipes-list">
       <h1>A template to show recipes here</h1>
-      <RecipeAccordion recipes={state.recipes} userId={userId}/>
+      <RecipeAccordion 
+        recipes={state.recipes}
+        userId={userId}
+        deleteRecipe={deleteRecipe}
+        createMessage={createMessage}
+      />
     </article>
   );
 };

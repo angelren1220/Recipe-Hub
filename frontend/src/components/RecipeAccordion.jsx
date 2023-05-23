@@ -2,21 +2,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
-import useApplicationData from "../hooks/useApplicationData";
+import SendLinkForm from "./SendLinkForm";
 
-
-const RecipeAccordion = function(props) {
-
-  const {
-    deleteRecipe
-  } = useApplicationData();
-
+const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage }) => {
   const [selected, setSelected] = useState([]);
+  const [recipesState, setRecipesState] = useState(recipes);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedRecipeForPopup, setSelectedRecipeForPopup] = useState(null);
 
+  useEffect(() => {
+    setRecipesState(recipes);
+  }, [recipes]);
+
+  const handleSendRecipeLink = (id, subjectType, event) => {
+    event.stopPropagation();
+    setShowPopup(true);
+    setSelectedRecipeForPopup({ id, subjectType });
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedRecipeForPopup(null);
+  };
 
   const toggle = (i, event) => {
     event.stopPropagation();
-    const selectedRecipeId = props.recipes[i].id;
+    const selectedRecipeId = recipes[i].id;
     if (selected.includes(selectedRecipeId)) {
       setSelected(selected.filter((id) => id !== selectedRecipeId));
     } else {
@@ -24,37 +35,48 @@ const RecipeAccordion = function(props) {
     }
   };
 
-  const handleDelete = (id, event) => {
+  const handleDelete = async (id, event) => {
     event.stopPropagation();
-    deleteRecipe(id);
+    await deleteRecipe(id);
+    setRecipesState(recipesState.filter((recipe) => recipe.id !== id));
   };
 
   return (
     <article className="recipe-accordions-wrapper">
-      {props.recipes.map((item, i) => (
-        <div className={selected.some(index => index === i) ? 'recipe-accordion selected' : 'recipe-accordion'} key={i} onClick={(event) => toggle(i, event)}>
-          
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-form">
+            <SendLinkForm
+              subjectType={selectedRecipeForPopup.subjectType}
+              subjectId={selectedRecipeForPopup.id}
+              onClose={closePopup}
+              createMessage={createMessage}
+            />
+          </div>
+        </div>
+      )}
+
+
+      {recipesState.map((item, i) => (
+        <div
+          className={selected.includes(item.id) ? 'recipe-accordion selected' : 'recipe-accordion'}
+          key={item.id}
+          onClick={(event) => toggle(i, event)}
+        >
           <div className="banner">
             <Link to={`/recipes/${item.id}`}>
-    
               <h1>{item.name}</h1>
-  
             </Link>
             <h2>By: {item.first_name}</h2>
-          
-
             <div className="banner-right">
-              <h2 className="toggle">{selected.includes(i) ? '-' : '+'}</h2>
-              <img className="banner-image" src={item.image} />
+              <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
+              <img className="banner-image" src={item.image} alt="Recipe" />
             </div>
-
           </div>
-
           <div className={selected.includes(item.id) ? 'content show' : 'content'}>
-
             <h2>Cooktime: {item.cooktime_minutes} min</h2>
             <h2>Description: <p>{item.description}</p></h2>
-            
             <div className="categories">
               <h2>Categories:</h2>
               {item.is_vegan && <span className="category">Vegan</span>}
@@ -62,18 +84,18 @@ const RecipeAccordion = function(props) {
               {item.is_nutfree && <span className="category">Nut-free</span>}
               {item.is_lowcarb && <span className="category">Low-Carb</span>}
               {item.is_glutenfree && <span className="category">Gluten-free</span>}
-              {item.is_is_lactosefree && <span className="category">Lactose-free</span>}
+              {item.is_lactosefree && <span className="category">Lactose-free</span>}
             </div>
-
-            {props.userId &&<div className="control-buttons">
-              <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
-              <Link to={`/edit/${item.id}`}>
-                <button>Edit Recipe</button>
-              </Link>
-            </div>}
-
+            {userId && (
+              <div className="control-buttons">
+                <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
+                <Link to={`/edit/${item.id}`}>
+                  <button>Edit Recipe</button>
+                </Link>
+                <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Send Recipe </button>
+              </div>
+            )}
           </div>
-
         </div>
       ))}
     </article>

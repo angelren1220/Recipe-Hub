@@ -65,6 +65,11 @@ const BookAccordion = ({
     setEditingBookId(id);
   };
 
+  const handleCancelDescription = () => {
+    // Reset the editing state without saving
+    setEditingBookId(null);
+  };
+
   const handleSaveDescription = (id, editedDescription) => {
     updateBookDescription(id, editedDescription)
       .then((response) => {
@@ -86,11 +91,6 @@ const BookAccordion = ({
       .catch((error) => {
         console.error('Error updating description:', error);
       });
-  };
-
-  const handleCancelDescription = () => {
-    // Reset the editing state without saving
-    setEditingBookId(null);
   };
 
   return (
