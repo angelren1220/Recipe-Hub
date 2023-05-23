@@ -169,7 +169,7 @@ const useApplicationData = () => {
       .then((response) => {
         const filteredMessages = response.data.messages.filter((message) => {
           return ((userId === message.recipient_id && message.recipient_deleted === false) || (userId === message.sender_id && message.sender_deleted === false));
-        });;
+        });
   
         dispatch({
           type: SET_MESSAGES,
@@ -198,7 +198,7 @@ const useApplicationData = () => {
 
         // Create a new book object using the first_name of the created user
         const book = {
-          title: `${user.first_name}'s favorites`,
+          name: `${user.first_name}'s favorites`,
           user_id: response.data.session.user_id
         };
 
@@ -219,6 +219,23 @@ const useApplicationData = () => {
       })
       .catch((error) => {
         sendErrorMessage(error);
+      });
+  };
+
+  const createMessage = (message) => {
+    axios
+      .post("/api/messages", { message })
+      .then((response) => {
+        console.log("💫", response.data.message);
+        const newMessage = response.data.message;
+  
+        dispatch({
+          type: SET_MESSAGES,
+          messages: [...state.messages, newMessage], // Add the new message to the existing messages array
+        });
+      })
+      .catch((error) => {
+        console.error('Error creating message:', error);
       });
   };
 
@@ -366,6 +383,7 @@ const useApplicationData = () => {
     getIngredients,
     updateIngredient,
     createIngredient,
+    createMessage,
     deleteIngredient,
     getRecipeById,
     getRecipesByUserId,
