@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import useApplicationData from "../../hooks/useApplicationData";
 import "../../styles/profile.scss";
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const UserProfile = function(props) {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const {
     state,
     getUserById
@@ -15,7 +16,7 @@ const UserProfile = function(props) {
     getUserById(id);
   }, []);
 
-  const { user, books, recipes, grocerylists } = state;
+  const { user, books, recipes } = state;
 
   return (
     <article className="profile">
@@ -44,7 +45,11 @@ const UserProfile = function(props) {
         <tbody>
           {books.map((book, index) => (
             <tr key={index}>
-              <td>{book.name}</td>
+              <td>
+                <Link to={`/books/${book.id}`}>
+                  {book.name}
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -59,7 +64,11 @@ const UserProfile = function(props) {
         <tbody>
           {recipes.map((recipe, index) => (
             <tr key={index}>
-              <td>{recipe.name}</td>
+              <td>
+                <Link to={`/recipes/${recipe.id}`}>
+                  {recipe.name}
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
