@@ -9,13 +9,19 @@ const Profile = function(props) {
   } = useApplicationData();
 
   const userId = localStorage.getItem('userId');
-
+  
   useEffect(() => {
-    getUserById(userId);
+    if(userId){
+      getUserById(userId);
+    }
   }, []);
 
   const { user, books, recipes, grocerylists } = state;
 
+  if (!userId) {
+    return (<h1>Login to view your profile</h1>)
+  }
+  
   return (
     <article className="profile">
       <h1>Display User Information Here</h1>
