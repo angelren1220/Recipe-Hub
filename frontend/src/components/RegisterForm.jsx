@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
-import bcrypt from "bcryptjs";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from 'react-router-dom';
 
