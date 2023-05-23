@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
+
 const Recipe = function(props) {
   const { id } = useParams();
   const userId = localStorage.getItem('userId');
@@ -20,7 +21,7 @@ const Recipe = function(props) {
     getIngredients(id);
   }, []);
 
-  const { recipe, ingredients } = state;
+  const { recipe, ingredients, user } = state;
 
   const handleDelete = (id) => {
     deleteRecipe(id);
@@ -53,6 +54,9 @@ const Recipe = function(props) {
 
       <div className="recipe-text">
         <h2 className="recipe-title">{recipe.name}</h2>
+        <Link to={`/profile/${user.id}`}>
+          by {user.first_name} {user.last_name}
+        </Link>
         <span>description</span>
         <p>{recipe.description}</p>
         <span>ingredients</span>

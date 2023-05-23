@@ -117,6 +117,11 @@ const useApplicationData = () => {
           type: SET_RECIPE,
           recipe: response.data.recipe
         });
+        dispatch({
+          type: SET_USER,
+          user: response.data.user
+        });
+        
         // console.log("🙈", response.data.recipe);
       })
       .catch((error) => {
@@ -156,6 +161,10 @@ const useApplicationData = () => {
             };
           })
         });
+        dispatch({
+          type: SET_USER,
+          user: response.data.user
+        })
       })
       .catch((error) => {
         // Handle error if needed
@@ -476,43 +485,45 @@ const useApplicationData = () => {
           grocerylists: response.data.grocerylists,
         });
 
-        return (response.data.user);
-      })
-      .catch ((error) => {
 
-})
+      // console.log("🙈", response.data);
+    })
+    .catch((error) => {
+
+    });
+  }
+
+  return {
+    state,
+    dispatch,
+    getAllRecipes,
+    getIngredients,
+    updateIngredient,
+    createIngredient,
+    createMessage,
+    deleteIngredient,
+    getRecipeById,
+    getRecipesByUserId,
+    getBooksByUserID,
+    getMessagesByUserID,
+    createUser,
+    loginUser,
+    logoutUser,
+    createRecipe,
+    updateRecipe,
+    deleteRecipe,
+    deleteBook,
+    updateBookDescription,
+    deleteBookmark,
+    getGrocerylistsByUserId,
+    createGrocerylist,
+    updateGrocerylist,
+    deleteGrocerylist,
+    deleteMessage,
+    getGrocerylistById,
+    getUserById
+
   };
-
-return {
-  state,
-  dispatch,
-  getAllRecipes,
-  getIngredients,
-  updateIngredient,
-  createIngredient,
-  createMessage,
-  deleteIngredient,
-  getRecipeById,
-  getRecipesByUserId,
-  getBooksByUserID,
-  getMessagesByUserID,
-  createUser,
-  loginUser,
-  logoutUser,
-  createRecipe,
-  updateRecipe,
-  deleteRecipe,
-  deleteBook,
-  updateBookDescription,
-  deleteBookmark,
-  getGrocerylistsByUserId,
-  createGrocerylist,
-  updateGrocerylist,
-  deleteGrocerylist,
-  deleteMessage,
-  getGrocerylistById,
-  getUserById
-};
 };
 
 export default useApplicationData;

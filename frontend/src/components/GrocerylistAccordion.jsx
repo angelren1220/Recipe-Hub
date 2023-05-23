@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/grocerylist_accordion.scss";
 import useApplicationData from "../hooks/useApplicationData";
+
 import SendLinkForm from "./SendLinkForm";
 import Popup from "./Popup";
 import CreateGrocerylist from "./CreateGroceryList";
@@ -150,7 +151,9 @@ const GrocerylistAccordion = function(props) {
               <h1>{grocerylist.name}</h1>
             </Link>
             <div className="banner-right">
+
               <h2 className="toggle" onClick={(event) => toggle(i, event)}>+</h2>
+              
             </div>
 
           </div>
