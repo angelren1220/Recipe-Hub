@@ -10,9 +10,9 @@ const Navigation = function() {
     logoutUser,
     getUserById,
   } = useApplicationData();
-  
+
   useEffect(() => {
-    if(userId){
+    if (userId) {
       getUserById(userId);
     }
   }, []);
@@ -27,14 +27,15 @@ const Navigation = function() {
     <nav className="nav">
 
       <h1 className="logo"><a href="/">Sous</a></h1>
-      
+
       <div className="sideview">
         {!userId && <h2><Link to={'/login'}>Login</Link></h2>}
-        {userId && 
-        <div><h2><Link to={`/profile/${user.id}`}>
-          Hello, {user.first_name}
-          </Link> </h2>
-          <button onClick={handleLogout}>Logout</button></div>}
+        {userId &&
+          <h2><Link to={`/profile/${user.id}`}>
+            Hello, {user.first_name}
+          </Link> </h2>}
+        {userId &&
+          <button onClick={handleLogout}>Logout</button>}
         <h2><Link to={'/recipes'}>My Recipes</Link></h2>
         <h2><Link to={'/books'}>My Books</Link></h2>
         <h2><Link to={'/grocerylists'}>Grocery Lists</Link></h2>
