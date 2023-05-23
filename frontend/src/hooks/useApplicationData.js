@@ -14,6 +14,7 @@ import dataReducer, {
   SET_MESSAGES,
   SET_GROCERYLISTS,
   SET_GROCERYLIST,
+  SET_ERRORMESSAGE
 } from './dataReducer';
 
 import axios from 'axios';
@@ -31,6 +32,7 @@ const useApplicationData = () => {
     messages: [],
     grocerylists: [],
     grocerylist: [],
+    errorMessage: "",
     loading: true,
   });
 
@@ -38,7 +40,11 @@ const useApplicationData = () => {
   const sendErrorMessage = (error) => {
     const message = (Object.entries(error.response.data)
       .reduce((str, [key, val]) => `${str} ${key} ${val}`, '')) || ("Something wrong with connection...");
-    alert(message);
+      dispatch({
+        type: SET_ERRORMESSAGE,
+        errorMessage: message
+      });
+      console.log(message)
   };
 
   const getAllRecipes = () => {
@@ -281,7 +287,7 @@ const useApplicationData = () => {
         window.location = "/recipes";
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error.response.data);
         sendErrorMessage(error);
       });
   };
