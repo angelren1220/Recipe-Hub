@@ -23,6 +23,7 @@ const RegisterForm = function() {
       return createUser(user);
 
   };
+  const {errorMessage} = state;
 
   return (
     <>
@@ -81,6 +82,9 @@ const RegisterForm = function() {
       <button>
         <Link to="/login"> Already have an account? Login here!</Link>
       </button>
+      {
+      errorMessage && <p>{errorMessage}</p>
+    }
     </>
   );
 };

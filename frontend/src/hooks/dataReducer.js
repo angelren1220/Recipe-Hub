@@ -8,6 +8,7 @@ export const SET_BOOKMARKS = 'SET_BOOKMARKS';
 export const SET_GROCERYLISTS = 'SET_GROCERYLISTS';
 export const SET_GROCERYLIST = 'SET_GROCERYLIST';
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+export const SET_ERRORMESSAGE = "SET_ERRORMESSAGE";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -79,6 +80,12 @@ const dataReducer = (state, action) => {
         users: action.users,
         recipes: action.recipes,
         // ingredients: action.ingredients,
+        loading: false
+      };
+    case SET_ERRORMESSAGE:
+      return {
+        ...state,
+        errorMessage: action.errorMessage,
         loading: false
       };
 

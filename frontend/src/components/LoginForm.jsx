@@ -24,6 +24,8 @@ const LoginForm = function() {
 
   };
 
+  const {errorMessage} = state;
+
   return (
     <>
       <form
@@ -55,6 +57,9 @@ const LoginForm = function() {
       <button>
         <Link to="/register"> Don't have an account? Register here!</Link>
       </button>
+      {
+      errorMessage && <p>{errorMessage}</p>
+    }
     </>
 
 
