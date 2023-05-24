@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
-import SuccessMessage from "../SuccessMessage";
+import SystemMessage from "../SystemMessage";
 
 const GroceryList = function(props) {
   const { id } = useParams();
@@ -55,7 +55,10 @@ const GroceryList = function(props) {
         </div>
       </div>
       {userId && <div className="control-buttons">
-        <SuccessMessage show={isItemSaved} />
+        <SystemMessage
+          show={isItemSaved}
+          message={"Added successfully"}
+          type="success" />
         <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
       </div>}
     </article>

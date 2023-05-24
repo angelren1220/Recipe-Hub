@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const SuccessMessage = ({ show }) => {
+const SystemMessage = ({  show, message, type  }) => {
   const [isVisible, setIsVisible] = useState(show);
 
   useEffect(() => {
@@ -16,8 +16,8 @@ const SuccessMessage = ({ show }) => {
   }, [show]);
 
   return isVisible ? (
-    <div className="success-message">Added successfully!</div>
+    <div className={`${type}-message`}>{message}</div>
   ) : null;
 };
 
-export default SuccessMessage;
+export default SystemMessage;

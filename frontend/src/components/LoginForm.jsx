@@ -4,6 +4,7 @@ import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import { Link } from 'react-router-dom';
 
 import useApplicationData from "../hooks/useApplicationData";
+import SystemMessage from "./SystemMessage";
 
 
 const LoginForm = function() {
@@ -26,6 +27,7 @@ const LoginForm = function() {
   };
 
   const { errorMessage } = state;
+
 
   return (
     <>
@@ -58,9 +60,11 @@ const LoginForm = function() {
       <button>
         <Link to="/register"> Don't have an account? Register here!</Link>
       </button>
-      {
-        errorMessage && <div className="error-message">{errorMessage}</div>
-      }
+
+      <SystemMessage
+        show={errorMessage}
+        message={errorMessage}
+        type="error" />
     </>
 
 
