@@ -14,9 +14,18 @@ const GroceryList = function(props) {
     createGrocerylist
   } = useApplicationData();
 
+  const [isItemSaved, setIsItemSaved] = useState(false);
+
   useEffect(() => {
     getGrocerylistById(id);
-  }, []);
+    if (isItemSaved) {
+      const timeout = setTimeout(() => {
+        setIsItemSaved(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isItemSaved]);
 
   const { grocerylist } = state;
 
@@ -28,9 +37,7 @@ const GroceryList = function(props) {
     // console.log(grocerylist);
     // console.log(ingredients.length, Object.keys(items).length);
     createGrocerylist(newGrocerylist);
-    alert("Added to Grocery lists!");
-
-
+    setIsItemSaved(true);
   };
 
   if (!grocerylist || !grocerylist.items) {
@@ -53,6 +60,7 @@ const GroceryList = function(props) {
         </div>
       </div>
       {userId && <div className="control-buttons">
+      {isItemSaved && <div className="success-message">Added successully!</div>}
         <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
       </div>}
     </article>

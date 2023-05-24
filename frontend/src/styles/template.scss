@@ -20,3 +20,16 @@
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
+.success-message {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.success-message.fade-out {
+  opacity: 0;
+}
+
