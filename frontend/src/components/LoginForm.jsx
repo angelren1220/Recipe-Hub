@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import useApplicationData from "../hooks/useApplicationData";
 import SystemMessage from "./SystemMessage";
-
+import "../styles/forms";
 
 const LoginForm = function() {
 
@@ -30,8 +30,9 @@ const LoginForm = function() {
 
 
   return (
-    <>
+    <div className="form-page-container">
       <form
+        className="form-container"
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
@@ -56,16 +57,17 @@ const LoginForm = function() {
         <button className="btn btn-primary" onClick={handleLogin}>Log In</button>
 
       </form>
+      <div className="link-container" >
+        <Link className="link-container" to="/register"> Don't have an account? Register here!</Link>
+      </div>
 
-      <button>
-        <Link to="/register"> Don't have an account? Register here!</Link>
-      </button>
+
 
       <SystemMessage
         show={errorMessage}
         message={errorMessage}
         type="error" />
-    </>
+    </div>
 
 
   );
