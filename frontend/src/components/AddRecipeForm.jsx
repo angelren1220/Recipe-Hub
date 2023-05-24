@@ -8,10 +8,12 @@ const AddRecipeForm = function(props) {
     const selected_id = selectedBookId || props.userBooks[0]?.id || null;
     console.log("book id", selected_id);
     console.log("recipe id", props.item.id);
-    const recipeId = props.item.id
-    props.addRecipe(selected_id, recipeId)
+    const recipeId = props.item.id;
+    props.addRecipe(selected_id, recipeId);
     props.closePopup();
   };
+  
+  console.log("☮", props.userBooks)
 
   return (
     <>
@@ -25,7 +27,7 @@ const AddRecipeForm = function(props) {
           onChange={(event) => setSelectedBookId(event.target.value)}
         >
           {props.userBooks.map((book) => (
-            <option key={book.id} value={book.id}>
+            <option key={book.name} value={book.id}>
               {book.name}
             </option>
           ))}

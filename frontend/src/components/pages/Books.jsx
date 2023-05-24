@@ -9,7 +9,8 @@ const Books = function(props) {
     deleteBook,
     deleteBookmark,
     updateBookDescription,
-    createMessage
+    createMessage,
+    createBookmark
   } = useApplicationData();
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Books = function(props) {
           deleteBook={deleteBook}
           updateBookDescription={updateBookDescription}
           createMessage={createMessage}
+          createBookmark={createBookmark}
         />
       )}
     </article>

@@ -5,7 +5,6 @@ import "../styles/recipe_accordion.scss";
 import SendLinkForm from "./SendLinkForm";
 import Popup from "./Popup";
 import AddRecipeForm from "./AddRecipeForm";
-import Loop from "./LoopScroll";
 
 const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks, addRecipe }) => {
   const [selected, setSelected] = useState([]);
@@ -44,6 +43,9 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
     await deleteRecipe(id);
     setRecipesState(recipesState.filter((recipe) => recipe.id !== id));
   };
+
+  console.log("💨", recipesState)
+  console.log("💦", userBooks)
 
   return (
     <article className="recipe-accordions-wrapper">
