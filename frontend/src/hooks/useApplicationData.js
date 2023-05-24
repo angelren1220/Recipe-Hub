@@ -536,7 +536,7 @@ const useApplicationData = () => {
           grocerylists: response.data.grocerylists,
         });
 
-
+        return response.data.user;
       // console.log("🙈", response.data);
     })
     .catch((error) => {

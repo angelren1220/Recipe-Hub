@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import SendLinkForm from "./SendLinkForm";
 import Popup from "./Popup";
-import { preprocessCSS } from "vite";
 import AddRecipeForm from "./AddRecipeForm";
 
-const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks, addRecipe }) => {
+const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks }) => {
   const [selected, setSelected] = useState([]);
   const [recipesState, setRecipesState] = useState(recipes);
   const [showSendPopup, setShowSendPopup] = useState(false);
@@ -53,6 +52,17 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
     event.stopPropagation();
     await deleteRecipe(id);
     setRecipesState(recipesState.filter((recipe) => recipe.id !== id));
+  };
+
+  const handleAddRecipe = (event, recipeId) => {
+    event.stopPropagation();
+    const selectedBook = selectedBookId || userBooks[0].id; // Use the first book ID as a fallback if selectedBookId is null
+    console.log("Selected Recipe ID:", recipeId);
+    console.log("Selected Book ID:", selectedBook);
+    setSelectedBookId(null);
+    setSelectedRecipeId(null);
+    // Additional logic using the selected book ID
+    closePopup(); // Close the popup after handling the submit action
   };
 
   return (
@@ -103,17 +113,13 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
             {userId && (
               <div className="control-buttons">
                 <button onClick={(event) => handleDelete(item.id, event)}>Delete Recipe</button>
-                <Link to={`/edit/${item.id}`}>
+                <Link to={`/recipes/edit/${item.id}`}>
                   <button>Edit Recipe</button>
                 </Link>
-                <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Share Recipe </button>
-                
-                <Popup 
-                  popupMessage={'Add to Book'}
-                >
-                  
-                  <AddRecipeForm userBooks={userBooks} />
+                <button onClick={(event) => handleSendRecipeLink(item.id, "Recipe", event)}> Send Recipe </button>
 
+                <Popup popupMessage={'Add to Book'} userBooks={userBooks} item={item}>
+                  <AddRecipeForm />
                 </Popup>
               </div>
             )}
