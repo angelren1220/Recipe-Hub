@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
       render json: {message: 'Successfully logged in!', user: user, session: session}
     else
       # failure send error message.
-      render json: {message: 'Invalid login!'}, status: 403
+      render json: {failed: ': Invalid login!'}, status: 403
     end
   end
 

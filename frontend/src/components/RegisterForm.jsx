@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
-import bcrypt from "bcryptjs";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from 'react-router-dom';
 
@@ -20,10 +19,11 @@ const RegisterForm = function() {
 
   const handleRegister = function() {
 
-      const user = { first_name: firstName, last_name: lastName, email, password: password, password_confirmation: passwordConfirmation };
-      return createUser(user);
+    const user = { first_name: firstName, last_name: lastName, email, password: password, password_confirmation: passwordConfirmation };
+    return createUser(user);
 
   };
+  const { errorMessage } = state;
 
   return (
     <>
@@ -82,6 +82,9 @@ const RegisterForm = function() {
       <button>
         <Link to="/login"> Already have an account? Login here!</Link>
       </button>
+      {
+        errorMessage && <div className="error-message">{errorMessage}</div>
+      }
     </>
   );
 };
