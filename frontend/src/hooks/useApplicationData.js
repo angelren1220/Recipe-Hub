@@ -159,17 +159,15 @@ const useApplicationData = () => {
       .then((response) => {
         dispatch({
           type: SET_BOOKS,
-          books: response.data.books,
-          bookmarks: response.data.bookmarked_books.map((item) => {
-            return {
-              bookmarked_book: item.bookmarked_book,
-              book: item.book,
-            };
-          })
+          books: response.data.books
         });
         dispatch({
           type: SET_USER,
           user: response.data.user
+        })
+        dispatch({
+          type: SET_BOOKMARKS,
+          bookmarks: response.data.bookmarked_books
         })
       })
       .catch((error) => {
@@ -271,18 +269,15 @@ const useApplicationData = () => {
   };
 
   const createBookmark = (userId, bookId) => {
-    console.log("user_id:" ,userId)
-    console.log("book_id:" ,bookId)
     const bookmark = { user_id: userId, book_id: bookId }
     axios
       .post("/api/bookmarked_books", bookmark)
       .then((response) => {
-        console.log("💫", response.bookmarked_book);
+        console.log("BOOKMARK 💫:", response.data.bookmarked_book);
         const newBookmark = response.data.bookmarked_book;
-
         dispatch({
           type: SET_BOOKMARKS,
-          messages: [...state.bookmarks, newBookmark], // Add the new message to the existing messages array
+          booksmarks: [...state.bookmarks, newBookmark], // Add the new message to the existing messages array
         });
       })
       .catch((error) => {
@@ -416,6 +411,7 @@ const useApplicationData = () => {
   const deleteBookmark = (id) => {
     axios.delete(`/api/bookmarked_books/${id}`)
       .then((response) => {
+        console.log(response.data)
         const updatedBookmarks = state.bookmarks.filter(bookmark => bookmark.id !== id);
         dispatch({
           type: SET_BOOKMARKS,

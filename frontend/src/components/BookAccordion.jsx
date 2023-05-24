@@ -47,6 +47,7 @@ const BookAccordion = ({
     event.stopPropagation();
     if (bookmarks && selected.includes(id)) {
       const bookmark = bookmarks.find((bookmark) => bookmark.book.id === id); // Use id instead of item.id
+      console.log("BOOKMARK:",bookmark)
       if (bookmark) {
         deleteBookmark(bookmark.id);
         console.log('🐷 deleted bookmark!');

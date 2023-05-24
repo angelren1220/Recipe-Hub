@@ -27,6 +27,8 @@ const Books = function(props) {
   // Extract bookmarked books from state.bookmarks if it is defined
   const bookmarkedBooks = state.bookmarks?.map((bookmark) => bookmark.book) || [];
 
+  // console.log("BOOKMARKED BOOKS", bookmarkedBooks)
+
   return (
     <article className="books">
       <h1>Bookshelf</h1>

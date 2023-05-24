@@ -19,7 +19,7 @@ class Api::BookmarkedBooksController < ApplicationController
       @bookmarked_book = BookmarkedBook.new(bookmarked_book_params)
   
       if @bookmarked_book.save
-        render json: {message: 'Successfully created!', user: @user, session: session}
+        render json: {message: 'Successfully created!', bookmarked_book: @bookmarked_book}
       else
         render json: @bookmarked_book.errors, status: :unprocessable_entity
       end
