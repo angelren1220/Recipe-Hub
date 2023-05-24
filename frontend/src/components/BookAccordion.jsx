@@ -120,7 +120,6 @@ const BookAccordion = ({
               <Link to={`/books/${item.id}`}>
                 <h1>{item.name}</h1>
               </Link>
-              <h2>By: {item.first_name}</h2>
             </div>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>

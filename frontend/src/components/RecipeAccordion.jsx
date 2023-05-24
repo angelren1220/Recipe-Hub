@@ -81,7 +81,6 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
             <Link to={`/recipes/${item.id}`}>
               <h1>{item.name}</h1>
             </Link>
-            {/* <h2>By: {item.first_name}</h2> */}
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
               <img className="banner-image" src={item.image} alt="Recipe" />
