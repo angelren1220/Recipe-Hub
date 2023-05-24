@@ -26,9 +26,9 @@ const Recipe = function(props) {
         <span>description</span>
         <p>{props.description}</p>
         <span>ingredients</span>
-      <ul>
-        {state.ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
-      </ul>
+        <ul>
+          {state.ingredients.map((ingredient, i) => (<li key={i}>{ingredient.name}: {ingredient.quantity} {ingredient.units}</li>))}
+        </ul>
         <ul>
           <li>Estimate cooktime: {props.cooktime_minutes} min</li>
           {props.is_vegetarian && <li>Vegetarian</li>}
