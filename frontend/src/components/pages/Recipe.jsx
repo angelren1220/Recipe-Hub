@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
+import SystemMessage from "../SystemMessage";
 
 const Recipe = function(props) {
   const { id } = useParams();
@@ -16,10 +17,13 @@ const Recipe = function(props) {
     createGrocerylist
   } = useApplicationData();
 
+  const [isItemSaved, setIsItemSaved] = useState(false);
+
   useEffect(() => {
     getRecipeById(id);
     getIngredients(id);
-  }, []);
+
+  }, [isItemSaved]);
 
   const { recipe, ingredients, user } = state;
 
@@ -40,9 +44,7 @@ const Recipe = function(props) {
     // console.log(grocerylist);
     // console.log(ingredients.length, Object.keys(items).length);
     createGrocerylist(grocerylist);
-    alert("Added to Grocery lists!");
-
-
+    setIsItemSaved(true);
   };
 
   if (!recipe || !recipe.directions) {
@@ -66,6 +68,10 @@ const Recipe = function(props) {
         <ul>
 
           {userId && <div className="control-buttons">
+            <SystemMessage
+              show={isItemSaved}
+              message={"Added successfully"}
+              type="success" />
             <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
           </div>}
 
