@@ -277,7 +277,7 @@ const useApplicationData = () => {
         const newBookmark = response.data.bookmarked_book;
         dispatch({
           type: SET_BOOKMARKS,
-          booksmarks: [...state.bookmarks, newBookmark], // Add the new message to the existing messages array
+          bookmarks: [...state.bookmarks, newBookmark], // Add the new message to the existing messages array
         });
       })
       .catch((error) => {
