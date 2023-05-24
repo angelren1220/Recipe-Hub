@@ -355,17 +355,22 @@ const useApplicationData = () => {
       });
   };
 
-  const addRecipe = (id) => {
-    axios.put(`/api/books/${id}`, { recipe })
+  // uses params rather than an object
+  const addRecipe = (bookId, recipeId) => {
+    axios.put(`/api/books/${bookId}`, null, {
+      params: {
+        recipe_id: recipeId
+      }
+    })
       .then((response) => {
         const updatedBook = response.data.book;
         dispatch({
           type: SET_BOOKS,
-          recipes: updatedBook
+          books: [...state.books, updatedBook]
         });
       })
       .catch((error) => {
-        console.error('Error creating bookmark:', error);
+        console.error('Error adding to book:', error);
       });
   };
 

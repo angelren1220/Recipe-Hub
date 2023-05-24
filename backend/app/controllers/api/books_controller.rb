@@ -9,7 +9,7 @@ class Api::BooksController < ApplicationController
 
   # GET /books/1
   def show
-    render json:  { book:@book, user:@user, recipes:@recipes }
+    render json: { book: @book, user: @user, recipes: @recipes }
   end
 
   # POST /books
@@ -25,7 +25,12 @@ class Api::BooksController < ApplicationController
 
   # PATCH/PUT /books/1
   def update
-    if @book.update(book_params)
+
+    #rails will find the recipe_books model
+    recipe_id = params[:recipe_id]
+    @book.recipes << Recipe.find(recipe_id) if recipe_id
+
+    if @book.save
       render json: @book
     else
       render json: @book.errors, status: :unprocessable_entity
@@ -38,16 +43,16 @@ class Api::BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-      @recipes = @book.recipes
-      @user = @book.user
-    end
 
-    # Only allow a list of trusted parameters through.
-    def book_params
-      params.require(:book).permit(:name, :user_id, :description)
-    end
-    
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+    @recipes = @book.recipes
+    @user = @book.user
+  end
+
+  # Only allow a list of trusted parameters through.
+  def book_params
+    params.require(:book).permit(:name, :user_id, :description)
+  end
 end

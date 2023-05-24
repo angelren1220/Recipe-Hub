@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import '../styles/popup.scss';
 
-// Popup takes a special prop called popupMessage
-// popupMessage is used to set the contents of the popup trigger button
 export default function Popup(props) {
   const [showPopup, setShowPopup] = useState(false);
   const formRef = useRef(null);
 
-  const handlePopup = function() {
+  const handlePopup = function(event) {
+    event.stopPropagation();
     setShowPopup(!showPopup);
   };
 
@@ -30,10 +29,10 @@ export default function Popup(props) {
 
   return (
     <div className="generic-popup">
-      <button onClick={handlePopup}>{props.popupMessage}</button>
+      <button onClick={(event) => handlePopup(event)}>{props.popupMessage}</button>
       {showPopup && (
-        <div className="popup-overlay">
-          <div className="popup-form"  ref={formRef}>
+        <div className="popup-overlay" ref={formRef}>
+          <div className="popup-form">
             {showPopup && React.Children.map(props.children, child => {
               return React.cloneElement(child, { ...props, closePopup });
             })}

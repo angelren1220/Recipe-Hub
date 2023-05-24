@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useApplicationData from "../../hooks/useApplicationData";
 import RecipeAccordion from "../RecipeAccordion";
+import Loop from "../LoopScroll";
 
 const Explore = function(props) {
 
