@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
+import SuccessMessage from "../SuccessMessage";
 
 const Recipe = function(props) {
   const { id } = useParams();
@@ -17,18 +18,11 @@ const Recipe = function(props) {
   } = useApplicationData();
 
   const [isItemSaved, setIsItemSaved] = useState(false);
-  
+
   useEffect(() => {
     getRecipeById(id);
     getIngredients(id);
 
-    if (isItemSaved) {
-      const timeout = setTimeout(() => {
-        setIsItemSaved(false);
-      }, 2000);
-
-      return () => clearTimeout(timeout);
-    }
   }, [isItemSaved]);
 
   const { recipe, ingredients, user } = state;
@@ -74,7 +68,7 @@ const Recipe = function(props) {
         <ul>
 
           {userId && <div className="control-buttons">
-            {isItemSaved && <div className="success-message">Added successully!</div>}
+            <SuccessMessage show={isItemSaved} />
             <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
           </div>}
 

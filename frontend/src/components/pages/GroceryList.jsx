@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApplicationData from "../../hooks/useApplicationData";
 import { useParams } from 'react-router-dom';
+import SuccessMessage from "../SuccessMessage";
 
 const GroceryList = function(props) {
   const { id } = useParams();
@@ -18,13 +19,7 @@ const GroceryList = function(props) {
 
   useEffect(() => {
     getGrocerylistById(id);
-    if (isItemSaved) {
-      const timeout = setTimeout(() => {
-        setIsItemSaved(false);
-      }, 2000);
 
-      return () => clearTimeout(timeout);
-    }
   }, [isItemSaved]);
 
   const { grocerylist } = state;
@@ -60,7 +55,7 @@ const GroceryList = function(props) {
         </div>
       </div>
       {userId && <div className="control-buttons">
-      {isItemSaved && <div className="success-message">Added successully!</div>}
+        <SuccessMessage show={isItemSaved} />
         <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
       </div>}
     </article>
