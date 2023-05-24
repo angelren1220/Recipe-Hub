@@ -68,72 +68,108 @@ const EditRecipeSummary = function(props) {
         onSubmit={event => event.preventDefault()}
         className="toggle"
       >
-        <label htmlFor="is_vegetarian">Vegetarian:</label>
-        <input 
-          id="is_vegetarian"
-          value={currentRecipe.is_vegetarian}
-          onChange={(e) => {
-            setRecipeFlag('is_vegetarian', e.target.checked);
-          }}
-          name="is_vegetarian"
-          type="checkbox"
-          checked={(currentRecipe.is_vegetarian ? "checked" : false)}
-        />
-        <label htmlFor="is_vegan">Vegan:</label>
-        <input 
-          id="is_vegan"
-          value={currentRecipe.is_vegan}
-          onChange={(e) => {
-            setRecipeFlag('is_vegan', e.target.checked);
-          }}
-          name="is_vegan"
-          type="checkbox"
-          checked={(currentRecipe.is_vegan ? "checked" : false)}
-        />
-        <label htmlFor="is_lowcarb">Low Carb:</label>
-        <input 
-          id="is_lowcarb"
-          value={currentRecipe.is_lowcarb}
-          onChange={(e) => {
-            setRecipeFlag('is_lowcarb', e.target.checked);
-          }}
-          name="is_lowcarb"
-          type="checkbox"
-          checked={(currentRecipe.is_lowcarb ? "checked" : false)}
-        />
-        <label htmlFor="is_lactosefree">Lactose Free:</label>
-        <input 
-          id="is_lactosefree"
-          value={currentRecipe.is_lactosefree}
-          onChange={(e) => {
-            setRecipeFlag('is_lactosefree', e.target.checked);
-          }}
-          name="is_lactosefree"
-          type="checkbox"
-          checked={(currentRecipe.is_lactosefree ? "checked" : false)}
-        />
-        <label htmlFor="is_glutenfree">Gluten Free:</label>
-        <input 
-          id="is_glutenfree"
-          value={currentRecipe.is_glutenfree}
-          onChange={(e) => {
-            setRecipeFlag('is_glutenfree', e.target.checked);
-          }}
-          name="is_glutenfree"
-          type="checkbox"
-          checked={(currentRecipe.is_glutenfree ? "checked" : false)}
-        />
-        <label htmlFor="is_nutfree">Nut Free:</label>
-        <input 
-          id="is_nutfree"
-          value={currentRecipe.is_nutfree}
-          onChange={(e) => {
-            setRecipeFlag('is_nutfree', e.target.checked);
-          }}
-          name="is_nutfree"
-          type="checkbox"
-          checked={(currentRecipe.is_nutfree ? "checked" : false)}
-        />
+        <div>
+          <input
+            id="is_vegetarian"
+            value={currentRecipe.is_vegetarian}
+            onChange={(e) => {
+              setRecipeFlag('is_vegetarian', e.target.checked);
+            }}
+            name="is_vegetarian"
+            type="checkbox"
+            checked={currentRecipe.is_vegetarian}
+            className="switch-checkbox"
+          />
+          <label htmlFor="is_vegetarian" className="switch-label">
+            Vegetarian:
+            <span className="switch-slider" />
+          </label>
+        </div>
+        <div>
+          <input
+            id="is_vegan"
+            value={currentRecipe.is_vegan}
+            onChange={(e) => {
+              setRecipeFlag('is_vegan', e.target.checked);
+            }}
+            name="is_vegan"
+            type="checkbox"
+            checked={currentRecipe.is_vegan}
+            className="switch-checkbox"
+          />
+          <label htmlFor="is_vegan" className="switch-label">
+            Vegan:
+            <span className="switch-slider" />
+          </label>
+        </div>
+        <div>
+          <input
+            id="is_lowcarb"
+            value={currentRecipe.is_lowcarb}
+            onChange={(e) => {
+              setRecipeFlag('is_lowcarb', e.target.checked);
+            }}
+            name="is_lowcarb"
+            type="checkbox"
+            checked={currentRecipe.is_lowcarb}
+            className="switch-checkbox"
+          />
+          <label htmlFor="is_lowcarb" className="switch-label">
+            Low Carb:
+            <span className="switch-slider" />
+          </label>
+        </div>
+        <div>
+          <input
+            id="is_lactosefree"
+            value={currentRecipe.is_lactosefree}
+            onChange={(e) => {
+              setRecipeFlag('is_lactosefree', e.target.checked);
+            }}
+            name="is_lactosefree"
+            type="checkbox"
+            checked={currentRecipe.is_lactosefree}
+            className="switch-checkbox"
+          />
+          <label htmlFor="is_lactosefree" className="switch-label">
+            Lactose Free:
+            <span className="switch-slider" />
+          </label>
+        </div>
+        <div>
+          <input
+            id="is_glutenfree"
+            value={currentRecipe.is_glutenfree}
+            onChange={(e) => {
+              setRecipeFlag('is_glutenfree', e.target.checked);
+            }}
+            name="is_glutenfree"
+            type="checkbox"
+            checked={currentRecipe.is_glutenfree}
+            className="switch-checkbox"
+          />
+          <label htmlFor="is_glutenfree" className="switch-label">
+            Gluten Free:
+            <span className="switch-slider" />
+          </label>
+        </div>
+        <div>
+          <input
+            id="is_nutfree"
+            value={currentRecipe.is_nutfree}
+            onChange={(e) => {
+              setRecipeFlag('is_nutfree', e.target.checked);
+            }}
+            name="is_nutfree"
+            type="checkbox"
+            checked={currentRecipe.is_nutfree}
+            className="switch-checkbox"
+          />
+          <label htmlFor="is_nutfree" className="switch-label">
+            Nut Free:
+            <span className="switch-slider" />
+          </label>
+        </div>
       </form>
       <button onClick={recipeIngredientsView}>Next</button>
     </>

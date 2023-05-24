@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from 'react-router-dom';
+import SystemMessage from "./SystemMessage";
 
 const RegisterForm = function() {
   const [firstName, setFirstName] = useState('');
@@ -82,9 +83,10 @@ const RegisterForm = function() {
       <button>
         <Link to="/login"> Already have an account? Login here!</Link>
       </button>
-      {
-        errorMessage && <div className="error-message">{errorMessage}</div>
-      }
+      <SystemMessage
+        show={errorMessage}
+        message={errorMessage}
+        type="error" />
     </>
   );
 };

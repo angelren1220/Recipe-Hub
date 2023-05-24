@@ -69,7 +69,7 @@ const EditRecipe = function() {
       (ingredient.delete && deleteIngredient(ingredient.id));
       (!ingredient.delete && updateIngredient(ingredient.id, ingredient));
     });
-
+    props.closePopup();
   };
 
 
@@ -84,8 +84,7 @@ const EditRecipe = function() {
       {recipeEditMode === 'LOCKED' && <Link to={'/recipes'}><button>Back</button></Link>}
       {currentRecipe &&
         <>
-          <Link to={`/recipes/${currentRecipe.id}`}><button>Reset Changes</button></Link>
-          <Link to={`/recipes/${currentRecipe.id}`} onClick={handleSubmit}><button>Publish</button></Link>
+          <button onClick={handleSubmit}>Publish</button>
         </>
       }
 
