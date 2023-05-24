@@ -31,12 +31,14 @@ export default function Popup(props) {
     <div className="generic-popup">
       <button onClick={(event) => handlePopup(event)}>{props.popupMessage}</button>
       {showPopup && (
-        <div className="popup-overlay" ref={formRef}>
-          <div className="popup-form">
-            {showPopup && React.Children.map(props.children, child => {
-              return React.cloneElement(child, { ...props, closePopup });
-            })}
-            <button onClick={closePopup}>X</button>
+        <div className="popup-overlay">
+          <div className="popup-form" ref={formRef}>
+            <div className="popup-content">
+              {showPopup && React.Children.map(props.children, child => {
+                return React.cloneElement(child, { ...props, closePopup });
+              })}
+              <button onClick={closePopup}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
