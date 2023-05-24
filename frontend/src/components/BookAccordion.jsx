@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DescriptionEditor from "./DescriptionEditor";
 import SendLinkForm from "./SendLinkForm";
 import "../styles/book_accordion.scss";
+import UserInfo from "./UserInfo";
 
 const BookAccordion = ({
   books,
@@ -120,6 +121,7 @@ const BookAccordion = ({
               <Link to={`/books/${item.id}`}>
                 <h1>{item.name}</h1>
               </Link>
+              <h2>by: <UserInfo userId={item.user_id}/></h2>
             </div>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
