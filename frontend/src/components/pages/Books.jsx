@@ -28,7 +28,7 @@ const Books = function(props) {
 
   return (
     <article className="books">
-      <h1>All of the current user's books go here</h1>
+      <h1>Bookshelf</h1>
       <button onClick={handleBookmarksToggle}>Bookmarks</button>
       {showBookmarks ? (
         <BookAccordion

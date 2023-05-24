@@ -14,6 +14,7 @@ import dataReducer, {
   SET_MESSAGES,
   SET_GROCERYLISTS,
   SET_GROCERYLIST,
+  SET_ERRORMESSAGE
 } from './dataReducer';
 
 import axios from 'axios';
@@ -31,6 +32,7 @@ const useApplicationData = () => {
     messages: [],
     grocerylists: [],
     grocerylist: [],
+    errorMessage: "",
     loading: true,
   });
 
@@ -38,7 +40,11 @@ const useApplicationData = () => {
   const sendErrorMessage = (error) => {
     const message = (Object.entries(error.response.data)
       .reduce((str, [key, val]) => `${str} ${key} ${val}`, '')) || ("Something wrong with connection...");
-    alert(message);
+      dispatch({
+        type: SET_ERRORMESSAGE,
+        errorMessage: message
+      });
+      console.log(message)
   };
 
   const getAllRecipes = () => {
@@ -117,6 +123,11 @@ const useApplicationData = () => {
           type: SET_RECIPE,
           recipe: response.data.recipe
         });
+        dispatch({
+          type: SET_USER,
+          user: response.data.user
+        });
+        
         // console.log("🙈", response.data.recipe);
       })
       .catch((error) => {
@@ -156,6 +167,24 @@ const useApplicationData = () => {
             };
           })
         });
+        dispatch({
+          type: SET_USER,
+          user: response.data.user
+        })
+      })
+      .catch((error) => {
+        // Handle error if needed
+      });
+  };
+
+  const getBookByBookID = (bookId) => {
+    if (!bookId) {
+      return Promise.resolve(); // Return a resolved promise if userId is not available
+    }
+    return axios.get(`/api/books/${bookId}`)
+      .then((response) => {
+        console.log('🎄',response.data);
+        return response.data;
       })
       .catch((error) => {
         // Handle error if needed
@@ -275,7 +304,7 @@ const useApplicationData = () => {
         window.location = "/recipes";
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error.response.data);
         sendErrorMessage(error);
       });
   };
@@ -507,12 +536,13 @@ const useApplicationData = () => {
           grocerylists: response.data.grocerylists,
         });
 
-        return (response.data.user);
-      })
-      .catch ((error) => {
 
-})
-  };
+      // console.log("🙈", response.data);
+    })
+    .catch((error) => {
+
+    });
+  }
 
 return {
   state,
