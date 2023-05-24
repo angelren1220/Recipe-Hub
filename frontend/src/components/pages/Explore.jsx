@@ -17,7 +17,6 @@ const Explore = function(props) {
 
   return (
     <article className="explore">
-      <h1>ALL Recipes go here</h1>
       <RecipeAccordion recipes={state.recipes}/>
     </article>
   );

@@ -37,7 +37,6 @@ export default function Popup(props) {
               {showPopup && React.Children.map(props.children, child => {
                 return React.cloneElement(child, { ...props, closePopup });
               })}
-              <button onClick={closePopup}>Cancel</button>
             </div>
           </div>
         </div>
