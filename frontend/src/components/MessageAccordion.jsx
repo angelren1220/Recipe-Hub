@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/message_accordion.scss";
 import { Link } from "react-router-dom";
+import UserInfo from "./UserInfo";
 
 const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => {
   const [selected, setSelected] = useState([]);
@@ -61,9 +62,9 @@ const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => 
                 </Link>
               )}
               {showReceivedMessages ? (
-                <h2>From: USER ID {item.sender_id}</h2>
+                <h2>From: <UserInfo userId = {item.sender_id} /></h2>
               ) : (
-                <h2>Sent to: USER ID {item.recipient_id}</h2>
+                <h2>Sent to: <UserInfo userId = {item.recipient_id} /></h2>
               )}
               <h3>{formatDate(item.created_at)}</h3>
             </div>
