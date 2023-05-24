@@ -11,7 +11,8 @@ const BookAccordion = ({
   bookmarks,
   deleteBookmark,
   updateBookDescription,
-  createMessage
+  createMessage,
+  createBookmark
 }) => {
   const [selected, setSelected] = useState([]);
   const [booksState, setBooks] = useState(books); // Declare books state
@@ -47,6 +48,7 @@ const BookAccordion = ({
     event.stopPropagation();
     if (bookmarks && selected.includes(id)) {
       const bookmark = bookmarks.find((bookmark) => bookmark.book.id === id); // Use id instead of item.id
+      console.log("BOOKMARK:",bookmark)
       if (bookmark) {
         deleteBookmark(bookmark.id);
         console.log('🐷 deleted bookmark!');
@@ -94,7 +96,14 @@ const BookAccordion = ({
       });
   };
 
+  const handleBookmark = (bookId, event) => {
+    const userId = parseInt(localStorage.getItem('userId'), 10);
+    event.stopPropagation();
+    createBookmark( userId, bookId);
+  }
+
   return (
+    
     <article className="book-accordions-wrapper">
 
       {showPopup && (
@@ -149,6 +158,7 @@ const BookAccordion = ({
                           {item.description ? "Edit Description" : "Add Description"}
                         </button>
                         <button onClick={(event) => handleSendBookLink(item.id, "Book", event)}> Send Book </button>
+                        <button onClick={(event) => handleBookmark(item.id, event)}> Bookmark </button>
                       </>
                     )}
                   </div>

@@ -159,17 +159,15 @@ const useApplicationData = () => {
       .then((response) => {
         dispatch({
           type: SET_BOOKS,
-          books: response.data.books,
-          bookmarks: response.data.bookmarked_books.map((item) => {
-            return {
-              bookmarked_book: item.bookmarked_book,
-              book: item.book,
-            };
-          })
+          books: response.data.books
         });
         dispatch({
           type: SET_USER,
           user: response.data.user
+        })
+        dispatch({
+          type: SET_BOOKMARKS,
+          bookmarks: response.data.bookmarked_books
         })
       })
       .catch((error) => {
@@ -270,6 +268,23 @@ const useApplicationData = () => {
       });
   };
 
+  const createBookmark = (userId, bookId) => {
+    const bookmark = { user_id: userId, book_id: bookId }
+    axios
+      .post("/api/bookmarked_books", bookmark)
+      .then((response) => {
+        console.log("BOOKMARK 💫:", response.data.bookmarked_book);
+        const newBookmark = response.data.bookmarked_book;
+        dispatch({
+          type: SET_BOOKMARKS,
+          booksmarks: [...state.bookmarks, newBookmark], // Add the new message to the existing messages array
+        });
+      })
+      .catch((error) => {
+        console.error('Error creating bookmark:', error);
+      });
+  };
+
 
   const loginUser = (user) => {
 
@@ -311,7 +326,7 @@ const useApplicationData = () => {
         window.location = `/recipes/edit/${response.data.id}`;
       })
       .catch((error) => {
-
+        console.error('Error creating bookmark:', error);
       });
   };
 
@@ -337,6 +352,33 @@ const useApplicationData = () => {
 
       });
   };
+
+  const addRecipe = (bookId, recipeId) => {
+    axios
+      .put(`/api/books/${bookId}`, null, {
+        params: {
+          recipe_id: recipeId
+        }
+      })
+      .then((response) => {
+        const updatedBook = response.data;
+        const bookIndex = state.books.findIndex((book) => book.id === updatedBook.id);
+  
+        if (bookIndex !== -1) {
+          const updatedBooks = [...state.books];
+          updatedBooks[bookIndex] = updatedBook;
+  
+          dispatch({
+            type: SET_BOOKS,
+            books: updatedBooks
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Error adding to book:', error);
+      });
+  };
+  
 
   const deleteRecipe = (id) => {
     axios.delete(`/api/recipes/${id}`)
@@ -369,6 +411,7 @@ const useApplicationData = () => {
   const deleteBookmark = (id) => {
     axios.delete(`/api/bookmarked_books/${id}`)
       .then((response) => {
+        console.log(response.data)
         const updatedBookmarks = state.bookmarks.filter(bookmark => bookmark.id !== id);
         dispatch({
           type: SET_BOOKMARKS,
@@ -513,38 +556,39 @@ const useApplicationData = () => {
     });
   }
 
-  return {
-    state,
-    dispatch,
-    getAllRecipes,
-    getIngredients,
-    updateIngredient,
-    createIngredient,
-    createMessage,
-    deleteIngredient,
-    getRecipeById,
-    getRecipesByUserId,
-    getBooksByUserID,
-    getBookByBookID,
-    getMessagesByUserID,
-    createUser,
-    loginUser,
-    logoutUser,
-    createRecipe,
-    updateRecipe,
-    deleteRecipe,
-    deleteBook,
-    updateBookDescription,
-    deleteBookmark,
-    getGrocerylistsByUserId,
-    createGrocerylist,
-    updateGrocerylist,
-    deleteGrocerylist,
-    deleteMessage,
-    getGrocerylistById,
-    getUserById
-
-  };
+return {
+  state,
+  dispatch,
+  getAllRecipes,
+  getIngredients,
+  updateIngredient,
+  createIngredient,
+  createMessage,
+  createBookmark,
+  addRecipe,
+  deleteIngredient,
+  getRecipeById,
+  getRecipesByUserId,
+  getBooksByUserID,
+  getBookByBookID,
+  getMessagesByUserID,
+  createUser,
+  loginUser,
+  logoutUser,
+  createRecipe,
+  updateRecipe,
+  deleteRecipe,
+  deleteBook,
+  updateBookDescription,
+  deleteBookmark,
+  getGrocerylistsByUserId,
+  createGrocerylist,
+  updateGrocerylist,
+  deleteGrocerylist,
+  deleteMessage,
+  getGrocerylistById,
+  getUserById
+};
 };
 
 export default useApplicationData;

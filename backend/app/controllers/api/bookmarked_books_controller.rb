@@ -14,18 +14,18 @@ class Api::BookmarkedBooksController < ApplicationController
       render json: { bookmarked_book:@bookmarked_book, book:@book, user:@user }
     end
   
-    # POST /users
+    # POST /bookmarked_books
     def create
-      @bookmarked_book = BookmarkedBook.new(user_params)
+      @bookmarked_book = BookmarkedBook.new(bookmarked_book_params)
   
       if @bookmarked_book.save
-        render json: {message: 'Successfully created!', user: @user, session: session}
+        render json: {message: 'Successfully created!', bookmarked_book: @bookmarked_book}
       else
         render json: @bookmarked_book.errors, status: :unprocessable_entity
       end
     end
   
-    # PATCH/PUT /users/1
+    # PATCH/PUT /bookmarked_books/1
     def update
       if @bookmarked_book.update(bookmarked_book)
         render json: @bookmarked_book
@@ -34,7 +34,7 @@ class Api::BookmarkedBooksController < ApplicationController
       end
     end
   
-    # DELETE /users/1
+    # DELETE /bookmarked_book/1
     def destroy
       @bookmarked_book.destroy
     end

@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   has_many :recipe_books
   has_many :recipes, through: :recipe_books
 
+  accepts_nested_attributes_for :recipe_books, allow_destroy: true
+
   has_many :bookmarked_books
   has_many :users, through: :bookmarked_books
 
