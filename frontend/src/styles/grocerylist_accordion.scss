@@ -42,16 +42,20 @@
     color: $secondary-color1;
   }
 
-  .content {
-    max-height: 0;
+  .grocerylist-content {
+    height: 0;
     overflow: hidden;
-    transition: all .2s cubic-bezier(0,1,0,1);
+    transition: height .5s ease-out;
+
+    &.selected {
+      height: auto;
+      transition: height 0.5s ease-in;
+    }
   }
 
-  .content.show {
+  .grocerylist-content.show {
     height: auto;
-    max-height: 9999px;
-    transition: all .5s cubic-bezier(0,1,0,1);
+    transition: height .5s ease-in;
   }
 
   &:hover {

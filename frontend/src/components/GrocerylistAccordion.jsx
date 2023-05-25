@@ -140,13 +140,13 @@ const GrocerylistAccordion = function(props) {
 
           </div>
 
-          <div className={selected.includes(grocerylist.id) ? 'content show' : 'content'}>
+          <div className={selected.includes(grocerylist.id) ? 'grocerylist-content show' : 'grocerylist-content'}>
             <div className="items-list">
               <ul>
                 {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
                   <li key={itemName}>
                     <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>➖</button>
+                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>x</button>
                   </li>
                 ))}
               </ul>
