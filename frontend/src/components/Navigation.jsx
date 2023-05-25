@@ -1,6 +1,7 @@
 import "../styles/nav.scss";
 import { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import { useEffect } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 import UnreadMessagesContext from "../hooks/providers/UnreadMessagesProvider";
 
@@ -9,13 +10,13 @@ const Navigation = function() {
   
   const {
     state,
-    logoutUser,
     getUserById,
   } = useApplicationData();
 
   const { unreadMessages, getUnreadMessagesByUserID, loading } = useContext(UnreadMessagesContext)
 
   useEffect(() => {
+    if (userId) {
     if (userId) {
       getUserById(userId);
       getUnreadMessagesByUserID(userId);
@@ -24,22 +25,17 @@ const Navigation = function() {
 
   const { user } = state;
 
-  const handleLogout = () => {
-    return logoutUser();
-  };
-
   return (
     <nav className="nav">
       <h1 className="logo"><a href="/">Sous</a></h1>
       <div className="sideview">
         {!userId && <h2><Link to={'/login'}>Login</Link></h2>}
+        {!userId && <h2><Link>Hello</Link></h2>}
         {userId &&
           <h2><Link to={`/profile/${user.id}`}>
             Hello, {user.first_name}
           </Link> </h2>}
         {unreadMessages !== null && unreadMessages > 0 && <span>You have {unreadMessages} unread messages!</span>}
-        {userId &&
-          <button onClick={handleLogout}>Logout</button>}
         <h2><Link to={'/recipes'}>My Recipes</Link></h2>
         <h2><Link to={'/books'}>My Books</Link></h2>
         <h2><Link to={'/grocerylists'}>Grocery Lists</Link></h2>
