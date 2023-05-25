@@ -1,7 +1,6 @@
 import "../styles/nav.scss";
 import { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import { useEffect } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 import UnreadMessagesContext from "../hooks/providers/UnreadMessagesProvider";
 
@@ -16,11 +15,8 @@ const Navigation = function() {
   const { unreadMessages, getUnreadMessagesByUserID, loading } = useContext(UnreadMessagesContext)
 
   useEffect(() => {
-    if (userId) {
-    if (userId) {
       getUserById(userId);
       getUnreadMessagesByUserID(userId);
-    }
   }, [userId]);
 
   const { user } = state;
