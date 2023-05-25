@@ -3,6 +3,7 @@ import { viewModeContext } from "../hooks/providers/viewModeProvider";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from 'react-router-dom';
 import SystemMessage from "./SystemMessage";
+import "../styles/forms.scss";
 
 const RegisterForm = function() {
   const [firstName, setFirstName] = useState('');
@@ -27,8 +28,9 @@ const RegisterForm = function() {
   const { errorMessage } = state;
 
   return (
-    <>
+    <div className="form-page-container">
       <form
+        className="form-container"
         autoComplete="off"
         onSubmit={event => event.preventDefault()}
       >
@@ -80,14 +82,14 @@ const RegisterForm = function() {
         <button onClick={handleRegister}>Register</button>
       </form>
 
-      <button>
+      <div className="link-container" >
         <Link to="/login"> Already have an account? Login here!</Link>
-      </button>
+      </div>
       <SystemMessage
         show={errorMessage}
         message={errorMessage}
         type="error" />
-    </>
+    </div>
   );
 };
 

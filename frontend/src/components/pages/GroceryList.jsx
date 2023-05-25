@@ -41,7 +41,6 @@ const GroceryList = function(props) {
 
   return (
     <article className="grocerylist-list">
-      <h1>Single grocery list details go here</h1>
       <div className="grocerylist-text">
         <h2 className="grocerylist-title">{grocerylist.name}</h2>
         <div className="items-list">

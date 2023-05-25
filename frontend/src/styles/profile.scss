@@ -3,18 +3,18 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
-  color: #0C134F;
+th, td, {
+  color: $secondary-color1;
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $primary-color1;
 }
 
 th {
-  background-color: #5C469C;
+  background-color: $primary-color2;
 }
 
 td:hover {
-  background-color: #D4ADFC;
+  background-color: $primary-color4;
 }
 

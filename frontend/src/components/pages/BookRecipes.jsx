@@ -3,6 +3,7 @@ import RecipeAccordion from "../RecipeAccordion";
 import Loop from "../LoopScroll";
 import useApplicationData from "../../hooks/useApplicationData";
 import { Link, useParams } from "react-router-dom";
+import UserInfo from "../UserInfo";
 
 const BooksRecipes = function(props) {
 
@@ -49,8 +50,12 @@ const BooksRecipes = function(props) {
       {bookState &&
         <article className="recipes-list">
           <h1>{`${bookState.book.name}`}</h1>
+          <UserInfo userId={bookState.user.id}/>
+          <p>{bookState.book.description}</p>
+
           {bookState.recipes.length === 0 && <h3>This Book has no Recipes!</h3>}
           <button onClick={() => handleBookmark()}> Bookmark this Book </button>
+
           <RecipeAccordion
             recipes={bookState.recipes}
             userId={userId}

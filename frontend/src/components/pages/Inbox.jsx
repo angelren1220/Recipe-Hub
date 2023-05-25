@@ -38,7 +38,6 @@ const Inbox = function(props) {
 
   return (
     <article className="inbox">
-      <h1>All of the current user's messages go here</h1>
       <div>
         <button onClick={handlesReceivedMessages} disabled={showReceivedMessages}>
           Received

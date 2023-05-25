@@ -1,7 +1,7 @@
 .book-accordion {
-  color: blue;
+  color: $secondary-color1;
   width: 90%;
-  background: rgb(206, 206, 189);
+  background: $primary-color4;
   padding: 1.5rem;
   margin: .5rem 0;
   border-radius: .5rem;
@@ -9,10 +9,10 @@
   h1 {
     font-size: 2rem;
     text-decoration: underline;
-    color: blue;
+    color: $secondary-color1;
 
     &:hover {
-      color: red;
+      color: $secondary-color4;
     }
   }
 
@@ -60,11 +60,11 @@
 .book-accordions-wrapper {
   .book-accordion {
     &:nth-child(even) {
-      background-color: #e6d49a; // Set the background color for even-indexed accordions
+      background-color: $primary-color1; // Set the background color for even-indexed accordions
     }
 
     &:nth-child(odd) {
-      background-color: #c4e09d; // Set the background color for odd-indexed accordions
+      background-color: $primary-color2; // Set the background color for odd-indexed accordions
     }
   }
 }

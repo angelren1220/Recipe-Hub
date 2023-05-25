@@ -6,6 +6,7 @@ import SystemMessage from "../SystemMessage";
 import Popup from "../Popup";
 import RecipeEditModeProvider from "../../hooks/providers/recipeEditMode";
 import EditRecipe from "./EditRecipe";
+import UserInfo from "../UserInfo";
 
 const Recipe = function(props) {
   const { id } = useParams();
@@ -59,9 +60,7 @@ const Recipe = function(props) {
 
       <div className="recipe-text">
         <h2 className="recipe-title">{recipe.name}</h2>
-        <Link to={`/profile/${user.id}`}>
-          by {user.first_name} {user.last_name}
-        </Link>
+         <h2>by <UserInfo userId={user.id} /></h2>
         <span>description</span>
         <p>{recipe.description}</p>
         <span>ingredients</span>
@@ -92,7 +91,7 @@ const Recipe = function(props) {
         </ol>
 
         {parseInt(userId) === recipe.user_id && <div className="control-buttons">
-          <Popup popupMessage="Delete Recipe">
+          <Popup popupMessage={"Delete Recipe"}>
             <button onClick={(event) => handleDelete(recipe.id)}>Confirm Delete</button>
           </Popup>
           <RecipeEditModeProvider>

@@ -14,8 +14,8 @@
   }
   
   .popup-form {
-    background-color: darkslategrey;
-    border: 1px solid #cccccc;
+    background-color:$primary-color2;
+    border: 1px solid $secondary-color4;
     padding: 20px;
     width: 400px;
     max-width: 90%;
@@ -36,13 +36,15 @@
   
   .popup-form label {
     margin-bottom: 5px;
-    color: white;
+    color: $secondary-color1;
   }
   
   .popup-form input,
   .popup-form textarea {
     padding: 8px;
     margin-bottom: 10px;
+    background-color: $primary-color4;
+    border-width: 0;
   }
   
   .popup-form textarea {
@@ -50,23 +52,35 @@
     resize: none;
   }
   
-  .popup-form button {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .popup-form button:not(:last-child) {
-    margin-bottom: .5rem;
-  }
-  
   .popup-form button:hover {
-    background-color: #2a2b2c;
+    background-color: $primary-color4;
   }
 
   .popup-content {
     padding: 10px;
+  }
+
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    color: $secondary-color1;
+    background-color: $primary-color4;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  
+  button:hover {
+    border-color: $secondary-color4;
+    color: $secondary-color4;
+  }
+  
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
   }
 
   .switch-checkbox {
@@ -91,7 +105,7 @@
     right: 0;
     bottom: 0;
     width: 48px;
-    background-color: #ccc;
+    background-color: $primary-color4;
     border-radius: 15px;
     transition: background-color 0.4s;
   }
@@ -103,13 +117,13 @@
     width: 24px;
     left: 4px;
     bottom: 4px;
-    background-color: #fff;
+    background-color: $secondary-color1;
     border-radius: 50%;
     transition: transform 0.4s;
   }
   
   .switch-checkbox:checked + .switch-label .switch-slider {
-    background-color: #2196F3;
+    background-color: $secondary-color4;
   }
   
   .switch-checkbox:checked + .switch-label .switch-slider:before {

@@ -5,6 +5,7 @@ import "../styles/recipe_accordion.scss";
 import SendLinkForm from "./SendLinkForm";
 import Popup from "./Popup";
 import AddRecipeForm from "./AddRecipeForm";
+import UserInfo from "./UserInfo";
 
 const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBooks, addRecipe }) => {
   const [selected, setSelected] = useState([]);
@@ -69,7 +70,7 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
             <Link to={`/recipes/${item.id}`}>
               <h1>{item.name}</h1>
             </Link>
-            {/* <h2>By: {item.first_name}</h2> */}
+            <h2>by: <UserInfo userId={item.user_id}/></h2>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? '-' : '+'}</h2>
               <img className="banner-image" src={item.image} alt="Recipe" />

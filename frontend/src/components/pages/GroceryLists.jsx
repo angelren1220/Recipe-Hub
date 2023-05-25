@@ -5,7 +5,6 @@ const GroceryLists = function(props) {
 
   return (
     <article className="grocery-lists">
-      <h1>ALL Grocerylists go here</h1>
       <GrocerylistAccordion/>
         
     </article>
