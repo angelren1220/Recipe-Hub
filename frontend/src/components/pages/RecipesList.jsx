@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import RecipeAccordion from "../RecipeAccordion";
-import Loop from "../LoopScroll";
 import useApplicationData from "../../hooks/useApplicationData";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Popup from "../Popup";
 import NewRecipe from "./NewRecipe";
-import CreateRecipe from "../CreateRecipe";
 
 const RecipesList = function(props) {
 
@@ -24,6 +22,8 @@ const RecipesList = function(props) {
 
   const [userState, setUserState] = useState(null);
 
+  const { id } = useParams();
+
   useEffect(() => {
     const getUserData = async function() {
       getRecipesByUserId(userId);
@@ -37,9 +37,6 @@ const RecipesList = function(props) {
       getAllRecipes();
     }
   }, []);
-
-
-
   
   return (
     <article className="recipes-list">

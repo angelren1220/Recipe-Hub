@@ -12,7 +12,8 @@ const BooksRecipes = function(props) {
     getBooksByUserID,
     getBookByBookID,
     deleteRecipe,
-    createMessage
+    createMessage,
+    createBookmark
   } = useApplicationData();
 
   const userId = localStorage.getItem('userId');
@@ -35,13 +36,21 @@ const BooksRecipes = function(props) {
     const userId = localStorage.getItem('userId');
     getBooksByUserID(userId);
   }, []);
+  
+  const handleBookmark = () => {
+    const userId = parseInt(localStorage.getItem('userId'), 10);
+    event.stopPropagation();
+    console.log("bookID:", id ,"userID:", userId)
+    createBookmark( userId, id);
+  }
 
   return (
     <>
       {bookState &&
         <article className="recipes-list">
           <h1>{`${bookState.book.name}`}</h1>
-          {bookState.recipes.length === 0 && <h3>This Book has no recipes!</h3>}
+          {bookState.recipes.length === 0 && <h3>This Book has no Recipes!</h3>}
+          <button onClick={() => handleBookmark()}> Bookmark this Book </button>
           <RecipeAccordion
             recipes={bookState.recipes}
             userId={userId}

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../styles/recipe_accordion.scss";
 import SendLinkForm from "./SendLinkForm";
 import Popup from "./Popup";
@@ -11,7 +11,6 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
   const [recipesState, setRecipesState] = useState(recipes);
   const [showSendPopup, setShowSendPopup] = useState(false);
   const [selectedRecipeForPopup, setSelectedRecipeForPopup] = useState(null);
-  const [selectedBookId, setSelectedBookId] = useState(null);
 
   useEffect(() => {
     setRecipesState(recipes);
@@ -44,9 +43,6 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
     setRecipesState(recipesState.filter((recipe) => recipe.id !== id));
   };
 
-  console.log("💨", recipesState)
-  console.log("💦", userBooks)
-
   return (
     <article className="recipe-accordions-wrapper">
 
@@ -62,7 +58,6 @@ const RecipeAccordion = ({ recipes, userId, deleteRecipe, createMessage, userBoo
           </div>
         </div>
       )}
-
 
       {recipesState.map((item, i) => (
         <div
