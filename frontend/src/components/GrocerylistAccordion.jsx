@@ -38,7 +38,7 @@ const GrocerylistAccordion = function(props) {
   }, [isItemSaved]);
 
   if (!userId) {
-    return (<div>Empty</div>);
+    return (<h2>Login to view your grocery list</h2>);
   }
 
   const toggle = (i, event) => {
@@ -154,76 +154,75 @@ const GrocerylistAccordion = function(props) {
                 <tbody>
                   {Object.entries(grocerylist.items).map(([itemName, itemData], i) => (
                     <tr key={i}>
-                      <td><strong>{itemName}</strong></td> 
+                      <td><strong>{itemName}</strong></td>
                       <td>{itemData.quantity}</td>
                       <td>{itemData.units}</td>
                       <td><button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>x</button></td>
                     </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {selected.includes(grocerylist.id) && (
-            <div>
-
-              <Popup popupMessage={"+"}>
-
-                <form className="form-container">
-                  <label htmlFor="name">Name:</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                    onClick={handleClick}
-                  />
-                  <label htmlFor="quantity">Quantity:</label>
-                  <input
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    value={quantity}
-                    onChange={(event) => setQuantity(event.target.value)}
-                    onClick={handleClick}
-                  />
-                  <label htmlFor="units">Units:</label>
-                  <input
-                    type="text"
-                    id="units"
-                    name="units"
-                    value={units}
-                    onChange={(event) => setUnits(event.target.value)}
-                    onClick={handleClick}
-                  />
-                  <button onClick={(event) => handleSaveItem(grocerylist, event)} disabled={!name}>Save Item</button>
-                </form>
-
-
-              </Popup>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          )}
+            {selected.includes(grocerylist.id) && (
+              <div>
 
-          <div className="control-buttons">
-            <Popup popupMessage={"Delete Grocery List"}>
-              <button onClick={(event) => handleDelete(grocerylist.id, event)}>Confirm Delete</button>
-            </Popup>
-            <button onClick={(event) => handleSendGroceryLink(grocerylist.id, "GroceryList", event)}> Share Grocery List </button>
+                <Popup popupMessage={"+"}>
+                  <>
+                    <form className="form-container">
+                      <label htmlFor="name">Name:</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        onClick={handleClick}
+                      />
+                      <label htmlFor="quantity">Quantity:</label>
+                      <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        value={quantity}
+                        onChange={(event) => setQuantity(event.target.value)}
+                        onClick={handleClick}
+                      />
+                      <label htmlFor="units">Units:</label>
+                      <input
+                        type="text"
+                        id="units"
+                        name="units"
+                        value={units}
+                        onChange={(event) => setUnits(event.target.value)}
+                        onClick={handleClick}
+                      />
+                      <button onClick={(event) => handleSaveItem(grocerylist, event)} disabled={!name}>Save Item</button>
+                    </form>
+                  </>
+
+
+                </Popup>
+              </div>
+            )}
+
+            <div className="control-buttons">
+              <button onClick={(event) => handleDelete(grocerylist.id, event)}>Delete Grocerylist</button>
+              <button onClick={(event) => handleSendGroceryLink(grocerylist.id, "GroceryList", event)}> Share Grocery List </button>
+            </div>
+
           </div>
 
         </div>
+      ))
+      }
 
-        </div>
-  ))
-}
+      < div className="add-new-grocerylist" >
 
-  < div className = "add-new-grocerylist" >
+        <Popup popupMessage="Create a Grocery List">
 
-    <Popup popupMessage="Create a Grocery List">
+          <CreateGrocerylist userId={userId} />
 
-      <CreateGrocerylist userId={userId} />
-
-    </Popup>
+        </Popup>
       </div >
     </article >
   );
