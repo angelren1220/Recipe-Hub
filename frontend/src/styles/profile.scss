@@ -14,7 +14,11 @@ th {
   background-color: $primary-color2;
 }
 
-td:hover {
+tr:hover {
   background-color: $primary-color4;
+}
+
+.items-table {
+  width: 60%;
 }
 
