@@ -4,9 +4,9 @@ class Ingredient < ApplicationRecord
 
   before_save :sanitize_attributes
 
-  private
+  # private
 
-  def sanitize_attributes
-    self.name = CGI.escapeHTML(name) if name.present?
-  end
+  # def sanitize_attributes
+  #   self.name = CGI.escapeHTML(name) if name.present?
+  # end
 end
