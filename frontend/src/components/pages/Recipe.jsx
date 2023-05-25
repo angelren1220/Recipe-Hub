@@ -72,7 +72,7 @@ const Recipe = function(props) {
           {userId && <div className="control-buttons">
             <SystemMessage
               show={isItemSaved}
-              message={"Added successfully"}
+              message={"Added to grocery list successfully"}
               type="success" />
             <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
           </div>}

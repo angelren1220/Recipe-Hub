@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "../styles/system_message.scss";
 
-const SystemMessage = ({  show, message, type  }) => {
+const SystemMessage = ({ show, message, type }) => {
   const [isVisible, setIsVisible] = useState(show);
 
   useEffect(() => {
@@ -15,9 +16,12 @@ const SystemMessage = ({  show, message, type  }) => {
     }
   }, [show]);
 
-  return isVisible ? (
-    <div className={`${type}-message`}>{message}</div>
-  ) : null;
+  return (
+    <div className={`system-message ${isVisible ? "visible" : ""}`}>
+      <div className={`message ${type}`}>{message}</div>
+    </div>
+  );
 };
 
 export default SystemMessage;
+

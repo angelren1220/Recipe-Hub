@@ -13,25 +13,3 @@
   overflow-y: scroll;
 }
 
-.error-message {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 10px;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-.success-message {
-  background-color: green;
-  color: white;
-  padding: 10px;
-  opacity: 1;
-  transition: opacity 0.5s;
-  width: 30%;
-}
-
-.success-message.fade-out {
-  opacity: 0;
-}
-

@@ -1,0 +1,32 @@
+.system-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.system-message.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
