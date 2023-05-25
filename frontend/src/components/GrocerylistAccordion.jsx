@@ -135,90 +135,97 @@ const GrocerylistAccordion = function(props) {
             <div className="banner-right">
 
               <h2 className="toggle" onClick={(event) => toggle(i, event)}>+</h2>
-              
+
             </div>
 
           </div>
 
           <div className={selected.includes(grocerylist.id) ? 'grocerylist-content show' : 'grocerylist-content'}>
-            <div className="items-list">
-              <ul>
-                {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
-                  <li key={itemName}>
-                    <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>x</button>
-                  </li>
+            <div className="items-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Quantiy</th>
+                    <th>Unit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.entries(grocerylist.items).map(([itemName, itemData], i) => (
+                    <tr key={i}>
+                      <td><strong>{itemName}</strong></td> 
+                      <td>{itemData.quantity}</td>
+                      <td>{itemData.units}</td>
+                      <td><button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>x</button></td>
+                    </tr>
                 ))}
-              </ul>
+              </tbody>
+            </table>
+          </div>
+          {selected.includes(grocerylist.id) && (
+            <div>
+
+              <Popup popupMessage={"+"}>
+
+                <form className="form-container">
+                  <label htmlFor="name">Name:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    onClick={handleClick}
+                  />
+                  <label htmlFor="quantity">Quantity:</label>
+                  <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    value={quantity}
+                    onChange={(event) => setQuantity(event.target.value)}
+                    onClick={handleClick}
+                  />
+                  <label htmlFor="units">Units:</label>
+                  <input
+                    type="text"
+                    id="units"
+                    name="units"
+                    value={units}
+                    onChange={(event) => setUnits(event.target.value)}
+                    onClick={handleClick}
+                  />
+                  <button onClick={(event) => handleSaveItem(grocerylist, event)} disabled={!name}>Save Item</button>
+                </form>
+
+
+              </Popup>
             </div>
-            {selected.includes(grocerylist.id) && (
-              <div>
+          )}
 
-                <Popup popupMessage={"Add New Item"}>
-
-                  <form>
-                    <div>
-                      <label htmlFor="name">Name:</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        onClick={handleClick}
-                        />
-                    </div>
-                    <div>
-                      <label htmlFor="quantity">Quantity:</label>
-                      <input
-                        type="number"
-                        id="quantity"
-                        name="quantity"
-                        value={quantity}
-                        onChange={(event) => setQuantity(event.target.value)}
-                        onClick={handleClick}
-                        />
-                    </div>
-                    <div>
-                      <label htmlFor="units">Units:</label>
-                      <input
-                        type="text"
-                        id="units"
-                        name="units"
-                        value={units}
-                        onChange={(event) => setUnits(event.target.value)}
-                        onClick={handleClick}
-                        />
-                    </div>
-                    <button onClick={(event) => handleSaveItem(grocerylist, event)} disabled={!name}>Save Item</button>
-                  </form>
-
-           
-                 </Popup>
-              </div>
-            )}
-
-            <div className="control-buttons">
+          <div className="control-buttons">
             <Popup popupMessage={"Delete Grocery List"}>
               <button onClick={(event) => handleDelete(grocerylist.id, event)}>Confirm Delete</button>
             </Popup>
-              <button onClick={(event) => handleSendGroceryLink(grocerylist.id, "GroceryList", event)}> Share Grocery List </button>
-            </div>
-
+            <button onClick={(event) => handleSendGroceryLink(grocerylist.id, "GroceryList", event)}> Share Grocery List </button>
           </div>
 
         </div>
-      ))}
 
-      <div className="add-new-grocerylist">
+        </div>
+  ))
+}
 
-        <Popup popupMessage="Create a Grocery List">
+  < div className = "add-new-grocerylist" >
 
-          <CreateGrocerylist userId={userId} />
+    <Popup popupMessage="Create a Grocery List">
 
-        </Popup>
-      </div>
-    </article>
+      <CreateGrocerylist userId={userId} />
+
+    </Popup>
+      </div >
+    </article >
   );
 };
 
