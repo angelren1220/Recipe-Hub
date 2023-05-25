@@ -15,8 +15,10 @@ const Navigation = function() {
   const { unreadMessages, getUnreadMessagesByUserID, loading } = useContext(UnreadMessagesContext)
 
   useEffect(() => {
-      getUserById(userId);
-      getUnreadMessagesByUserID(userId);
+    if(userId){
+        getUserById(userId);
+        getUnreadMessagesByUserID(userId);
+      }
   }, [userId]);
 
   const { user } = state;
@@ -33,7 +35,7 @@ const Navigation = function() {
               <h2><Link to={`/profile/${user.id}`}>
                 Hello, {user.first_name}
               </Link> </h2>}
-            {unreadMessages !== null && unreadMessages > 0 && <span>You have {unreadMessages} unread messages!</span>}
+            {unreadMessages && unreadMessages > 0 && <span>You have {unreadMessages} unread messages!</span>}
         </div>
         
         <h2><Link to={'/recipes'}>My Recipes</Link></h2>

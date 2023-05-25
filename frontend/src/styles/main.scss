@@ -1,22 +1,3 @@
-@font-face {
-  font-family: 'FreeSans';
-  src: local('FreeSans'), url('./fonts/FreeSans.otf') format('opentype');
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'FreeSans';
-  src: local('FreeSans Bold'), url('./fonts/FreeSansBold.otf') format('opentype');
-  font-style: bold;
-}
-
-@font-face {
-  font-family: 'FreeSans';
-  src: local('FreeSans Bold Oblique'), url('./fonts/FreeSansBoldOblique.otf') format('opentype');
-  font-style: oblique;
-}
-
-
 :root {
   font-family: FreeSans, system-ui, Avenir, serif, Arial, sans-serif;
   line-height: 1.5;

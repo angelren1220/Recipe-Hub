@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  font-family: $font2;
 }
 
 .form-container {
@@ -31,6 +32,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-family: $font1;
 }
 
 .form-container .link-container {
