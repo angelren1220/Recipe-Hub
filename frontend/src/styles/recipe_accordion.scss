@@ -1,10 +1,11 @@
 .recipe-accordion {
+  position: relative;;
   color: $secondary-color1;
-  width: 90%;
+  width: 100%;
   background: $primary-color4;
-  padding: 1.5rem;
-  margin: .5rem 0;
-  border-radius: .5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid $secondary-color1;
+  border-bottom: 1px solid $secondary-color1;
 
   h1 {
     font-size: 2rem;
@@ -16,10 +17,15 @@
     }
   }
 
+  .toggle{
+    font-size: 3em;
+  }
+
   .banner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 2em;
 
     .banner-right {
       display: flex;
@@ -36,6 +42,9 @@
   }
 
   .content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
     max-height: 0;
     overflow: hidden;
     transition: all .2s cubic-bezier(0,1,0,1);
@@ -45,6 +54,52 @@
     height: auto;
     max-height: 9999px;
     transition: all .5s cubic-bezier(0,1,0,1);
+
+    .bottom-content{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+
+      .categories{
+      display: column;
+      margin-bottom: 2em;
+        
+        h2{
+          padding: none;
+        }
+
+        .tags{
+          display: flex;
+          gap: 2em;
+        }
+  
+          .category {
+            padding: .8em 1em;
+            text-align: center;
+            border: 1px solid;
+            border-radius: 50%;
+          }
+      }
+  
+      .control-buttons {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2em;
+
+          button{
+            height: 3rem;
+            background-color: transparent;
+            border: 2px solid;
+            border-radius: 1rem;
+
+            &:hover{
+              background-color: $secondary-color1;
+              color: $primary-color1;
+            }
+          }
+      }
+    }
   }
 
   &:hover {

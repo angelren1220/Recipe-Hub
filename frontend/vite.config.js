@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import sass from 'sass';
 
 export default defineConfig({
   plugins: [react()],
@@ -26,11 +25,17 @@ export default defineConfig({
   },
 
   css: {
+    modules: {
+      localsConvention: 'camelCaseOnly', // Enable camelCase for CSS module class names
+    },
     preprocessorOptions: {
       scss: {
-        implementation: sass,
-        additionalData: `@import "@/styles/variables.scss";`, // Import a global variables file
+        additionalData: `@import '@/styles/variables.scss';`, // Import a global variables file
       },
     },
+  },
+
+  build: {
+    assetsDir: 'assets', // Output directory for bundled assets
   },
 });
