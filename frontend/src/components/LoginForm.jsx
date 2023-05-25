@@ -22,11 +22,15 @@ const LoginForm = function() {
   const handleLogin = () => {
 
     const user = { email, password };
-    return loginUser(user);
+    loginUser(user);
 
   };
 
   const { errorMessage } = state;
+
+  const handleShowMessage = () => {
+
+  };
 
 
   return (
@@ -66,7 +70,8 @@ const LoginForm = function() {
       <SystemMessage
         show={errorMessage}
         message={errorMessage}
-        type="error" />
+        type="error"
+        onShowMessage={handleShowMessage} />
     </div>
 
 

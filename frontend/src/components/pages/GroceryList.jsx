@@ -35,6 +35,10 @@ const GroceryList = function(props) {
     setIsItemSaved(true);
   };
 
+  const handleShowMessage = () => {
+    setIsItemSaved(false);
+  };
+
   if (!grocerylist || !grocerylist.items) {
     return <div>Loading...</div>;
   }
@@ -67,8 +71,9 @@ const GroceryList = function(props) {
       {userId && <div className="control-buttons">
         <SystemMessage
           show={isItemSaved}
-          message={"Added successfully"}
-          type="success" />
+          message={"Added to grocery list successfully"}
+          type="success"
+          onShowMessage={handleShowMessage} />
         <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
       </div>}
     </article>
