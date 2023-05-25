@@ -43,14 +43,25 @@ const GroceryList = function(props) {
     <article className="grocerylist-list">
       <div className="grocerylist-text">
         <h2 className="grocerylist-title">{grocerylist.name}</h2>
-        <div className="items-list">
-          <ul>
-            {Object.entries(grocerylist.items).map(([itemName, itemData]) => (
-              <li key={itemName}>
-                <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-              </li>
-            ))}
-          </ul>
+        <div className="items-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Quantiy</th>
+                <th>Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(grocerylist.items).map(([itemName, itemData], i) => (
+                <tr key={i}>
+                  <td><strong>{itemName}</strong></td>
+                  <td>{itemData.quantity}</td>
+                  <td>{itemData.units}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
       {userId && <div className="control-buttons">

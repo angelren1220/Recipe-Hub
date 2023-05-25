@@ -142,14 +142,6 @@ const GrocerylistAccordion = function(props) {
 
           <div className={selected.includes(grocerylist.id) ? 'grocerylist-content show' : 'grocerylist-content'}>
             <div className="items-table">
-              {/* <ol>
-                {Object.entries(grocerylist.items).map(([itemName, itemData], i) => (
-                  <li key={i}>
-                    <strong>{itemName}:</strong> {itemData.quantity} {itemData.units}
-                    <button className="btn-delete" onClick={(event) => handleDeleteItem(itemName, grocerylist, event)}>x</button>
-                  </li>
-                ))}
-              </ol> */}
               <table>
                 <thead>
                   <tr>
@@ -174,7 +166,7 @@ const GrocerylistAccordion = function(props) {
           {selected.includes(grocerylist.id) && (
             <div>
 
-              <Popup popupMessage={"Add New Item"}>
+              <Popup popupMessage={"+"}>
 
                 <form className="form-container">
                   <label htmlFor="name">Name:</label>
