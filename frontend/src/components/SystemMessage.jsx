@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/system_message.scss";
 
-const SystemMessage = ({ show, message, type }) => {
+const SystemMessage = ({ show, message, type, onShowMessage }) => {
   const [isVisible, setIsVisible] = useState(show);
 
   useEffect(() => {
@@ -10,11 +10,14 @@ const SystemMessage = ({ show, message, type }) => {
 
       const timeout = setTimeout(() => {
         setIsVisible(false);
+        if (onShowMessage) {
+          onShowMessage();
+        }
       }, 2000);
 
       return () => clearTimeout(timeout);
     }
-  }, [show]);
+  }, [show, onShowMessage]);
 
   return (
     <div className={`system-message ${isVisible ? "visible" : ""}`}>

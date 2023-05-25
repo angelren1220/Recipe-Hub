@@ -44,11 +44,12 @@ const Recipe = function(props) {
 
     const grocerylist = { name: recipe.name, user_id: userId, items: items };
 
-    // console.log(items);
-    // console.log(grocerylist);
-    // console.log(ingredients.length, Object.keys(items).length);
     createGrocerylist(grocerylist);
     setIsItemSaved(true);
+  };
+
+  const handleShowMessage = () => {
+    setIsItemSaved(false);
   };
 
   if (!recipe || !recipe.directions) {
@@ -73,7 +74,8 @@ const Recipe = function(props) {
             <SystemMessage
               show={isItemSaved}
               message={"Added to grocery list successfully"}
-              type="success" />
+              type="success"
+              onShowMessage={handleShowMessage} />
             <button onClick={(event) => handleAddGrocerylist()}>Add to Grocery Lists</button>
           </div>}
 

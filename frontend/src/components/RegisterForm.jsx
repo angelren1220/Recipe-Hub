@@ -27,6 +27,10 @@ const RegisterForm = function() {
   };
   const { errorMessage } = state;
 
+  const handleShowMessage = () => {
+
+  };
+
   return (
     <div className="form-page-container">
       <form
@@ -88,7 +92,8 @@ const RegisterForm = function() {
       <SystemMessage
         show={errorMessage}
         message={errorMessage}
-        type="error" />
+        type="error"
+        onShowMessage={handleShowMessage}/>
     </div>
   );
 };
