@@ -1,21 +1,26 @@
 import "../styles/nav.scss";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import useApplicationData from "../hooks/useApplicationData";
+import UnreadMessagesContext from "../hooks/providers/UnreadMessagesProvider";
 
 const Navigation = function() {
-  const userId = localStorage.getItem('userId');
+  const userId = parseInt(localStorage.getItem('userId'), 10);
+  
   const {
     state,
     logoutUser,
     getUserById,
   } = useApplicationData();
-  
+
+  const { unreadMessages, getUnreadMessagesByUserID, loading } = useContext(UnreadMessagesContext)
+
   useEffect(() => {
-    if(userId){
+    if (userId) {
       getUserById(userId);
+      getUnreadMessagesByUserID(userId);
     }
-  }, []);
+  }, [userId]);
 
   const { user } = state;
 
@@ -25,16 +30,15 @@ const Navigation = function() {
 
   return (
     <nav className="nav">
-
       <h1 className="logo"><a href="/">Sous</a></h1>
-      
       <div className="sideview">
         {!userId && <h2><Link to={'/login'}>Login</Link></h2>}
-        {userId && 
-        <h2><Link to={`/profile/${user.id}`}>
-          Hello, {user.first_name}
+        {userId &&
+          <h2><Link to={`/profile/${user.id}`}>
+            Hello, {user.first_name}
           </Link> </h2>}
-        {userId && 
+        {unreadMessages !== null && unreadMessages > 0 && <span>You have {unreadMessages} unread messages!</span>}
+        {userId &&
           <button onClick={handleLogout}>Logout</button>}
         <h2><Link to={'/recipes'}>My Recipes</Link></h2>
         <h2><Link to={'/books'}>My Books</Link></h2>
@@ -43,7 +47,6 @@ const Navigation = function() {
         <h2><Link to={'/search'}>Search</Link></h2>
         <h2><Link to={'/inbox'}>Inbox</Link></h2>
       </div>
-
     </nav>
   );
 };

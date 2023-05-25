@@ -12,6 +12,7 @@ import dataReducer, {
   SET_BOOKS,
   SET_BOOKMARKS,
   SET_MESSAGES,
+  SET_UNREAD_MESSAGES_COUNT,
   SET_GROCERYLISTS,
   SET_GROCERYLIST,
   SET_ERRORMESSAGE
@@ -30,6 +31,7 @@ const useApplicationData = () => {
     books: [],
     bookmarks: [],
     messages: [],
+    unread_messages: null,
     grocerylists: [],
     grocerylist: [],
     errorMessage: "",
@@ -189,25 +191,57 @@ const useApplicationData = () => {
       });
   };
 
-
+  // FETCH MESSAGES BY USER ID AND SETS UNREAD MESSAGES STATE
   const getMessagesByUserID = (userId) => {
     if (!userId) {
       return Promise.resolve(); // Return a resolved promise if userId is not available
     }
-    return axios.get(`/api/users/${userId}`)
+    return axios
+      .get(`/api/users/${userId}`)
       .then((response) => {
         const filteredMessages = response.data.messages.filter((message) => {
-          return ((userId === message.recipient_id && message.recipient_deleted === false) || (userId === message.sender_id && message.sender_deleted === false));
+          // only returns messages (received or sent) that aren't soft deleted by the user
+          return (
+            (userId === message.recipient_id && message.recipient_deleted === false) ||
+            (userId === message.sender_id && message.sender_deleted === false)
+          );
         });
-
+  
+        const unreadMessages = filteredMessages.filter((message) => {
+          return message.recipient_id === userId && !message.read;
+        });
+  
         dispatch({
           type: SET_MESSAGES,
-          messages: filteredMessages
+          messages: filteredMessages,
         });
-        console.log("😎 Messages:", filteredMessages); // Add this console.log statement
+  
+        dispatch({
+          type: SET_UNREAD_MESSAGES_COUNT,
+          count: unreadMessages.length,
+        });
       })
       .catch((error) => {
-        // Handle error if needed
+        console.error('Error fetching messages:', error);
+      });
+  };
+
+  // UPDATES MESSAGES READ COLUMN
+  const updateReadMessage = (messageId, payload) => {
+    return axios.put(`api/messages/${messageId}/mark_as_read`, payload)
+      .then((response) => {
+        const updatedMessage = response.data;
+
+        const updatedMessages = state.messages.map((message) =>
+          message.id === updatedMessage.id ? updatedMessage : message
+        );
+        dispatch({
+          type: SET_MESSAGES,
+          messages: updatedMessages
+        });
+      })
+      .catch((error) => {
+        console.error('Error updating message read status:', error);
       });
   };
 
@@ -587,7 +621,8 @@ return {
   deleteGrocerylist,
   deleteMessage,
   getGrocerylistById,
-  getUserById
+  getUserById,
+  updateReadMessage
 };
 };
 
