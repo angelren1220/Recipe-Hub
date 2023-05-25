@@ -78,6 +78,9 @@ const MessageAccordion = ({ messages, deleteMessage, showReceivedMessages }) => 
                 <h2>Sent to: <UserInfo userId = {item.recipient_id} /></h2>
               )}
               <h3>{formatDate(item.created_at)}</h3>
+              {item.read === false && (
+                <h3>Unread</h3>
+              )}
             </div>
             <div className="banner-right">
               <h2 className="toggle">{selected.includes(item.id) ? "-" : "+"}</h2>

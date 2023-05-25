@@ -31,7 +31,7 @@ const Books = function(props) {
 
   return (
     <article className="books">
-      <h1>Bookshelf</h1>
+      <h1 className="books-title">Bookshelf</h1>
       <button onClick={handleBookmarksToggle}>Bookmarks</button>
       {showBookmarks ? (
         <BookAccordion

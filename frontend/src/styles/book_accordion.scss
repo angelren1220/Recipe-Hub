@@ -1,10 +1,14 @@
+.books-title, .book-recipe-title{
+  margin: 2rem 1rem;
+}
+
 .book-accordion {
   color: $secondary-color1;
   width: 100%;
   background: $primary-color4;
   padding: 1.5rem 0;
-  border-top: 1px solid $secondary-color2;
-  border-bottom: 1px solid $secondary-color2;
+  border-top: 1px solid $secondary-color1;
+  border-bottom: 1px solid $secondary-color1;
 
 
   h1 {
@@ -33,6 +37,23 @@
         width: 150px;
         border-radius: .5rem;
         object-fit: cover;
+      }
+    }
+  }
+  
+  .control-buttons{
+    display: flex;
+    gap: 1rem;
+
+    button{
+      height: 3rem;
+      background-color: transparent;
+      border: 2px solid;
+      border-radius: 1rem;
+
+      &:hover{
+        background-color: $secondary-color1;
+        color: $primary-color1;
       }
     }
   }

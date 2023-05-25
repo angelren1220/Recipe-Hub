@@ -39,7 +39,8 @@ const Inbox = function(props) {
 
   return (
     <article className="inbox">
-      <div>
+      <h1 className="inbox-title">Inbox</h1>
+      <div className="message-toggles">
         <button onClick={handlesReceivedMessages} disabled={showReceivedMessages}>
           Received
         </button>

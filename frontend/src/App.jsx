@@ -21,7 +21,6 @@ import NewBook from './components/pages/NewBook';
 import BookRecipes from './components/pages/BookRecipes';
 
 import Explore from './components/pages/Explore';
-import Search from './components/pages/Search';
 
 import GroceryLists from './components/pages/GroceryLists';
 import GroceryList from './components/pages/GroceryList';
@@ -61,7 +60,6 @@ const App = function() {
               <Route path='/register' element={<Register/>}/>
 
               <Route path='/explore' element={<Explore/>}/>
-              <Route path='/search' element={<Search/>}/>
 
               <Route path='/books'>
                 <Route index element={<Books/>}/>

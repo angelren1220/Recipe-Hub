@@ -1,10 +1,26 @@
+.inbox-title{
+  margin: 2rem 1rem;
+}
+
 .message-accordion {
   color: $secondary-color1;
-  width: 90%;
-  background: rgb(206, 206, 189);
+  width: 100%;
   padding: 1.5rem;
-  margin: .5rem 0;
-  border-radius: .5rem;
+  border-top: 1px solid $secondary-color1;
+  border-bottom: 1px solid $secondary-color1;
+
+  button{
+    height: 3rem;
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 1rem;
+
+    &:hover{
+      background-color: $secondary-color1;
+      color: $primary-color1;
+    }
+  }
+
 
   h1 {
     font-size: 2rem;
@@ -25,6 +41,7 @@
       display: flex;
       gap: 2em;
       align-items: center;
+      padding-right: 5rem;
 
       .banner-image {
         max-height: 150px;

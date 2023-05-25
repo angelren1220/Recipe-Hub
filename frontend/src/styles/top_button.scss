@@ -3,11 +3,11 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 8rem;
+  width: 6rem;
   border-radius: .5rem;
-  background-color: #333;
-  color: #fff;
-  font-size: 1.5rem;
+  background-color: $primary-color3;
+  color: $secondary-color1;
+  font-size: 1rem;
   text-align: center;
   cursor: pointer;
   transition: opacity 0.3s;

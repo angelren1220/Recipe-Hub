@@ -29,7 +29,7 @@ export default function Popup(props) {
 
   return (
     <div className="generic-popup">
-      <button onClick={(event) => handlePopup(event)}>{props.popupMessage}</button>
+      <button className="popup-action" onClick={(event) => handlePopup(event)}>{props.popupMessage}</button>
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup-form" ref={formRef}>

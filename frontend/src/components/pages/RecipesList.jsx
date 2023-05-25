@@ -40,6 +40,7 @@ const RecipesList = function(props) {
   
   return (
     <article className="recipes-list">
+      <h1 className="recipe-title">{userId && 'My Recipes' }</h1>
       {!userState && <h1>All Recipes</h1>}
       {userState && (
         <Popup popupMessage="Create a Recipe">
