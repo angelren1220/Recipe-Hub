@@ -1,18 +1,17 @@
 .grocerylist-accordion {
   color: $secondary-color1;
   width: 90%;
-  background: $primary-color4;
+  background: $primary-color1;
   padding: 1.5rem;
   margin: .5rem 0;
   border-radius: .5rem;
 
   h1 {
     font-size: 2rem;
-    text-decoration: underline;
     color: $secondary-color1;
 
     &:hover {
-      color: $secondary-color4;
+      color: $secondary-color3;
     }
   }
 
@@ -36,11 +35,11 @@
   }
 
   .btn-delete{
-    color: red;
+    color: $secondary-color1;
   }
 
   .btn-add{
-    color: green;
+    color: $secondary-color1;
   }
 
   .grocerylist-content {
@@ -60,7 +59,7 @@
   }
 
   &:hover {
-    background: rgb(163, 163, 163);
+    background: $primary-color1;
     cursor: pointer;
   }
 }
