@@ -38,7 +38,7 @@ const GrocerylistAccordion = function(props) {
   }, [isItemSaved]);
 
   if (!userId) {
-    return (<h2>Login to view your grocery list</h2>);
+    return (<h1>Login to view your grocery list</h1>);
   }
 
   const toggle = (i, event) => {
