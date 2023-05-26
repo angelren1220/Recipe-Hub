@@ -28,11 +28,11 @@ With its user-friendly interface, robust technology stack, and focus on recipe s
 - Recipe Card
 ![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/open-recipe-card.png)
 - Books
--[](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/book.png)
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/book.png)
 - Grocery List
 ![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/grocerylist.png)
 - Message Inbox
-![]()
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/message.png)
 
 ## Stacks
 
