@@ -22,15 +22,15 @@ With its user-friendly interface, robust technology stack, and focus on recipe s
 ## Demo
 
 - Recipe and Edit
-![]()
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/edit-recipe.png)
 - Browse Recipes
-![]()
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/edit-recipe.png)
 - Recipe Card
-![]()
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/open-recipe-card.png)
 - Books
--[]()
+-[](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/book.png)
 - Grocery List
-![]()
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/grocerylist.png)
 - Message Inbox
 ![]()
 
@@ -55,23 +55,23 @@ frontend
 
 backend
 1. to install dependencies:
-`bundle install` 
+```bundle install```
 2. to create database:
-`rails db:create`
+```rails db:create```
   to migrate database:
-`rails db:migrate`
+```rails db:migrate```
   to reset database:
-`rake db:reset`
+```rails db:reset```
 3. to start backend server:
-`rails s -p 3001 -b 0.0.0.0`
+```rails s -p 3001 -b 0.0.0.0```
 The server is run http://localhost:3001/
 
 frontend
 1. to install dependencies:
-`npm install`
+```npm install```
 2. to start the front server:
-`npm run dev `
+```npm run dev```
 The server is run http://localhost:3000/
-3. seed users password: `password`
+3. seed users password: ```password```
 
 
