@@ -24,7 +24,7 @@ With its user-friendly interface, robust technology stack, and focus on recipe s
 - Recipe and Edit
 ![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/edit-recipe.png)
 - Browse Recipes
-![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/edit-recipe.png)
+![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/explore.png)
 - Recipe Card
 ![](https://github.com/angelren1220/Recipe-Hub/blob/main/docs/open-recipe-card.png)
 - Books
